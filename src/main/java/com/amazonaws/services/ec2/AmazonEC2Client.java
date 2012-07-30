@@ -120,7 +120,8 @@ public class AmazonEC2Client extends AmazonWebServiceClient implements AmazonEC2
         exceptionUnmarshallers = new ArrayList<Unmarshaller<AmazonServiceException, Node>>();
         
         exceptionUnmarshallers.add(new LegacyErrorUnmarshaller());
-        setEndpoint("ec2.amazonaws.com");
+        //setEndpoint("ec2.amazonaws.com");
+        setEndpoint("https://173.205.188.130:8773", "services/Eucalyptus/");
 
         signer = new QueryStringSigner();
 

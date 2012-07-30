@@ -47,6 +47,9 @@ public abstract class AmazonWebServiceClient {
     /** Optional request handlers for additional request processing. */
     protected final List<RequestHandler> requestHandlers;
 
+    /** An optional value that comes after the host:port/ portion of the URL */
+	protected String resourcePrefix;
+
     /**
      * Constructs a new AmazonWebServiceClient object using the specified
      * configuration.
@@ -101,6 +104,49 @@ public abstract class AmazonWebServiceClient {
     }
 
     /**
+     * Overrides the default endpoint for this client. Callers can use this
+     * method to control which AWS region they want to work with.
+     * <p>
+     * Callers can pass in just the endpoint (ex: "ec2.amazonaws.com") or a full
+     * URL, including the protocol (ex: "https://ec2.amazonaws.com"). If the
+     * protocol is not specified here, the default protocol from this client's
+     * {@link ClientConfiguration} will be used, which by default is HTTPS.
+     * <p>
+     * For more information on using AWS regions with the AWS SDK for Java, and
+     * a complete list of all available endpoints for all AWS services, see:
+     * <a href="http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912">
+     * http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912</a>
+     *
+     * @param endpoint
+     *            The endpoint (ex: "ec2.amazonaws.com") or a full URL,
+     *            including the protocol (ex: "https://ec2.amazonaws.com") of
+     *            the region specific AWS endpoint this client will communicate
+     *            with.
+     * @param resourcePrefix this param adds to the resource part of the url (what
+     *            comes after the slash which follows the location:port.
+     *
+     * @throws IllegalArgumentException
+     *             If any problems are detected with the specified endpoint.
+     */
+    public void setEndpoint(String endpoint, String resourcePrefix) throws IllegalArgumentException {
+        /*
+         * If the endpoint doesn't explicitly specify a protocol to use, then
+         * we'll defer to the default protocol specified in the client
+         * configuration.
+         */
+        if (endpoint.contains("://") == false) {
+            endpoint = clientConfiguration.getProtocol().toString() + "://" + endpoint;
+        }
+		this.resourcePrefix = resourcePrefix;
+
+        try {
+            this.endpoint = new URI(endpoint);
+        } catch (URISyntaxException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    /**
      * Shuts down this client object, releasing any resources that might be held
      * open. This is an optional method, and callers are not expected to call
      * it, but can if they want to explicitly release any open resources. Once a
@@ -137,8 +183,10 @@ public abstract class AmazonWebServiceClient {
 
         httpRequest.setServiceName(request.getServiceName());
         httpRequest.setEndpoint(request.getEndpoint());
-        httpRequest.setResourcePath(request.getResourcePath());
+        httpRequest.setResourcePath(((this.resourcePrefix!=null)?this.resourcePrefix:"")+
+                                        request.getResourcePath());
         httpRequest.setOriginalRequest(request.getOriginalRequest());
+        System.err.println("request string : "+httpRequest.toString());
 
         return httpRequest;
     }
