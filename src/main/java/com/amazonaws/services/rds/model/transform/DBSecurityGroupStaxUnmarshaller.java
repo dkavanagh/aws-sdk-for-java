@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,15 +32,15 @@ import com.amazonaws.transform.SimpleTypeStaxUnmarshallers.*;
  */
 public class DBSecurityGroupStaxUnmarshaller implements Unmarshaller<DBSecurityGroup, StaxUnmarshallerContext> {
 
-    
-
     public DBSecurityGroup unmarshall(StaxUnmarshallerContext context) throws Exception {
         DBSecurityGroup dBSecurityGroup = new DBSecurityGroup();
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
+
         
         if (context.isStartOfDocument()) targetDepth += 2;
         
+
         if (context.isStartOfDocument()) targetDepth++;
         
 
@@ -59,6 +59,10 @@ public class DBSecurityGroupStaxUnmarshaller implements Unmarshaller<DBSecurityG
                 }
                 if (context.testExpression("DBSecurityGroupDescription", targetDepth)) {
                     dBSecurityGroup.setDBSecurityGroupDescription(StringStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("VpcId", targetDepth)) {
+                    dBSecurityGroup.setVpcId(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
                 if (context.testExpression("EC2SecurityGroups/EC2SecurityGroup", targetDepth)) {

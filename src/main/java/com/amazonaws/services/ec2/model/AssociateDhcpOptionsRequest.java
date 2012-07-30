@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,15 +18,10 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#associateDhcpOptions(AssociateDhcpOptionsRequest) AssociateDhcpOptions operation}.
  * <p>
- * Associates a set of DHCP options (that you've previously created)
- * with the specified VPC. Or, associates the default DHCP options with
- * the VPC. The default set consists of the standard EC2 host name, no
- * domain name, no DNS server, no NTP server, and no NetBIOS server or
- * node type. After you associate the options with the VPC, any existing
- * instances and all new instances that you launch in that VPC use the
- * options. For more information about the supported DHCP options and
- * using them with Amazon VPC, go to Using DHCP Options in the Amazon
- * Virtual Private Cloud Developer Guide.
+ * Associates a set of DHCP options (that you've previously created) with the specified VPC. Or, associates the default DHCP options with the VPC. The
+ * default set consists of the standard EC2 host name, no domain name, no DNS server, no NTP server, and no NetBIOS server or node type. After you
+ * associate the options with the VPC, any existing instances and all new instances that you launch in that VPC use the options. For more information
+ * about the supported DHCP options and using them with Amazon VPC, go to Using DHCP Options in the Amazon Virtual Private Cloud Developer Guide.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#associateDhcpOptions(AssociateDhcpOptionsRequest)
@@ -60,6 +55,8 @@ public class AssociateDhcpOptionsRequest extends AmazonWebServiceRequest {
     public AssociateDhcpOptionsRequest(String vpcId) {
         this.vpcId = vpcId;
     }
+
+    
     
     /**
      * The ID of the DHCP options to associate with the VPC. Specify
@@ -147,10 +144,35 @@ public class AssociateDhcpOptionsRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("DhcpOptionsId: " + dhcpOptionsId + ", ");
-        sb.append("VpcId: " + vpcId + ", ");
+        if (dhcpOptionsId != null) sb.append("DhcpOptionsId: " + dhcpOptionsId + ", ");
+        if (vpcId != null) sb.append("VpcId: " + vpcId + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getDhcpOptionsId() == null) ? 0 : getDhcpOptionsId().hashCode()); 
+        hashCode = prime * hashCode + ((getVpcId() == null) ? 0 : getVpcId().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof AssociateDhcpOptionsRequest == false) return false;
+        AssociateDhcpOptionsRequest other = (AssociateDhcpOptionsRequest)obj;
+        
+        if (other.getDhcpOptionsId() == null ^ this.getDhcpOptionsId() == null) return false;
+        if (other.getDhcpOptionsId() != null && other.getDhcpOptionsId().equals(this.getDhcpOptionsId()) == false) return false; 
+        if (other.getVpcId() == null ^ this.getVpcId() == null) return false;
+        if (other.getVpcId() != null && other.getVpcId().equals(this.getVpcId()) == false) return false; 
+        return true;
     }
     
 }

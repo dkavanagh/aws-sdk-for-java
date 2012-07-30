@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ public class GetTemplateResult {
     /**
      * Structure containing the template body. (For more information, go to
      * the <a
-     * docs.amazonwebservices.com/AmazonCloudFormation/latest/UserGuide/">AWS
+     * ://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide/">AWS
      * CloudFormation User Guide</a>.)
      * <p>
      * <b>Constraints:</b><br/>
@@ -35,7 +35,7 @@ public class GetTemplateResult {
     /**
      * Structure containing the template body. (For more information, go to
      * the <a
-     * docs.amazonwebservices.com/AmazonCloudFormation/latest/UserGuide/">AWS
+     * ://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide/">AWS
      * CloudFormation User Guide</a>.)
      * <p>
      * <b>Constraints:</b><br/>
@@ -43,7 +43,7 @@ public class GetTemplateResult {
      *
      * @return Structure containing the template body. (For more information, go to
      *         the <a
-     *         docs.amazonwebservices.com/AmazonCloudFormation/latest/UserGuide/">AWS
+     *         ://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide/">AWS
      *         CloudFormation User Guide</a>.)
      */
     public String getTemplateBody() {
@@ -53,7 +53,7 @@ public class GetTemplateResult {
     /**
      * Structure containing the template body. (For more information, go to
      * the <a
-     * docs.amazonwebservices.com/AmazonCloudFormation/latest/UserGuide/">AWS
+     * ://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide/">AWS
      * CloudFormation User Guide</a>.)
      * <p>
      * <b>Constraints:</b><br/>
@@ -61,7 +61,7 @@ public class GetTemplateResult {
      *
      * @param templateBody Structure containing the template body. (For more information, go to
      *         the <a
-     *         docs.amazonwebservices.com/AmazonCloudFormation/latest/UserGuide/">AWS
+     *         ://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide/">AWS
      *         CloudFormation User Guide</a>.)
      */
     public void setTemplateBody(String templateBody) {
@@ -71,7 +71,7 @@ public class GetTemplateResult {
     /**
      * Structure containing the template body. (For more information, go to
      * the <a
-     * docs.amazonwebservices.com/AmazonCloudFormation/latest/UserGuide/">AWS
+     * ://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide/">AWS
      * CloudFormation User Guide</a>.)
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
@@ -81,7 +81,7 @@ public class GetTemplateResult {
      *
      * @param templateBody Structure containing the template body. (For more information, go to
      *         the <a
-     *         docs.amazonwebservices.com/AmazonCloudFormation/latest/UserGuide/">AWS
+     *         ://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide/">AWS
      *         CloudFormation User Guide</a>.)
      *
      * @return A reference to this updated object so that method calls can be chained 
@@ -105,9 +105,31 @@ public class GetTemplateResult {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("TemplateBody: " + templateBody + ", ");
+        if (templateBody != null) sb.append("TemplateBody: " + templateBody + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getTemplateBody() == null) ? 0 : getTemplateBody().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof GetTemplateResult == false) return false;
+        GetTemplateResult other = (GetTemplateResult)obj;
+        
+        if (other.getTemplateBody() == null ^ this.getTemplateBody() == null) return false;
+        if (other.getTemplateBody() != null && other.getTemplateBody().equals(this.getTemplateBody()) == false) return false; 
+        return true;
     }
     
 }

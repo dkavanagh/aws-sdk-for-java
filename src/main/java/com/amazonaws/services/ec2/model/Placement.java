@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@ package com.amazonaws.services.ec2.model;
 
 /**
  * <p>
- * Describes where an Amazon EC2 instance is running within an Amazon
- * EC2 region.
+ * Describes where an Amazon EC2 instance is running within an Amazon EC2 region.
  * </p>
  */
 public class Placement {
@@ -38,7 +37,9 @@ public class Placement {
     /**
      * The allowed tenancy of instances launched into the VPC. A value of
      * default means instances can be launched with any tenancy; a value of
-     * dedicated means instances must be launched with tenancy as dedicated.
+     * dedicated means all instances launched into the VPC will be launched
+     * as dedicated tenancy regardless of the tenancy assigned to the
+     * instance at launch.
      */
     private String tenancy;
 
@@ -59,6 +60,8 @@ public class Placement {
     public Placement(String availabilityZone) {
         this.availabilityZone = availabilityZone;
     }
+
+    
     
     /**
      * The availability zone in which an Amazon EC2 instance runs.
@@ -149,11 +152,15 @@ public class Placement {
     /**
      * The allowed tenancy of instances launched into the VPC. A value of
      * default means instances can be launched with any tenancy; a value of
-     * dedicated means instances must be launched with tenancy as dedicated.
+     * dedicated means all instances launched into the VPC will be launched
+     * as dedicated tenancy regardless of the tenancy assigned to the
+     * instance at launch.
      *
      * @return The allowed tenancy of instances launched into the VPC. A value of
      *         default means instances can be launched with any tenancy; a value of
-     *         dedicated means instances must be launched with tenancy as dedicated.
+     *         dedicated means all instances launched into the VPC will be launched
+     *         as dedicated tenancy regardless of the tenancy assigned to the
+     *         instance at launch.
      */
     public String getTenancy() {
         return tenancy;
@@ -162,11 +169,15 @@ public class Placement {
     /**
      * The allowed tenancy of instances launched into the VPC. A value of
      * default means instances can be launched with any tenancy; a value of
-     * dedicated means instances must be launched with tenancy as dedicated.
+     * dedicated means all instances launched into the VPC will be launched
+     * as dedicated tenancy regardless of the tenancy assigned to the
+     * instance at launch.
      *
      * @param tenancy The allowed tenancy of instances launched into the VPC. A value of
      *         default means instances can be launched with any tenancy; a value of
-     *         dedicated means instances must be launched with tenancy as dedicated.
+     *         dedicated means all instances launched into the VPC will be launched
+     *         as dedicated tenancy regardless of the tenancy assigned to the
+     *         instance at launch.
      */
     public void setTenancy(String tenancy) {
         this.tenancy = tenancy;
@@ -175,13 +186,17 @@ public class Placement {
     /**
      * The allowed tenancy of instances launched into the VPC. A value of
      * default means instances can be launched with any tenancy; a value of
-     * dedicated means instances must be launched with tenancy as dedicated.
+     * dedicated means all instances launched into the VPC will be launched
+     * as dedicated tenancy regardless of the tenancy assigned to the
+     * instance at launch.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
      * @param tenancy The allowed tenancy of instances launched into the VPC. A value of
      *         default means instances can be launched with any tenancy; a value of
-     *         dedicated means instances must be launched with tenancy as dedicated.
+     *         dedicated means all instances launched into the VPC will be launched
+     *         as dedicated tenancy regardless of the tenancy assigned to the
+     *         instance at launch.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -204,11 +219,39 @@ public class Placement {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("AvailabilityZone: " + availabilityZone + ", ");
-        sb.append("GroupName: " + groupName + ", ");
-        sb.append("Tenancy: " + tenancy + ", ");
+        if (availabilityZone != null) sb.append("AvailabilityZone: " + availabilityZone + ", ");
+        if (groupName != null) sb.append("GroupName: " + groupName + ", ");
+        if (tenancy != null) sb.append("Tenancy: " + tenancy + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getAvailabilityZone() == null) ? 0 : getAvailabilityZone().hashCode()); 
+        hashCode = prime * hashCode + ((getGroupName() == null) ? 0 : getGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getTenancy() == null) ? 0 : getTenancy().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof Placement == false) return false;
+        Placement other = (Placement)obj;
+        
+        if (other.getAvailabilityZone() == null ^ this.getAvailabilityZone() == null) return false;
+        if (other.getAvailabilityZone() != null && other.getAvailabilityZone().equals(this.getAvailabilityZone()) == false) return false; 
+        if (other.getGroupName() == null ^ this.getGroupName() == null) return false;
+        if (other.getGroupName() != null && other.getGroupName().equals(this.getGroupName()) == false) return false; 
+        if (other.getTenancy() == null ^ this.getTenancy() == null) return false;
+        if (other.getTenancy() != null && other.getTenancy().equals(this.getTenancy()) == false) return false; 
+        return true;
     }
     
 }

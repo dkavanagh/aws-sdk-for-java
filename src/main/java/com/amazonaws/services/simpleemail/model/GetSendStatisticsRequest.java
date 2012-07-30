@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,12 +18,10 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.simpleemail.AmazonSimpleEmailService#getSendStatistics(GetSendStatisticsRequest) GetSendStatistics operation}.
  * <p>
- * Returns the user's sending statistics. The result is a list of data
- * points, representing the last two weeks of sending activity.
+ * Returns the user's sending statistics. The result is a list of data points, representing the last two weeks of sending activity.
  * </p>
  * <p>
- * Each data point in the list contains statistics for a 15-minute
- * interval.
+ * Each data point in the list contains statistics for a 15-minute interval.
  * </p>
  *
  * @see com.amazonaws.services.simpleemail.AmazonSimpleEmailService#getSendStatistics(GetSendStatisticsRequest)
@@ -44,6 +42,25 @@ public class GetSendStatisticsRequest extends AmazonWebServiceRequest {
         sb.append("{");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof GetSendStatisticsRequest == false) return false;
+        GetSendStatisticsRequest other = (GetSendStatisticsRequest)obj;
+        
+        return true;
     }
     
 }

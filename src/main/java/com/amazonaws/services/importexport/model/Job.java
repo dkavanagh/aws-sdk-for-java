@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -212,6 +212,40 @@ public class Job {
     
     
     /**
+     * Specifies whether the job to initiate is an import or export job.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>Import, Export
+     *
+     * @param jobType Specifies whether the job to initiate is an import or export job.
+     *
+     * @see JobType
+     */
+    public void setJobType(JobType jobType) {
+        this.jobType = jobType.toString();
+    }
+    
+    /**
+     * Specifies whether the job to initiate is an import or export job.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>Import, Export
+     *
+     * @param jobType Specifies whether the job to initiate is an import or export job.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see JobType
+     */
+    public Job withJobType(JobType jobType) {
+        this.jobType = jobType.toString();
+        return this;
+    }
+    
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -223,12 +257,43 @@ public class Job {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("JobId: " + jobId + ", ");
-        sb.append("CreationDate: " + creationDate + ", ");
-        sb.append("IsCanceled: " + isCanceled + ", ");
-        sb.append("JobType: " + jobType + ", ");
+        if (jobId != null) sb.append("JobId: " + jobId + ", ");
+        if (creationDate != null) sb.append("CreationDate: " + creationDate + ", ");
+        if (isCanceled != null) sb.append("IsCanceled: " + isCanceled + ", ");
+        if (jobType != null) sb.append("JobType: " + jobType + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getJobId() == null) ? 0 : getJobId().hashCode()); 
+        hashCode = prime * hashCode + ((getCreationDate() == null) ? 0 : getCreationDate().hashCode()); 
+        hashCode = prime * hashCode + ((isCanceled() == null) ? 0 : isCanceled().hashCode()); 
+        hashCode = prime * hashCode + ((getJobType() == null) ? 0 : getJobType().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof Job == false) return false;
+        Job other = (Job)obj;
+        
+        if (other.getJobId() == null ^ this.getJobId() == null) return false;
+        if (other.getJobId() != null && other.getJobId().equals(this.getJobId()) == false) return false; 
+        if (other.getCreationDate() == null ^ this.getCreationDate() == null) return false;
+        if (other.getCreationDate() != null && other.getCreationDate().equals(this.getCreationDate()) == false) return false; 
+        if (other.isCanceled() == null ^ this.isCanceled() == null) return false;
+        if (other.isCanceled() != null && other.isCanceled().equals(this.isCanceled()) == false) return false; 
+        if (other.getJobType() == null ^ this.getJobType() == null) return false;
+        if (other.getJobType() != null && other.getJobType().equals(this.getJobType()) == false) return false; 
+        return true;
     }
     
 }

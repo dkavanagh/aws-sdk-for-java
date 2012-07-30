@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,12 +18,9 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.importexport.AmazonImportExport#createJob(CreateJobRequest) CreateJob operation}.
  * <p>
- * This operation initiates the process of scheduling an upload or
- * download of your data. You include in the request a manifest that
- * describes the data transfer specifics. The response to the request
- * includes a job ID, which you can use in other operations, a signature
- * that you use to identify your storage device, and the address where
- * you should ship your storage device.
+ * This operation initiates the process of scheduling an upload or download of your data. You include in the request a manifest that describes the data
+ * transfer specifics. The response to the request includes a job ID, which you can use in other operations, a signature that you use to identify your
+ * storage device, and the address where you should ship your storage device.
  * </p>
  *
  * @see com.amazonaws.services.importexport.AmazonImportExport#createJob(CreateJobRequest)
@@ -102,6 +99,40 @@ public class CreateJobRequest extends AmazonWebServiceRequest {
         return this;
     }
     
+    
+    /**
+     * Specifies whether the job to initiate is an import or export job.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>Import, Export
+     *
+     * @param jobType Specifies whether the job to initiate is an import or export job.
+     *
+     * @see JobType
+     */
+    public void setJobType(JobType jobType) {
+        this.jobType = jobType.toString();
+    }
+    
+    /**
+     * Specifies whether the job to initiate is an import or export job.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>Import, Export
+     *
+     * @param jobType Specifies whether the job to initiate is an import or export job.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see JobType
+     */
+    public CreateJobRequest withJobType(JobType jobType) {
+        this.jobType = jobType.toString();
+        return this;
+    }
     
     /**
      * The UTF-8 encoded text of the manifest file.
@@ -234,12 +265,43 @@ public class CreateJobRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("JobType: " + jobType + ", ");
-        sb.append("Manifest: " + manifest + ", ");
-        sb.append("ManifestAddendum: " + manifestAddendum + ", ");
-        sb.append("ValidateOnly: " + validateOnly + ", ");
+        if (jobType != null) sb.append("JobType: " + jobType + ", ");
+        if (manifest != null) sb.append("Manifest: " + manifest + ", ");
+        if (manifestAddendum != null) sb.append("ManifestAddendum: " + manifestAddendum + ", ");
+        if (validateOnly != null) sb.append("ValidateOnly: " + validateOnly + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getJobType() == null) ? 0 : getJobType().hashCode()); 
+        hashCode = prime * hashCode + ((getManifest() == null) ? 0 : getManifest().hashCode()); 
+        hashCode = prime * hashCode + ((getManifestAddendum() == null) ? 0 : getManifestAddendum().hashCode()); 
+        hashCode = prime * hashCode + ((isValidateOnly() == null) ? 0 : isValidateOnly().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof CreateJobRequest == false) return false;
+        CreateJobRequest other = (CreateJobRequest)obj;
+        
+        if (other.getJobType() == null ^ this.getJobType() == null) return false;
+        if (other.getJobType() != null && other.getJobType().equals(this.getJobType()) == false) return false; 
+        if (other.getManifest() == null ^ this.getManifest() == null) return false;
+        if (other.getManifest() != null && other.getManifest().equals(this.getManifest()) == false) return false; 
+        if (other.getManifestAddendum() == null ^ this.getManifestAddendum() == null) return false;
+        if (other.getManifestAddendum() != null && other.getManifestAddendum().equals(this.getManifestAddendum()) == false) return false; 
+        if (other.isValidateOnly() == null ^ this.isValidateOnly() == null) return false;
+        if (other.isValidateOnly() != null && other.isValidateOnly().equals(this.isValidateOnly()) == false) return false; 
+        return true;
     }
     
 }

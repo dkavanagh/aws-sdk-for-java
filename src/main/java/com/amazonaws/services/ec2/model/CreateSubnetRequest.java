@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,21 +18,15 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#createSubnet(CreateSubnetRequest) CreateSubnet operation}.
  * <p>
- * Creates a subnet in an existing VPC. You can create up to 20 subnets
- * in a VPC. If you add more than one subnet to a VPC, they're set up in
- * a star topology with a logical router in the middle. When you create
- * each subnet, you provide the VPC ID and the CIDR block you want for
- * the subnet. Once you create a subnet, you can't change its CIDR block.
- * The subnet's CIDR block can be the same as the VPC's CIDR block
- * (assuming you want only a single subnet in the VPC), or a subset of
- * the VPC's CIDR block. If you create more than one subnet in a VPC, the
- * subnets' CIDR blocks must not overlap. The smallest subnet (and VPC)
- * you can create uses a <code>/28</code> netmask (16 IP addresses), and
- * the largest uses a <code>/18</code> netmask (16,384 IP addresses).
+ * Creates a subnet in an existing VPC. You can create up to 20 subnets in a VPC. If you add more than one subnet to a VPC, they're set up in a star
+ * topology with a logical router in the middle. When you create each subnet, you provide the VPC ID and the CIDR block you want for the subnet. Once you
+ * create a subnet, you can't change its CIDR block. The subnet's CIDR block can be the same as the VPC's CIDR block (assuming you want only a single
+ * subnet in the VPC), or a subset of the VPC's CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The
+ * smallest subnet (and VPC) you can create uses a <code>/28</code> netmask (16 IP addresses), and the largest uses a <code>/18</code> netmask (16,384 IP
+ * addresses).
  * </p>
  * <p>
- * <b>IMPORTANT:</b> AWS reserves both the first four and the last IP
- * address in each subnet's CIDR block. They're not available for use.
+ * <b>IMPORTANT:</b> AWS reserves both the first four and the last IP address in each subnet's CIDR block. They're not available for use.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#createSubnet(CreateSubnetRequest)
@@ -72,6 +66,8 @@ public class CreateSubnetRequest extends AmazonWebServiceRequest {
         this.vpcId = vpcId;
         this.cidrBlock = cidrBlock;
     }
+
+    
     
     /**
      * The ID of the VPC to create the subnet in.
@@ -187,11 +183,39 @@ public class CreateSubnetRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("VpcId: " + vpcId + ", ");
-        sb.append("CidrBlock: " + cidrBlock + ", ");
-        sb.append("AvailabilityZone: " + availabilityZone + ", ");
+        if (vpcId != null) sb.append("VpcId: " + vpcId + ", ");
+        if (cidrBlock != null) sb.append("CidrBlock: " + cidrBlock + ", ");
+        if (availabilityZone != null) sb.append("AvailabilityZone: " + availabilityZone + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getVpcId() == null) ? 0 : getVpcId().hashCode()); 
+        hashCode = prime * hashCode + ((getCidrBlock() == null) ? 0 : getCidrBlock().hashCode()); 
+        hashCode = prime * hashCode + ((getAvailabilityZone() == null) ? 0 : getAvailabilityZone().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof CreateSubnetRequest == false) return false;
+        CreateSubnetRequest other = (CreateSubnetRequest)obj;
+        
+        if (other.getVpcId() == null ^ this.getVpcId() == null) return false;
+        if (other.getVpcId() != null && other.getVpcId().equals(this.getVpcId()) == false) return false; 
+        if (other.getCidrBlock() == null ^ this.getCidrBlock() == null) return false;
+        if (other.getCidrBlock() != null && other.getCidrBlock().equals(this.getCidrBlock()) == false) return false; 
+        if (other.getAvailabilityZone() == null ^ this.getAvailabilityZone() == null) return false;
+        if (other.getAvailabilityZone() != null && other.getAvailabilityZone().equals(this.getAvailabilityZone()) == false) return false; 
+        return true;
     }
     
 }

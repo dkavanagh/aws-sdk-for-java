@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.elasticbeanstalk.model.*;
@@ -30,13 +31,17 @@ import com.amazonaws.util.StringUtils;
 public class DeleteApplicationRequestMarshaller implements Marshaller<Request<DeleteApplicationRequest>, DeleteApplicationRequest> {
 
     public Request<DeleteApplicationRequest> marshall(DeleteApplicationRequest deleteApplicationRequest) {
+
+        if (deleteApplicationRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<DeleteApplicationRequest> request = new DefaultRequest<DeleteApplicationRequest>(deleteApplicationRequest, "AWSElasticBeanstalk");
         request.addParameter("Action", "DeleteApplication");
         request.addParameter("Version", "2010-12-01");
-        if (deleteApplicationRequest != null) {
-            if (deleteApplicationRequest.getApplicationName() != null) {
-                request.addParameter("ApplicationName", StringUtils.fromString(deleteApplicationRequest.getApplicationName()));
-            }
+
+        if (deleteApplicationRequest.getApplicationName() != null) {
+            request.addParameter("ApplicationName", StringUtils.fromString(deleteApplicationRequest.getApplicationName()));
         }
 
 

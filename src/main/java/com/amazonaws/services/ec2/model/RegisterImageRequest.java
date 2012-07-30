@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,23 +18,16 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#registerImage(RegisterImageRequest) RegisterImage operation}.
  * <p>
- * The RegisterImage operation registers an AMI with Amazon EC2. Images
- * must be registered before they can be launched. For more information,
- * see RunInstances.
+ * The RegisterImage operation registers an AMI with Amazon EC2. Images must be registered before they can be launched. For more information, see
+ * RunInstances.
  * </p>
  * <p>
- * Each AMI is associated with an unique ID which is provided by the
- * Amazon EC2 service through the RegisterImage operation. During
- * registration, Amazon EC2 retrieves the specified image manifest from
- * Amazon S3 and verifies that the image is owned by the user registering
- * the image.
+ * Each AMI is associated with an unique ID which is provided by the Amazon EC2 service through the RegisterImage operation. During registration, Amazon
+ * EC2 retrieves the specified image manifest from Amazon S3 and verifies that the image is owned by the user registering the image.
  * </p>
  * <p>
- * The image manifest is retrieved once and stored within the Amazon
- * EC2. Any modifications to an image in Amazon S3 invalidates this
- * registration. If you make changes to an image, deregister the previous
- * image and register the new image. For more information, see
- * DeregisterImage.
+ * The image manifest is retrieved once and stored within the Amazon EC2. Any modifications to an image in Amazon S3 invalidates this registration. If
+ * you make changes to an image, deregister the previous image and register the new image. For more information, see DeregisterImage.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#registerImage(RegisterImageRequest)
@@ -107,6 +100,8 @@ public class RegisterImageRequest extends AmazonWebServiceRequest {
     public RegisterImageRequest(String imageLocation) {
         this.imageLocation = imageLocation;
     }
+
+    
     
     /**
      * The full path to your AMI manifest in Amazon S3 storage.
@@ -398,6 +393,7 @@ public class RegisterImageRequest extends AmazonWebServiceRequest {
      *         on instances launched from the new image.
      */
     public java.util.List<BlockDeviceMapping> getBlockDeviceMappings() {
+        
         if (blockDeviceMappings == null) {
             blockDeviceMappings = new java.util.ArrayList<BlockDeviceMapping>();
         }
@@ -414,10 +410,13 @@ public class RegisterImageRequest extends AmazonWebServiceRequest {
      *         on instances launched from the new image.
      */
     public void setBlockDeviceMappings(java.util.Collection<BlockDeviceMapping> blockDeviceMappings) {
-        java.util.List<BlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<BlockDeviceMapping>();
-        if (blockDeviceMappings != null) {
-            blockDeviceMappingsCopy.addAll(blockDeviceMappings);
+        if (blockDeviceMappings == null) {
+            this.blockDeviceMappings = null;
+            return;
         }
+
+        java.util.List<BlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<BlockDeviceMapping>(blockDeviceMappings.size());
+        blockDeviceMappingsCopy.addAll(blockDeviceMappings);
         this.blockDeviceMappings = blockDeviceMappingsCopy;
     }
     
@@ -436,6 +435,7 @@ public class RegisterImageRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public RegisterImageRequest withBlockDeviceMappings(BlockDeviceMapping... blockDeviceMappings) {
+        if (getBlockDeviceMappings() == null) setBlockDeviceMappings(new java.util.ArrayList<BlockDeviceMapping>(blockDeviceMappings.length));
         for (BlockDeviceMapping value : blockDeviceMappings) {
             getBlockDeviceMappings().add(value);
         }
@@ -457,11 +457,13 @@ public class RegisterImageRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public RegisterImageRequest withBlockDeviceMappings(java.util.Collection<BlockDeviceMapping> blockDeviceMappings) {
-        java.util.List<BlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<BlockDeviceMapping>();
-        if (blockDeviceMappings != null) {
+        if (blockDeviceMappings == null) {
+            this.blockDeviceMappings = null;
+        } else {
+            java.util.List<BlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<BlockDeviceMapping>(blockDeviceMappings.size());
             blockDeviceMappingsCopy.addAll(blockDeviceMappings);
+            this.blockDeviceMappings = blockDeviceMappingsCopy;
         }
-        this.blockDeviceMappings = blockDeviceMappingsCopy;
 
         return this;
     }
@@ -478,16 +480,59 @@ public class RegisterImageRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("ImageLocation: " + imageLocation + ", ");
-        sb.append("Name: " + name + ", ");
-        sb.append("Description: " + description + ", ");
-        sb.append("Architecture: " + architecture + ", ");
-        sb.append("KernelId: " + kernelId + ", ");
-        sb.append("RamdiskId: " + ramdiskId + ", ");
-        sb.append("RootDeviceName: " + rootDeviceName + ", ");
-        sb.append("BlockDeviceMappings: " + blockDeviceMappings + ", ");
+        if (imageLocation != null) sb.append("ImageLocation: " + imageLocation + ", ");
+        if (name != null) sb.append("Name: " + name + ", ");
+        if (description != null) sb.append("Description: " + description + ", ");
+        if (architecture != null) sb.append("Architecture: " + architecture + ", ");
+        if (kernelId != null) sb.append("KernelId: " + kernelId + ", ");
+        if (ramdiskId != null) sb.append("RamdiskId: " + ramdiskId + ", ");
+        if (rootDeviceName != null) sb.append("RootDeviceName: " + rootDeviceName + ", ");
+        if (blockDeviceMappings != null) sb.append("BlockDeviceMappings: " + blockDeviceMappings + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getImageLocation() == null) ? 0 : getImageLocation().hashCode()); 
+        hashCode = prime * hashCode + ((getName() == null) ? 0 : getName().hashCode()); 
+        hashCode = prime * hashCode + ((getDescription() == null) ? 0 : getDescription().hashCode()); 
+        hashCode = prime * hashCode + ((getArchitecture() == null) ? 0 : getArchitecture().hashCode()); 
+        hashCode = prime * hashCode + ((getKernelId() == null) ? 0 : getKernelId().hashCode()); 
+        hashCode = prime * hashCode + ((getRamdiskId() == null) ? 0 : getRamdiskId().hashCode()); 
+        hashCode = prime * hashCode + ((getRootDeviceName() == null) ? 0 : getRootDeviceName().hashCode()); 
+        hashCode = prime * hashCode + ((getBlockDeviceMappings() == null) ? 0 : getBlockDeviceMappings().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof RegisterImageRequest == false) return false;
+        RegisterImageRequest other = (RegisterImageRequest)obj;
+        
+        if (other.getImageLocation() == null ^ this.getImageLocation() == null) return false;
+        if (other.getImageLocation() != null && other.getImageLocation().equals(this.getImageLocation()) == false) return false; 
+        if (other.getName() == null ^ this.getName() == null) return false;
+        if (other.getName() != null && other.getName().equals(this.getName()) == false) return false; 
+        if (other.getDescription() == null ^ this.getDescription() == null) return false;
+        if (other.getDescription() != null && other.getDescription().equals(this.getDescription()) == false) return false; 
+        if (other.getArchitecture() == null ^ this.getArchitecture() == null) return false;
+        if (other.getArchitecture() != null && other.getArchitecture().equals(this.getArchitecture()) == false) return false; 
+        if (other.getKernelId() == null ^ this.getKernelId() == null) return false;
+        if (other.getKernelId() != null && other.getKernelId().equals(this.getKernelId()) == false) return false; 
+        if (other.getRamdiskId() == null ^ this.getRamdiskId() == null) return false;
+        if (other.getRamdiskId() != null && other.getRamdiskId().equals(this.getRamdiskId()) == false) return false; 
+        if (other.getRootDeviceName() == null ^ this.getRootDeviceName() == null) return false;
+        if (other.getRootDeviceName() != null && other.getRootDeviceName().equals(this.getRootDeviceName()) == false) return false; 
+        if (other.getBlockDeviceMappings() == null ^ this.getBlockDeviceMappings() == null) return false;
+        if (other.getBlockDeviceMappings() != null && other.getBlockDeviceMappings().equals(this.getBlockDeviceMappings()) == false) return false; 
+        return true;
     }
     
 }

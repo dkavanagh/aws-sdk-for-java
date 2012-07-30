@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@ package com.amazonaws.services.rds.model;
 
 /**
  * <p>
- * Contains the result of a successful invocation of the
- * DescribeDBEngineVersions action.
+ * Contains the result of a successful invocation of the DescribeDBEngineVersions action.
  * </p>
  */
 public class DescribeDBEngineVersionsResult {
@@ -72,6 +71,7 @@ public class DescribeDBEngineVersionsResult {
      * @return A list of <code>DBEngineVersion</code> elements.
      */
     public java.util.List<DBEngineVersion> getDBEngineVersions() {
+        
         if (dBEngineVersions == null) {
             dBEngineVersions = new java.util.ArrayList<DBEngineVersion>();
         }
@@ -84,10 +84,13 @@ public class DescribeDBEngineVersionsResult {
      * @param dBEngineVersions A list of <code>DBEngineVersion</code> elements.
      */
     public void setDBEngineVersions(java.util.Collection<DBEngineVersion> dBEngineVersions) {
-        java.util.List<DBEngineVersion> dBEngineVersionsCopy = new java.util.ArrayList<DBEngineVersion>();
-        if (dBEngineVersions != null) {
-            dBEngineVersionsCopy.addAll(dBEngineVersions);
+        if (dBEngineVersions == null) {
+            this.dBEngineVersions = null;
+            return;
         }
+
+        java.util.List<DBEngineVersion> dBEngineVersionsCopy = new java.util.ArrayList<DBEngineVersion>(dBEngineVersions.size());
+        dBEngineVersionsCopy.addAll(dBEngineVersions);
         this.dBEngineVersions = dBEngineVersionsCopy;
     }
     
@@ -102,6 +105,7 @@ public class DescribeDBEngineVersionsResult {
      *         together. 
      */
     public DescribeDBEngineVersionsResult withDBEngineVersions(DBEngineVersion... dBEngineVersions) {
+        if (getDBEngineVersions() == null) setDBEngineVersions(new java.util.ArrayList<DBEngineVersion>(dBEngineVersions.length));
         for (DBEngineVersion value : dBEngineVersions) {
             getDBEngineVersions().add(value);
         }
@@ -119,11 +123,13 @@ public class DescribeDBEngineVersionsResult {
      *         together. 
      */
     public DescribeDBEngineVersionsResult withDBEngineVersions(java.util.Collection<DBEngineVersion> dBEngineVersions) {
-        java.util.List<DBEngineVersion> dBEngineVersionsCopy = new java.util.ArrayList<DBEngineVersion>();
-        if (dBEngineVersions != null) {
+        if (dBEngineVersions == null) {
+            this.dBEngineVersions = null;
+        } else {
+            java.util.List<DBEngineVersion> dBEngineVersionsCopy = new java.util.ArrayList<DBEngineVersion>(dBEngineVersions.size());
             dBEngineVersionsCopy.addAll(dBEngineVersions);
+            this.dBEngineVersions = dBEngineVersionsCopy;
         }
-        this.dBEngineVersions = dBEngineVersionsCopy;
 
         return this;
     }
@@ -140,10 +146,35 @@ public class DescribeDBEngineVersionsResult {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Marker: " + marker + ", ");
-        sb.append("DBEngineVersions: " + dBEngineVersions + ", ");
+        if (marker != null) sb.append("Marker: " + marker + ", ");
+        if (dBEngineVersions != null) sb.append("DBEngineVersions: " + dBEngineVersions + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getMarker() == null) ? 0 : getMarker().hashCode()); 
+        hashCode = prime * hashCode + ((getDBEngineVersions() == null) ? 0 : getDBEngineVersions().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeDBEngineVersionsResult == false) return false;
+        DescribeDBEngineVersionsResult other = (DescribeDBEngineVersionsResult)obj;
+        
+        if (other.getMarker() == null ^ this.getMarker() == null) return false;
+        if (other.getMarker() != null && other.getMarker().equals(this.getMarker()) == false) return false; 
+        if (other.getDBEngineVersions() == null ^ this.getDBEngineVersions() == null) return false;
+        if (other.getDBEngineVersions() != null && other.getDBEngineVersions().equals(this.getDBEngineVersions()) == false) return false; 
+        return true;
     }
     
 }

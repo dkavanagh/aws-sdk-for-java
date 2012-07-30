@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -35,10 +35,10 @@ public class DescribeEventsRequestMarshaller implements Marshaller<Request<Descr
         if (describeEventsRequest == null) {
 		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
 		}
-		
+
         Request<DescribeEventsRequest> request = new DefaultRequest<DescribeEventsRequest>(describeEventsRequest, "AmazonElastiCache");
         request.addParameter("Action", "DescribeEvents");
-        request.addParameter("Version", "2011-07-15");
+        request.addParameter("Version", "2012-03-09");
 
         if (describeEventsRequest.getSourceIdentifier() != null) {
             request.addParameter("SourceIdentifier", StringUtils.fromString(describeEventsRequest.getSourceIdentifier()));

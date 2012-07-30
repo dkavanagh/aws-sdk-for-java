@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ public class DescribeEnvironmentsResult {
      * @return Returns an <a>EnvironmentDescription</a> list.
      */
     public java.util.List<EnvironmentDescription> getEnvironments() {
+        
         if (environments == null) {
             environments = new java.util.ArrayList<EnvironmentDescription>();
         }
@@ -44,10 +45,13 @@ public class DescribeEnvironmentsResult {
      * @param environments Returns an <a>EnvironmentDescription</a> list.
      */
     public void setEnvironments(java.util.Collection<EnvironmentDescription> environments) {
-        java.util.List<EnvironmentDescription> environmentsCopy = new java.util.ArrayList<EnvironmentDescription>();
-        if (environments != null) {
-            environmentsCopy.addAll(environments);
+        if (environments == null) {
+            this.environments = null;
+            return;
         }
+
+        java.util.List<EnvironmentDescription> environmentsCopy = new java.util.ArrayList<EnvironmentDescription>(environments.size());
+        environmentsCopy.addAll(environments);
         this.environments = environmentsCopy;
     }
     
@@ -62,6 +66,7 @@ public class DescribeEnvironmentsResult {
      *         together. 
      */
     public DescribeEnvironmentsResult withEnvironments(EnvironmentDescription... environments) {
+        if (getEnvironments() == null) setEnvironments(new java.util.ArrayList<EnvironmentDescription>(environments.length));
         for (EnvironmentDescription value : environments) {
             getEnvironments().add(value);
         }
@@ -79,11 +84,13 @@ public class DescribeEnvironmentsResult {
      *         together. 
      */
     public DescribeEnvironmentsResult withEnvironments(java.util.Collection<EnvironmentDescription> environments) {
-        java.util.List<EnvironmentDescription> environmentsCopy = new java.util.ArrayList<EnvironmentDescription>();
-        if (environments != null) {
+        if (environments == null) {
+            this.environments = null;
+        } else {
+            java.util.List<EnvironmentDescription> environmentsCopy = new java.util.ArrayList<EnvironmentDescription>(environments.size());
             environmentsCopy.addAll(environments);
+            this.environments = environmentsCopy;
         }
-        this.environments = environmentsCopy;
 
         return this;
     }
@@ -100,9 +107,31 @@ public class DescribeEnvironmentsResult {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Environments: " + environments + ", ");
+        if (environments != null) sb.append("Environments: " + environments + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getEnvironments() == null) ? 0 : getEnvironments().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeEnvironmentsResult == false) return false;
+        DescribeEnvironmentsResult other = (DescribeEnvironmentsResult)obj;
+        
+        if (other.getEnvironments() == null ^ this.getEnvironments() == null) return false;
+        if (other.getEnvironments() != null && other.getEnvironments().equals(this.getEnvironments()) == false) return false; 
+        return true;
     }
     
 }

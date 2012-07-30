@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -21,17 +21,13 @@ import com.amazonaws.AmazonWebServiceRequest;
  * Updates the name and/or the path of the specified group.
  * </p>
  * <p>
- * <b>IMPORTANT:</b> You should understand the implications of changing a
- * group's path or name. For more information, see Renaming Users and
- * Groups in Using AWS Identity and Access Management.
+ * <b>IMPORTANT:</b> You should understand the implications of changing a group's path or name. For more information, see Renaming Users and Groups in
+ * Using AWS Identity and Access Management.
  * </p>
  * <p>
- * <b>NOTE:</b>To change a group name the requester must have appropriate
- * permissions on both the source object and the target object. For
- * example, to change Managers to MGRs, the entity making the request
- * must have permission on Managers and MGRs, or must have permission on
- * all (*). For more information about permissions, see Permissions and
- * Policies.
+ * <b>NOTE:</b>To change a group name the requester must have appropriate permissions on both the source object and the target object. For example, to
+ * change Managers to MGRs, the entity making the request must have permission on Managers and MGRs, or must have permission on all (*). For more
+ * information about permissions, see Permissions and Policies.
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#updateGroup(UpdateGroupRequest)
@@ -85,6 +81,8 @@ public class UpdateGroupRequest extends AmazonWebServiceRequest {
     public UpdateGroupRequest(String groupName) {
         this.groupName = groupName;
     }
+
+    
     
     /**
      * Name of the group to update. If you're changing the name of the group,
@@ -254,11 +252,39 @@ public class UpdateGroupRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("GroupName: " + groupName + ", ");
-        sb.append("NewPath: " + newPath + ", ");
-        sb.append("NewGroupName: " + newGroupName + ", ");
+        if (groupName != null) sb.append("GroupName: " + groupName + ", ");
+        if (newPath != null) sb.append("NewPath: " + newPath + ", ");
+        if (newGroupName != null) sb.append("NewGroupName: " + newGroupName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getGroupName() == null) ? 0 : getGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getNewPath() == null) ? 0 : getNewPath().hashCode()); 
+        hashCode = prime * hashCode + ((getNewGroupName() == null) ? 0 : getNewGroupName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof UpdateGroupRequest == false) return false;
+        UpdateGroupRequest other = (UpdateGroupRequest)obj;
+        
+        if (other.getGroupName() == null ^ this.getGroupName() == null) return false;
+        if (other.getGroupName() != null && other.getGroupName().equals(this.getGroupName()) == false) return false; 
+        if (other.getNewPath() == null ^ this.getNewPath() == null) return false;
+        if (other.getNewPath() != null && other.getNewPath().equals(this.getNewPath()) == false) return false; 
+        if (other.getNewGroupName() == null ^ this.getNewGroupName() == null) return false;
+        if (other.getNewGroupName() != null && other.getNewGroupName().equals(this.getNewGroupName()) == false) return false; 
+        return true;
     }
     
 }

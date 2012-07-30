@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,17 +18,13 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#startInstances(StartInstancesRequest) StartInstances operation}.
  * <p>
- * Starts an instance that uses an Amazon EBS volume as its root device.
- * Instances that use Amazon EBS volumes as their root devices can be
- * quickly stopped and started. When an instance is stopped, the compute
- * resources are released and you are not billed for hourly instance
- * usage. However, your root partition Amazon EBS volume remains,
- * continues to persist your data, and you are charged for Amazon EBS
- * volume usage. You can restart your instance at any time.
+ * Starts an instance that uses an Amazon EBS volume as its root device. Instances that use Amazon EBS volumes as their root devices can be quickly
+ * stopped and started. When an instance is stopped, the compute resources are released and you are not billed for hourly instance usage. However, your
+ * root partition Amazon EBS volume remains, continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your
+ * instance at any time.
  * </p>
  * <p>
- * <b>NOTE:</b> Performing this operation on an instance that uses an
- * instance store as its root device returns an error.
+ * <b>NOTE:</b> Performing this operation on an instance that uses an instance store as its root device returns an error.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#startInstances(StartInstancesRequest)
@@ -39,6 +35,8 @@ public class StartInstancesRequest extends AmazonWebServiceRequest {
      * The list of Amazon EC2 instances to start.
      */
     private java.util.List<String> instanceIds;
+
+    private String additionalInfo;
 
     /**
      * Default constructor for a new StartInstancesRequest object.  Callers should use the
@@ -56,6 +54,8 @@ public class StartInstancesRequest extends AmazonWebServiceRequest {
     public StartInstancesRequest(java.util.List<String> instanceIds) {
         this.instanceIds = instanceIds;
     }
+
+    
     
     /**
      * The list of Amazon EC2 instances to start.
@@ -63,6 +63,7 @@ public class StartInstancesRequest extends AmazonWebServiceRequest {
      * @return The list of Amazon EC2 instances to start.
      */
     public java.util.List<String> getInstanceIds() {
+        
         if (instanceIds == null) {
             instanceIds = new java.util.ArrayList<String>();
         }
@@ -75,10 +76,13 @@ public class StartInstancesRequest extends AmazonWebServiceRequest {
      * @param instanceIds The list of Amazon EC2 instances to start.
      */
     public void setInstanceIds(java.util.Collection<String> instanceIds) {
-        java.util.List<String> instanceIdsCopy = new java.util.ArrayList<String>();
-        if (instanceIds != null) {
-            instanceIdsCopy.addAll(instanceIds);
+        if (instanceIds == null) {
+            this.instanceIds = null;
+            return;
         }
+
+        java.util.List<String> instanceIdsCopy = new java.util.ArrayList<String>(instanceIds.size());
+        instanceIdsCopy.addAll(instanceIds);
         this.instanceIds = instanceIdsCopy;
     }
     
@@ -93,6 +97,7 @@ public class StartInstancesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public StartInstancesRequest withInstanceIds(String... instanceIds) {
+        if (getInstanceIds() == null) setInstanceIds(new java.util.ArrayList<String>(instanceIds.length));
         for (String value : instanceIds) {
             getInstanceIds().add(value);
         }
@@ -110,14 +115,50 @@ public class StartInstancesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public StartInstancesRequest withInstanceIds(java.util.Collection<String> instanceIds) {
-        java.util.List<String> instanceIdsCopy = new java.util.ArrayList<String>();
-        if (instanceIds != null) {
+        if (instanceIds == null) {
+            this.instanceIds = null;
+        } else {
+            java.util.List<String> instanceIdsCopy = new java.util.ArrayList<String>(instanceIds.size());
             instanceIdsCopy.addAll(instanceIds);
+            this.instanceIds = instanceIdsCopy;
         }
-        this.instanceIds = instanceIdsCopy;
 
         return this;
     }
+    
+    /**
+     * Returns the value of the AdditionalInfo property for this object.
+     *
+     * @return The value of the AdditionalInfo property for this object.
+     */
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+    
+    /**
+     * Sets the value of the AdditionalInfo property for this object.
+     *
+     * @param additionalInfo The new value for the AdditionalInfo property for this object.
+     */
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
+    }
+    
+    /**
+     * Sets the value of the AdditionalInfo property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param additionalInfo The new value for the AdditionalInfo property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public StartInstancesRequest withAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
+        return this;
+    }
+    
     
     /**
      * Returns a string representation of this object; useful for testing and
@@ -131,9 +172,35 @@ public class StartInstancesRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("InstanceIds: " + instanceIds + ", ");
+        if (instanceIds != null) sb.append("InstanceIds: " + instanceIds + ", ");
+        if (additionalInfo != null) sb.append("AdditionalInfo: " + additionalInfo + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getInstanceIds() == null) ? 0 : getInstanceIds().hashCode()); 
+        hashCode = prime * hashCode + ((getAdditionalInfo() == null) ? 0 : getAdditionalInfo().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof StartInstancesRequest == false) return false;
+        StartInstancesRequest other = (StartInstancesRequest)obj;
+        
+        if (other.getInstanceIds() == null ^ this.getInstanceIds() == null) return false;
+        if (other.getInstanceIds() != null && other.getInstanceIds().equals(this.getInstanceIds()) == false) return false; 
+        if (other.getAdditionalInfo() == null ^ this.getAdditionalInfo() == null) return false;
+        if (other.getAdditionalInfo() != null && other.getAdditionalInfo().equals(this.getAdditionalInfo()) == false) return false; 
+        return true;
     }
     
 }

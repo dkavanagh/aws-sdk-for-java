@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,12 +18,10 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#getUser(GetUserRequest) GetUser operation}.
  * <p>
- * Retrieves information about the specified User, including the User's
- * path, GUID, and ARN.
+ * Retrieves information about the specified user, including the user's path, GUID, and ARN.
  * </p>
  * <p>
- * If you do not specify a User name, IAM determines the User name
- * implicitly based on the AWS Access Key ID signing the request.
+ * If you do not specify a user name, IAM determines the user name implicitly based on the AWS Access Key ID signing the request.
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#getUser(GetUserRequest)
@@ -31,8 +29,8 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class GetUserRequest extends AmazonWebServiceRequest {
 
     /**
-     * Name of the User to get information about. <p>This parameter is
-     * optional. If it is not included, it defaults to the User making the
+     * Name of the user to get information about. <p>This parameter is
+     * optional. If it is not included, it defaults to the user making the
      * request.
      * <p>
      * <b>Constraints:</b><br/>
@@ -48,16 +46,16 @@ public class GetUserRequest extends AmazonWebServiceRequest {
     public GetUserRequest() {}
     
     /**
-     * Name of the User to get information about. <p>This parameter is
-     * optional. If it is not included, it defaults to the User making the
+     * Name of the user to get information about. <p>This parameter is
+     * optional. If it is not included, it defaults to the user making the
      * request.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @return Name of the User to get information about. <p>This parameter is
-     *         optional. If it is not included, it defaults to the User making the
+     * @return Name of the user to get information about. <p>This parameter is
+     *         optional. If it is not included, it defaults to the user making the
      *         request.
      */
     public String getUserName() {
@@ -65,16 +63,16 @@ public class GetUserRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * Name of the User to get information about. <p>This parameter is
-     * optional. If it is not included, it defaults to the User making the
+     * Name of the user to get information about. <p>This parameter is
+     * optional. If it is not included, it defaults to the user making the
      * request.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User to get information about. <p>This parameter is
-     *         optional. If it is not included, it defaults to the User making the
+     * @param userName Name of the user to get information about. <p>This parameter is
+     *         optional. If it is not included, it defaults to the user making the
      *         request.
      */
     public void setUserName(String userName) {
@@ -82,8 +80,8 @@ public class GetUserRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * Name of the User to get information about. <p>This parameter is
-     * optional. If it is not included, it defaults to the User making the
+     * Name of the user to get information about. <p>This parameter is
+     * optional. If it is not included, it defaults to the user making the
      * request.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
@@ -92,8 +90,8 @@ public class GetUserRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User to get information about. <p>This parameter is
-     *         optional. If it is not included, it defaults to the User making the
+     * @param userName Name of the user to get information about. <p>This parameter is
+     *         optional. If it is not included, it defaults to the user making the
      *         request.
      *
      * @return A reference to this updated object so that method calls can be chained 
@@ -117,9 +115,31 @@ public class GetUserRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("UserName: " + userName + ", ");
+        if (userName != null) sb.append("UserName: " + userName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getUserName() == null) ? 0 : getUserName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof GetUserRequest == false) return false;
+        GetUserRequest other = (GetUserRequest)obj;
+        
+        if (other.getUserName() == null ^ this.getUserName() == null) return false;
+        if (other.getUserName() != null && other.getUserName().equals(this.getUserName()) == false) return false; 
+        return true;
     }
     
 }

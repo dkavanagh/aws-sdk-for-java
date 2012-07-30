@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.autoscaling.model.*;
@@ -30,29 +31,31 @@ import com.amazonaws.util.StringUtils;
 public class DescribeAutoScalingGroupsRequestMarshaller implements Marshaller<Request<DescribeAutoScalingGroupsRequest>, DescribeAutoScalingGroupsRequest> {
 
     public Request<DescribeAutoScalingGroupsRequest> marshall(DescribeAutoScalingGroupsRequest describeAutoScalingGroupsRequest) {
+
+        if (describeAutoScalingGroupsRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<DescribeAutoScalingGroupsRequest> request = new DefaultRequest<DescribeAutoScalingGroupsRequest>(describeAutoScalingGroupsRequest, "AmazonAutoScaling");
         request.addParameter("Action", "DescribeAutoScalingGroups");
         request.addParameter("Version", "2011-01-01");
-        if (describeAutoScalingGroupsRequest != null) {
-            java.util.List<String> autoScalingGroupNamesList = describeAutoScalingGroupsRequest.getAutoScalingGroupNames();
-            int autoScalingGroupNamesListIndex = 1;
 
-            for (String autoScalingGroupNamesListValue : autoScalingGroupNamesList) {
-                if (autoScalingGroupNamesListValue != null) {
-                    request.addParameter("AutoScalingGroupNames.member." + autoScalingGroupNamesListIndex, StringUtils.fromString(autoScalingGroupNamesListValue));
-                }
-                autoScalingGroupNamesListIndex++;
+
+        java.util.List<String> autoScalingGroupNamesList = describeAutoScalingGroupsRequest.getAutoScalingGroupNames();
+        int autoScalingGroupNamesListIndex = 1;
+
+        for (String autoScalingGroupNamesListValue : autoScalingGroupNamesList) {
+            if (autoScalingGroupNamesListValue != null) {
+                request.addParameter("AutoScalingGroupNames.member." + autoScalingGroupNamesListIndex, StringUtils.fromString(autoScalingGroupNamesListValue));
             }
+
+            autoScalingGroupNamesListIndex++;
         }
-        if (describeAutoScalingGroupsRequest != null) {
-            if (describeAutoScalingGroupsRequest.getNextToken() != null) {
-                request.addParameter("NextToken", StringUtils.fromString(describeAutoScalingGroupsRequest.getNextToken()));
-            }
+        if (describeAutoScalingGroupsRequest.getNextToken() != null) {
+            request.addParameter("NextToken", StringUtils.fromString(describeAutoScalingGroupsRequest.getNextToken()));
         }
-        if (describeAutoScalingGroupsRequest != null) {
-            if (describeAutoScalingGroupsRequest.getMaxRecords() != null) {
-                request.addParameter("MaxRecords", StringUtils.fromInteger(describeAutoScalingGroupsRequest.getMaxRecords()));
-            }
+        if (describeAutoScalingGroupsRequest.getMaxRecords() != null) {
+            request.addParameter("MaxRecords", StringUtils.fromInteger(describeAutoScalingGroupsRequest.getMaxRecords()));
         }
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,11 +18,8 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#deleteVpc(DeleteVpcRequest) DeleteVpc operation}.
  * <p>
- * Deletes a VPC. You must detach or delete all gateways or other
- * objects that are dependent on the VPC first. For example, you must
- * terminate all running instances, delete all VPC security groups
- * (except the default), delete all the route tables (except the
- * default), etc.
+ * Deletes a VPC. You must detach or delete all gateways or other objects that are dependent on the VPC first. For example, you must terminate all
+ * running instances, delete all VPC security groups (except the default), delete all the route tables (except the default), etc.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#deleteVpc(DeleteVpcRequest)
@@ -50,6 +47,8 @@ public class DeleteVpcRequest extends AmazonWebServiceRequest {
     public DeleteVpcRequest(String vpcId) {
         this.vpcId = vpcId;
     }
+
+    
     
     /**
      * The ID of the VPC you want to delete.
@@ -97,9 +96,31 @@ public class DeleteVpcRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("VpcId: " + vpcId + ", ");
+        if (vpcId != null) sb.append("VpcId: " + vpcId + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getVpcId() == null) ? 0 : getVpcId().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DeleteVpcRequest == false) return false;
+        DeleteVpcRequest other = (DeleteVpcRequest)obj;
+        
+        if (other.getVpcId() == null ^ this.getVpcId() == null) return false;
+        if (other.getVpcId() != null && other.getVpcId().equals(this.getVpcId()) == false) return false; 
+        return true;
     }
     
 }

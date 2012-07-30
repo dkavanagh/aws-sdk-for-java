@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -21,14 +21,10 @@ import com.amazonaws.AmazonWebServiceRequest;
  * Deletes the specified server certificate.
  * </p>
  * <p>
- * <b>IMPORTANT:</b>If your Elastic Load Balancing instances are using a
- * server certificate, deleting the certificate could have implications
- * for your application. If your Elastic Load Balancing instances do not
- * detect the deletion of bound certificates, they may continue to use
- * the certificates. This could cause them to stop accepting traffic.
- * We recommend that you remove the reference to the certificate from
- * your Elastic Load Balancing instances before using this command to
- * delete the certificate.
+ * <b>IMPORTANT:</b>If you are using a server certificate with Elastic Load Balancing, deleting the certificate could have implications for your
+ * application. If Elastic Load Balancing doesn't detect the deletion of bound certificates, it may continue to use the certificates. This could cause
+ * Elastic Load Balancing to stop accepting traffic. We recommend that you remove the reference to the certificate from Elastic Load Balancing before
+ * using this command to delete the certificate. For more information, go to DeleteLoadBalancerListeners in the Elastic Load Balancing API Reference.
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#deleteServerCertificate(DeleteServerCertificateRequest)
@@ -61,6 +57,8 @@ public class DeleteServerCertificateRequest extends AmazonWebServiceRequest {
     public DeleteServerCertificateRequest(String serverCertificateName) {
         this.serverCertificateName = serverCertificateName;
     }
+
+    
     
     /**
      * The name of the server certificate you want to delete.
@@ -120,9 +118,31 @@ public class DeleteServerCertificateRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("ServerCertificateName: " + serverCertificateName + ", ");
+        if (serverCertificateName != null) sb.append("ServerCertificateName: " + serverCertificateName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getServerCertificateName() == null) ? 0 : getServerCertificateName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DeleteServerCertificateRequest == false) return false;
+        DeleteServerCertificateRequest other = (DeleteServerCertificateRequest)obj;
+        
+        if (other.getServerCertificateName() == null ^ this.getServerCertificateName() == null) return false;
+        if (other.getServerCertificateName() != null && other.getServerCertificateName().equals(this.getServerCertificateName()) == false) return false; 
+        return true;
     }
     
 }

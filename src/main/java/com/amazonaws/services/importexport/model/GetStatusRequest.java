@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,10 +18,8 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.importexport.AmazonImportExport#getStatus(GetStatusRequest) GetStatus operation}.
  * <p>
- * This operation returns information about a job, including where the
- * job is in the processing pipeline, the status of the results, and the
- * signature value associated with the job. You can only return
- * information about jobs you own.
+ * This operation returns information about a job, including where the job is in the processing pipeline, the status of the results, and the signature
+ * value associated with the job. You can only return information about jobs you own.
  * </p>
  *
  * @see com.amazonaws.services.importexport.AmazonImportExport#getStatus(GetStatusRequest)
@@ -79,9 +77,31 @@ public class GetStatusRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("JobId: " + jobId + ", ");
+        if (jobId != null) sb.append("JobId: " + jobId + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getJobId() == null) ? 0 : getJobId().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof GetStatusRequest == false) return false;
+        GetStatusRequest other = (GetStatusRequest)obj;
+        
+        if (other.getJobId() == null ^ this.getJobId() == null) return false;
+        if (other.getJobId() != null && other.getJobId().equals(this.getJobId()) == false) return false; 
+        return true;
     }
     
 }

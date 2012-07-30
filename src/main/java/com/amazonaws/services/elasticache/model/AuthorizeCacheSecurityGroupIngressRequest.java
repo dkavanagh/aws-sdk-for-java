@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,14 +18,11 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.elasticache.AmazonElastiCache#authorizeCacheSecurityGroupIngress(AuthorizeCacheSecurityGroupIngressRequest) AuthorizeCacheSecurityGroupIngress operation}.
  * <p>
- * Authorizes ingress to a CacheSecurityGroup using EC2 Security Groups
- * as authorization (therefore the application using the cache must be
- * running on EC2 clusters). This API requires the following parameters:
- * EC2SecurityGroupName and EC2SecurityGroupOwnerId.
+ * Authorizes ingress to a CacheSecurityGroup using EC2 Security Groups as authorization (therefore the application using the cache must be running on
+ * EC2 clusters). This API requires the following parameters: EC2SecurityGroupName and EC2SecurityGroupOwnerId.
  * </p>
  * <p>
- * <b>NOTE:</b> You cannot authorize ingress from an EC2 security group
- * in one Region to an Amazon Cache Cluster in another.
+ * <b>NOTE:</b> You cannot authorize ingress from an EC2 security group in one Region to an Amazon Cache Cluster in another.
  * </p>
  *
  * @see com.amazonaws.services.elasticache.AmazonElastiCache#authorizeCacheSecurityGroupIngress(AuthorizeCacheSecurityGroupIngressRequest)
@@ -73,6 +70,8 @@ public class AuthorizeCacheSecurityGroupIngressRequest extends AmazonWebServiceR
         this.eC2SecurityGroupName = eC2SecurityGroupName;
         this.eC2SecurityGroupOwnerId = eC2SecurityGroupOwnerId;
     }
+
+    
     
     /**
      * The name of the Cache Security Group to authorize.
@@ -200,11 +199,39 @@ public class AuthorizeCacheSecurityGroupIngressRequest extends AmazonWebServiceR
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("CacheSecurityGroupName: " + cacheSecurityGroupName + ", ");
-        sb.append("EC2SecurityGroupName: " + eC2SecurityGroupName + ", ");
-        sb.append("EC2SecurityGroupOwnerId: " + eC2SecurityGroupOwnerId + ", ");
+        if (cacheSecurityGroupName != null) sb.append("CacheSecurityGroupName: " + cacheSecurityGroupName + ", ");
+        if (eC2SecurityGroupName != null) sb.append("EC2SecurityGroupName: " + eC2SecurityGroupName + ", ");
+        if (eC2SecurityGroupOwnerId != null) sb.append("EC2SecurityGroupOwnerId: " + eC2SecurityGroupOwnerId + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getCacheSecurityGroupName() == null) ? 0 : getCacheSecurityGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getEC2SecurityGroupName() == null) ? 0 : getEC2SecurityGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getEC2SecurityGroupOwnerId() == null) ? 0 : getEC2SecurityGroupOwnerId().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof AuthorizeCacheSecurityGroupIngressRequest == false) return false;
+        AuthorizeCacheSecurityGroupIngressRequest other = (AuthorizeCacheSecurityGroupIngressRequest)obj;
+        
+        if (other.getCacheSecurityGroupName() == null ^ this.getCacheSecurityGroupName() == null) return false;
+        if (other.getCacheSecurityGroupName() != null && other.getCacheSecurityGroupName().equals(this.getCacheSecurityGroupName()) == false) return false; 
+        if (other.getEC2SecurityGroupName() == null ^ this.getEC2SecurityGroupName() == null) return false;
+        if (other.getEC2SecurityGroupName() != null && other.getEC2SecurityGroupName().equals(this.getEC2SecurityGroupName()) == false) return false; 
+        if (other.getEC2SecurityGroupOwnerId() == null ^ this.getEC2SecurityGroupOwnerId() == null) return false;
+        if (other.getEC2SecurityGroupOwnerId() != null && other.getEC2SecurityGroupOwnerId().equals(this.getEC2SecurityGroupOwnerId()) == false) return false; 
+        return true;
     }
     
 }

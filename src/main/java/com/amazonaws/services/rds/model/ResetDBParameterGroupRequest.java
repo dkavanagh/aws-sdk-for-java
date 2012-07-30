@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,14 +18,10 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.rds.AmazonRDS#resetDBParameterGroup(ResetDBParameterGroupRequest) ResetDBParameterGroup operation}.
  * <p>
- * Modifies the parameters of a DBParameterGroup to the engine/system
- * default value. To reset specific parameters submit a list of the
- * following: ParameterName and ApplyMethod. To reset the entire
- * DBParameterGroup specify the DBParameterGroup name and
- * ResetAllParameters parameters. When resetting the entire group,
- * dynamic parameters are updated immediately and static parameters are
- * set to pending-reboot to take effect on the next DB instance restart
- * or RebootDBInstance request.
+ * Modifies the parameters of a DBParameterGroup to the engine/system default value. To reset specific parameters submit a list of the following:
+ * ParameterName and ApplyMethod. To reset the entire DBParameterGroup specify the DBParameterGroup name and ResetAllParameters parameters. When
+ * resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB
+ * instance restart or RebootDBInstance request.
  * </p>
  *
  * @see com.amazonaws.services.rds.AmazonRDS#resetDBParameterGroup(ResetDBParameterGroupRequest)
@@ -80,6 +76,8 @@ public class ResetDBParameterGroupRequest extends AmazonWebServiceRequest {
     public ResetDBParameterGroupRequest(String dBParameterGroupName) {
         this.dBParameterGroupName = dBParameterGroupName;
     }
+
+    
     
     /**
      * The name of the DB Parameter Group. <p>Constraints: <ul> <li>Must be 1
@@ -216,6 +214,7 @@ public class ResetDBParameterGroupRequest extends AmazonWebServiceRequest {
      *         method): <code>pending-reboot</code>
      */
     public java.util.List<Parameter> getParameters() {
+        
         if (parameters == null) {
             parameters = new java.util.ArrayList<Parameter>();
         }
@@ -246,10 +245,13 @@ public class ResetDBParameterGroupRequest extends AmazonWebServiceRequest {
      *         method): <code>pending-reboot</code>
      */
     public void setParameters(java.util.Collection<Parameter> parameters) {
-        java.util.List<Parameter> parametersCopy = new java.util.ArrayList<Parameter>();
-        if (parameters != null) {
-            parametersCopy.addAll(parameters);
+        if (parameters == null) {
+            this.parameters = null;
+            return;
         }
+
+        java.util.List<Parameter> parametersCopy = new java.util.ArrayList<Parameter>(parameters.size());
+        parametersCopy.addAll(parameters);
         this.parameters = parametersCopy;
     }
     
@@ -282,6 +284,7 @@ public class ResetDBParameterGroupRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public ResetDBParameterGroupRequest withParameters(Parameter... parameters) {
+        if (getParameters() == null) setParameters(new java.util.ArrayList<Parameter>(parameters.length));
         for (Parameter value : parameters) {
             getParameters().add(value);
         }
@@ -317,11 +320,13 @@ public class ResetDBParameterGroupRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public ResetDBParameterGroupRequest withParameters(java.util.Collection<Parameter> parameters) {
-        java.util.List<Parameter> parametersCopy = new java.util.ArrayList<Parameter>();
-        if (parameters != null) {
+        if (parameters == null) {
+            this.parameters = null;
+        } else {
+            java.util.List<Parameter> parametersCopy = new java.util.ArrayList<Parameter>(parameters.size());
             parametersCopy.addAll(parameters);
+            this.parameters = parametersCopy;
         }
-        this.parameters = parametersCopy;
 
         return this;
     }
@@ -338,11 +343,39 @@ public class ResetDBParameterGroupRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("DBParameterGroupName: " + dBParameterGroupName + ", ");
-        sb.append("ResetAllParameters: " + resetAllParameters + ", ");
-        sb.append("Parameters: " + parameters + ", ");
+        if (dBParameterGroupName != null) sb.append("DBParameterGroupName: " + dBParameterGroupName + ", ");
+        if (resetAllParameters != null) sb.append("ResetAllParameters: " + resetAllParameters + ", ");
+        if (parameters != null) sb.append("Parameters: " + parameters + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getDBParameterGroupName() == null) ? 0 : getDBParameterGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((isResetAllParameters() == null) ? 0 : isResetAllParameters().hashCode()); 
+        hashCode = prime * hashCode + ((getParameters() == null) ? 0 : getParameters().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof ResetDBParameterGroupRequest == false) return false;
+        ResetDBParameterGroupRequest other = (ResetDBParameterGroupRequest)obj;
+        
+        if (other.getDBParameterGroupName() == null ^ this.getDBParameterGroupName() == null) return false;
+        if (other.getDBParameterGroupName() != null && other.getDBParameterGroupName().equals(this.getDBParameterGroupName()) == false) return false; 
+        if (other.isResetAllParameters() == null ^ this.isResetAllParameters() == null) return false;
+        if (other.isResetAllParameters() != null && other.isResetAllParameters().equals(this.isResetAllParameters()) == false) return false; 
+        if (other.getParameters() == null ^ this.getParameters() == null) return false;
+        if (other.getParameters() != null && other.getParameters().equals(this.getParameters()) == false) return false; 
+        return true;
     }
     
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.elasticbeanstalk.AWSElasticBeanstalk#restartAppServer(RestartAppServerRequest) RestartAppServer operation}.
  * <p>
- * Causes the environment to restart the application container server
- * running on each Amazon EC2 instance.
+ * Causes the environment to restart the application container server running on each Amazon EC2 instance.
  * </p>
  *
  * @see com.amazonaws.services.elasticbeanstalk.AWSElasticBeanstalk#restartAppServer(RestartAppServerRequest)
@@ -27,12 +26,18 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class RestartAppServerRequest extends AmazonWebServiceRequest {
 
     /**
-     * The ID of the environment to restart the server for.
+     * The ID of the environment to restart the server for. <p> Condition:
+     * You must specify either this or an EnvironmentName, or both. If you do
+     * not specify either, AWS Elastic Beanstalk returns
+     * <code>MissingRequiredParameter</code> error.
      */
     private String environmentId;
 
     /**
-     * The name of the environment to restart the server for.
+     * The name of the environment to restart the server for. <p> Condition:
+     * You must specify either this or an EnvironmentId, or both. If you do
+     * not specify either, AWS Elastic Beanstalk returns
+     * <code>MissingRequiredParameter</code> error.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>4 - 23<br/>
@@ -46,29 +51,47 @@ public class RestartAppServerRequest extends AmazonWebServiceRequest {
     public RestartAppServerRequest() {}
     
     /**
-     * The ID of the environment to restart the server for.
+     * The ID of the environment to restart the server for. <p> Condition:
+     * You must specify either this or an EnvironmentName, or both. If you do
+     * not specify either, AWS Elastic Beanstalk returns
+     * <code>MissingRequiredParameter</code> error.
      *
-     * @return The ID of the environment to restart the server for.
+     * @return The ID of the environment to restart the server for. <p> Condition:
+     *         You must specify either this or an EnvironmentName, or both. If you do
+     *         not specify either, AWS Elastic Beanstalk returns
+     *         <code>MissingRequiredParameter</code> error.
      */
     public String getEnvironmentId() {
         return environmentId;
     }
     
     /**
-     * The ID of the environment to restart the server for.
+     * The ID of the environment to restart the server for. <p> Condition:
+     * You must specify either this or an EnvironmentName, or both. If you do
+     * not specify either, AWS Elastic Beanstalk returns
+     * <code>MissingRequiredParameter</code> error.
      *
-     * @param environmentId The ID of the environment to restart the server for.
+     * @param environmentId The ID of the environment to restart the server for. <p> Condition:
+     *         You must specify either this or an EnvironmentName, or both. If you do
+     *         not specify either, AWS Elastic Beanstalk returns
+     *         <code>MissingRequiredParameter</code> error.
      */
     public void setEnvironmentId(String environmentId) {
         this.environmentId = environmentId;
     }
     
     /**
-     * The ID of the environment to restart the server for.
+     * The ID of the environment to restart the server for. <p> Condition:
+     * You must specify either this or an EnvironmentName, or both. If you do
+     * not specify either, AWS Elastic Beanstalk returns
+     * <code>MissingRequiredParameter</code> error.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param environmentId The ID of the environment to restart the server for.
+     * @param environmentId The ID of the environment to restart the server for. <p> Condition:
+     *         You must specify either this or an EnvironmentName, or both. If you do
+     *         not specify either, AWS Elastic Beanstalk returns
+     *         <code>MissingRequiredParameter</code> error.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -80,38 +103,56 @@ public class RestartAppServerRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * The name of the environment to restart the server for.
+     * The name of the environment to restart the server for. <p> Condition:
+     * You must specify either this or an EnvironmentId, or both. If you do
+     * not specify either, AWS Elastic Beanstalk returns
+     * <code>MissingRequiredParameter</code> error.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>4 - 23<br/>
      *
-     * @return The name of the environment to restart the server for.
+     * @return The name of the environment to restart the server for. <p> Condition:
+     *         You must specify either this or an EnvironmentId, or both. If you do
+     *         not specify either, AWS Elastic Beanstalk returns
+     *         <code>MissingRequiredParameter</code> error.
      */
     public String getEnvironmentName() {
         return environmentName;
     }
     
     /**
-     * The name of the environment to restart the server for.
+     * The name of the environment to restart the server for. <p> Condition:
+     * You must specify either this or an EnvironmentId, or both. If you do
+     * not specify either, AWS Elastic Beanstalk returns
+     * <code>MissingRequiredParameter</code> error.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>4 - 23<br/>
      *
-     * @param environmentName The name of the environment to restart the server for.
+     * @param environmentName The name of the environment to restart the server for. <p> Condition:
+     *         You must specify either this or an EnvironmentId, or both. If you do
+     *         not specify either, AWS Elastic Beanstalk returns
+     *         <code>MissingRequiredParameter</code> error.
      */
     public void setEnvironmentName(String environmentName) {
         this.environmentName = environmentName;
     }
     
     /**
-     * The name of the environment to restart the server for.
+     * The name of the environment to restart the server for. <p> Condition:
+     * You must specify either this or an EnvironmentId, or both. If you do
+     * not specify either, AWS Elastic Beanstalk returns
+     * <code>MissingRequiredParameter</code> error.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>4 - 23<br/>
      *
-     * @param environmentName The name of the environment to restart the server for.
+     * @param environmentName The name of the environment to restart the server for. <p> Condition:
+     *         You must specify either this or an EnvironmentId, or both. If you do
+     *         not specify either, AWS Elastic Beanstalk returns
+     *         <code>MissingRequiredParameter</code> error.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -134,10 +175,35 @@ public class RestartAppServerRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("EnvironmentId: " + environmentId + ", ");
-        sb.append("EnvironmentName: " + environmentName + ", ");
+        if (environmentId != null) sb.append("EnvironmentId: " + environmentId + ", ");
+        if (environmentName != null) sb.append("EnvironmentName: " + environmentName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getEnvironmentId() == null) ? 0 : getEnvironmentId().hashCode()); 
+        hashCode = prime * hashCode + ((getEnvironmentName() == null) ? 0 : getEnvironmentName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof RestartAppServerRequest == false) return false;
+        RestartAppServerRequest other = (RestartAppServerRequest)obj;
+        
+        if (other.getEnvironmentId() == null ^ this.getEnvironmentId() == null) return false;
+        if (other.getEnvironmentId() != null && other.getEnvironmentId().equals(this.getEnvironmentId()) == false) return false; 
+        if (other.getEnvironmentName() == null ^ this.getEnvironmentName() == null) return false;
+        if (other.getEnvironmentName() != null && other.getEnvironmentName().equals(this.getEnvironmentName()) == false) return false; 
+        return true;
     }
     
 }

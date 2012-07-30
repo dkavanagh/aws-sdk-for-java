@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -23,17 +23,11 @@ public class OptionSpecification {
 
     /**
      * A unique namespace identifying the option's associated AWS resource.
-     * <p>
-     * <b>Constraints:</b><br/>
-     * <b>Length: </b>1 - 255<br/>
      */
     private String namespace;
 
     /**
      * The name of the configuration option.
-     * <p>
-     * <b>Constraints:</b><br/>
-     * <b>Length: </b>1 - 100<br/>
      */
     private String optionName;
 
@@ -45,9 +39,6 @@ public class OptionSpecification {
     
     /**
      * A unique namespace identifying the option's associated AWS resource.
-     * <p>
-     * <b>Constraints:</b><br/>
-     * <b>Length: </b>1 - 255<br/>
      *
      * @return A unique namespace identifying the option's associated AWS resource.
      */
@@ -57,9 +48,6 @@ public class OptionSpecification {
     
     /**
      * A unique namespace identifying the option's associated AWS resource.
-     * <p>
-     * <b>Constraints:</b><br/>
-     * <b>Length: </b>1 - 255<br/>
      *
      * @param namespace A unique namespace identifying the option's associated AWS resource.
      */
@@ -71,9 +59,6 @@ public class OptionSpecification {
      * A unique namespace identifying the option's associated AWS resource.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
-     * <p>
-     * <b>Constraints:</b><br/>
-     * <b>Length: </b>1 - 255<br/>
      *
      * @param namespace A unique namespace identifying the option's associated AWS resource.
      *
@@ -88,9 +73,6 @@ public class OptionSpecification {
     
     /**
      * The name of the configuration option.
-     * <p>
-     * <b>Constraints:</b><br/>
-     * <b>Length: </b>1 - 100<br/>
      *
      * @return The name of the configuration option.
      */
@@ -100,9 +82,6 @@ public class OptionSpecification {
     
     /**
      * The name of the configuration option.
-     * <p>
-     * <b>Constraints:</b><br/>
-     * <b>Length: </b>1 - 100<br/>
      *
      * @param optionName The name of the configuration option.
      */
@@ -114,9 +93,6 @@ public class OptionSpecification {
      * The name of the configuration option.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
-     * <p>
-     * <b>Constraints:</b><br/>
-     * <b>Length: </b>1 - 100<br/>
      *
      * @param optionName The name of the configuration option.
      *
@@ -141,10 +117,35 @@ public class OptionSpecification {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Namespace: " + namespace + ", ");
-        sb.append("OptionName: " + optionName + ", ");
+        if (namespace != null) sb.append("Namespace: " + namespace + ", ");
+        if (optionName != null) sb.append("OptionName: " + optionName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getNamespace() == null) ? 0 : getNamespace().hashCode()); 
+        hashCode = prime * hashCode + ((getOptionName() == null) ? 0 : getOptionName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof OptionSpecification == false) return false;
+        OptionSpecification other = (OptionSpecification)obj;
+        
+        if (other.getNamespace() == null ^ this.getNamespace() == null) return false;
+        if (other.getNamespace() != null && other.getNamespace().equals(this.getNamespace()) == false) return false; 
+        if (other.getOptionName() == null ^ this.getOptionName() == null) return false;
+        if (other.getOptionName() != null && other.getOptionName().equals(this.getOptionName()) == false) return false; 
+        return true;
     }
     
 }

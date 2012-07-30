@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.identitymanagement.model.*;
@@ -30,18 +31,20 @@ import com.amazonaws.util.StringUtils;
 public class GetUserPolicyRequestMarshaller implements Marshaller<Request<GetUserPolicyRequest>, GetUserPolicyRequest> {
 
     public Request<GetUserPolicyRequest> marshall(GetUserPolicyRequest getUserPolicyRequest) {
+
+        if (getUserPolicyRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<GetUserPolicyRequest> request = new DefaultRequest<GetUserPolicyRequest>(getUserPolicyRequest, "AmazonIdentityManagement");
         request.addParameter("Action", "GetUserPolicy");
         request.addParameter("Version", "2010-05-08");
-        if (getUserPolicyRequest != null) {
-            if (getUserPolicyRequest.getUserName() != null) {
-                request.addParameter("UserName", StringUtils.fromString(getUserPolicyRequest.getUserName()));
-            }
+
+        if (getUserPolicyRequest.getUserName() != null) {
+            request.addParameter("UserName", StringUtils.fromString(getUserPolicyRequest.getUserName()));
         }
-        if (getUserPolicyRequest != null) {
-            if (getUserPolicyRequest.getPolicyName() != null) {
-                request.addParameter("PolicyName", StringUtils.fromString(getUserPolicyRequest.getPolicyName()));
-            }
+        if (getUserPolicyRequest.getPolicyName() != null) {
+            request.addParameter("PolicyName", StringUtils.fromString(getUserPolicyRequest.getPolicyName()));
         }
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.rds.model.*;
@@ -30,23 +31,23 @@ import com.amazonaws.util.StringUtils;
 public class DescribeEngineDefaultParametersRequestMarshaller implements Marshaller<Request<DescribeEngineDefaultParametersRequest>, DescribeEngineDefaultParametersRequest> {
 
     public Request<DescribeEngineDefaultParametersRequest> marshall(DescribeEngineDefaultParametersRequest describeEngineDefaultParametersRequest) {
+
+        if (describeEngineDefaultParametersRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<DescribeEngineDefaultParametersRequest> request = new DefaultRequest<DescribeEngineDefaultParametersRequest>(describeEngineDefaultParametersRequest, "AmazonRDS");
         request.addParameter("Action", "DescribeEngineDefaultParameters");
-        request.addParameter("Version", "2011-04-01");
-        if (describeEngineDefaultParametersRequest != null) {
-            if (describeEngineDefaultParametersRequest.getDBParameterGroupFamily() != null) {
-                request.addParameter("DBParameterGroupFamily", StringUtils.fromString(describeEngineDefaultParametersRequest.getDBParameterGroupFamily()));
-            }
+        request.addParameter("Version", "2012-04-23");
+
+        if (describeEngineDefaultParametersRequest.getDBParameterGroupFamily() != null) {
+            request.addParameter("DBParameterGroupFamily", StringUtils.fromString(describeEngineDefaultParametersRequest.getDBParameterGroupFamily()));
         }
-        if (describeEngineDefaultParametersRequest != null) {
-            if (describeEngineDefaultParametersRequest.getMaxRecords() != null) {
-                request.addParameter("MaxRecords", StringUtils.fromInteger(describeEngineDefaultParametersRequest.getMaxRecords()));
-            }
+        if (describeEngineDefaultParametersRequest.getMaxRecords() != null) {
+            request.addParameter("MaxRecords", StringUtils.fromInteger(describeEngineDefaultParametersRequest.getMaxRecords()));
         }
-        if (describeEngineDefaultParametersRequest != null) {
-            if (describeEngineDefaultParametersRequest.getMarker() != null) {
-                request.addParameter("Marker", StringUtils.fromString(describeEngineDefaultParametersRequest.getMarker()));
-            }
+        if (describeEngineDefaultParametersRequest.getMarker() != null) {
+            request.addParameter("Marker", StringUtils.fromString(describeEngineDefaultParametersRequest.getMarker()));
         }
 
 

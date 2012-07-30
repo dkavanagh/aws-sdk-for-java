@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,9 +18,8 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#describeLicenses(DescribeLicensesRequest) DescribeLicenses operation}.
  * <p>
- * Provides details of a user's registered licenses. Zero or more IDs
- * may be specified on the call. When one or more license IDs are
- * specified, only data for the specified IDs are returned.
+ * Provides details of a user's registered licenses. Zero or more IDs may be specified on the call. When one or more license IDs are specified, only
+ * data for the specified IDs are returned.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#describeLicenses(DescribeLicensesRequest)
@@ -50,6 +49,7 @@ public class DescribeLicensesRequest extends AmazonWebServiceRequest {
      *         returned.
      */
     public java.util.List<String> getLicenseIds() {
+        
         if (licenseIds == null) {
             licenseIds = new java.util.ArrayList<String>();
         }
@@ -64,10 +64,13 @@ public class DescribeLicensesRequest extends AmazonWebServiceRequest {
      *         returned.
      */
     public void setLicenseIds(java.util.Collection<String> licenseIds) {
-        java.util.List<String> licenseIdsCopy = new java.util.ArrayList<String>();
-        if (licenseIds != null) {
-            licenseIdsCopy.addAll(licenseIds);
+        if (licenseIds == null) {
+            this.licenseIds = null;
+            return;
         }
+
+        java.util.List<String> licenseIdsCopy = new java.util.ArrayList<String>(licenseIds.size());
+        licenseIdsCopy.addAll(licenseIds);
         this.licenseIds = licenseIdsCopy;
     }
     
@@ -84,6 +87,7 @@ public class DescribeLicensesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeLicensesRequest withLicenseIds(String... licenseIds) {
+        if (getLicenseIds() == null) setLicenseIds(new java.util.ArrayList<String>(licenseIds.length));
         for (String value : licenseIds) {
             getLicenseIds().add(value);
         }
@@ -103,11 +107,13 @@ public class DescribeLicensesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeLicensesRequest withLicenseIds(java.util.Collection<String> licenseIds) {
-        java.util.List<String> licenseIdsCopy = new java.util.ArrayList<String>();
-        if (licenseIds != null) {
+        if (licenseIds == null) {
+            this.licenseIds = null;
+        } else {
+            java.util.List<String> licenseIdsCopy = new java.util.ArrayList<String>(licenseIds.size());
             licenseIdsCopy.addAll(licenseIds);
+            this.licenseIds = licenseIdsCopy;
         }
-        this.licenseIds = licenseIdsCopy;
 
         return this;
     }
@@ -126,6 +132,7 @@ public class DescribeLicensesRequest extends AmazonWebServiceRequest {
      *         EC2 API reference</a>.
      */
     public java.util.List<Filter> getFilters() {
+        
         if (filters == null) {
             filters = new java.util.ArrayList<Filter>();
         }
@@ -146,10 +153,13 @@ public class DescribeLicensesRequest extends AmazonWebServiceRequest {
      *         EC2 API reference</a>.
      */
     public void setFilters(java.util.Collection<Filter> filters) {
-        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>();
-        if (filters != null) {
-            filtersCopy.addAll(filters);
+        if (filters == null) {
+            this.filters = null;
+            return;
         }
+
+        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>(filters.size());
+        filtersCopy.addAll(filters);
         this.filters = filtersCopy;
     }
     
@@ -172,6 +182,7 @@ public class DescribeLicensesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeLicensesRequest withFilters(Filter... filters) {
+        if (getFilters() == null) setFilters(new java.util.ArrayList<Filter>(filters.length));
         for (Filter value : filters) {
             getFilters().add(value);
         }
@@ -197,11 +208,13 @@ public class DescribeLicensesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeLicensesRequest withFilters(java.util.Collection<Filter> filters) {
-        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>();
-        if (filters != null) {
+        if (filters == null) {
+            this.filters = null;
+        } else {
+            java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>(filters.size());
             filtersCopy.addAll(filters);
+            this.filters = filtersCopy;
         }
-        this.filters = filtersCopy;
 
         return this;
     }
@@ -218,10 +231,35 @@ public class DescribeLicensesRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("LicenseIds: " + licenseIds + ", ");
-        sb.append("Filters: " + filters + ", ");
+        if (licenseIds != null) sb.append("LicenseIds: " + licenseIds + ", ");
+        if (filters != null) sb.append("Filters: " + filters + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getLicenseIds() == null) ? 0 : getLicenseIds().hashCode()); 
+        hashCode = prime * hashCode + ((getFilters() == null) ? 0 : getFilters().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeLicensesRequest == false) return false;
+        DescribeLicensesRequest other = (DescribeLicensesRequest)obj;
+        
+        if (other.getLicenseIds() == null ^ this.getLicenseIds() == null) return false;
+        if (other.getLicenseIds() != null && other.getLicenseIds().equals(this.getLicenseIds()) == false) return false; 
+        if (other.getFilters() == null ^ this.getFilters() == null) return false;
+        if (other.getFilters() != null && other.getFilters().equals(this.getFilters()) == false) return false; 
+        return true;
     }
     
 }

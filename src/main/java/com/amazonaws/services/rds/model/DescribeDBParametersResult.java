@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@ package com.amazonaws.services.rds.model;
 
 /**
  * <p>
- * Contains the result of a successful invocation of the
- * DescribeDBParameters action.
+ * Contains the result of a successful invocation of the DescribeDBParameters action.
  * </p>
  */
 public class DescribeDBParametersResult {
@@ -38,6 +37,7 @@ public class DescribeDBParametersResult {
      * @return A list of <a>Parameter</a> instances.
      */
     public java.util.List<Parameter> getParameters() {
+        
         if (parameters == null) {
             parameters = new java.util.ArrayList<Parameter>();
         }
@@ -50,10 +50,13 @@ public class DescribeDBParametersResult {
      * @param parameters A list of <a>Parameter</a> instances.
      */
     public void setParameters(java.util.Collection<Parameter> parameters) {
-        java.util.List<Parameter> parametersCopy = new java.util.ArrayList<Parameter>();
-        if (parameters != null) {
-            parametersCopy.addAll(parameters);
+        if (parameters == null) {
+            this.parameters = null;
+            return;
         }
+
+        java.util.List<Parameter> parametersCopy = new java.util.ArrayList<Parameter>(parameters.size());
+        parametersCopy.addAll(parameters);
         this.parameters = parametersCopy;
     }
     
@@ -68,6 +71,7 @@ public class DescribeDBParametersResult {
      *         together. 
      */
     public DescribeDBParametersResult withParameters(Parameter... parameters) {
+        if (getParameters() == null) setParameters(new java.util.ArrayList<Parameter>(parameters.length));
         for (Parameter value : parameters) {
             getParameters().add(value);
         }
@@ -85,11 +89,13 @@ public class DescribeDBParametersResult {
      *         together. 
      */
     public DescribeDBParametersResult withParameters(java.util.Collection<Parameter> parameters) {
-        java.util.List<Parameter> parametersCopy = new java.util.ArrayList<Parameter>();
-        if (parameters != null) {
+        if (parameters == null) {
+            this.parameters = null;
+        } else {
+            java.util.List<Parameter> parametersCopy = new java.util.ArrayList<Parameter>(parameters.size());
             parametersCopy.addAll(parameters);
+            this.parameters = parametersCopy;
         }
-        this.parameters = parametersCopy;
 
         return this;
     }
@@ -140,10 +146,35 @@ public class DescribeDBParametersResult {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Parameters: " + parameters + ", ");
-        sb.append("Marker: " + marker + ", ");
+        if (parameters != null) sb.append("Parameters: " + parameters + ", ");
+        if (marker != null) sb.append("Marker: " + marker + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getParameters() == null) ? 0 : getParameters().hashCode()); 
+        hashCode = prime * hashCode + ((getMarker() == null) ? 0 : getMarker().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeDBParametersResult == false) return false;
+        DescribeDBParametersResult other = (DescribeDBParametersResult)obj;
+        
+        if (other.getParameters() == null ^ this.getParameters() == null) return false;
+        if (other.getParameters() != null && other.getParameters().equals(this.getParameters()) == false) return false; 
+        if (other.getMarker() == null ^ this.getMarker() == null) return false;
+        if (other.getMarker() != null && other.getMarker().equals(this.getMarker()) == false) return false; 
+        return true;
     }
     
 }

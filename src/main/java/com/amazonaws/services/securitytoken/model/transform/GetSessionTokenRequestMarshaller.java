@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.securitytoken.model.*;
@@ -30,13 +31,23 @@ import com.amazonaws.util.StringUtils;
 public class GetSessionTokenRequestMarshaller implements Marshaller<Request<GetSessionTokenRequest>, GetSessionTokenRequest> {
 
     public Request<GetSessionTokenRequest> marshall(GetSessionTokenRequest getSessionTokenRequest) {
+
+        if (getSessionTokenRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<GetSessionTokenRequest> request = new DefaultRequest<GetSessionTokenRequest>(getSessionTokenRequest, "AWSSecurityTokenService");
         request.addParameter("Action", "GetSessionToken");
         request.addParameter("Version", "2011-06-15");
-        if (getSessionTokenRequest != null) {
-            if (getSessionTokenRequest.getDurationSeconds() != null) {
-                request.addParameter("DurationSeconds", StringUtils.fromInteger(getSessionTokenRequest.getDurationSeconds()));
-            }
+
+        if (getSessionTokenRequest.getDurationSeconds() != null) {
+            request.addParameter("DurationSeconds", StringUtils.fromInteger(getSessionTokenRequest.getDurationSeconds()));
+        }
+        if (getSessionTokenRequest.getSerialNumber() != null) {
+            request.addParameter("SerialNumber", StringUtils.fromString(getSessionTokenRequest.getSerialNumber()));
+        }
+        if (getSessionTokenRequest.getTokenCode() != null) {
+            request.addParameter("TokenCode", StringUtils.fromString(getSessionTokenRequest.getTokenCode()));
         }
 
 

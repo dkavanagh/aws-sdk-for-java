@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,34 +18,25 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.elasticache.AmazonElastiCache#describeCacheClusters(DescribeCacheClustersRequest) DescribeCacheClusters operation}.
  * <p>
- * Returns information about all provisioned Cache Clusters if no Cache
- * Cluster identifier is specified, or about a specific Cache Cluster if
- * a Cache Cluster identifier is supplied.
+ * Returns information about all provisioned Cache Clusters if no Cache Cluster identifier is specified, or about a specific Cache Cluster if a Cache
+ * Cluster identifier is supplied.
  * </p>
  * <p>
- * Cluster information will be returned by default. An optional
- * <i>ShowDetails</i> flag can be used to retrieve detailed information
- * about the Cache Nodes associated with the Cache Cluster. Details
- * include the DNS address and port for the Cache Node endpoint.
+ * Cluster information will be returned by default. An optional <i>ShowDetails</i> flag can be used to retrieve detailed information about the Cache
+ * Nodes associated with the Cache Cluster. Details include the DNS address and port for the Cache Node endpoint.
  * </p>
  * <p>
- * If the cluster is in the CREATING state, only cluster level
- * information will be displayed until all of the nodes are successfully
- * provisioned.
+ * If the cluster is in the CREATING state, only cluster level information will be displayed until all of the nodes are successfully provisioned.
  * </p>
  * <p>
- * If the cluster is in the DELETING state, only cluster level
- * information will be displayed.
+ * If the cluster is in the DELETING state, only cluster level information will be displayed.
  * </p>
  * <p>
- * While adding Cache Nodes, node endpoint information and creation time
- * for the additional nodes will not be displayed until they are
- * completely provisioned. The cluster lifecycle tells the customer when
- * new nodes are AVAILABLE.
+ * While adding Cache Nodes, node endpoint information and creation time for the additional nodes will not be displayed until they are completely
+ * provisioned. The cluster lifecycle tells the customer when new nodes are AVAILABLE.
  * </p>
  * <p>
- * While removing existing Cache Nodes from an cluster, endpoint
- * information for the removed nodes will not be displayed.
+ * While removing existing Cache Nodes from an cluster, endpoint information for the removed nodes will not be displayed.
  * </p>
  * <p>
  * DescribeCacheClusters supports pagination.
@@ -303,12 +294,43 @@ public class DescribeCacheClustersRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("CacheClusterId: " + cacheClusterId + ", ");
-        sb.append("MaxRecords: " + maxRecords + ", ");
-        sb.append("Marker: " + marker + ", ");
-        sb.append("ShowCacheNodeInfo: " + showCacheNodeInfo + ", ");
+        if (cacheClusterId != null) sb.append("CacheClusterId: " + cacheClusterId + ", ");
+        if (maxRecords != null) sb.append("MaxRecords: " + maxRecords + ", ");
+        if (marker != null) sb.append("Marker: " + marker + ", ");
+        if (showCacheNodeInfo != null) sb.append("ShowCacheNodeInfo: " + showCacheNodeInfo + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getCacheClusterId() == null) ? 0 : getCacheClusterId().hashCode()); 
+        hashCode = prime * hashCode + ((getMaxRecords() == null) ? 0 : getMaxRecords().hashCode()); 
+        hashCode = prime * hashCode + ((getMarker() == null) ? 0 : getMarker().hashCode()); 
+        hashCode = prime * hashCode + ((isShowCacheNodeInfo() == null) ? 0 : isShowCacheNodeInfo().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeCacheClustersRequest == false) return false;
+        DescribeCacheClustersRequest other = (DescribeCacheClustersRequest)obj;
+        
+        if (other.getCacheClusterId() == null ^ this.getCacheClusterId() == null) return false;
+        if (other.getCacheClusterId() != null && other.getCacheClusterId().equals(this.getCacheClusterId()) == false) return false; 
+        if (other.getMaxRecords() == null ^ this.getMaxRecords() == null) return false;
+        if (other.getMaxRecords() != null && other.getMaxRecords().equals(this.getMaxRecords()) == false) return false; 
+        if (other.getMarker() == null ^ this.getMarker() == null) return false;
+        if (other.getMarker() != null && other.getMarker().equals(this.getMarker()) == false) return false; 
+        if (other.isShowCacheNodeInfo() == null ^ this.isShowCacheNodeInfo() == null) return false;
+        if (other.isShowCacheNodeInfo() != null && other.isShowCacheNodeInfo().equals(this.isShowCacheNodeInfo()) == false) return false; 
+        return true;
     }
     
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * permissions and limitations under the License.
  */
 package com.amazonaws.services.cloudwatch;
-            
+
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -23,6 +23,8 @@ import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 
 import com.amazonaws.services.cloudwatch.model.*;
 
@@ -33,76 +35,101 @@ import com.amazonaws.services.cloudwatch.model.*;
  * Callers must use the Future object to determine when the service call has actually
  * completed.
  * Amazon CloudWatch <p>
- * This is the <i>Amazon CloudWatch API Reference</i> . This guide
- * provides detailed information about Amazon CloudWatch actions, data
- * types, parameters, and errors. For detailed information about Amazon
- * CloudWatch features and their associated API calls, go to the <a
- * ://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide">
- * Amazon CloudWatch Developer Guide </a> .
+ * This is the <i>Amazon CloudWatch API Reference</i> . This guide provides detailed information about Amazon CloudWatch actions, data types, parameters,
+ * and errors. For detailed information about Amazon CloudWatch features and their associated API calls, go to the <a
+ * href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide"> Amazon CloudWatch Developer Guide </a> .
  * </p>
  * <p>
- * Amazon CloudWatch is a web service that enables you to publish,
- * monitor, and manage various metrics, as well as configure alarm
- * actions based on data from metrics. For more information about this
- * product go to <a href="http://aws.amazon.com/cloudwatch">
- * http://aws.amazon.com/cloudwatch </a> .
+ * Amazon CloudWatch is a web service that enables you to publish, monitor, and manage various metrics, as well as configure alarm actions based on data
+ * from metrics. For more information about this product go to <a href="http://aws.amazon.com/cloudwatch"> http://aws.amazon.com/cloudwatch </a> .
  * </p>
  * <p>
- * Use the following links to get started using the <i>Amazon CloudWatch
- * API Reference</i> :
+ * Use the following links to get started using the <i>Amazon CloudWatch API Reference</i> :
  * </p>
  * 
  * <ul>
- * <li> <a
- * ervices.com/AmazonCloudWatch/latest/APIReference/API_Operations.html">
- * Actions </a> : An alphabetical list of all Amazon CloudWatch
- * actions.</li>
- * <li> <a
- * nwebservices.com/AmazonCloudWatch/latest/APIReference/API_Types.html">
- * Data Types </a> : An alphabetical list of all Amazon CloudWatch data
- * types.</li>
- * <li> <a
- * vices.com/AmazonCloudWatch/latest/APIReference/CommonParameters.html">
- * Common Parameters </a> : Parameters that all Query actions can
- * use.</li>
- * <li> <a
- * bservices.com/AmazonCloudWatch/latest/APIReference/CommonErrors.html">
- * Common Errors </a> : Client and server errors that all actions can
- * return.</li>
- * <li> <a
- * //docs.amazonwebservices.com/general/latest/gr/index.html?rande.html">
- * Regions and Endpoints </a> : Itemized regions and endpoints for all
- * AWS products.</li>
- * <li> <a
- * href="http://monitoring.amazonaws.com/doc/2010-08-01/CloudWatch.wsdl">
- * WSDL Location </a> :
+ * <li> <a href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/APIReference/API_Operations.html"> Actions </a> : An alphabetical list of all
+ * Amazon CloudWatch actions.</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/APIReference/API_Types.html"> Data Types </a> : An alphabetical list of all
+ * Amazon CloudWatch data types.</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/APIReference/CommonParameters.html"> Common Parameters </a> : Parameters that
+ * all Query actions can use.</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/APIReference/CommonErrors.html"> Common Errors </a> : Client and server
+ * errors that all actions can return.</li>
+ * <li> <a href="http://docs.amazonwebservices.com/general/latest/gr/index.html?rande.html"> Regions and Endpoints </a> : Itemized regions and endpoints
+ * for all AWS products.</li>
+ * <li> <a href="http://monitoring.amazonaws.com/doc/2010-08-01/CloudWatch.wsdl"> WSDL Location </a> :
  * http://monitoring.amazonaws.com/doc/2010-08-01/CloudWatch.wsdl</li>
  * 
- * </ul> 
- */       
+ * </ul>
+ */
 public class AmazonCloudWatchAsyncClient extends AmazonCloudWatchClient
-        implements AmazonCloudWatchAsync { 
+        implements AmazonCloudWatchAsync {
 
     /**
      * Executor service for executing asynchronous requests.
      */
     private ExecutorService executorService;
 
-    
+
     /**
-     * Constructs a new asynchronous client to invoke service methods on 
+     * Constructs a new asynchronous client to invoke service methods on
+     * AmazonCloudWatch.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonCloudWatchAsyncClient() {
+        this(new DefaultAWSCredentialsProviderChain());
+    }
+
+    /**
+     * Constructs a new asynchronous client to invoke service methods on
+     * AmazonCloudWatch.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param clientConfiguration The client configuration options controlling how this
+     *                       client connects to AmazonCloudWatch
+     *                       (ex: proxy settings, retry counts, etc.).
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonCloudWatchAsyncClient(ClientConfiguration clientConfiguration) {
+        this(new DefaultAWSCredentialsProviderChain(), clientConfiguration, Executors.newCachedThreadPool());
+    }
+
+    /**
+     * Constructs a new asynchronous client to invoke service methods on
      * AmazonCloudWatch using the specified AWS account credentials.
-     * Default client settings will be used, and a default cached thread pool will be 
+     * Default client settings will be used, and a default cached thread pool will be
      * created for executing the asynchronous tasks.
      *
      * <p>
      * All calls made using this new client object are non-blocking, and will immediately
      * return a Java Future object that the caller can later check to see if the service
      * call has actually completed.
-     * 
+     *
      * @param awsCredentials The AWS credentials (access key ID and secret key) to use
      *                       when authenticating with AWS services.
-     */                                      
+     */
     public AmazonCloudWatchAsyncClient(AWSCredentials awsCredentials) {
         this(awsCredentials, Executors.newCachedThreadPool());
     }
@@ -111,13 +138,13 @@ public class AmazonCloudWatchAsyncClient extends AmazonCloudWatchClient
      * Constructs a new asynchronous client to invoke service methods on
      * AmazonCloudWatch using the specified AWS account credentials
      * and executor service.  Default client settings will be used.
-     * 
-     * <p> 
+     *
+     * <p>
      * All calls made using this new client object are non-blocking, and will immediately
      * return a Java Future object that the caller can later check to see if the service
      * call has actually completed.
-     * 
-     * @param awsCredentials 
+     *
+     * @param awsCredentials
      *            The AWS credentials (access key ID and secret key) to use
      *            when authenticating with AWS services.
      * @param executorService
@@ -128,18 +155,18 @@ public class AmazonCloudWatchAsyncClient extends AmazonCloudWatchClient
         super(awsCredentials);
         this.executorService = executorService;
     }
-     
+
     /**
      * Constructs a new asynchronous client to invoke service methods on
      * AmazonCloudWatch using the specified AWS account credentials,
      * executor service, and client configuration options.
-     * 
-     * <p> 
+     *
+     * <p>
      * All calls made using this new client object are non-blocking, and will immediately
      * return a Java Future object that the caller can later check to see if the service
      * call has actually completed.
-     * 
-     * @param awsCredentials 
+     *
+     * @param awsCredentials
      *            The AWS credentials (access key ID and secret key) to use
      *            when authenticating with AWS services.
      * @param clientConfiguration
@@ -154,16 +181,95 @@ public class AmazonCloudWatchAsyncClient extends AmazonCloudWatchClient
         super(awsCredentials, clientConfiguration);
         this.executorService = executorService;
     }
-     
+
+    /**
+     * Constructs a new asynchronous client to invoke service methods on
+     * AmazonCloudWatch using the specified AWS account credentials provider.
+     * Default client settings will be used, and a default cached thread pool will be
+     * created for executing the asynchronous tasks.
+     *
+     * <p>
+     * All calls made using this new client object are non-blocking, and will immediately
+     * return a Java Future object that the caller can later check to see if the service
+     * call has actually completed.
+     *
+     * @param awsCredentialsProvider
+     *            The AWS credentials provider which will provide credentials
+     *            to authenticate requests with AWS services.
+     */
+    public AmazonCloudWatchAsyncClient(AWSCredentialsProvider awsCredentialsProvider) {
+        this(awsCredentialsProvider, Executors.newCachedThreadPool());
+    }
+
+    /**
+     * Constructs a new asynchronous client to invoke service methods on
+     * AmazonCloudWatch using the specified AWS account credentials provider
+     * and executor service.  Default client settings will be used.
+     *
+     * <p>
+     * All calls made using this new client object are non-blocking, and will immediately
+     * return a Java Future object that the caller can later check to see if the service
+     * call has actually completed.
+     *
+     * @param awsCredentialsProvider
+     *            The AWS credentials provider which will provide credentials
+     *            to authenticate requests with AWS services.
+     * @param executorService
+     *            The executor service by which all asynchronous requests will
+     *            be executed.
+     */
+    public AmazonCloudWatchAsyncClient(AWSCredentialsProvider awsCredentialsProvider, ExecutorService executorService) {
+        this(awsCredentialsProvider, new ClientConfiguration(), executorService);
+    }
+
+    /**
+     * Constructs a new asynchronous client to invoke service methods on
+     * AmazonCloudWatch using the specified AWS account credentials
+     * provider, executor service, and client configuration options.
+     *
+     * <p>
+     * All calls made using this new client object are non-blocking, and will immediately
+     * return a Java Future object that the caller can later check to see if the service
+     * call has actually completed.
+     *
+     * @param awsCredentialsProvider
+     *            The AWS credentials provider which will provide credentials
+     *            to authenticate requests with AWS services.
+     * @param clientConfiguration
+     *            Client configuration options (ex: max retry limit, proxy
+     *            settings, etc).
+     * @param executorService
+     *            The executor service by which all asynchronous requests will
+     *            be executed.
+     */
+    public AmazonCloudWatchAsyncClient(AWSCredentialsProvider awsCredentialsProvider,
+                ClientConfiguration clientConfiguration, ExecutorService executorService) {
+        super(awsCredentialsProvider, clientConfiguration);
+        this.executorService = executorService;
+    }
+
+
     /**
      * Returns the executor service used by this async client to execute
      * requests.
-     *   
+     *
      * @return The executor service used by this async client to execute
      *         requests.
      */
     public ExecutorService getExecutorService() {
         return executorService;
+    }
+
+    /**
+     * Shuts down the client, releasing all managed resources. This includes
+     * forcibly terminating all pending asynchronous service calls. Clients who
+     * wish to give pending asynchronous service calls time to complete should
+     * call getExecutorService().shutdown() prior to calling this method.
+     */
+    @Override
+    public void shutdown() {
+        super.shutdown();
+        executorService.shutdownNow();
     }
             
     /**

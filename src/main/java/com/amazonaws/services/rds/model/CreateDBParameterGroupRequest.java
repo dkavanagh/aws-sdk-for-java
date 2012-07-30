@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,7 +18,13 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.rds.AmazonRDS#createDBParameterGroup(CreateDBParameterGroupRequest) CreateDBParameterGroup operation}.
  * <p>
- * Creates a new database parameter group.
+ * Creates a new DB Parameter Group.
+ * </p>
+ * <p>
+ * A DB Parameter Group is initially created with the default parameters for the database engine used by the DB Instance. To provide custom values for
+ * any of the parameters, you must modify the group after creating it using <i>ModifyDBParameterGroup</i> . Once you've created a DB Parameter Group, you
+ * need to associate it with your DB Instance using <i>ModifyDBInstance</i> . When you associate a new DB Parameter Group with a running DB Instance, you
+ * need to reboot the DB Instance for the new DB Parameter Group and associated settings to take effect.
  * </p>
  *
  * @see com.amazonaws.services.rds.AmazonRDS#createDBParameterGroup(CreateDBParameterGroupRequest)
@@ -35,10 +41,10 @@ public class CreateDBParameterGroupRequest extends AmazonWebServiceRequest {
     private String dBParameterGroupName;
 
     /**
-     * The DB parameter group family name. A DB parameter group can be
-     * associated with one and only one DB parameter group family, and can be
-     * applied only to a DB instance running a database engine compatible
-     * with that DB parameter group family and version.
+     * The DB Parameter Group Family name. A DB Parameter Group can be
+     * associated with one and only one DB Parameter Group Family, and can be
+     * applied only to a DB Instance running a database engine and engine
+     * version compatible with that DB Parameter Group Family.
      */
     private String dBParameterGroupFamily;
 
@@ -63,11 +69,11 @@ public class CreateDBParameterGroupRequest extends AmazonWebServiceRequest {
      * <li>First character must be a letter</li> <li>Cannot end with a hyphen
      * or contain two consecutive hyphens</li> </ul> <note>This value is
      * stored as a lower-case string.</note>
-     * @param dBParameterGroupFamily The DB parameter group family name. A DB
-     * parameter group can be associated with one and only one DB parameter
-     * group family, and can be applied only to a DB instance running a
-     * database engine compatible with that DB parameter group family and
-     * version.
+     * @param dBParameterGroupFamily The DB Parameter Group Family name. A DB
+     * Parameter Group can be associated with one and only one DB Parameter
+     * Group Family, and can be applied only to a DB Instance running a
+     * database engine and engine version compatible with that DB Parameter
+     * Group Family.
      * @param description The description for the DB Parameter Group.
      */
     public CreateDBParameterGroupRequest(String dBParameterGroupName, String dBParameterGroupFamily, String description) {
@@ -75,6 +81,8 @@ public class CreateDBParameterGroupRequest extends AmazonWebServiceRequest {
         this.dBParameterGroupFamily = dBParameterGroupFamily;
         this.description = description;
     }
+
+    
     
     /**
      * The name of the DB Parameter Group. <p> Constraints: <ul> <li>Must be
@@ -135,47 +143,47 @@ public class CreateDBParameterGroupRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * The DB parameter group family name. A DB parameter group can be
-     * associated with one and only one DB parameter group family, and can be
-     * applied only to a DB instance running a database engine compatible
-     * with that DB parameter group family and version.
+     * The DB Parameter Group Family name. A DB Parameter Group can be
+     * associated with one and only one DB Parameter Group Family, and can be
+     * applied only to a DB Instance running a database engine and engine
+     * version compatible with that DB Parameter Group Family.
      *
-     * @return The DB parameter group family name. A DB parameter group can be
-     *         associated with one and only one DB parameter group family, and can be
-     *         applied only to a DB instance running a database engine compatible
-     *         with that DB parameter group family and version.
+     * @return The DB Parameter Group Family name. A DB Parameter Group can be
+     *         associated with one and only one DB Parameter Group Family, and can be
+     *         applied only to a DB Instance running a database engine and engine
+     *         version compatible with that DB Parameter Group Family.
      */
     public String getDBParameterGroupFamily() {
         return dBParameterGroupFamily;
     }
     
     /**
-     * The DB parameter group family name. A DB parameter group can be
-     * associated with one and only one DB parameter group family, and can be
-     * applied only to a DB instance running a database engine compatible
-     * with that DB parameter group family and version.
+     * The DB Parameter Group Family name. A DB Parameter Group can be
+     * associated with one and only one DB Parameter Group Family, and can be
+     * applied only to a DB Instance running a database engine and engine
+     * version compatible with that DB Parameter Group Family.
      *
-     * @param dBParameterGroupFamily The DB parameter group family name. A DB parameter group can be
-     *         associated with one and only one DB parameter group family, and can be
-     *         applied only to a DB instance running a database engine compatible
-     *         with that DB parameter group family and version.
+     * @param dBParameterGroupFamily The DB Parameter Group Family name. A DB Parameter Group can be
+     *         associated with one and only one DB Parameter Group Family, and can be
+     *         applied only to a DB Instance running a database engine and engine
+     *         version compatible with that DB Parameter Group Family.
      */
     public void setDBParameterGroupFamily(String dBParameterGroupFamily) {
         this.dBParameterGroupFamily = dBParameterGroupFamily;
     }
     
     /**
-     * The DB parameter group family name. A DB parameter group can be
-     * associated with one and only one DB parameter group family, and can be
-     * applied only to a DB instance running a database engine compatible
-     * with that DB parameter group family and version.
+     * The DB Parameter Group Family name. A DB Parameter Group can be
+     * associated with one and only one DB Parameter Group Family, and can be
+     * applied only to a DB Instance running a database engine and engine
+     * version compatible with that DB Parameter Group Family.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param dBParameterGroupFamily The DB parameter group family name. A DB parameter group can be
-     *         associated with one and only one DB parameter group family, and can be
-     *         applied only to a DB instance running a database engine compatible
-     *         with that DB parameter group family and version.
+     * @param dBParameterGroupFamily The DB Parameter Group Family name. A DB Parameter Group can be
+     *         associated with one and only one DB Parameter Group Family, and can be
+     *         applied only to a DB Instance running a database engine and engine
+     *         version compatible with that DB Parameter Group Family.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -232,11 +240,39 @@ public class CreateDBParameterGroupRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("DBParameterGroupName: " + dBParameterGroupName + ", ");
-        sb.append("DBParameterGroupFamily: " + dBParameterGroupFamily + ", ");
-        sb.append("Description: " + description + ", ");
+        if (dBParameterGroupName != null) sb.append("DBParameterGroupName: " + dBParameterGroupName + ", ");
+        if (dBParameterGroupFamily != null) sb.append("DBParameterGroupFamily: " + dBParameterGroupFamily + ", ");
+        if (description != null) sb.append("Description: " + description + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getDBParameterGroupName() == null) ? 0 : getDBParameterGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getDBParameterGroupFamily() == null) ? 0 : getDBParameterGroupFamily().hashCode()); 
+        hashCode = prime * hashCode + ((getDescription() == null) ? 0 : getDescription().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof CreateDBParameterGroupRequest == false) return false;
+        CreateDBParameterGroupRequest other = (CreateDBParameterGroupRequest)obj;
+        
+        if (other.getDBParameterGroupName() == null ^ this.getDBParameterGroupName() == null) return false;
+        if (other.getDBParameterGroupName() != null && other.getDBParameterGroupName().equals(this.getDBParameterGroupName()) == false) return false; 
+        if (other.getDBParameterGroupFamily() == null ^ this.getDBParameterGroupFamily() == null) return false;
+        if (other.getDBParameterGroupFamily() != null && other.getDBParameterGroupFamily().equals(this.getDBParameterGroupFamily()) == false) return false; 
+        if (other.getDescription() == null ^ this.getDescription() == null) return false;
+        if (other.getDescription() != null && other.getDescription().equals(this.getDescription()) == false) return false; 
+        return true;
     }
     
 }

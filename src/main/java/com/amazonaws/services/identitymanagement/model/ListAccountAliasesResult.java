@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,14 +16,13 @@ package com.amazonaws.services.identitymanagement.model;
 
 /**
  * <p>
- * Contains the result of a successful invocation of the
- * ListAccountAliases action.
+ * Contains the result of a successful invocation of the ListAccountAliases action.
  * </p>
  */
 public class ListAccountAliasesResult {
 
     /**
-     * 
+     * A list of aliases associated with the account.
      */
     private java.util.List<String> accountAliases;
 
@@ -36,7 +35,10 @@ public class ListAccountAliasesResult {
     private Boolean isTruncated;
 
     /**
-     * 
+     * Use this only when paginating results, and only in a subsequent
+     * request after you've received a response where the results are
+     * truncated. Set it to the value of the <code>Marker</code> element in
+     * the response you just received.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 320<br/>
@@ -45,11 +47,12 @@ public class ListAccountAliasesResult {
     private String marker;
 
     /**
-     * 
+     * A list of aliases associated with the account.
      *
-     * @return 
+     * @return A list of aliases associated with the account.
      */
     public java.util.List<String> getAccountAliases() {
+        
         if (accountAliases == null) {
             accountAliases = new java.util.ArrayList<String>();
         }
@@ -57,29 +60,33 @@ public class ListAccountAliasesResult {
     }
     
     /**
-     * 
+     * A list of aliases associated with the account.
      *
-     * @param accountAliases 
+     * @param accountAliases A list of aliases associated with the account.
      */
     public void setAccountAliases(java.util.Collection<String> accountAliases) {
-        java.util.List<String> accountAliasesCopy = new java.util.ArrayList<String>();
-        if (accountAliases != null) {
-            accountAliasesCopy.addAll(accountAliases);
+        if (accountAliases == null) {
+            this.accountAliases = null;
+            return;
         }
+
+        java.util.List<String> accountAliasesCopy = new java.util.ArrayList<String>(accountAliases.size());
+        accountAliasesCopy.addAll(accountAliases);
         this.accountAliases = accountAliasesCopy;
     }
     
     /**
-     * 
+     * A list of aliases associated with the account.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param accountAliases 
+     * @param accountAliases A list of aliases associated with the account.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
      */
     public ListAccountAliasesResult withAccountAliases(String... accountAliases) {
+        if (getAccountAliases() == null) setAccountAliases(new java.util.ArrayList<String>(accountAliases.length));
         for (String value : accountAliases) {
             getAccountAliases().add(value);
         }
@@ -87,21 +94,23 @@ public class ListAccountAliasesResult {
     }
     
     /**
-     * 
+     * A list of aliases associated with the account.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param accountAliases 
+     * @param accountAliases A list of aliases associated with the account.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
      */
     public ListAccountAliasesResult withAccountAliases(java.util.Collection<String> accountAliases) {
-        java.util.List<String> accountAliasesCopy = new java.util.ArrayList<String>();
-        if (accountAliases != null) {
+        if (accountAliases == null) {
+            this.accountAliases = null;
+        } else {
+            java.util.List<String> accountAliasesCopy = new java.util.ArrayList<String>(accountAliases.size());
             accountAliasesCopy.addAll(accountAliases);
+            this.accountAliases = accountAliasesCopy;
         }
-        this.accountAliases = accountAliasesCopy;
 
         return this;
     }
@@ -174,33 +183,48 @@ public class ListAccountAliasesResult {
     }
     
     /**
-     * 
+     * Use this only when paginating results, and only in a subsequent
+     * request after you've received a response where the results are
+     * truncated. Set it to the value of the <code>Marker</code> element in
+     * the response you just received.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 320<br/>
      * <b>Pattern: </b>[\u0020-\u00FF]*<br/>
      *
-     * @return 
+     * @return Use this only when paginating results, and only in a subsequent
+     *         request after you've received a response where the results are
+     *         truncated. Set it to the value of the <code>Marker</code> element in
+     *         the response you just received.
      */
     public String getMarker() {
         return marker;
     }
     
     /**
-     * 
+     * Use this only when paginating results, and only in a subsequent
+     * request after you've received a response where the results are
+     * truncated. Set it to the value of the <code>Marker</code> element in
+     * the response you just received.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 320<br/>
      * <b>Pattern: </b>[\u0020-\u00FF]*<br/>
      *
-     * @param marker 
+     * @param marker Use this only when paginating results, and only in a subsequent
+     *         request after you've received a response where the results are
+     *         truncated. Set it to the value of the <code>Marker</code> element in
+     *         the response you just received.
      */
     public void setMarker(String marker) {
         this.marker = marker;
     }
     
     /**
-     * 
+     * Use this only when paginating results, and only in a subsequent
+     * request after you've received a response where the results are
+     * truncated. Set it to the value of the <code>Marker</code> element in
+     * the response you just received.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -208,7 +232,10 @@ public class ListAccountAliasesResult {
      * <b>Length: </b>1 - 320<br/>
      * <b>Pattern: </b>[\u0020-\u00FF]*<br/>
      *
-     * @param marker 
+     * @param marker Use this only when paginating results, and only in a subsequent
+     *         request after you've received a response where the results are
+     *         truncated. Set it to the value of the <code>Marker</code> element in
+     *         the response you just received.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -231,11 +258,39 @@ public class ListAccountAliasesResult {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("AccountAliases: " + accountAliases + ", ");
-        sb.append("IsTruncated: " + isTruncated + ", ");
-        sb.append("Marker: " + marker + ", ");
+        if (accountAliases != null) sb.append("AccountAliases: " + accountAliases + ", ");
+        if (isTruncated != null) sb.append("IsTruncated: " + isTruncated + ", ");
+        if (marker != null) sb.append("Marker: " + marker + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getAccountAliases() == null) ? 0 : getAccountAliases().hashCode()); 
+        hashCode = prime * hashCode + ((isTruncated() == null) ? 0 : isTruncated().hashCode()); 
+        hashCode = prime * hashCode + ((getMarker() == null) ? 0 : getMarker().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof ListAccountAliasesResult == false) return false;
+        ListAccountAliasesResult other = (ListAccountAliasesResult)obj;
+        
+        if (other.getAccountAliases() == null ^ this.getAccountAliases() == null) return false;
+        if (other.getAccountAliases() != null && other.getAccountAliases().equals(this.getAccountAliases()) == false) return false; 
+        if (other.isTruncated() == null ^ this.isTruncated() == null) return false;
+        if (other.isTruncated() != null && other.isTruncated().equals(this.isTruncated()) == false) return false; 
+        if (other.getMarker() == null ^ this.getMarker() == null) return false;
+        if (other.getMarker() != null && other.getMarker().equals(this.getMarker()) == false) return false; 
+        return true;
     }
     
 }

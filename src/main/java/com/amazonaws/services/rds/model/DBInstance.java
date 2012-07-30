@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@ package com.amazonaws.services.rds.model;
 
 /**
  * <p>
- * Contains the result of a successful invocation of the following
- * actions:
+ * Contains the result of a successful invocation of the following actions:
  * </p>
  * 
  * <ul>
@@ -27,8 +26,7 @@ package com.amazonaws.services.rds.model;
  * 
  * </ul>
  * <p>
- * This data type is used as a response element in the
- * DescribeDBInstances action.
+ * This data type is used as a response element in the DescribeDBInstances action.
  * </p>
  */
 public class DBInstance {
@@ -118,6 +116,13 @@ public class DBInstance {
     private String availabilityZone;
 
     /**
+     * Provides the inforamtion of the subnet group associated with the DB
+     * instance, including the name, descrption and subnets in the subnet
+     * group.
+     */
+    private DBSubnetGroup dBSubnetGroup;
+
+    /**
      * Specifies the weekly time range (in UTC) during which system
      * maintenance can occur.
      */
@@ -167,6 +172,18 @@ public class DBInstance {
      * License model information for this DB Instance.
      */
     private String licenseModel;
+
+    /**
+     * Specifies the name and status of the option group that this instance
+     * belongs to.
+     */
+    private OptionGroupMembership optionGroupMembership;
+
+    /**
+     * If present, specifies the name of the character set that this instance
+     * is associated with.
+     */
+    private String characterSetName;
 
     /**
      * Contains a user-supplied database identifier. This is the unique key
@@ -618,6 +635,7 @@ public class DBInstance {
      *         <code>DBSecurityGroup.Status</code> subelements.
      */
     public java.util.List<DBSecurityGroupMembership> getDBSecurityGroups() {
+        
         if (dBSecurityGroups == null) {
             dBSecurityGroups = new java.util.ArrayList<DBSecurityGroupMembership>();
         }
@@ -634,10 +652,13 @@ public class DBInstance {
      *         <code>DBSecurityGroup.Status</code> subelements.
      */
     public void setDBSecurityGroups(java.util.Collection<DBSecurityGroupMembership> dBSecurityGroups) {
-        java.util.List<DBSecurityGroupMembership> dBSecurityGroupsCopy = new java.util.ArrayList<DBSecurityGroupMembership>();
-        if (dBSecurityGroups != null) {
-            dBSecurityGroupsCopy.addAll(dBSecurityGroups);
+        if (dBSecurityGroups == null) {
+            this.dBSecurityGroups = null;
+            return;
         }
+
+        java.util.List<DBSecurityGroupMembership> dBSecurityGroupsCopy = new java.util.ArrayList<DBSecurityGroupMembership>(dBSecurityGroups.size());
+        dBSecurityGroupsCopy.addAll(dBSecurityGroups);
         this.dBSecurityGroups = dBSecurityGroupsCopy;
     }
     
@@ -656,6 +677,7 @@ public class DBInstance {
      *         together. 
      */
     public DBInstance withDBSecurityGroups(DBSecurityGroupMembership... dBSecurityGroups) {
+        if (getDBSecurityGroups() == null) setDBSecurityGroups(new java.util.ArrayList<DBSecurityGroupMembership>(dBSecurityGroups.length));
         for (DBSecurityGroupMembership value : dBSecurityGroups) {
             getDBSecurityGroups().add(value);
         }
@@ -677,11 +699,13 @@ public class DBInstance {
      *         together. 
      */
     public DBInstance withDBSecurityGroups(java.util.Collection<DBSecurityGroupMembership> dBSecurityGroups) {
-        java.util.List<DBSecurityGroupMembership> dBSecurityGroupsCopy = new java.util.ArrayList<DBSecurityGroupMembership>();
-        if (dBSecurityGroups != null) {
+        if (dBSecurityGroups == null) {
+            this.dBSecurityGroups = null;
+        } else {
+            java.util.List<DBSecurityGroupMembership> dBSecurityGroupsCopy = new java.util.ArrayList<DBSecurityGroupMembership>(dBSecurityGroups.size());
             dBSecurityGroupsCopy.addAll(dBSecurityGroups);
+            this.dBSecurityGroups = dBSecurityGroupsCopy;
         }
-        this.dBSecurityGroups = dBSecurityGroupsCopy;
 
         return this;
     }
@@ -692,6 +716,7 @@ public class DBInstance {
      * @return Provides the list of DB Parameter Groups applied to this DB Instance.
      */
     public java.util.List<DBParameterGroupStatus> getDBParameterGroups() {
+        
         if (dBParameterGroups == null) {
             dBParameterGroups = new java.util.ArrayList<DBParameterGroupStatus>();
         }
@@ -704,10 +729,13 @@ public class DBInstance {
      * @param dBParameterGroups Provides the list of DB Parameter Groups applied to this DB Instance.
      */
     public void setDBParameterGroups(java.util.Collection<DBParameterGroupStatus> dBParameterGroups) {
-        java.util.List<DBParameterGroupStatus> dBParameterGroupsCopy = new java.util.ArrayList<DBParameterGroupStatus>();
-        if (dBParameterGroups != null) {
-            dBParameterGroupsCopy.addAll(dBParameterGroups);
+        if (dBParameterGroups == null) {
+            this.dBParameterGroups = null;
+            return;
         }
+
+        java.util.List<DBParameterGroupStatus> dBParameterGroupsCopy = new java.util.ArrayList<DBParameterGroupStatus>(dBParameterGroups.size());
+        dBParameterGroupsCopy.addAll(dBParameterGroups);
         this.dBParameterGroups = dBParameterGroupsCopy;
     }
     
@@ -722,6 +750,7 @@ public class DBInstance {
      *         together. 
      */
     public DBInstance withDBParameterGroups(DBParameterGroupStatus... dBParameterGroups) {
+        if (getDBParameterGroups() == null) setDBParameterGroups(new java.util.ArrayList<DBParameterGroupStatus>(dBParameterGroups.length));
         for (DBParameterGroupStatus value : dBParameterGroups) {
             getDBParameterGroups().add(value);
         }
@@ -739,11 +768,13 @@ public class DBInstance {
      *         together. 
      */
     public DBInstance withDBParameterGroups(java.util.Collection<DBParameterGroupStatus> dBParameterGroups) {
-        java.util.List<DBParameterGroupStatus> dBParameterGroupsCopy = new java.util.ArrayList<DBParameterGroupStatus>();
-        if (dBParameterGroups != null) {
+        if (dBParameterGroups == null) {
+            this.dBParameterGroups = null;
+        } else {
+            java.util.List<DBParameterGroupStatus> dBParameterGroupsCopy = new java.util.ArrayList<DBParameterGroupStatus>(dBParameterGroups.size());
             dBParameterGroupsCopy.addAll(dBParameterGroups);
+            this.dBParameterGroups = dBParameterGroupsCopy;
         }
-        this.dBParameterGroups = dBParameterGroupsCopy;
 
         return this;
     }
@@ -784,6 +815,52 @@ public class DBInstance {
      */
     public DBInstance withAvailabilityZone(String availabilityZone) {
         this.availabilityZone = availabilityZone;
+        return this;
+    }
+    
+    
+    /**
+     * Provides the inforamtion of the subnet group associated with the DB
+     * instance, including the name, descrption and subnets in the subnet
+     * group.
+     *
+     * @return Provides the inforamtion of the subnet group associated with the DB
+     *         instance, including the name, descrption and subnets in the subnet
+     *         group.
+     */
+    public DBSubnetGroup getDBSubnetGroup() {
+        return dBSubnetGroup;
+    }
+    
+    /**
+     * Provides the inforamtion of the subnet group associated with the DB
+     * instance, including the name, descrption and subnets in the subnet
+     * group.
+     *
+     * @param dBSubnetGroup Provides the inforamtion of the subnet group associated with the DB
+     *         instance, including the name, descrption and subnets in the subnet
+     *         group.
+     */
+    public void setDBSubnetGroup(DBSubnetGroup dBSubnetGroup) {
+        this.dBSubnetGroup = dBSubnetGroup;
+    }
+    
+    /**
+     * Provides the inforamtion of the subnet group associated with the DB
+     * instance, including the name, descrption and subnets in the subnet
+     * group.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param dBSubnetGroup Provides the inforamtion of the subnet group associated with the DB
+     *         instance, including the name, descrption and subnets in the subnet
+     *         group.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public DBInstance withDBSubnetGroup(DBSubnetGroup dBSubnetGroup) {
+        this.dBSubnetGroup = dBSubnetGroup;
         return this;
     }
     
@@ -1082,6 +1159,7 @@ public class DBInstance {
      *         this DB Instance.
      */
     public java.util.List<String> getReadReplicaDBInstanceIdentifiers() {
+        
         if (readReplicaDBInstanceIdentifiers == null) {
             readReplicaDBInstanceIdentifiers = new java.util.ArrayList<String>();
         }
@@ -1096,10 +1174,13 @@ public class DBInstance {
      *         this DB Instance.
      */
     public void setReadReplicaDBInstanceIdentifiers(java.util.Collection<String> readReplicaDBInstanceIdentifiers) {
-        java.util.List<String> readReplicaDBInstanceIdentifiersCopy = new java.util.ArrayList<String>();
-        if (readReplicaDBInstanceIdentifiers != null) {
-            readReplicaDBInstanceIdentifiersCopy.addAll(readReplicaDBInstanceIdentifiers);
+        if (readReplicaDBInstanceIdentifiers == null) {
+            this.readReplicaDBInstanceIdentifiers = null;
+            return;
         }
+
+        java.util.List<String> readReplicaDBInstanceIdentifiersCopy = new java.util.ArrayList<String>(readReplicaDBInstanceIdentifiers.size());
+        readReplicaDBInstanceIdentifiersCopy.addAll(readReplicaDBInstanceIdentifiers);
         this.readReplicaDBInstanceIdentifiers = readReplicaDBInstanceIdentifiersCopy;
     }
     
@@ -1116,6 +1197,7 @@ public class DBInstance {
      *         together. 
      */
     public DBInstance withReadReplicaDBInstanceIdentifiers(String... readReplicaDBInstanceIdentifiers) {
+        if (getReadReplicaDBInstanceIdentifiers() == null) setReadReplicaDBInstanceIdentifiers(new java.util.ArrayList<String>(readReplicaDBInstanceIdentifiers.length));
         for (String value : readReplicaDBInstanceIdentifiers) {
             getReadReplicaDBInstanceIdentifiers().add(value);
         }
@@ -1135,11 +1217,13 @@ public class DBInstance {
      *         together. 
      */
     public DBInstance withReadReplicaDBInstanceIdentifiers(java.util.Collection<String> readReplicaDBInstanceIdentifiers) {
-        java.util.List<String> readReplicaDBInstanceIdentifiersCopy = new java.util.ArrayList<String>();
-        if (readReplicaDBInstanceIdentifiers != null) {
+        if (readReplicaDBInstanceIdentifiers == null) {
+            this.readReplicaDBInstanceIdentifiers = null;
+        } else {
+            java.util.List<String> readReplicaDBInstanceIdentifiersCopy = new java.util.ArrayList<String>(readReplicaDBInstanceIdentifiers.size());
             readReplicaDBInstanceIdentifiersCopy.addAll(readReplicaDBInstanceIdentifiers);
+            this.readReplicaDBInstanceIdentifiers = readReplicaDBInstanceIdentifiersCopy;
         }
-        this.readReplicaDBInstanceIdentifiers = readReplicaDBInstanceIdentifiersCopy;
 
         return this;
     }
@@ -1179,6 +1263,86 @@ public class DBInstance {
     
     
     /**
+     * Specifies the name and status of the option group that this instance
+     * belongs to.
+     *
+     * @return Specifies the name and status of the option group that this instance
+     *         belongs to.
+     */
+    public OptionGroupMembership getOptionGroupMembership() {
+        return optionGroupMembership;
+    }
+    
+    /**
+     * Specifies the name and status of the option group that this instance
+     * belongs to.
+     *
+     * @param optionGroupMembership Specifies the name and status of the option group that this instance
+     *         belongs to.
+     */
+    public void setOptionGroupMembership(OptionGroupMembership optionGroupMembership) {
+        this.optionGroupMembership = optionGroupMembership;
+    }
+    
+    /**
+     * Specifies the name and status of the option group that this instance
+     * belongs to.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param optionGroupMembership Specifies the name and status of the option group that this instance
+     *         belongs to.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public DBInstance withOptionGroupMembership(OptionGroupMembership optionGroupMembership) {
+        this.optionGroupMembership = optionGroupMembership;
+        return this;
+    }
+    
+    
+    /**
+     * If present, specifies the name of the character set that this instance
+     * is associated with.
+     *
+     * @return If present, specifies the name of the character set that this instance
+     *         is associated with.
+     */
+    public String getCharacterSetName() {
+        return characterSetName;
+    }
+    
+    /**
+     * If present, specifies the name of the character set that this instance
+     * is associated with.
+     *
+     * @param characterSetName If present, specifies the name of the character set that this instance
+     *         is associated with.
+     */
+    public void setCharacterSetName(String characterSetName) {
+        this.characterSetName = characterSetName;
+    }
+    
+    /**
+     * If present, specifies the name of the character set that this instance
+     * is associated with.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param characterSetName If present, specifies the name of the character set that this instance
+     *         is associated with.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public DBInstance withCharacterSetName(String characterSetName) {
+        this.characterSetName = characterSetName;
+        return this;
+    }
+    
+    
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -1190,31 +1354,131 @@ public class DBInstance {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("DBInstanceIdentifier: " + dBInstanceIdentifier + ", ");
-        sb.append("DBInstanceClass: " + dBInstanceClass + ", ");
-        sb.append("Engine: " + engine + ", ");
-        sb.append("DBInstanceStatus: " + dBInstanceStatus + ", ");
-        sb.append("MasterUsername: " + masterUsername + ", ");
-        sb.append("DBName: " + dBName + ", ");
-        sb.append("Endpoint: " + endpoint + ", ");
-        sb.append("AllocatedStorage: " + allocatedStorage + ", ");
-        sb.append("InstanceCreateTime: " + instanceCreateTime + ", ");
-        sb.append("PreferredBackupWindow: " + preferredBackupWindow + ", ");
-        sb.append("BackupRetentionPeriod: " + backupRetentionPeriod + ", ");
-        sb.append("DBSecurityGroups: " + dBSecurityGroups + ", ");
-        sb.append("DBParameterGroups: " + dBParameterGroups + ", ");
-        sb.append("AvailabilityZone: " + availabilityZone + ", ");
-        sb.append("PreferredMaintenanceWindow: " + preferredMaintenanceWindow + ", ");
-        sb.append("PendingModifiedValues: " + pendingModifiedValues + ", ");
-        sb.append("LatestRestorableTime: " + latestRestorableTime + ", ");
-        sb.append("MultiAZ: " + multiAZ + ", ");
-        sb.append("EngineVersion: " + engineVersion + ", ");
-        sb.append("AutoMinorVersionUpgrade: " + autoMinorVersionUpgrade + ", ");
-        sb.append("ReadReplicaSourceDBInstanceIdentifier: " + readReplicaSourceDBInstanceIdentifier + ", ");
-        sb.append("ReadReplicaDBInstanceIdentifiers: " + readReplicaDBInstanceIdentifiers + ", ");
-        sb.append("LicenseModel: " + licenseModel + ", ");
+        if (dBInstanceIdentifier != null) sb.append("DBInstanceIdentifier: " + dBInstanceIdentifier + ", ");
+        if (dBInstanceClass != null) sb.append("DBInstanceClass: " + dBInstanceClass + ", ");
+        if (engine != null) sb.append("Engine: " + engine + ", ");
+        if (dBInstanceStatus != null) sb.append("DBInstanceStatus: " + dBInstanceStatus + ", ");
+        if (masterUsername != null) sb.append("MasterUsername: " + masterUsername + ", ");
+        if (dBName != null) sb.append("DBName: " + dBName + ", ");
+        if (endpoint != null) sb.append("Endpoint: " + endpoint + ", ");
+        if (allocatedStorage != null) sb.append("AllocatedStorage: " + allocatedStorage + ", ");
+        if (instanceCreateTime != null) sb.append("InstanceCreateTime: " + instanceCreateTime + ", ");
+        if (preferredBackupWindow != null) sb.append("PreferredBackupWindow: " + preferredBackupWindow + ", ");
+        if (backupRetentionPeriod != null) sb.append("BackupRetentionPeriod: " + backupRetentionPeriod + ", ");
+        if (dBSecurityGroups != null) sb.append("DBSecurityGroups: " + dBSecurityGroups + ", ");
+        if (dBParameterGroups != null) sb.append("DBParameterGroups: " + dBParameterGroups + ", ");
+        if (availabilityZone != null) sb.append("AvailabilityZone: " + availabilityZone + ", ");
+        if (dBSubnetGroup != null) sb.append("DBSubnetGroup: " + dBSubnetGroup + ", ");
+        if (preferredMaintenanceWindow != null) sb.append("PreferredMaintenanceWindow: " + preferredMaintenanceWindow + ", ");
+        if (pendingModifiedValues != null) sb.append("PendingModifiedValues: " + pendingModifiedValues + ", ");
+        if (latestRestorableTime != null) sb.append("LatestRestorableTime: " + latestRestorableTime + ", ");
+        if (multiAZ != null) sb.append("MultiAZ: " + multiAZ + ", ");
+        if (engineVersion != null) sb.append("EngineVersion: " + engineVersion + ", ");
+        if (autoMinorVersionUpgrade != null) sb.append("AutoMinorVersionUpgrade: " + autoMinorVersionUpgrade + ", ");
+        if (readReplicaSourceDBInstanceIdentifier != null) sb.append("ReadReplicaSourceDBInstanceIdentifier: " + readReplicaSourceDBInstanceIdentifier + ", ");
+        if (readReplicaDBInstanceIdentifiers != null) sb.append("ReadReplicaDBInstanceIdentifiers: " + readReplicaDBInstanceIdentifiers + ", ");
+        if (licenseModel != null) sb.append("LicenseModel: " + licenseModel + ", ");
+        if (optionGroupMembership != null) sb.append("OptionGroupMembership: " + optionGroupMembership + ", ");
+        if (characterSetName != null) sb.append("CharacterSetName: " + characterSetName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getDBInstanceIdentifier() == null) ? 0 : getDBInstanceIdentifier().hashCode()); 
+        hashCode = prime * hashCode + ((getDBInstanceClass() == null) ? 0 : getDBInstanceClass().hashCode()); 
+        hashCode = prime * hashCode + ((getEngine() == null) ? 0 : getEngine().hashCode()); 
+        hashCode = prime * hashCode + ((getDBInstanceStatus() == null) ? 0 : getDBInstanceStatus().hashCode()); 
+        hashCode = prime * hashCode + ((getMasterUsername() == null) ? 0 : getMasterUsername().hashCode()); 
+        hashCode = prime * hashCode + ((getDBName() == null) ? 0 : getDBName().hashCode()); 
+        hashCode = prime * hashCode + ((getEndpoint() == null) ? 0 : getEndpoint().hashCode()); 
+        hashCode = prime * hashCode + ((getAllocatedStorage() == null) ? 0 : getAllocatedStorage().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceCreateTime() == null) ? 0 : getInstanceCreateTime().hashCode()); 
+        hashCode = prime * hashCode + ((getPreferredBackupWindow() == null) ? 0 : getPreferredBackupWindow().hashCode()); 
+        hashCode = prime * hashCode + ((getBackupRetentionPeriod() == null) ? 0 : getBackupRetentionPeriod().hashCode()); 
+        hashCode = prime * hashCode + ((getDBSecurityGroups() == null) ? 0 : getDBSecurityGroups().hashCode()); 
+        hashCode = prime * hashCode + ((getDBParameterGroups() == null) ? 0 : getDBParameterGroups().hashCode()); 
+        hashCode = prime * hashCode + ((getAvailabilityZone() == null) ? 0 : getAvailabilityZone().hashCode()); 
+        hashCode = prime * hashCode + ((getDBSubnetGroup() == null) ? 0 : getDBSubnetGroup().hashCode()); 
+        hashCode = prime * hashCode + ((getPreferredMaintenanceWindow() == null) ? 0 : getPreferredMaintenanceWindow().hashCode()); 
+        hashCode = prime * hashCode + ((getPendingModifiedValues() == null) ? 0 : getPendingModifiedValues().hashCode()); 
+        hashCode = prime * hashCode + ((getLatestRestorableTime() == null) ? 0 : getLatestRestorableTime().hashCode()); 
+        hashCode = prime * hashCode + ((isMultiAZ() == null) ? 0 : isMultiAZ().hashCode()); 
+        hashCode = prime * hashCode + ((getEngineVersion() == null) ? 0 : getEngineVersion().hashCode()); 
+        hashCode = prime * hashCode + ((isAutoMinorVersionUpgrade() == null) ? 0 : isAutoMinorVersionUpgrade().hashCode()); 
+        hashCode = prime * hashCode + ((getReadReplicaSourceDBInstanceIdentifier() == null) ? 0 : getReadReplicaSourceDBInstanceIdentifier().hashCode()); 
+        hashCode = prime * hashCode + ((getReadReplicaDBInstanceIdentifiers() == null) ? 0 : getReadReplicaDBInstanceIdentifiers().hashCode()); 
+        hashCode = prime * hashCode + ((getLicenseModel() == null) ? 0 : getLicenseModel().hashCode()); 
+        hashCode = prime * hashCode + ((getOptionGroupMembership() == null) ? 0 : getOptionGroupMembership().hashCode()); 
+        hashCode = prime * hashCode + ((getCharacterSetName() == null) ? 0 : getCharacterSetName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DBInstance == false) return false;
+        DBInstance other = (DBInstance)obj;
+        
+        if (other.getDBInstanceIdentifier() == null ^ this.getDBInstanceIdentifier() == null) return false;
+        if (other.getDBInstanceIdentifier() != null && other.getDBInstanceIdentifier().equals(this.getDBInstanceIdentifier()) == false) return false; 
+        if (other.getDBInstanceClass() == null ^ this.getDBInstanceClass() == null) return false;
+        if (other.getDBInstanceClass() != null && other.getDBInstanceClass().equals(this.getDBInstanceClass()) == false) return false; 
+        if (other.getEngine() == null ^ this.getEngine() == null) return false;
+        if (other.getEngine() != null && other.getEngine().equals(this.getEngine()) == false) return false; 
+        if (other.getDBInstanceStatus() == null ^ this.getDBInstanceStatus() == null) return false;
+        if (other.getDBInstanceStatus() != null && other.getDBInstanceStatus().equals(this.getDBInstanceStatus()) == false) return false; 
+        if (other.getMasterUsername() == null ^ this.getMasterUsername() == null) return false;
+        if (other.getMasterUsername() != null && other.getMasterUsername().equals(this.getMasterUsername()) == false) return false; 
+        if (other.getDBName() == null ^ this.getDBName() == null) return false;
+        if (other.getDBName() != null && other.getDBName().equals(this.getDBName()) == false) return false; 
+        if (other.getEndpoint() == null ^ this.getEndpoint() == null) return false;
+        if (other.getEndpoint() != null && other.getEndpoint().equals(this.getEndpoint()) == false) return false; 
+        if (other.getAllocatedStorage() == null ^ this.getAllocatedStorage() == null) return false;
+        if (other.getAllocatedStorage() != null && other.getAllocatedStorage().equals(this.getAllocatedStorage()) == false) return false; 
+        if (other.getInstanceCreateTime() == null ^ this.getInstanceCreateTime() == null) return false;
+        if (other.getInstanceCreateTime() != null && other.getInstanceCreateTime().equals(this.getInstanceCreateTime()) == false) return false; 
+        if (other.getPreferredBackupWindow() == null ^ this.getPreferredBackupWindow() == null) return false;
+        if (other.getPreferredBackupWindow() != null && other.getPreferredBackupWindow().equals(this.getPreferredBackupWindow()) == false) return false; 
+        if (other.getBackupRetentionPeriod() == null ^ this.getBackupRetentionPeriod() == null) return false;
+        if (other.getBackupRetentionPeriod() != null && other.getBackupRetentionPeriod().equals(this.getBackupRetentionPeriod()) == false) return false; 
+        if (other.getDBSecurityGroups() == null ^ this.getDBSecurityGroups() == null) return false;
+        if (other.getDBSecurityGroups() != null && other.getDBSecurityGroups().equals(this.getDBSecurityGroups()) == false) return false; 
+        if (other.getDBParameterGroups() == null ^ this.getDBParameterGroups() == null) return false;
+        if (other.getDBParameterGroups() != null && other.getDBParameterGroups().equals(this.getDBParameterGroups()) == false) return false; 
+        if (other.getAvailabilityZone() == null ^ this.getAvailabilityZone() == null) return false;
+        if (other.getAvailabilityZone() != null && other.getAvailabilityZone().equals(this.getAvailabilityZone()) == false) return false; 
+        if (other.getDBSubnetGroup() == null ^ this.getDBSubnetGroup() == null) return false;
+        if (other.getDBSubnetGroup() != null && other.getDBSubnetGroup().equals(this.getDBSubnetGroup()) == false) return false; 
+        if (other.getPreferredMaintenanceWindow() == null ^ this.getPreferredMaintenanceWindow() == null) return false;
+        if (other.getPreferredMaintenanceWindow() != null && other.getPreferredMaintenanceWindow().equals(this.getPreferredMaintenanceWindow()) == false) return false; 
+        if (other.getPendingModifiedValues() == null ^ this.getPendingModifiedValues() == null) return false;
+        if (other.getPendingModifiedValues() != null && other.getPendingModifiedValues().equals(this.getPendingModifiedValues()) == false) return false; 
+        if (other.getLatestRestorableTime() == null ^ this.getLatestRestorableTime() == null) return false;
+        if (other.getLatestRestorableTime() != null && other.getLatestRestorableTime().equals(this.getLatestRestorableTime()) == false) return false; 
+        if (other.isMultiAZ() == null ^ this.isMultiAZ() == null) return false;
+        if (other.isMultiAZ() != null && other.isMultiAZ().equals(this.isMultiAZ()) == false) return false; 
+        if (other.getEngineVersion() == null ^ this.getEngineVersion() == null) return false;
+        if (other.getEngineVersion() != null && other.getEngineVersion().equals(this.getEngineVersion()) == false) return false; 
+        if (other.isAutoMinorVersionUpgrade() == null ^ this.isAutoMinorVersionUpgrade() == null) return false;
+        if (other.isAutoMinorVersionUpgrade() != null && other.isAutoMinorVersionUpgrade().equals(this.isAutoMinorVersionUpgrade()) == false) return false; 
+        if (other.getReadReplicaSourceDBInstanceIdentifier() == null ^ this.getReadReplicaSourceDBInstanceIdentifier() == null) return false;
+        if (other.getReadReplicaSourceDBInstanceIdentifier() != null && other.getReadReplicaSourceDBInstanceIdentifier().equals(this.getReadReplicaSourceDBInstanceIdentifier()) == false) return false; 
+        if (other.getReadReplicaDBInstanceIdentifiers() == null ^ this.getReadReplicaDBInstanceIdentifiers() == null) return false;
+        if (other.getReadReplicaDBInstanceIdentifiers() != null && other.getReadReplicaDBInstanceIdentifiers().equals(this.getReadReplicaDBInstanceIdentifiers()) == false) return false; 
+        if (other.getLicenseModel() == null ^ this.getLicenseModel() == null) return false;
+        if (other.getLicenseModel() != null && other.getLicenseModel().equals(this.getLicenseModel()) == false) return false; 
+        if (other.getOptionGroupMembership() == null ^ this.getOptionGroupMembership() == null) return false;
+        if (other.getOptionGroupMembership() != null && other.getOptionGroupMembership().equals(this.getOptionGroupMembership()) == false) return false; 
+        if (other.getCharacterSetName() == null ^ this.getCharacterSetName() == null) return false;
+        if (other.getCharacterSetName() != null && other.getCharacterSetName().equals(this.getCharacterSetName()) == false) return false; 
+        return true;
     }
     
 }

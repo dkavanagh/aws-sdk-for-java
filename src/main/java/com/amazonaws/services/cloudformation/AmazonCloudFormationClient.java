@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -22,14 +22,13 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import com.amazonaws.*;
-import com.amazonaws.auth.AWS3Signer;
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.QueryStringSigner;
+import com.amazonaws.auth.*;
 import com.amazonaws.handlers.HandlerChainFactory;
 import com.amazonaws.handlers.RequestHandler;
 import com.amazonaws.http.StaxResponseHandler;
 import com.amazonaws.http.DefaultErrorResponseHandler;
 import com.amazonaws.http.ExecutionContext;
+import com.amazonaws.internal.StaticCredentialsProvider;
 import com.amazonaws.transform.Unmarshaller;
 import com.amazonaws.transform.StaxUnmarshallerContext;
 import com.amazonaws.transform.StandardErrorUnmarshaller;
@@ -44,74 +43,98 @@ import com.amazonaws.services.cloudformation.model.transform.*;
  * completes.
  * <p>
  * AWS CloudFormation <p>
- * This is the AWS CloudFormation API Reference. The major sections of
- * this guide are described in the following table.
+ * This is the AWS CloudFormation API Reference. The major sections of this guide are described in the following table.
  * </p>
  * 
  * <ul>
- * <li> <a
- * rvices.com/AWSCloudFormation/latest/APIReference/API_Operations.html">
- * Actions </a> : Alphabetical list of CloudFormation actions</li>
- * <li> <a
- * webservices.com/AWSCloudFormation/latest/APIReference/API_Types.html">
- * Data Types </a> : Alphabetical list of CloudFormation data types</li>
- * <li> <a
- * ices.com/AWSCloudFormation/latest/APIReference/CommonParameters.html">
- * Common Parameters </a> : Parameters that all Query actions can
- * use</li>
- * <li> <a
- * services.com/AWSCloudFormation/latest/APIReference/CommonErrors.html">
- * Common Errors </a> : Client and server errors that all actions can
- * return</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AWSCloudFormation/latest/APIReference/API_Operations.html"> Actions </a> : Alphabetical list of
+ * CloudFormation actions</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AWSCloudFormation/latest/APIReference/API_Types.html"> Data Types </a> : Alphabetical list of
+ * CloudFormation data types</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AWSCloudFormation/latest/APIReference/CommonParameters.html"> Common Parameters </a> : Parameters
+ * that all Query actions can use</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AWSCloudFormation/latest/APIReference/CommonErrors.html"> Common Errors </a> : Client and server
+ * errors that all actions can return</li>
  * 
  * </ul>
  * <p>
- * This guide is for programmers who need detailed information about the
- * CloudFormation APIs. You use AWS CloudFormation to create and manage
- * AWS infrastructure deployments predictably and repeatedly.
- * CloudFormation helps you leverage AWS products such as Amazon EC2,
- * EBS, Amazon SNS, ELB, and Auto Scaling to build highly-reliable,
- * highly scalable, cost effective applications without worrying about
- * creating and configuring the underlying the AWS infrastructure.
+ * This guide is for programmers who need detailed information about the CloudFormation APIs. You use AWS CloudFormation to create and manage AWS
+ * infrastructure deployments predictably and repeatedly. CloudFormation helps you leverage AWS products such as Amazon EC2, EBS, Amazon SNS, ELB, and
+ * Auto Scaling to build highly-reliable, highly scalable, cost effective applications without worrying about creating and configuring the underlying the
+ * AWS infrastructure.
  * </p>
  * <p>
- * Through the use of a template file you write, and a few AWS
- * CloudFormation commands or API actions, AWS CloudFormation enables you
- * to manage a collection of resources together as a single unit called a
- * stack. AWS CloudFormation creates and deletes all member resources of
- * the stack together and manages all dependencies between the resources
- * for you.
+ * Through the use of a template file you write, and a few AWS CloudFormation commands or API actions, AWS CloudFormation enables you to manage a
+ * collection of resources together as a single unit called a stack. AWS CloudFormation creates and deletes all member resources of the stack together
+ * and manages all dependencies between the resources for you.
  * </p>
  * <p>
- * For more information about this product, go to the <a
- * href="http://aws.amazon.com/documentation/cloudformation">
- * CloudFormation Product Page </a> .
+ * For more information about this product, go to the <a href="http://aws.amazon.com/cloudformation/"> CloudFormation Product Page </a> .
  * </p>
  * <p>
- * Amazon CloudFormation makes use of other AWS products. If you need
- * additional technical information about a specific AWS product, you can
- * find the product's technical documentation at <a
- * href="http://aws.amazon.com/documentation/">
- * http://aws.amazon.com/documentation/ </a> .
+ * Amazon CloudFormation makes use of other AWS products. If you need additional technical information about a specific AWS product, you can find the
+ * product's technical documentation at <a href="http://aws.amazon.com/documentation/"> http://aws.amazon.com/documentation/ </a> .
  * </p>
  */
 public class AmazonCloudFormationClient extends AmazonWebServiceClient implements AmazonCloudFormation {
 
-    /**
-     * The AWS credentials (access key ID and secret key) to use when
-     * authenticating with AWS services.
-     */
-    private AWSCredentials awsCredentials;
+    /** Provider for AWS credentials. */
+    private AWSCredentialsProvider awsCredentialsProvider;
 
     /**
      * List of exception unmarshallers for all AmazonCloudFormation exceptions.
      */
-    protected final List<Unmarshaller<AmazonServiceException, Node>> exceptionUnmarshallers;
+    protected final List<Unmarshaller<AmazonServiceException, Node>> exceptionUnmarshallers
+            = new ArrayList<Unmarshaller<AmazonServiceException, Node>>();
 
     
     /** AWS signer for authenticating requests. */
-    private QueryStringSigner signer;
+    private AWS4Signer signer;
 
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonCloudFormation.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonCloudFormationClient() {
+        this(new DefaultAWSCredentialsProviderChain(), new ClientConfiguration());
+    }
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonCloudFormation.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param clientConfiguration The client configuration options controlling how this
+     *                       client connects to AmazonCloudFormation
+     *                       (ex: proxy settings, retry counts, etc.).
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonCloudFormationClient(ClientConfiguration clientConfiguration) {
+        this(new DefaultAWSCredentialsProviderChain(), clientConfiguration);
+    }
 
     /**
      * Constructs a new client to invoke service methods on
@@ -145,16 +168,60 @@ public class AmazonCloudFormationClient extends AmazonWebServiceClient implement
      */
     public AmazonCloudFormationClient(AWSCredentials awsCredentials, ClientConfiguration clientConfiguration) {
         super(clientConfiguration);
-        this.awsCredentials = awsCredentials;
+        this.awsCredentialsProvider = new StaticCredentialsProvider(awsCredentials);
+        init();
+    }
 
-        exceptionUnmarshallers = new ArrayList<Unmarshaller<AmazonServiceException, Node>>();
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonCloudFormation using the specified AWS account credentials provider.
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param awsCredentialsProvider
+     *            The AWS credentials provider which will provide credentials
+     *            to authenticate requests with AWS services.
+     */
+    public AmazonCloudFormationClient(AWSCredentialsProvider awsCredentialsProvider) {
+        this(awsCredentialsProvider, new ClientConfiguration());
+    }
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonCloudFormation using the specified AWS account credentials
+     * provider and client configuration options.
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param awsCredentialsProvider
+     *            The AWS credentials provider which will provide credentials
+     *            to authenticate requests with AWS services.
+     * @param clientConfiguration The client configuration options controlling how this
+     *                       client connects to AmazonCloudFormation
+     *                       (ex: proxy settings, retry counts, etc.).
+     */
+    public AmazonCloudFormationClient(AWSCredentialsProvider awsCredentialsProvider, ClientConfiguration clientConfiguration) {
+        super(clientConfiguration);
+        this.awsCredentialsProvider = awsCredentialsProvider;
+        init();
+    }
+
+    private void init() {
         exceptionUnmarshallers.add(new AlreadyExistsExceptionUnmarshaller());
+        exceptionUnmarshallers.add(new InsufficientCapabilitiesExceptionUnmarshaller());
         exceptionUnmarshallers.add(new LimitExceededExceptionUnmarshaller());
         
         exceptionUnmarshallers.add(new StandardErrorUnmarshaller());
         setEndpoint("cloudformation.us-east-1.amazonaws.com");
 
-        signer = new QueryStringSigner();
+        signer = new AWS4Signer();
+        
+        signer.setServiceName("cloudformation");
+        
 
         HandlerChainFactory chainFactory = new HandlerChainFactory();
 		requestHandlers.addAll(chainFactory.newRequestHandlerChain(
@@ -212,6 +279,7 @@ public class AmazonCloudFormationClient extends AmazonWebServiceClient implement
      * 
      * @throws AlreadyExistsException
      * @throws LimitExceededException
+     * @throws InsufficientCapabilitiesException
      *
      * @throws AmazonClientException
      *             If any internal errors are encountered inside the client while
@@ -252,6 +320,35 @@ public class AmazonCloudFormationClient extends AmazonWebServiceClient implement
             throws AmazonServiceException, AmazonClientException {
         Request<ValidateTemplateRequest> request = new ValidateTemplateRequestMarshaller().marshall(validateTemplateRequest);
         return invoke(request, new ValidateTemplateResultStaxUnmarshaller());
+    }
+    
+    /**
+     * <p>
+     * Returns the estimated monthly cost of a template. The return value is
+     * an AWS Simply Monthly Calculator URL with a query string that
+     * describes the resources required to run the template.
+     * </p>
+     *
+     * @param estimateTemplateCostRequest Container for the necessary
+     *           parameters to execute the EstimateTemplateCost service method on
+     *           AmazonCloudFormation.
+     * 
+     * @return The response from the EstimateTemplateCost service method, as
+     *         returned by AmazonCloudFormation.
+     * 
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonCloudFormation indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public EstimateTemplateCostResult estimateTemplateCost(EstimateTemplateCostRequest estimateTemplateCostRequest) 
+            throws AmazonServiceException, AmazonClientException {
+        Request<EstimateTemplateCostRequest> request = new EstimateTemplateCostRequestMarshaller().marshall(estimateTemplateCostRequest);
+        return invoke(request, new EstimateTemplateCostResultStaxUnmarshaller());
     }
     
     /**
@@ -355,17 +452,12 @@ public class AmazonCloudFormationClient extends AmazonWebServiceClient implement
     
     /**
      * <p>
-     * Returns the description for the specified resource in the specified
+     * Returns a description of the specified resource in the specified
      * stack.
      * </p>
      * <p>
      * For deleted stacks, DescribeStackResource returns resource information
      * for up to 90 days after the stack has been deleted.
-     * </p>
-     * <p>
-     * You must specify <code>StackName</code> and
-     * <code>LogicalResourceId</code> .
-     * 
      * </p>
      *
      * @param describeStackResourceRequest Container for the necessary
@@ -417,7 +509,7 @@ public class AmazonCloudFormationClient extends AmazonWebServiceClient implement
     
     /**
      * <p>
-     * Returns descriptions for all resources of the specified stack.
+     * Returns descriptions of all resources of the specified stack.
      * </p>
      * <p>
      * For deleted stacks, ListStackResources returns resource information
@@ -496,6 +588,45 @@ public class AmazonCloudFormationClient extends AmazonWebServiceClient implement
     
     /**
      * <p>
+     * Updates a stack as specified in the template. After the call
+     * completes successfully, the stack update starts. You can check the
+     * status of the stack via the DescribeStacks action.
+     * </p>
+     * <p>
+     * To get a copy of the template for an existing stack, you can use the
+     * GetTemplate action.
+     * </p>
+     * <p>
+     * For more information about creating an update template, updating a
+     * stack, and monitoring the progress of the update, see <a
+     * om/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">
+     * Updating a Stack </a> .
+     * </p>
+     *
+     * @param updateStackRequest Container for the necessary parameters to
+     *           execute the UpdateStack service method on AmazonCloudFormation.
+     * 
+     * @return The response from the UpdateStack service method, as returned
+     *         by AmazonCloudFormation.
+     * 
+     * @throws InsufficientCapabilitiesException
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonCloudFormation indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public UpdateStackResult updateStack(UpdateStackRequest updateStackRequest) 
+            throws AmazonServiceException, AmazonClientException {
+        Request<UpdateStackRequest> request = new UpdateStackRequestMarshaller().marshall(updateStackRequest);
+        return invoke(request, new UpdateStackResultStaxUnmarshaller());
+    }
+    
+    /**
+     * <p>
      * Returns the summary information for stacks whose status matches the
      * specified StackStatusFilter. Summary information for stacks that have
      * been deleted is kept for 90 days after the stack is deleted. If no
@@ -518,6 +649,29 @@ public class AmazonCloudFormationClient extends AmazonWebServiceClient implement
      */
     public ListStacksResult listStacks() throws AmazonServiceException, AmazonClientException {
         return listStacks(new ListStacksRequest());
+    }
+    
+    /**
+     * <p>
+     * Returns the estimated monthly cost of a template. The return value is
+     * an AWS Simply Monthly Calculator URL with a query string that
+     * describes the resources required to run the template.
+     * </p>
+     * 
+     * @return The response from the EstimateTemplateCost service method, as
+     *         returned by AmazonCloudFormation.
+     * 
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonCloudFormation indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public EstimateTemplateCostResult estimateTemplateCost() throws AmazonServiceException, AmazonClientException {
+        return estimateTemplateCost(new EstimateTemplateCostRequest());
     }
     
     /**
@@ -615,7 +769,47 @@ public class AmazonCloudFormationClient extends AmazonWebServiceClient implement
         return describeStackResources(new DescribeStackResourcesRequest());
     }
     
-
+    /**
+     * Overrides the default endpoint for this client and explicitly provides
+     * an AWS region ID and AWS service name to use when the client calculates a signature
+     * for requests.  In almost all cases, this region ID and service name
+     * are automatically determined from the endpoint, and callers should use the simpler
+     * one-argument form of setEndpoint instead of this method.
+     * <p>
+     * <b>This method is not threadsafe. Endpoints should be configured when the
+     * client is created and before any service requests are made. Changing it
+     * afterwards creates inevitable race conditions for any service requests in
+     * transit.</b>
+     * <p>
+     * Callers can pass in just the endpoint (ex: "ec2.amazonaws.com") or a full
+     * URL, including the protocol (ex: "https://ec2.amazonaws.com"). If the
+     * protocol is not specified here, the default protocol from this client's
+     * {@link ClientConfiguration} will be used, which by default is HTTPS.
+     * <p>
+     * For more information on using AWS regions with the AWS SDK for Java, and
+     * a complete list of all available endpoints for all AWS services, see:
+     * <a href="http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912">
+     * http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912</a>
+     *
+     * @param endpoint
+     *            The endpoint (ex: "ec2.amazonaws.com") or a full URL,
+     *            including the protocol (ex: "https://ec2.amazonaws.com") of
+     *            the region specific AWS endpoint this client will communicate
+     *            with.
+     * @param serviceName
+     *            The name of the AWS service to use when signing requests.
+     * @param regionId
+     *            The ID of the region in which this service resides.
+     *
+     * @throws IllegalArgumentException
+     *             If any problems are detected with the specified endpoint.
+     */
+    public void setEndpoint(String endpoint, String serviceName, String regionId) throws IllegalArgumentException {
+        setEndpoint(endpoint);
+        signer.setServiceName(serviceName);
+        signer.setRegionName(regionId);
+    }
+    
 
     /**
      * Returns additional metadata for a previously executed successful, request, typically used for
@@ -643,24 +837,19 @@ public class AmazonCloudFormationClient extends AmazonWebServiceClient implement
             request.addParameter(entry.getKey(), entry.getValue());
         }
 
-        // Apply any additional service specific request handlers that need to be run
-        if (requestHandlers != null) {
-            for (RequestHandler requestHandler : requestHandlers) {
-                requestHandler.beforeRequest(request);
-            }
+        AWSCredentials credentials = awsCredentialsProvider.getCredentials();
+        AmazonWebServiceRequest originalRequest = request.getOriginalRequest();
+        if (originalRequest != null && originalRequest.getRequestCredentials() != null) {
+        	credentials = originalRequest.getRequestCredentials();
         }
 
-        if (request.getOriginalRequest().getRequestCredentials() != null) {
-	        signer.sign(request, request.getOriginalRequest().getRequestCredentials());
-        } else {
-    	    signer.sign(request, awsCredentials);
-        }
-
+        ExecutionContext executionContext = createExecutionContext();
+        executionContext.setSigner(signer);
+        executionContext.setCredentials(credentials);
         
         StaxResponseHandler<X> responseHandler = new StaxResponseHandler<X>(unmarshaller);
         DefaultErrorResponseHandler errorResponseHandler = new DefaultErrorResponseHandler(exceptionUnmarshallers);
 
-        ExecutionContext executionContext = createExecutionContext();
         return (X)client.execute(request, responseHandler, errorResponseHandler, executionContext);
     }
 }

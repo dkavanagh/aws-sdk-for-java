@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.cloudwatch.AmazonCloudWatch#deleteAlarms(DeleteAlarmsRequest) DeleteAlarms operation}.
  * <p>
- * Deletes all specified alarms. In the event of an error, no alarms are
- * deleted.
+ * Deletes all specified alarms. In the event of an error, no alarms are deleted.
  * </p>
  *
  * @see com.amazonaws.services.cloudwatch.AmazonCloudWatch#deleteAlarms(DeleteAlarmsRequest)
@@ -43,6 +42,7 @@ public class DeleteAlarmsRequest extends AmazonWebServiceRequest {
      * @return A list of alarms to be deleted.
      */
     public java.util.List<String> getAlarmNames() {
+        
         if (alarmNames == null) {
             alarmNames = new java.util.ArrayList<String>();
         }
@@ -58,10 +58,13 @@ public class DeleteAlarmsRequest extends AmazonWebServiceRequest {
      * @param alarmNames A list of alarms to be deleted.
      */
     public void setAlarmNames(java.util.Collection<String> alarmNames) {
-        java.util.List<String> alarmNamesCopy = new java.util.ArrayList<String>();
-        if (alarmNames != null) {
-            alarmNamesCopy.addAll(alarmNames);
+        if (alarmNames == null) {
+            this.alarmNames = null;
+            return;
         }
+
+        java.util.List<String> alarmNamesCopy = new java.util.ArrayList<String>(alarmNames.size());
+        alarmNamesCopy.addAll(alarmNames);
         this.alarmNames = alarmNamesCopy;
     }
     
@@ -79,6 +82,7 @@ public class DeleteAlarmsRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DeleteAlarmsRequest withAlarmNames(String... alarmNames) {
+        if (getAlarmNames() == null) setAlarmNames(new java.util.ArrayList<String>(alarmNames.length));
         for (String value : alarmNames) {
             getAlarmNames().add(value);
         }
@@ -99,11 +103,13 @@ public class DeleteAlarmsRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DeleteAlarmsRequest withAlarmNames(java.util.Collection<String> alarmNames) {
-        java.util.List<String> alarmNamesCopy = new java.util.ArrayList<String>();
-        if (alarmNames != null) {
+        if (alarmNames == null) {
+            this.alarmNames = null;
+        } else {
+            java.util.List<String> alarmNamesCopy = new java.util.ArrayList<String>(alarmNames.size());
             alarmNamesCopy.addAll(alarmNames);
+            this.alarmNames = alarmNamesCopy;
         }
-        this.alarmNames = alarmNamesCopy;
 
         return this;
     }
@@ -120,9 +126,31 @@ public class DeleteAlarmsRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("AlarmNames: " + alarmNames + ", ");
+        if (alarmNames != null) sb.append("AlarmNames: " + alarmNames + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getAlarmNames() == null) ? 0 : getAlarmNames().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DeleteAlarmsRequest == false) return false;
+        DeleteAlarmsRequest other = (DeleteAlarmsRequest)obj;
+        
+        if (other.getAlarmNames() == null ^ this.getAlarmNames() == null) return false;
+        if (other.getAlarmNames() != null && other.getAlarmNames().equals(this.getAlarmNames()) == false) return false; 
+        return true;
     }
     
 }

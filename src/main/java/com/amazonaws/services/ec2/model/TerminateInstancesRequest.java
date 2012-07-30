@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,13 +18,11 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#terminateInstances(TerminateInstancesRequest) TerminateInstances operation}.
  * <p>
- * The TerminateInstances operation shuts down one or more instances.
- * This operation is idempotent; if you terminate an instance more than
- * once, each call will succeed.
+ * The TerminateInstances operation shuts down one or more instances. This operation is idempotent; if you terminate an instance more than once, each
+ * call will succeed.
  * </p>
  * <p>
- * Terminated instances will remain visible after termination
- * (approximately one hour).
+ * Terminated instances will remain visible after termination (approximately one hour).
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#terminateInstances(TerminateInstancesRequest)
@@ -52,6 +50,8 @@ public class TerminateInstancesRequest extends AmazonWebServiceRequest {
     public TerminateInstancesRequest(java.util.List<String> instanceIds) {
         this.instanceIds = instanceIds;
     }
+
+    
     
     /**
      * The list of instances to terminate.
@@ -59,6 +59,7 @@ public class TerminateInstancesRequest extends AmazonWebServiceRequest {
      * @return The list of instances to terminate.
      */
     public java.util.List<String> getInstanceIds() {
+        
         if (instanceIds == null) {
             instanceIds = new java.util.ArrayList<String>();
         }
@@ -71,10 +72,13 @@ public class TerminateInstancesRequest extends AmazonWebServiceRequest {
      * @param instanceIds The list of instances to terminate.
      */
     public void setInstanceIds(java.util.Collection<String> instanceIds) {
-        java.util.List<String> instanceIdsCopy = new java.util.ArrayList<String>();
-        if (instanceIds != null) {
-            instanceIdsCopy.addAll(instanceIds);
+        if (instanceIds == null) {
+            this.instanceIds = null;
+            return;
         }
+
+        java.util.List<String> instanceIdsCopy = new java.util.ArrayList<String>(instanceIds.size());
+        instanceIdsCopy.addAll(instanceIds);
         this.instanceIds = instanceIdsCopy;
     }
     
@@ -89,6 +93,7 @@ public class TerminateInstancesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public TerminateInstancesRequest withInstanceIds(String... instanceIds) {
+        if (getInstanceIds() == null) setInstanceIds(new java.util.ArrayList<String>(instanceIds.length));
         for (String value : instanceIds) {
             getInstanceIds().add(value);
         }
@@ -106,11 +111,13 @@ public class TerminateInstancesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public TerminateInstancesRequest withInstanceIds(java.util.Collection<String> instanceIds) {
-        java.util.List<String> instanceIdsCopy = new java.util.ArrayList<String>();
-        if (instanceIds != null) {
+        if (instanceIds == null) {
+            this.instanceIds = null;
+        } else {
+            java.util.List<String> instanceIdsCopy = new java.util.ArrayList<String>(instanceIds.size());
             instanceIdsCopy.addAll(instanceIds);
+            this.instanceIds = instanceIdsCopy;
         }
-        this.instanceIds = instanceIdsCopy;
 
         return this;
     }
@@ -127,9 +134,31 @@ public class TerminateInstancesRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("InstanceIds: " + instanceIds + ", ");
+        if (instanceIds != null) sb.append("InstanceIds: " + instanceIds + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getInstanceIds() == null) ? 0 : getInstanceIds().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof TerminateInstancesRequest == false) return false;
+        TerminateInstancesRequest other = (TerminateInstancesRequest)obj;
+        
+        if (other.getInstanceIds() == null ^ this.getInstanceIds() == null) return false;
+        if (other.getInstanceIds() != null && other.getInstanceIds().equals(this.getInstanceIds()) == false) return false; 
+        return true;
     }
     
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#deleteUserPolicy(DeleteUserPolicyRequest) DeleteUserPolicy operation}.
  * <p>
- * Deletes the specified policy associated with the specified User.
+ * Deletes the specified policy associated with the specified user.
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#deleteUserPolicy(DeleteUserPolicyRequest)
@@ -26,7 +26,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class DeleteUserPolicyRequest extends AmazonWebServiceRequest {
 
     /**
-     * Name of the User the policy is associated with.
+     * Name of the user the policy is associated with.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
@@ -54,42 +54,44 @@ public class DeleteUserPolicyRequest extends AmazonWebServiceRequest {
      * Callers should use the setter or fluent setter (with...) methods to
      * initialize any additional object members.
      * 
-     * @param userName Name of the User the policy is associated with.
+     * @param userName Name of the user the policy is associated with.
      * @param policyName Name of the policy document to delete.
      */
     public DeleteUserPolicyRequest(String userName, String policyName) {
         this.userName = userName;
         this.policyName = policyName;
     }
+
+    
     
     /**
-     * Name of the User the policy is associated with.
+     * Name of the user the policy is associated with.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @return Name of the User the policy is associated with.
+     * @return Name of the user the policy is associated with.
      */
     public String getUserName() {
         return userName;
     }
     
     /**
-     * Name of the User the policy is associated with.
+     * Name of the user the policy is associated with.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User the policy is associated with.
+     * @param userName Name of the user the policy is associated with.
      */
     public void setUserName(String userName) {
         this.userName = userName;
     }
     
     /**
-     * Name of the User the policy is associated with.
+     * Name of the user the policy is associated with.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -97,7 +99,7 @@ public class DeleteUserPolicyRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User the policy is associated with.
+     * @param userName Name of the user the policy is associated with.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -166,10 +168,35 @@ public class DeleteUserPolicyRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("UserName: " + userName + ", ");
-        sb.append("PolicyName: " + policyName + ", ");
+        if (userName != null) sb.append("UserName: " + userName + ", ");
+        if (policyName != null) sb.append("PolicyName: " + policyName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getUserName() == null) ? 0 : getUserName().hashCode()); 
+        hashCode = prime * hashCode + ((getPolicyName() == null) ? 0 : getPolicyName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DeleteUserPolicyRequest == false) return false;
+        DeleteUserPolicyRequest other = (DeleteUserPolicyRequest)obj;
+        
+        if (other.getUserName() == null ^ this.getUserName() == null) return false;
+        if (other.getUserName() != null && other.getUserName().equals(this.getUserName()) == false) return false; 
+        if (other.getPolicyName() == null ^ this.getPolicyName() == null) return false;
+        if (other.getPolicyName() != null && other.getPolicyName().equals(this.getPolicyName()) == false) return false; 
+        return true;
     }
     
 }

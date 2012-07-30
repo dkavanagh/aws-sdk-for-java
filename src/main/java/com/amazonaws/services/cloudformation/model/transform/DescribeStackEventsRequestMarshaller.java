@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.cloudformation.model.*;
@@ -30,18 +31,20 @@ import com.amazonaws.util.StringUtils;
 public class DescribeStackEventsRequestMarshaller implements Marshaller<Request<DescribeStackEventsRequest>, DescribeStackEventsRequest> {
 
     public Request<DescribeStackEventsRequest> marshall(DescribeStackEventsRequest describeStackEventsRequest) {
+
+        if (describeStackEventsRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<DescribeStackEventsRequest> request = new DefaultRequest<DescribeStackEventsRequest>(describeStackEventsRequest, "AmazonCloudFormation");
         request.addParameter("Action", "DescribeStackEvents");
         request.addParameter("Version", "2010-05-15");
-        if (describeStackEventsRequest != null) {
-            if (describeStackEventsRequest.getStackName() != null) {
-                request.addParameter("StackName", StringUtils.fromString(describeStackEventsRequest.getStackName()));
-            }
+
+        if (describeStackEventsRequest.getStackName() != null) {
+            request.addParameter("StackName", StringUtils.fromString(describeStackEventsRequest.getStackName()));
         }
-        if (describeStackEventsRequest != null) {
-            if (describeStackEventsRequest.getNextToken() != null) {
-                request.addParameter("NextToken", StringUtils.fromString(describeStackEventsRequest.getNextToken()));
-            }
+        if (describeStackEventsRequest.getNextToken() != null) {
+            request.addParameter("NextToken", StringUtils.fromString(describeStackEventsRequest.getNextToken()));
         }
 
 

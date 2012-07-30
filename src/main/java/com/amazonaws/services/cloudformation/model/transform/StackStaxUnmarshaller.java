@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,12 +32,11 @@ import com.amazonaws.transform.SimpleTypeStaxUnmarshallers.*;
  */
 public class StackStaxUnmarshaller implements Unmarshaller<Stack, StaxUnmarshallerContext> {
 
-    
-
     public Stack unmarshall(StaxUnmarshallerContext context) throws Exception {
         Stack stack = new Stack();
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
+
         
         if (context.isStartOfDocument()) targetDepth += 2;
         
@@ -67,6 +66,10 @@ public class StackStaxUnmarshaller implements Unmarshaller<Stack, StaxUnmarshall
                     stack.setCreationTime(DateStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
+                if (context.testExpression("LastUpdatedTime", targetDepth)) {
+                    stack.setLastUpdatedTime(DateStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
                 if (context.testExpression("StackStatus", targetDepth)) {
                     stack.setStackStatus(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
@@ -85,6 +88,10 @@ public class StackStaxUnmarshaller implements Unmarshaller<Stack, StaxUnmarshall
                 }
                 if (context.testExpression("TimeoutInMinutes", targetDepth)) {
                     stack.setTimeoutInMinutes(IntegerStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("Capabilities/member", targetDepth)) {
+                    stack.getCapabilities().add(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
                 if (context.testExpression("Outputs/member", targetDepth)) {

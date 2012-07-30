@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,14 +18,11 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#detachVpnGateway(DetachVpnGatewayRequest) DetachVpnGateway operation}.
  * <p>
- * Detaches a VPN gateway from a VPC. You do this if you're planning to
- * turn off the VPC and not use it anymore. You can confirm a VPN gateway
- * has been completely detached from a VPC by describing the VPN gateway
- * (any attachments to the VPN gateway are also described).
+ * Detaches a VPN gateway from a VPC. You do this if you're planning to turn off the VPC and not use it anymore. You can confirm a VPN gateway has been
+ * completely detached from a VPC by describing the VPN gateway (any attachments to the VPN gateway are also described).
  * </p>
  * <p>
- * You must wait for the attachment's state to switch to detached before
- * you can delete the VPC or attach a different VPC to the VPN gateway.
+ * You must wait for the attachment's state to switch to detached before you can delete the VPC or attach a different VPC to the VPN gateway.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#detachVpnGateway(DetachVpnGatewayRequest)
@@ -60,6 +57,8 @@ public class DetachVpnGatewayRequest extends AmazonWebServiceRequest {
         this.vpnGatewayId = vpnGatewayId;
         this.vpcId = vpcId;
     }
+
+    
     
     /**
      * The ID of the VPN gateway to detach from the VPC.
@@ -141,10 +140,35 @@ public class DetachVpnGatewayRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("VpnGatewayId: " + vpnGatewayId + ", ");
-        sb.append("VpcId: " + vpcId + ", ");
+        if (vpnGatewayId != null) sb.append("VpnGatewayId: " + vpnGatewayId + ", ");
+        if (vpcId != null) sb.append("VpcId: " + vpcId + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getVpnGatewayId() == null) ? 0 : getVpnGatewayId().hashCode()); 
+        hashCode = prime * hashCode + ((getVpcId() == null) ? 0 : getVpcId().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DetachVpnGatewayRequest == false) return false;
+        DetachVpnGatewayRequest other = (DetachVpnGatewayRequest)obj;
+        
+        if (other.getVpnGatewayId() == null ^ this.getVpnGatewayId() == null) return false;
+        if (other.getVpnGatewayId() != null && other.getVpnGatewayId().equals(this.getVpnGatewayId()) == false) return false; 
+        if (other.getVpcId() == null ^ this.getVpcId() == null) return false;
+        if (other.getVpcId() != null && other.getVpcId().equals(this.getVpcId()) == false) return false; 
+        return true;
     }
     
 }

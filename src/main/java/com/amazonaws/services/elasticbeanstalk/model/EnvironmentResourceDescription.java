@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@ package com.amazonaws.services.elasticbeanstalk.model;
 
 /**
  * <p>
- * Describes the AWS resources in use by this environment. This data is
- * live.
+ * Describes the AWS resources in use by this environment. This data is live.
  * </p>
  */
 public class EnvironmentResourceDescription {
@@ -110,6 +109,7 @@ public class EnvironmentResourceDescription {
      * @return The <code>AutoScalingGroups</code> used by this environment.
      */
     public java.util.List<AutoScalingGroup> getAutoScalingGroups() {
+        
         if (autoScalingGroups == null) {
             autoScalingGroups = new java.util.ArrayList<AutoScalingGroup>();
         }
@@ -122,10 +122,13 @@ public class EnvironmentResourceDescription {
      * @param autoScalingGroups The <code>AutoScalingGroups</code> used by this environment.
      */
     public void setAutoScalingGroups(java.util.Collection<AutoScalingGroup> autoScalingGroups) {
-        java.util.List<AutoScalingGroup> autoScalingGroupsCopy = new java.util.ArrayList<AutoScalingGroup>();
-        if (autoScalingGroups != null) {
-            autoScalingGroupsCopy.addAll(autoScalingGroups);
+        if (autoScalingGroups == null) {
+            this.autoScalingGroups = null;
+            return;
         }
+
+        java.util.List<AutoScalingGroup> autoScalingGroupsCopy = new java.util.ArrayList<AutoScalingGroup>(autoScalingGroups.size());
+        autoScalingGroupsCopy.addAll(autoScalingGroups);
         this.autoScalingGroups = autoScalingGroupsCopy;
     }
     
@@ -140,6 +143,7 @@ public class EnvironmentResourceDescription {
      *         together. 
      */
     public EnvironmentResourceDescription withAutoScalingGroups(AutoScalingGroup... autoScalingGroups) {
+        if (getAutoScalingGroups() == null) setAutoScalingGroups(new java.util.ArrayList<AutoScalingGroup>(autoScalingGroups.length));
         for (AutoScalingGroup value : autoScalingGroups) {
             getAutoScalingGroups().add(value);
         }
@@ -157,11 +161,13 @@ public class EnvironmentResourceDescription {
      *         together. 
      */
     public EnvironmentResourceDescription withAutoScalingGroups(java.util.Collection<AutoScalingGroup> autoScalingGroups) {
-        java.util.List<AutoScalingGroup> autoScalingGroupsCopy = new java.util.ArrayList<AutoScalingGroup>();
-        if (autoScalingGroups != null) {
+        if (autoScalingGroups == null) {
+            this.autoScalingGroups = null;
+        } else {
+            java.util.List<AutoScalingGroup> autoScalingGroupsCopy = new java.util.ArrayList<AutoScalingGroup>(autoScalingGroups.size());
             autoScalingGroupsCopy.addAll(autoScalingGroups);
+            this.autoScalingGroups = autoScalingGroupsCopy;
         }
-        this.autoScalingGroups = autoScalingGroupsCopy;
 
         return this;
     }
@@ -172,6 +178,7 @@ public class EnvironmentResourceDescription {
      * @return The Amazon EC2 instances used by this environment.
      */
     public java.util.List<Instance> getInstances() {
+        
         if (instances == null) {
             instances = new java.util.ArrayList<Instance>();
         }
@@ -184,10 +191,13 @@ public class EnvironmentResourceDescription {
      * @param instances The Amazon EC2 instances used by this environment.
      */
     public void setInstances(java.util.Collection<Instance> instances) {
-        java.util.List<Instance> instancesCopy = new java.util.ArrayList<Instance>();
-        if (instances != null) {
-            instancesCopy.addAll(instances);
+        if (instances == null) {
+            this.instances = null;
+            return;
         }
+
+        java.util.List<Instance> instancesCopy = new java.util.ArrayList<Instance>(instances.size());
+        instancesCopy.addAll(instances);
         this.instances = instancesCopy;
     }
     
@@ -202,6 +212,7 @@ public class EnvironmentResourceDescription {
      *         together. 
      */
     public EnvironmentResourceDescription withInstances(Instance... instances) {
+        if (getInstances() == null) setInstances(new java.util.ArrayList<Instance>(instances.length));
         for (Instance value : instances) {
             getInstances().add(value);
         }
@@ -219,11 +230,13 @@ public class EnvironmentResourceDescription {
      *         together. 
      */
     public EnvironmentResourceDescription withInstances(java.util.Collection<Instance> instances) {
-        java.util.List<Instance> instancesCopy = new java.util.ArrayList<Instance>();
-        if (instances != null) {
+        if (instances == null) {
+            this.instances = null;
+        } else {
+            java.util.List<Instance> instancesCopy = new java.util.ArrayList<Instance>(instances.size());
             instancesCopy.addAll(instances);
+            this.instances = instancesCopy;
         }
-        this.instances = instancesCopy;
 
         return this;
     }
@@ -234,6 +247,7 @@ public class EnvironmentResourceDescription {
      * @return The Auto Scaling launch configurations in use by this environment.
      */
     public java.util.List<LaunchConfiguration> getLaunchConfigurations() {
+        
         if (launchConfigurations == null) {
             launchConfigurations = new java.util.ArrayList<LaunchConfiguration>();
         }
@@ -246,10 +260,13 @@ public class EnvironmentResourceDescription {
      * @param launchConfigurations The Auto Scaling launch configurations in use by this environment.
      */
     public void setLaunchConfigurations(java.util.Collection<LaunchConfiguration> launchConfigurations) {
-        java.util.List<LaunchConfiguration> launchConfigurationsCopy = new java.util.ArrayList<LaunchConfiguration>();
-        if (launchConfigurations != null) {
-            launchConfigurationsCopy.addAll(launchConfigurations);
+        if (launchConfigurations == null) {
+            this.launchConfigurations = null;
+            return;
         }
+
+        java.util.List<LaunchConfiguration> launchConfigurationsCopy = new java.util.ArrayList<LaunchConfiguration>(launchConfigurations.size());
+        launchConfigurationsCopy.addAll(launchConfigurations);
         this.launchConfigurations = launchConfigurationsCopy;
     }
     
@@ -264,6 +281,7 @@ public class EnvironmentResourceDescription {
      *         together. 
      */
     public EnvironmentResourceDescription withLaunchConfigurations(LaunchConfiguration... launchConfigurations) {
+        if (getLaunchConfigurations() == null) setLaunchConfigurations(new java.util.ArrayList<LaunchConfiguration>(launchConfigurations.length));
         for (LaunchConfiguration value : launchConfigurations) {
             getLaunchConfigurations().add(value);
         }
@@ -281,11 +299,13 @@ public class EnvironmentResourceDescription {
      *         together. 
      */
     public EnvironmentResourceDescription withLaunchConfigurations(java.util.Collection<LaunchConfiguration> launchConfigurations) {
-        java.util.List<LaunchConfiguration> launchConfigurationsCopy = new java.util.ArrayList<LaunchConfiguration>();
-        if (launchConfigurations != null) {
+        if (launchConfigurations == null) {
+            this.launchConfigurations = null;
+        } else {
+            java.util.List<LaunchConfiguration> launchConfigurationsCopy = new java.util.ArrayList<LaunchConfiguration>(launchConfigurations.size());
             launchConfigurationsCopy.addAll(launchConfigurations);
+            this.launchConfigurations = launchConfigurationsCopy;
         }
-        this.launchConfigurations = launchConfigurationsCopy;
 
         return this;
     }
@@ -296,6 +316,7 @@ public class EnvironmentResourceDescription {
      * @return The LoadBalancers in use by this environment.
      */
     public java.util.List<LoadBalancer> getLoadBalancers() {
+        
         if (loadBalancers == null) {
             loadBalancers = new java.util.ArrayList<LoadBalancer>();
         }
@@ -308,10 +329,13 @@ public class EnvironmentResourceDescription {
      * @param loadBalancers The LoadBalancers in use by this environment.
      */
     public void setLoadBalancers(java.util.Collection<LoadBalancer> loadBalancers) {
-        java.util.List<LoadBalancer> loadBalancersCopy = new java.util.ArrayList<LoadBalancer>();
-        if (loadBalancers != null) {
-            loadBalancersCopy.addAll(loadBalancers);
+        if (loadBalancers == null) {
+            this.loadBalancers = null;
+            return;
         }
+
+        java.util.List<LoadBalancer> loadBalancersCopy = new java.util.ArrayList<LoadBalancer>(loadBalancers.size());
+        loadBalancersCopy.addAll(loadBalancers);
         this.loadBalancers = loadBalancersCopy;
     }
     
@@ -326,6 +350,7 @@ public class EnvironmentResourceDescription {
      *         together. 
      */
     public EnvironmentResourceDescription withLoadBalancers(LoadBalancer... loadBalancers) {
+        if (getLoadBalancers() == null) setLoadBalancers(new java.util.ArrayList<LoadBalancer>(loadBalancers.length));
         for (LoadBalancer value : loadBalancers) {
             getLoadBalancers().add(value);
         }
@@ -343,11 +368,13 @@ public class EnvironmentResourceDescription {
      *         together. 
      */
     public EnvironmentResourceDescription withLoadBalancers(java.util.Collection<LoadBalancer> loadBalancers) {
-        java.util.List<LoadBalancer> loadBalancersCopy = new java.util.ArrayList<LoadBalancer>();
-        if (loadBalancers != null) {
+        if (loadBalancers == null) {
+            this.loadBalancers = null;
+        } else {
+            java.util.List<LoadBalancer> loadBalancersCopy = new java.util.ArrayList<LoadBalancer>(loadBalancers.size());
             loadBalancersCopy.addAll(loadBalancers);
+            this.loadBalancers = loadBalancersCopy;
         }
-        this.loadBalancers = loadBalancersCopy;
 
         return this;
     }
@@ -358,6 +385,7 @@ public class EnvironmentResourceDescription {
      * @return The <code>AutoScaling</code> triggers in use by this environment.
      */
     public java.util.List<Trigger> getTriggers() {
+        
         if (triggers == null) {
             triggers = new java.util.ArrayList<Trigger>();
         }
@@ -370,10 +398,13 @@ public class EnvironmentResourceDescription {
      * @param triggers The <code>AutoScaling</code> triggers in use by this environment.
      */
     public void setTriggers(java.util.Collection<Trigger> triggers) {
-        java.util.List<Trigger> triggersCopy = new java.util.ArrayList<Trigger>();
-        if (triggers != null) {
-            triggersCopy.addAll(triggers);
+        if (triggers == null) {
+            this.triggers = null;
+            return;
         }
+
+        java.util.List<Trigger> triggersCopy = new java.util.ArrayList<Trigger>(triggers.size());
+        triggersCopy.addAll(triggers);
         this.triggers = triggersCopy;
     }
     
@@ -388,6 +419,7 @@ public class EnvironmentResourceDescription {
      *         together. 
      */
     public EnvironmentResourceDescription withTriggers(Trigger... triggers) {
+        if (getTriggers() == null) setTriggers(new java.util.ArrayList<Trigger>(triggers.length));
         for (Trigger value : triggers) {
             getTriggers().add(value);
         }
@@ -405,11 +437,13 @@ public class EnvironmentResourceDescription {
      *         together. 
      */
     public EnvironmentResourceDescription withTriggers(java.util.Collection<Trigger> triggers) {
-        java.util.List<Trigger> triggersCopy = new java.util.ArrayList<Trigger>();
-        if (triggers != null) {
+        if (triggers == null) {
+            this.triggers = null;
+        } else {
+            java.util.List<Trigger> triggersCopy = new java.util.ArrayList<Trigger>(triggers.size());
             triggersCopy.addAll(triggers);
+            this.triggers = triggersCopy;
         }
-        this.triggers = triggersCopy;
 
         return this;
     }
@@ -426,14 +460,51 @@ public class EnvironmentResourceDescription {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("EnvironmentName: " + environmentName + ", ");
-        sb.append("AutoScalingGroups: " + autoScalingGroups + ", ");
-        sb.append("Instances: " + instances + ", ");
-        sb.append("LaunchConfigurations: " + launchConfigurations + ", ");
-        sb.append("LoadBalancers: " + loadBalancers + ", ");
-        sb.append("Triggers: " + triggers + ", ");
+        if (environmentName != null) sb.append("EnvironmentName: " + environmentName + ", ");
+        if (autoScalingGroups != null) sb.append("AutoScalingGroups: " + autoScalingGroups + ", ");
+        if (instances != null) sb.append("Instances: " + instances + ", ");
+        if (launchConfigurations != null) sb.append("LaunchConfigurations: " + launchConfigurations + ", ");
+        if (loadBalancers != null) sb.append("LoadBalancers: " + loadBalancers + ", ");
+        if (triggers != null) sb.append("Triggers: " + triggers + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getEnvironmentName() == null) ? 0 : getEnvironmentName().hashCode()); 
+        hashCode = prime * hashCode + ((getAutoScalingGroups() == null) ? 0 : getAutoScalingGroups().hashCode()); 
+        hashCode = prime * hashCode + ((getInstances() == null) ? 0 : getInstances().hashCode()); 
+        hashCode = prime * hashCode + ((getLaunchConfigurations() == null) ? 0 : getLaunchConfigurations().hashCode()); 
+        hashCode = prime * hashCode + ((getLoadBalancers() == null) ? 0 : getLoadBalancers().hashCode()); 
+        hashCode = prime * hashCode + ((getTriggers() == null) ? 0 : getTriggers().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof EnvironmentResourceDescription == false) return false;
+        EnvironmentResourceDescription other = (EnvironmentResourceDescription)obj;
+        
+        if (other.getEnvironmentName() == null ^ this.getEnvironmentName() == null) return false;
+        if (other.getEnvironmentName() != null && other.getEnvironmentName().equals(this.getEnvironmentName()) == false) return false; 
+        if (other.getAutoScalingGroups() == null ^ this.getAutoScalingGroups() == null) return false;
+        if (other.getAutoScalingGroups() != null && other.getAutoScalingGroups().equals(this.getAutoScalingGroups()) == false) return false; 
+        if (other.getInstances() == null ^ this.getInstances() == null) return false;
+        if (other.getInstances() != null && other.getInstances().equals(this.getInstances()) == false) return false; 
+        if (other.getLaunchConfigurations() == null ^ this.getLaunchConfigurations() == null) return false;
+        if (other.getLaunchConfigurations() != null && other.getLaunchConfigurations().equals(this.getLaunchConfigurations()) == false) return false; 
+        if (other.getLoadBalancers() == null ^ this.getLoadBalancers() == null) return false;
+        if (other.getLoadBalancers() != null && other.getLoadBalancers().equals(this.getLoadBalancers()) == false) return false; 
+        if (other.getTriggers() == null ^ this.getTriggers() == null) return false;
+        if (other.getTriggers() != null && other.getTriggers().equals(this.getTriggers()) == false) return false; 
+        return true;
     }
     
 }

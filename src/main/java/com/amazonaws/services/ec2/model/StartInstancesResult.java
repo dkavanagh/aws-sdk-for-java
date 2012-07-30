@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@ package com.amazonaws.services.ec2.model;
 
 /**
  * <p>
- * The result of calling the StartInstances operation. Contains details
- * on how the specified instances are changing state.
+ * The result of calling the StartInstances operation. Contains details on how the specified instances are changing state.
  * </p>
  */
 public class StartInstancesResult {
@@ -36,6 +35,7 @@ public class StartInstancesResult {
      *         changed.
      */
     public java.util.List<InstanceStateChange> getStartingInstances() {
+        
         if (startingInstances == null) {
             startingInstances = new java.util.ArrayList<InstanceStateChange>();
         }
@@ -50,10 +50,13 @@ public class StartInstancesResult {
      *         changed.
      */
     public void setStartingInstances(java.util.Collection<InstanceStateChange> startingInstances) {
-        java.util.List<InstanceStateChange> startingInstancesCopy = new java.util.ArrayList<InstanceStateChange>();
-        if (startingInstances != null) {
-            startingInstancesCopy.addAll(startingInstances);
+        if (startingInstances == null) {
+            this.startingInstances = null;
+            return;
         }
+
+        java.util.List<InstanceStateChange> startingInstancesCopy = new java.util.ArrayList<InstanceStateChange>(startingInstances.size());
+        startingInstancesCopy.addAll(startingInstances);
         this.startingInstances = startingInstancesCopy;
     }
     
@@ -70,6 +73,7 @@ public class StartInstancesResult {
      *         together. 
      */
     public StartInstancesResult withStartingInstances(InstanceStateChange... startingInstances) {
+        if (getStartingInstances() == null) setStartingInstances(new java.util.ArrayList<InstanceStateChange>(startingInstances.length));
         for (InstanceStateChange value : startingInstances) {
             getStartingInstances().add(value);
         }
@@ -89,11 +93,13 @@ public class StartInstancesResult {
      *         together. 
      */
     public StartInstancesResult withStartingInstances(java.util.Collection<InstanceStateChange> startingInstances) {
-        java.util.List<InstanceStateChange> startingInstancesCopy = new java.util.ArrayList<InstanceStateChange>();
-        if (startingInstances != null) {
+        if (startingInstances == null) {
+            this.startingInstances = null;
+        } else {
+            java.util.List<InstanceStateChange> startingInstancesCopy = new java.util.ArrayList<InstanceStateChange>(startingInstances.size());
             startingInstancesCopy.addAll(startingInstances);
+            this.startingInstances = startingInstancesCopy;
         }
-        this.startingInstances = startingInstancesCopy;
 
         return this;
     }
@@ -110,9 +116,31 @@ public class StartInstancesResult {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("StartingInstances: " + startingInstances + ", ");
+        if (startingInstances != null) sb.append("StartingInstances: " + startingInstances + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getStartingInstances() == null) ? 0 : getStartingInstances().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof StartInstancesResult == false) return false;
+        StartInstancesResult other = (StartInstancesResult)obj;
+        
+        if (other.getStartingInstances() == null ^ this.getStartingInstances() == null) return false;
+        if (other.getStartingInstances() != null && other.getStartingInstances().equals(this.getStartingInstances()) == false) return false; 
+        return true;
     }
     
 }

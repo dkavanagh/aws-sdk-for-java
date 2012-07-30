@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,9 +16,8 @@ package com.amazonaws.services.elasticmapreduce.model;
 
 /**
  * <p>
- * A job flow step consisting of a JAR file whose main function will be
- * executed. The main function submits a job for Hadoop to execute and
- * waits for the job to finish or fail.
+ * A job flow step consisting of a JAR file whose main function will be executed. The main function submits a job for Hadoop to execute and waits for the
+ * job to finish or fail.
  * </p>
  */
 public class HadoopJarStepConfig {
@@ -71,6 +70,8 @@ public class HadoopJarStepConfig {
     public HadoopJarStepConfig(String jar) {
         this.jar = jar;
     }
+
+    
     
     /**
      * A list of Java properties that are set when the step runs. You can use
@@ -80,6 +81,7 @@ public class HadoopJarStepConfig {
      *         these properties to pass key value pairs to your main function.
      */
     public java.util.List<KeyValue> getProperties() {
+        
         if (properties == null) {
             properties = new java.util.ArrayList<KeyValue>();
         }
@@ -94,10 +96,13 @@ public class HadoopJarStepConfig {
      *         these properties to pass key value pairs to your main function.
      */
     public void setProperties(java.util.Collection<KeyValue> properties) {
-        java.util.List<KeyValue> propertiesCopy = new java.util.ArrayList<KeyValue>();
-        if (properties != null) {
-            propertiesCopy.addAll(properties);
+        if (properties == null) {
+            this.properties = null;
+            return;
         }
+
+        java.util.List<KeyValue> propertiesCopy = new java.util.ArrayList<KeyValue>(properties.size());
+        propertiesCopy.addAll(properties);
         this.properties = propertiesCopy;
     }
     
@@ -114,6 +119,7 @@ public class HadoopJarStepConfig {
      *         together. 
      */
     public HadoopJarStepConfig withProperties(KeyValue... properties) {
+        if (getProperties() == null) setProperties(new java.util.ArrayList<KeyValue>(properties.length));
         for (KeyValue value : properties) {
             getProperties().add(value);
         }
@@ -133,11 +139,13 @@ public class HadoopJarStepConfig {
      *         together. 
      */
     public HadoopJarStepConfig withProperties(java.util.Collection<KeyValue> properties) {
-        java.util.List<KeyValue> propertiesCopy = new java.util.ArrayList<KeyValue>();
-        if (properties != null) {
+        if (properties == null) {
+            this.properties = null;
+        } else {
+            java.util.List<KeyValue> propertiesCopy = new java.util.ArrayList<KeyValue>(properties.size());
             propertiesCopy.addAll(properties);
+            this.properties = propertiesCopy;
         }
-        this.properties = propertiesCopy;
 
         return this;
     }
@@ -254,6 +262,7 @@ public class HadoopJarStepConfig {
      *         function when executed.
      */
     public java.util.List<String> getArgs() {
+        
         if (args == null) {
             args = new java.util.ArrayList<String>();
         }
@@ -268,10 +277,13 @@ public class HadoopJarStepConfig {
      *         function when executed.
      */
     public void setArgs(java.util.Collection<String> args) {
-        java.util.List<String> argsCopy = new java.util.ArrayList<String>();
-        if (args != null) {
-            argsCopy.addAll(args);
+        if (args == null) {
+            this.args = null;
+            return;
         }
+
+        java.util.List<String> argsCopy = new java.util.ArrayList<String>(args.size());
+        argsCopy.addAll(args);
         this.args = argsCopy;
     }
     
@@ -288,6 +300,7 @@ public class HadoopJarStepConfig {
      *         together. 
      */
     public HadoopJarStepConfig withArgs(String... args) {
+        if (getArgs() == null) setArgs(new java.util.ArrayList<String>(args.length));
         for (String value : args) {
             getArgs().add(value);
         }
@@ -307,11 +320,13 @@ public class HadoopJarStepConfig {
      *         together. 
      */
     public HadoopJarStepConfig withArgs(java.util.Collection<String> args) {
-        java.util.List<String> argsCopy = new java.util.ArrayList<String>();
-        if (args != null) {
+        if (args == null) {
+            this.args = null;
+        } else {
+            java.util.List<String> argsCopy = new java.util.ArrayList<String>(args.size());
             argsCopy.addAll(args);
+            this.args = argsCopy;
         }
-        this.args = argsCopy;
 
         return this;
     }
@@ -328,12 +343,43 @@ public class HadoopJarStepConfig {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Properties: " + properties + ", ");
-        sb.append("Jar: " + jar + ", ");
-        sb.append("MainClass: " + mainClass + ", ");
-        sb.append("Args: " + args + ", ");
+        if (properties != null) sb.append("Properties: " + properties + ", ");
+        if (jar != null) sb.append("Jar: " + jar + ", ");
+        if (mainClass != null) sb.append("MainClass: " + mainClass + ", ");
+        if (args != null) sb.append("Args: " + args + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getProperties() == null) ? 0 : getProperties().hashCode()); 
+        hashCode = prime * hashCode + ((getJar() == null) ? 0 : getJar().hashCode()); 
+        hashCode = prime * hashCode + ((getMainClass() == null) ? 0 : getMainClass().hashCode()); 
+        hashCode = prime * hashCode + ((getArgs() == null) ? 0 : getArgs().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof HadoopJarStepConfig == false) return false;
+        HadoopJarStepConfig other = (HadoopJarStepConfig)obj;
+        
+        if (other.getProperties() == null ^ this.getProperties() == null) return false;
+        if (other.getProperties() != null && other.getProperties().equals(this.getProperties()) == false) return false; 
+        if (other.getJar() == null ^ this.getJar() == null) return false;
+        if (other.getJar() != null && other.getJar().equals(this.getJar()) == false) return false; 
+        if (other.getMainClass() == null ^ this.getMainClass() == null) return false;
+        if (other.getMainClass() != null && other.getMainClass().equals(this.getMainClass()) == false) return false; 
+        if (other.getArgs() == null ^ this.getArgs() == null) return false;
+        if (other.getArgs() != null && other.getArgs().equals(this.getArgs()) == false) return false; 
+        return true;
     }
     
 }

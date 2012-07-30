@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.rds.model.*;
@@ -30,28 +31,29 @@ import com.amazonaws.util.StringUtils;
 public class DescribeDBSnapshotsRequestMarshaller implements Marshaller<Request<DescribeDBSnapshotsRequest>, DescribeDBSnapshotsRequest> {
 
     public Request<DescribeDBSnapshotsRequest> marshall(DescribeDBSnapshotsRequest describeDBSnapshotsRequest) {
+
+        if (describeDBSnapshotsRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<DescribeDBSnapshotsRequest> request = new DefaultRequest<DescribeDBSnapshotsRequest>(describeDBSnapshotsRequest, "AmazonRDS");
         request.addParameter("Action", "DescribeDBSnapshots");
-        request.addParameter("Version", "2011-04-01");
-        if (describeDBSnapshotsRequest != null) {
-            if (describeDBSnapshotsRequest.getDBInstanceIdentifier() != null) {
-                request.addParameter("DBInstanceIdentifier", StringUtils.fromString(describeDBSnapshotsRequest.getDBInstanceIdentifier()));
-            }
+        request.addParameter("Version", "2012-04-23");
+
+        if (describeDBSnapshotsRequest.getDBInstanceIdentifier() != null) {
+            request.addParameter("DBInstanceIdentifier", StringUtils.fromString(describeDBSnapshotsRequest.getDBInstanceIdentifier()));
         }
-        if (describeDBSnapshotsRequest != null) {
-            if (describeDBSnapshotsRequest.getDBSnapshotIdentifier() != null) {
-                request.addParameter("DBSnapshotIdentifier", StringUtils.fromString(describeDBSnapshotsRequest.getDBSnapshotIdentifier()));
-            }
+        if (describeDBSnapshotsRequest.getDBSnapshotIdentifier() != null) {
+            request.addParameter("DBSnapshotIdentifier", StringUtils.fromString(describeDBSnapshotsRequest.getDBSnapshotIdentifier()));
         }
-        if (describeDBSnapshotsRequest != null) {
-            if (describeDBSnapshotsRequest.getMaxRecords() != null) {
-                request.addParameter("MaxRecords", StringUtils.fromInteger(describeDBSnapshotsRequest.getMaxRecords()));
-            }
+        if (describeDBSnapshotsRequest.getSnapshotType() != null) {
+            request.addParameter("SnapshotType", StringUtils.fromString(describeDBSnapshotsRequest.getSnapshotType()));
         }
-        if (describeDBSnapshotsRequest != null) {
-            if (describeDBSnapshotsRequest.getMarker() != null) {
-                request.addParameter("Marker", StringUtils.fromString(describeDBSnapshotsRequest.getMarker()));
-            }
+        if (describeDBSnapshotsRequest.getMaxRecords() != null) {
+            request.addParameter("MaxRecords", StringUtils.fromInteger(describeDBSnapshotsRequest.getMaxRecords()));
+        }
+        if (describeDBSnapshotsRequest.getMarker() != null) {
+            request.addParameter("Marker", StringUtils.fromString(describeDBSnapshotsRequest.getMarker()));
         }
 
 

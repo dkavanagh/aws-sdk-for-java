@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,12 +32,11 @@ import com.amazonaws.transform.SimpleTypeStaxUnmarshallers.*;
  */
 public class ValidateTemplateResultStaxUnmarshaller implements Unmarshaller<ValidateTemplateResult, StaxUnmarshallerContext> {
 
-    
-
     public ValidateTemplateResult unmarshall(StaxUnmarshallerContext context) throws Exception {
         ValidateTemplateResult validateTemplateResult = new ValidateTemplateResult();
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
+
         
         if (context.isStartOfDocument()) targetDepth += 2;
         
@@ -53,6 +52,14 @@ public class ValidateTemplateResultStaxUnmarshaller implements Unmarshaller<Vali
                 }
                 if (context.testExpression("Description", targetDepth)) {
                     validateTemplateResult.setDescription(StringStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("Capabilities/member", targetDepth)) {
+                    validateTemplateResult.getCapabilities().add(StringStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("CapabilitiesReason", targetDepth)) {
+                    validateTemplateResult.setCapabilitiesReason(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
             } else if (xmlEvent.isEndElement()) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -83,6 +83,7 @@ public class SolutionStackDescription {
      * @return The permitted file types allowed for a solution stack.
      */
     public java.util.List<String> getPermittedFileTypes() {
+        
         if (permittedFileTypes == null) {
             permittedFileTypes = new java.util.ArrayList<String>();
         }
@@ -95,10 +96,13 @@ public class SolutionStackDescription {
      * @param permittedFileTypes The permitted file types allowed for a solution stack.
      */
     public void setPermittedFileTypes(java.util.Collection<String> permittedFileTypes) {
-        java.util.List<String> permittedFileTypesCopy = new java.util.ArrayList<String>();
-        if (permittedFileTypes != null) {
-            permittedFileTypesCopy.addAll(permittedFileTypes);
+        if (permittedFileTypes == null) {
+            this.permittedFileTypes = null;
+            return;
         }
+
+        java.util.List<String> permittedFileTypesCopy = new java.util.ArrayList<String>(permittedFileTypes.size());
+        permittedFileTypesCopy.addAll(permittedFileTypes);
         this.permittedFileTypes = permittedFileTypesCopy;
     }
     
@@ -113,6 +117,7 @@ public class SolutionStackDescription {
      *         together. 
      */
     public SolutionStackDescription withPermittedFileTypes(String... permittedFileTypes) {
+        if (getPermittedFileTypes() == null) setPermittedFileTypes(new java.util.ArrayList<String>(permittedFileTypes.length));
         for (String value : permittedFileTypes) {
             getPermittedFileTypes().add(value);
         }
@@ -130,11 +135,13 @@ public class SolutionStackDescription {
      *         together. 
      */
     public SolutionStackDescription withPermittedFileTypes(java.util.Collection<String> permittedFileTypes) {
-        java.util.List<String> permittedFileTypesCopy = new java.util.ArrayList<String>();
-        if (permittedFileTypes != null) {
+        if (permittedFileTypes == null) {
+            this.permittedFileTypes = null;
+        } else {
+            java.util.List<String> permittedFileTypesCopy = new java.util.ArrayList<String>(permittedFileTypes.size());
             permittedFileTypesCopy.addAll(permittedFileTypes);
+            this.permittedFileTypes = permittedFileTypesCopy;
         }
-        this.permittedFileTypes = permittedFileTypesCopy;
 
         return this;
     }
@@ -151,10 +158,35 @@ public class SolutionStackDescription {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("SolutionStackName: " + solutionStackName + ", ");
-        sb.append("PermittedFileTypes: " + permittedFileTypes + ", ");
+        if (solutionStackName != null) sb.append("SolutionStackName: " + solutionStackName + ", ");
+        if (permittedFileTypes != null) sb.append("PermittedFileTypes: " + permittedFileTypes + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getSolutionStackName() == null) ? 0 : getSolutionStackName().hashCode()); 
+        hashCode = prime * hashCode + ((getPermittedFileTypes() == null) ? 0 : getPermittedFileTypes().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof SolutionStackDescription == false) return false;
+        SolutionStackDescription other = (SolutionStackDescription)obj;
+        
+        if (other.getSolutionStackName() == null ^ this.getSolutionStackName() == null) return false;
+        if (other.getSolutionStackName() != null && other.getSolutionStackName().equals(this.getSolutionStackName()) == false) return false; 
+        if (other.getPermittedFileTypes() == null ^ this.getPermittedFileTypes() == null) return false;
+        if (other.getPermittedFileTypes() != null && other.getPermittedFileTypes().equals(this.getPermittedFileTypes()) == false) return false; 
+        return true;
     }
     
 }

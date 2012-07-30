@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.elasticache.AmazonElastiCache#describeEngineDefaultParameters(DescribeEngineDefaultParametersRequest) DescribeEngineDefaultParameters operation}.
  * <p>
- * Returns the default engine and system parameter information for the
- * specified cache engine.
+ * Returns the default engine and system parameter information for the specified cache engine.
  * </p>
  *
  * @see com.amazonaws.services.elasticache.AmazonElastiCache#describeEngineDefaultParameters(DescribeEngineDefaultParametersRequest)
@@ -67,6 +66,8 @@ public class DescribeEngineDefaultParametersRequest extends AmazonWebServiceRequ
     public DescribeEngineDefaultParametersRequest(String cacheParameterGroupFamily) {
         this.cacheParameterGroupFamily = cacheParameterGroupFamily;
     }
+
+    
     
     /**
      * The name of the Cache Parameter Group Family. <note>Currently,
@@ -230,11 +231,39 @@ public class DescribeEngineDefaultParametersRequest extends AmazonWebServiceRequ
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("CacheParameterGroupFamily: " + cacheParameterGroupFamily + ", ");
-        sb.append("MaxRecords: " + maxRecords + ", ");
-        sb.append("Marker: " + marker + ", ");
+        if (cacheParameterGroupFamily != null) sb.append("CacheParameterGroupFamily: " + cacheParameterGroupFamily + ", ");
+        if (maxRecords != null) sb.append("MaxRecords: " + maxRecords + ", ");
+        if (marker != null) sb.append("Marker: " + marker + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getCacheParameterGroupFamily() == null) ? 0 : getCacheParameterGroupFamily().hashCode()); 
+        hashCode = prime * hashCode + ((getMaxRecords() == null) ? 0 : getMaxRecords().hashCode()); 
+        hashCode = prime * hashCode + ((getMarker() == null) ? 0 : getMarker().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeEngineDefaultParametersRequest == false) return false;
+        DescribeEngineDefaultParametersRequest other = (DescribeEngineDefaultParametersRequest)obj;
+        
+        if (other.getCacheParameterGroupFamily() == null ^ this.getCacheParameterGroupFamily() == null) return false;
+        if (other.getCacheParameterGroupFamily() != null && other.getCacheParameterGroupFamily().equals(this.getCacheParameterGroupFamily()) == false) return false; 
+        if (other.getMaxRecords() == null ^ this.getMaxRecords() == null) return false;
+        if (other.getMaxRecords() != null && other.getMaxRecords().equals(this.getMaxRecords()) == false) return false; 
+        if (other.getMarker() == null ^ this.getMarker() == null) return false;
+        if (other.getMarker() != null && other.getMarker().equals(this.getMarker()) == false) return false; 
+        return true;
     }
     
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -22,7 +22,9 @@ public enum InstanceStateName {
     Pending("pending"),
     Running("running"),
     ShuttingDown("shutting-down"),
-    Terminated("terminated");
+    Terminated("terminated"),
+    Stopping("stopping"),
+    Stopped("stopped");
 
     private String value;
 
@@ -54,6 +56,10 @@ public enum InstanceStateName {
             return InstanceStateName.ShuttingDown;
         } else if ("terminated".equals(value)) {
             return InstanceStateName.Terminated;
+        } else if ("stopping".equals(value)) {
+            return InstanceStateName.Stopping;
+        } else if ("stopped".equals(value)) {
+            return InstanceStateName.Stopped;
         } else {
             throw new IllegalArgumentException("Cannot create enum from " + value + " value!");
         }

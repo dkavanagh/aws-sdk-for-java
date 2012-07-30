@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,12 +18,9 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.rds.AmazonRDS#describeEvents(DescribeEventsRequest) DescribeEvents operation}.
  * <p>
- * Returns events related to DB Instances, DB Security Groups, DB
- * Snapshots and DB Parameter Groups for the past 14 days. Events
- * specific to a particular DB Instance, database security group,
- * database snapshot or database parameter group can be obtained by
- * providing the name as a parameter. By default, the past hour of events
- * are returned.
+ * Returns events related to DB Instances, DB Security Groups, DB Snapshots and DB Parameter Groups for the past 14 days. Events specific to a
+ * particular DB Instance, DB Security Group, database snapshot or DB Parameter Group can be obtained by providing the name as a parameter. By default,
+ * the past hour of events are returned.
  * </p>
  *
  * @see com.amazonaws.services.rds.AmazonRDS#describeEvents(DescribeEventsRequest)
@@ -83,10 +80,9 @@ public class DescribeEventsRequest extends AmazonWebServiceRequest {
     private Integer maxRecords;
 
     /**
-     * An optional marker provided in the previous DescribeDBInstances
-     * request. If this parameter is specified, the response includes only
-     * records beyond the marker, up to the value specified by
-     * <code>MaxRecords</code>.
+     * An optional marker provided in the previous DescribeEvents request. If
+     * this parameter is specified, the response includes only records beyond
+     * the marker, up to the value specified by <code>MaxRecords</code>.
      */
     private String marker;
 
@@ -238,6 +234,44 @@ public class DescribeEventsRequest extends AmazonWebServiceRequest {
         return this;
     }
     
+    
+    /**
+     * The event source to retrieve events for. If no value is specified, all
+     * events are returned.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>db-instance, db-parameter-group, db-security-group, db-snapshot
+     *
+     * @param sourceType The event source to retrieve events for. If no value is specified, all
+     *         events are returned.
+     *
+     * @see SourceType
+     */
+    public void setSourceType(SourceType sourceType) {
+        this.sourceType = sourceType.toString();
+    }
+    
+    /**
+     * The event source to retrieve events for. If no value is specified, all
+     * events are returned.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>db-instance, db-parameter-group, db-security-group, db-snapshot
+     *
+     * @param sourceType The event source to retrieve events for. If no value is specified, all
+     *         events are returned.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see SourceType
+     */
+    public DescribeEventsRequest withSourceType(SourceType sourceType) {
+        this.sourceType = sourceType.toString();
+        return this;
+    }
     
     /**
      * The beginning of the time interval to retrieve events for, specified
@@ -430,47 +464,41 @@ public class DescribeEventsRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * An optional marker provided in the previous DescribeDBInstances
-     * request. If this parameter is specified, the response includes only
-     * records beyond the marker, up to the value specified by
-     * <code>MaxRecords</code>.
+     * An optional marker provided in the previous DescribeEvents request. If
+     * this parameter is specified, the response includes only records beyond
+     * the marker, up to the value specified by <code>MaxRecords</code>.
      *
-     * @return An optional marker provided in the previous DescribeDBInstances
-     *         request. If this parameter is specified, the response includes only
-     *         records beyond the marker, up to the value specified by
-     *         <code>MaxRecords</code>.
+     * @return An optional marker provided in the previous DescribeEvents request. If
+     *         this parameter is specified, the response includes only records beyond
+     *         the marker, up to the value specified by <code>MaxRecords</code>.
      */
     public String getMarker() {
         return marker;
     }
     
     /**
-     * An optional marker provided in the previous DescribeDBInstances
-     * request. If this parameter is specified, the response includes only
-     * records beyond the marker, up to the value specified by
-     * <code>MaxRecords</code>.
+     * An optional marker provided in the previous DescribeEvents request. If
+     * this parameter is specified, the response includes only records beyond
+     * the marker, up to the value specified by <code>MaxRecords</code>.
      *
-     * @param marker An optional marker provided in the previous DescribeDBInstances
-     *         request. If this parameter is specified, the response includes only
-     *         records beyond the marker, up to the value specified by
-     *         <code>MaxRecords</code>.
+     * @param marker An optional marker provided in the previous DescribeEvents request. If
+     *         this parameter is specified, the response includes only records beyond
+     *         the marker, up to the value specified by <code>MaxRecords</code>.
      */
     public void setMarker(String marker) {
         this.marker = marker;
     }
     
     /**
-     * An optional marker provided in the previous DescribeDBInstances
-     * request. If this parameter is specified, the response includes only
-     * records beyond the marker, up to the value specified by
-     * <code>MaxRecords</code>.
+     * An optional marker provided in the previous DescribeEvents request. If
+     * this parameter is specified, the response includes only records beyond
+     * the marker, up to the value specified by <code>MaxRecords</code>.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param marker An optional marker provided in the previous DescribeDBInstances
-     *         request. If this parameter is specified, the response includes only
-     *         records beyond the marker, up to the value specified by
-     *         <code>MaxRecords</code>.
+     * @param marker An optional marker provided in the previous DescribeEvents request. If
+     *         this parameter is specified, the response includes only records beyond
+     *         the marker, up to the value specified by <code>MaxRecords</code>.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -493,15 +521,55 @@ public class DescribeEventsRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("SourceIdentifier: " + sourceIdentifier + ", ");
-        sb.append("SourceType: " + sourceType + ", ");
-        sb.append("StartTime: " + startTime + ", ");
-        sb.append("EndTime: " + endTime + ", ");
-        sb.append("Duration: " + duration + ", ");
-        sb.append("MaxRecords: " + maxRecords + ", ");
-        sb.append("Marker: " + marker + ", ");
+        if (sourceIdentifier != null) sb.append("SourceIdentifier: " + sourceIdentifier + ", ");
+        if (sourceType != null) sb.append("SourceType: " + sourceType + ", ");
+        if (startTime != null) sb.append("StartTime: " + startTime + ", ");
+        if (endTime != null) sb.append("EndTime: " + endTime + ", ");
+        if (duration != null) sb.append("Duration: " + duration + ", ");
+        if (maxRecords != null) sb.append("MaxRecords: " + maxRecords + ", ");
+        if (marker != null) sb.append("Marker: " + marker + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getSourceIdentifier() == null) ? 0 : getSourceIdentifier().hashCode()); 
+        hashCode = prime * hashCode + ((getSourceType() == null) ? 0 : getSourceType().hashCode()); 
+        hashCode = prime * hashCode + ((getStartTime() == null) ? 0 : getStartTime().hashCode()); 
+        hashCode = prime * hashCode + ((getEndTime() == null) ? 0 : getEndTime().hashCode()); 
+        hashCode = prime * hashCode + ((getDuration() == null) ? 0 : getDuration().hashCode()); 
+        hashCode = prime * hashCode + ((getMaxRecords() == null) ? 0 : getMaxRecords().hashCode()); 
+        hashCode = prime * hashCode + ((getMarker() == null) ? 0 : getMarker().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeEventsRequest == false) return false;
+        DescribeEventsRequest other = (DescribeEventsRequest)obj;
+        
+        if (other.getSourceIdentifier() == null ^ this.getSourceIdentifier() == null) return false;
+        if (other.getSourceIdentifier() != null && other.getSourceIdentifier().equals(this.getSourceIdentifier()) == false) return false; 
+        if (other.getSourceType() == null ^ this.getSourceType() == null) return false;
+        if (other.getSourceType() != null && other.getSourceType().equals(this.getSourceType()) == false) return false; 
+        if (other.getStartTime() == null ^ this.getStartTime() == null) return false;
+        if (other.getStartTime() != null && other.getStartTime().equals(this.getStartTime()) == false) return false; 
+        if (other.getEndTime() == null ^ this.getEndTime() == null) return false;
+        if (other.getEndTime() != null && other.getEndTime().equals(this.getEndTime()) == false) return false; 
+        if (other.getDuration() == null ^ this.getDuration() == null) return false;
+        if (other.getDuration() != null && other.getDuration().equals(this.getDuration()) == false) return false; 
+        if (other.getMaxRecords() == null ^ this.getMaxRecords() == null) return false;
+        if (other.getMaxRecords() != null && other.getMaxRecords().equals(this.getMaxRecords()) == false) return false; 
+        if (other.getMarker() == null ^ this.getMarker() == null) return false;
+        if (other.getMarker() != null && other.getMarker().equals(this.getMarker()) == false) return false; 
+        return true;
     }
     
 }

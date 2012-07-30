@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,11 +18,10 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#listGroupsForUser(ListGroupsForUserRequest) ListGroupsForUser operation}.
  * <p>
- * Lists the groups the specified User belongs to.
+ * Lists the groups the specified user belongs to.
  * </p>
  * <p>
- * You can paginate the results using the <code>MaxItems</code> and
- * <code>Marker</code> parameters.
+ * You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters.
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#listGroupsForUser(ListGroupsForUserRequest)
@@ -30,7 +29,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class ListGroupsForUserRequest extends AmazonWebServiceRequest {
 
     /**
-     * The name of the User to list groups for.
+     * The name of the user to list groups for.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
@@ -72,40 +71,42 @@ public class ListGroupsForUserRequest extends AmazonWebServiceRequest {
      * Callers should use the setter or fluent setter (with...) methods to
      * initialize any additional object members.
      * 
-     * @param userName The name of the User to list groups for.
+     * @param userName The name of the user to list groups for.
      */
     public ListGroupsForUserRequest(String userName) {
         this.userName = userName;
     }
+
+    
     
     /**
-     * The name of the User to list groups for.
+     * The name of the user to list groups for.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @return The name of the User to list groups for.
+     * @return The name of the user to list groups for.
      */
     public String getUserName() {
         return userName;
     }
     
     /**
-     * The name of the User to list groups for.
+     * The name of the user to list groups for.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName The name of the User to list groups for.
+     * @param userName The name of the user to list groups for.
      */
     public void setUserName(String userName) {
         this.userName = userName;
     }
     
     /**
-     * The name of the User to list groups for.
+     * The name of the user to list groups for.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -113,7 +114,7 @@ public class ListGroupsForUserRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName The name of the User to list groups for.
+     * @param userName The name of the user to list groups for.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -261,11 +262,39 @@ public class ListGroupsForUserRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("UserName: " + userName + ", ");
-        sb.append("Marker: " + marker + ", ");
-        sb.append("MaxItems: " + maxItems + ", ");
+        if (userName != null) sb.append("UserName: " + userName + ", ");
+        if (marker != null) sb.append("Marker: " + marker + ", ");
+        if (maxItems != null) sb.append("MaxItems: " + maxItems + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getUserName() == null) ? 0 : getUserName().hashCode()); 
+        hashCode = prime * hashCode + ((getMarker() == null) ? 0 : getMarker().hashCode()); 
+        hashCode = prime * hashCode + ((getMaxItems() == null) ? 0 : getMaxItems().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof ListGroupsForUserRequest == false) return false;
+        ListGroupsForUserRequest other = (ListGroupsForUserRequest)obj;
+        
+        if (other.getUserName() == null ^ this.getUserName() == null) return false;
+        if (other.getUserName() != null && other.getUserName().equals(this.getUserName()) == false) return false; 
+        if (other.getMarker() == null ^ this.getMarker() == null) return false;
+        if (other.getMarker() != null && other.getMarker().equals(this.getMarker()) == false) return false; 
+        if (other.getMaxItems() == null ^ this.getMaxItems() == null) return false;
+        if (other.getMaxItems() != null && other.getMaxItems().equals(this.getMaxItems()) == false) return false; 
+        return true;
     }
     
 }

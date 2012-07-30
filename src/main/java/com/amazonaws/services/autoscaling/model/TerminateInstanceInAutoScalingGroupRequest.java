@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,12 +18,10 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.autoscaling.AmazonAutoScaling#terminateInstanceInAutoScalingGroup(TerminateInstanceInAutoScalingGroupRequest) TerminateInstanceInAutoScalingGroup operation}.
  * <p>
- * Terminates the specified instance. Optionally, the desired group size
- * can be adjusted.
+ * Terminates the specified instance. Optionally, the desired group size can be adjusted.
  * </p>
  * <p>
- * <b>NOTE:</b> This call simply registers a termination request. The
- * termination of the instance cannot happen immediately.
+ * <b>NOTE:</b> This call simply registers a termination request. The termination of the instance cannot happen immediately.
  * </p>
  *
  * @see com.amazonaws.services.autoscaling.AmazonAutoScaling#terminateInstanceInAutoScalingGroup(TerminateInstanceInAutoScalingGroupRequest)
@@ -31,7 +29,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class TerminateInstanceInAutoScalingGroupRequest extends AmazonWebServiceRequest {
 
     /**
-     * The ID of the EC2 instance to be terminated.
+     * The ID of the Amazon EC2 instance to be terminated.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 16<br/>
@@ -47,33 +45,33 @@ public class TerminateInstanceInAutoScalingGroupRequest extends AmazonWebService
     private Boolean shouldDecrementDesiredCapacity;
 
     /**
-     * The ID of the EC2 instance to be terminated.
+     * The ID of the Amazon EC2 instance to be terminated.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 16<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @return The ID of the EC2 instance to be terminated.
+     * @return The ID of the Amazon EC2 instance to be terminated.
      */
     public String getInstanceId() {
         return instanceId;
     }
     
     /**
-     * The ID of the EC2 instance to be terminated.
+     * The ID of the Amazon EC2 instance to be terminated.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 16<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @param instanceId The ID of the EC2 instance to be terminated.
+     * @param instanceId The ID of the Amazon EC2 instance to be terminated.
      */
     public void setInstanceId(String instanceId) {
         this.instanceId = instanceId;
     }
     
     /**
-     * The ID of the EC2 instance to be terminated.
+     * The ID of the Amazon EC2 instance to be terminated.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -81,7 +79,7 @@ public class TerminateInstanceInAutoScalingGroupRequest extends AmazonWebService
      * <b>Length: </b>1 - 16<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @param instanceId The ID of the EC2 instance to be terminated.
+     * @param instanceId The ID of the Amazon EC2 instance to be terminated.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -163,10 +161,35 @@ public class TerminateInstanceInAutoScalingGroupRequest extends AmazonWebService
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("InstanceId: " + instanceId + ", ");
-        sb.append("ShouldDecrementDesiredCapacity: " + shouldDecrementDesiredCapacity + ", ");
+        if (instanceId != null) sb.append("InstanceId: " + instanceId + ", ");
+        if (shouldDecrementDesiredCapacity != null) sb.append("ShouldDecrementDesiredCapacity: " + shouldDecrementDesiredCapacity + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getInstanceId() == null) ? 0 : getInstanceId().hashCode()); 
+        hashCode = prime * hashCode + ((isShouldDecrementDesiredCapacity() == null) ? 0 : isShouldDecrementDesiredCapacity().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof TerminateInstanceInAutoScalingGroupRequest == false) return false;
+        TerminateInstanceInAutoScalingGroupRequest other = (TerminateInstanceInAutoScalingGroupRequest)obj;
+        
+        if (other.getInstanceId() == null ^ this.getInstanceId() == null) return false;
+        if (other.getInstanceId() != null && other.getInstanceId().equals(this.getInstanceId()) == false) return false; 
+        if (other.isShouldDecrementDesiredCapacity() == null ^ this.isShouldDecrementDesiredCapacity() == null) return false;
+        if (other.isShouldDecrementDesiredCapacity() != null && other.isShouldDecrementDesiredCapacity().equals(this.isShouldDecrementDesiredCapacity()) == false) return false; 
+        return true;
     }
     
 }

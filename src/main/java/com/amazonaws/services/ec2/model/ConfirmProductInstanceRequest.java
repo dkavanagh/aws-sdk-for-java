@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,15 +18,12 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#confirmProductInstance(ConfirmProductInstanceRequest) ConfirmProductInstance operation}.
  * <p>
- * The ConfirmProductInstance operation returns true if the specified
- * product code is attached to the specified instance. The operation
- * returns false if the product code is not attached to the instance.
+ * The ConfirmProductInstance operation returns true if the specified product code is attached to the specified instance. The operation returns false if
+ * the product code is not attached to the instance.
  * </p>
  * <p>
- * The ConfirmProductInstance operation can only be executed by the
- * owner of the AMI. This feature is useful when an AMI owner is
- * providing support and wants to verify whether a user's instance is
- * eligible.
+ * The ConfirmProductInstance operation can only be executed by the owner of the AMI. This feature is useful when an AMI owner is providing support and
+ * wants to verify whether a user's instance is eligible.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#confirmProductInstance(ConfirmProductInstanceRequest)
@@ -61,6 +58,8 @@ public class ConfirmProductInstanceRequest extends AmazonWebServiceRequest {
         this.productCode = productCode;
         this.instanceId = instanceId;
     }
+
+    
     
     /**
      * The product code to confirm.
@@ -142,10 +141,35 @@ public class ConfirmProductInstanceRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("ProductCode: " + productCode + ", ");
-        sb.append("InstanceId: " + instanceId + ", ");
+        if (productCode != null) sb.append("ProductCode: " + productCode + ", ");
+        if (instanceId != null) sb.append("InstanceId: " + instanceId + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getProductCode() == null) ? 0 : getProductCode().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceId() == null) ? 0 : getInstanceId().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof ConfirmProductInstanceRequest == false) return false;
+        ConfirmProductInstanceRequest other = (ConfirmProductInstanceRequest)obj;
+        
+        if (other.getProductCode() == null ^ this.getProductCode() == null) return false;
+        if (other.getProductCode() != null && other.getProductCode().equals(this.getProductCode()) == false) return false; 
+        if (other.getInstanceId() == null ^ this.getInstanceId() == null) return false;
+        if (other.getInstanceId() != null && other.getInstanceId().equals(this.getInstanceId()) == false) return false; 
+        return true;
     }
     
 }

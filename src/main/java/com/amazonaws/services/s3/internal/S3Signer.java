@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -83,7 +83,7 @@ public class S3Signer extends AbstractAWSSigner {
     }
 
     public void sign(Request<?> request, AWSCredentials credentials) throws AmazonClientException {
-        if (credentials == null) {
+        if (credentials == null || credentials.getAWSSecretKey() == null) {
             log.debug("Canonical string will not be signed, as no AWS Secret Key was provided");
             return;
         }
@@ -92,13 +92,13 @@ public class S3Signer extends AbstractAWSSigner {
         if ( sanitizedCredentials instanceof AWSSessionCredentials ) {
         	addSessionCredentials(request, (AWSSessionCredentials) sanitizedCredentials);
         }
-        
+
         request.addHeader(Headers.DATE, ServiceUtils.formatRfc822Date(new Date()));
         String canonicalString = RestUtils.makeS3CanonicalString(
                 httpVerb, resourcePath, request, null);
         log.debug("Calculated string to sign:\n\"" + canonicalString + "\"");
 
-        String signature = super.sign(canonicalString, sanitizedCredentials.getAWSSecretKey(), SigningAlgorithm.HmacSHA1);
+        String signature = super.signAndBase64Encode(canonicalString, sanitizedCredentials.getAWSSecretKey(), SigningAlgorithm.HmacSHA1);
         request.addHeader("Authorization", "AWS " + sanitizedCredentials.getAWSAccessKeyId() + ":" + signature);
     }
 

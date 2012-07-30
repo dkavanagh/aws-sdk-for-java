@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -29,8 +29,8 @@ public class LBCookieStickinessPolicy {
 
     /**
      * The time period in seconds after which the cookie should be considered
-     * stale. Not specifying this parameter indicates that the sticky session
-     * will last for the duration of the browser session.
+     * stale. Not specifying this parameter indicates that the stickiness
+     * session will last for the duration of the browser session.
      */
     private Long cookieExpirationPeriod;
 
@@ -49,13 +49,15 @@ public class LBCookieStickinessPolicy {
      * be unique within the set of policies for this LoadBalancer.
      * @param cookieExpirationPeriod The time period in seconds after which
      * the cookie should be considered stale. Not specifying this parameter
-     * indicates that the sticky session will last for the duration of the
-     * browser session.
+     * indicates that the stickiness session will last for the duration of
+     * the browser session.
      */
     public LBCookieStickinessPolicy(String policyName, Long cookieExpirationPeriod) {
         this.policyName = policyName;
         this.cookieExpirationPeriod = cookieExpirationPeriod;
     }
+
+    
     
     /**
      * The name for the policy being created. The name must be unique within
@@ -99,12 +101,12 @@ public class LBCookieStickinessPolicy {
     
     /**
      * The time period in seconds after which the cookie should be considered
-     * stale. Not specifying this parameter indicates that the sticky session
-     * will last for the duration of the browser session.
+     * stale. Not specifying this parameter indicates that the stickiness
+     * session will last for the duration of the browser session.
      *
      * @return The time period in seconds after which the cookie should be considered
-     *         stale. Not specifying this parameter indicates that the sticky session
-     *         will last for the duration of the browser session.
+     *         stale. Not specifying this parameter indicates that the stickiness
+     *         session will last for the duration of the browser session.
      */
     public Long getCookieExpirationPeriod() {
         return cookieExpirationPeriod;
@@ -112,12 +114,12 @@ public class LBCookieStickinessPolicy {
     
     /**
      * The time period in seconds after which the cookie should be considered
-     * stale. Not specifying this parameter indicates that the sticky session
-     * will last for the duration of the browser session.
+     * stale. Not specifying this parameter indicates that the stickiness
+     * session will last for the duration of the browser session.
      *
      * @param cookieExpirationPeriod The time period in seconds after which the cookie should be considered
-     *         stale. Not specifying this parameter indicates that the sticky session
-     *         will last for the duration of the browser session.
+     *         stale. Not specifying this parameter indicates that the stickiness
+     *         session will last for the duration of the browser session.
      */
     public void setCookieExpirationPeriod(Long cookieExpirationPeriod) {
         this.cookieExpirationPeriod = cookieExpirationPeriod;
@@ -125,14 +127,14 @@ public class LBCookieStickinessPolicy {
     
     /**
      * The time period in seconds after which the cookie should be considered
-     * stale. Not specifying this parameter indicates that the sticky session
-     * will last for the duration of the browser session.
+     * stale. Not specifying this parameter indicates that the stickiness
+     * session will last for the duration of the browser session.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
      * @param cookieExpirationPeriod The time period in seconds after which the cookie should be considered
-     *         stale. Not specifying this parameter indicates that the sticky session
-     *         will last for the duration of the browser session.
+     *         stale. Not specifying this parameter indicates that the stickiness
+     *         session will last for the duration of the browser session.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -155,10 +157,35 @@ public class LBCookieStickinessPolicy {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("PolicyName: " + policyName + ", ");
-        sb.append("CookieExpirationPeriod: " + cookieExpirationPeriod + ", ");
+        if (policyName != null) sb.append("PolicyName: " + policyName + ", ");
+        if (cookieExpirationPeriod != null) sb.append("CookieExpirationPeriod: " + cookieExpirationPeriod + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getPolicyName() == null) ? 0 : getPolicyName().hashCode()); 
+        hashCode = prime * hashCode + ((getCookieExpirationPeriod() == null) ? 0 : getCookieExpirationPeriod().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof LBCookieStickinessPolicy == false) return false;
+        LBCookieStickinessPolicy other = (LBCookieStickinessPolicy)obj;
+        
+        if (other.getPolicyName() == null ^ this.getPolicyName() == null) return false;
+        if (other.getPolicyName() != null && other.getPolicyName().equals(this.getPolicyName()) == false) return false; 
+        if (other.getCookieExpirationPeriod() == null ^ this.getCookieExpirationPeriod() == null) return false;
+        if (other.getCookieExpirationPeriod() != null && other.getCookieExpirationPeriod().equals(this.getCookieExpirationPeriod()) == false) return false; 
+        return true;
     }
     
 }

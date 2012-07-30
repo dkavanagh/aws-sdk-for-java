@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,14 +18,11 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#associateAddress(AssociateAddressRequest) AssociateAddress operation}.
  * <p>
- * The AssociateAddress operation associates an elastic IP address with
- * an instance.
+ * The AssociateAddress operation associates an elastic IP address with an instance.
  * </p>
  * <p>
- * If the IP address is currently assigned to another instance, the IP
- * address is assigned to the new instance. This is an idempotent
- * operation. If you enter it more than once, Amazon EC2 does not return
- * an error.
+ * If the IP address is currently assigned to another instance, the IP address is assigned to the new instance. This is an idempotent operation. If you
+ * enter it more than once, Amazon EC2 does not return an error.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#associateAddress(AssociateAddressRequest)
@@ -48,6 +45,12 @@ public class AssociateAddressRequest extends AmazonWebServiceRequest {
      */
     private String allocationId;
 
+    private String networkInterfaceId;
+
+    private String privateIpAddress;
+
+    private Boolean allowReassociation;
+
     /**
      * Default constructor for a new AssociateAddressRequest object.  Callers should use the
      * setter or fluent setter (with...) methods to initialize this object after creating it.
@@ -66,6 +69,8 @@ public class AssociateAddressRequest extends AmazonWebServiceRequest {
         this.instanceId = instanceId;
         this.publicIp = publicIp;
     }
+
+    
     
     /**
      * The instance to associate with the IP address.
@@ -176,6 +181,117 @@ public class AssociateAddressRequest extends AmazonWebServiceRequest {
     
     
     /**
+     * Returns the value of the NetworkInterfaceId property for this object.
+     *
+     * @return The value of the NetworkInterfaceId property for this object.
+     */
+    public String getNetworkInterfaceId() {
+        return networkInterfaceId;
+    }
+    
+    /**
+     * Sets the value of the NetworkInterfaceId property for this object.
+     *
+     * @param networkInterfaceId The new value for the NetworkInterfaceId property for this object.
+     */
+    public void setNetworkInterfaceId(String networkInterfaceId) {
+        this.networkInterfaceId = networkInterfaceId;
+    }
+    
+    /**
+     * Sets the value of the NetworkInterfaceId property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param networkInterfaceId The new value for the NetworkInterfaceId property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public AssociateAddressRequest withNetworkInterfaceId(String networkInterfaceId) {
+        this.networkInterfaceId = networkInterfaceId;
+        return this;
+    }
+    
+    
+    /**
+     * Returns the value of the PrivateIpAddress property for this object.
+     *
+     * @return The value of the PrivateIpAddress property for this object.
+     */
+    public String getPrivateIpAddress() {
+        return privateIpAddress;
+    }
+    
+    /**
+     * Sets the value of the PrivateIpAddress property for this object.
+     *
+     * @param privateIpAddress The new value for the PrivateIpAddress property for this object.
+     */
+    public void setPrivateIpAddress(String privateIpAddress) {
+        this.privateIpAddress = privateIpAddress;
+    }
+    
+    /**
+     * Sets the value of the PrivateIpAddress property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param privateIpAddress The new value for the PrivateIpAddress property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public AssociateAddressRequest withPrivateIpAddress(String privateIpAddress) {
+        this.privateIpAddress = privateIpAddress;
+        return this;
+    }
+    
+    
+    /**
+     * Returns the value of the AllowReassociation property for this object.
+     *
+     * @return The value of the AllowReassociation property for this object.
+     */
+    public Boolean isAllowReassociation() {
+        return allowReassociation;
+    }
+    
+    /**
+     * Sets the value of the AllowReassociation property for this object.
+     *
+     * @param allowReassociation The new value for the AllowReassociation property for this object.
+     */
+    public void setAllowReassociation(Boolean allowReassociation) {
+        this.allowReassociation = allowReassociation;
+    }
+    
+    /**
+     * Sets the value of the AllowReassociation property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param allowReassociation The new value for the AllowReassociation property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public AssociateAddressRequest withAllowReassociation(Boolean allowReassociation) {
+        this.allowReassociation = allowReassociation;
+        return this;
+    }
+    
+    
+    /**
+     * Returns the value of the AllowReassociation property for this object.
+     *
+     * @return The value of the AllowReassociation property for this object.
+     */
+    public Boolean getAllowReassociation() {
+        return allowReassociation;
+    }
+    
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -187,11 +303,51 @@ public class AssociateAddressRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("InstanceId: " + instanceId + ", ");
-        sb.append("PublicIp: " + publicIp + ", ");
-        sb.append("AllocationId: " + allocationId + ", ");
+        if (instanceId != null) sb.append("InstanceId: " + instanceId + ", ");
+        if (publicIp != null) sb.append("PublicIp: " + publicIp + ", ");
+        if (allocationId != null) sb.append("AllocationId: " + allocationId + ", ");
+        if (networkInterfaceId != null) sb.append("NetworkInterfaceId: " + networkInterfaceId + ", ");
+        if (privateIpAddress != null) sb.append("PrivateIpAddress: " + privateIpAddress + ", ");
+        if (allowReassociation != null) sb.append("AllowReassociation: " + allowReassociation + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getInstanceId() == null) ? 0 : getInstanceId().hashCode()); 
+        hashCode = prime * hashCode + ((getPublicIp() == null) ? 0 : getPublicIp().hashCode()); 
+        hashCode = prime * hashCode + ((getAllocationId() == null) ? 0 : getAllocationId().hashCode()); 
+        hashCode = prime * hashCode + ((getNetworkInterfaceId() == null) ? 0 : getNetworkInterfaceId().hashCode()); 
+        hashCode = prime * hashCode + ((getPrivateIpAddress() == null) ? 0 : getPrivateIpAddress().hashCode()); 
+        hashCode = prime * hashCode + ((isAllowReassociation() == null) ? 0 : isAllowReassociation().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof AssociateAddressRequest == false) return false;
+        AssociateAddressRequest other = (AssociateAddressRequest)obj;
+        
+        if (other.getInstanceId() == null ^ this.getInstanceId() == null) return false;
+        if (other.getInstanceId() != null && other.getInstanceId().equals(this.getInstanceId()) == false) return false; 
+        if (other.getPublicIp() == null ^ this.getPublicIp() == null) return false;
+        if (other.getPublicIp() != null && other.getPublicIp().equals(this.getPublicIp()) == false) return false; 
+        if (other.getAllocationId() == null ^ this.getAllocationId() == null) return false;
+        if (other.getAllocationId() != null && other.getAllocationId().equals(this.getAllocationId()) == false) return false; 
+        if (other.getNetworkInterfaceId() == null ^ this.getNetworkInterfaceId() == null) return false;
+        if (other.getNetworkInterfaceId() != null && other.getNetworkInterfaceId().equals(this.getNetworkInterfaceId()) == false) return false; 
+        if (other.getPrivateIpAddress() == null ^ this.getPrivateIpAddress() == null) return false;
+        if (other.getPrivateIpAddress() != null && other.getPrivateIpAddress().equals(this.getPrivateIpAddress()) == false) return false; 
+        if (other.isAllowReassociation() == null ^ this.isAllowReassociation() == null) return false;
+        if (other.isAllowReassociation() != null && other.isAllowReassociation().equals(this.isAllowReassociation()) == false) return false; 
+        return true;
     }
     
 }

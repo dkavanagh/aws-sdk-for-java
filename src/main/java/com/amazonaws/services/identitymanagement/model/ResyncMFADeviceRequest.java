@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class ResyncMFADeviceRequest extends AmazonWebServiceRequest {
 
     /**
-     * Name of the User whose MFA device you want to resynchronize.
+     * Name of the user whose MFA device you want to resynchronize.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
@@ -38,8 +38,8 @@ public class ResyncMFADeviceRequest extends AmazonWebServiceRequest {
      * Serial number that uniquely identifies the MFA device.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Length: </b>9 - 48<br/>
-     * <b>Pattern: </b>[\w]*<br/>
+     * <b>Length: </b>9 - 256<br/>
+     * <b>Pattern: </b>[\w+=/:,.@-]*<br/>
      */
     private String serialNumber;
 
@@ -72,7 +72,7 @@ public class ResyncMFADeviceRequest extends AmazonWebServiceRequest {
      * Callers should use the setter or fluent setter (with...) methods to
      * initialize any additional object members.
      * 
-     * @param userName Name of the User whose MFA device you want to
+     * @param userName Name of the user whose MFA device you want to
      * resynchronize.
      * @param serialNumber Serial number that uniquely identifies the MFA
      * device.
@@ -87,35 +87,37 @@ public class ResyncMFADeviceRequest extends AmazonWebServiceRequest {
         this.authenticationCode1 = authenticationCode1;
         this.authenticationCode2 = authenticationCode2;
     }
+
+    
     
     /**
-     * Name of the User whose MFA device you want to resynchronize.
+     * Name of the user whose MFA device you want to resynchronize.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @return Name of the User whose MFA device you want to resynchronize.
+     * @return Name of the user whose MFA device you want to resynchronize.
      */
     public String getUserName() {
         return userName;
     }
     
     /**
-     * Name of the User whose MFA device you want to resynchronize.
+     * Name of the user whose MFA device you want to resynchronize.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User whose MFA device you want to resynchronize.
+     * @param userName Name of the user whose MFA device you want to resynchronize.
      */
     public void setUserName(String userName) {
         this.userName = userName;
     }
     
     /**
-     * Name of the User whose MFA device you want to resynchronize.
+     * Name of the user whose MFA device you want to resynchronize.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -123,7 +125,7 @@ public class ResyncMFADeviceRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User whose MFA device you want to resynchronize.
+     * @param userName Name of the user whose MFA device you want to resynchronize.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -138,8 +140,8 @@ public class ResyncMFADeviceRequest extends AmazonWebServiceRequest {
      * Serial number that uniquely identifies the MFA device.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Length: </b>9 - 48<br/>
-     * <b>Pattern: </b>[\w]*<br/>
+     * <b>Length: </b>9 - 256<br/>
+     * <b>Pattern: </b>[\w+=/:,.@-]*<br/>
      *
      * @return Serial number that uniquely identifies the MFA device.
      */
@@ -151,8 +153,8 @@ public class ResyncMFADeviceRequest extends AmazonWebServiceRequest {
      * Serial number that uniquely identifies the MFA device.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Length: </b>9 - 48<br/>
-     * <b>Pattern: </b>[\w]*<br/>
+     * <b>Length: </b>9 - 256<br/>
+     * <b>Pattern: </b>[\w+=/:,.@-]*<br/>
      *
      * @param serialNumber Serial number that uniquely identifies the MFA device.
      */
@@ -166,8 +168,8 @@ public class ResyncMFADeviceRequest extends AmazonWebServiceRequest {
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Length: </b>9 - 48<br/>
-     * <b>Pattern: </b>[\w]*<br/>
+     * <b>Length: </b>9 - 256<br/>
+     * <b>Pattern: </b>[\w+=/:,.@-]*<br/>
      *
      * @param serialNumber Serial number that uniquely identifies the MFA device.
      *
@@ -284,12 +286,43 @@ public class ResyncMFADeviceRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("UserName: " + userName + ", ");
-        sb.append("SerialNumber: " + serialNumber + ", ");
-        sb.append("AuthenticationCode1: " + authenticationCode1 + ", ");
-        sb.append("AuthenticationCode2: " + authenticationCode2 + ", ");
+        if (userName != null) sb.append("UserName: " + userName + ", ");
+        if (serialNumber != null) sb.append("SerialNumber: " + serialNumber + ", ");
+        if (authenticationCode1 != null) sb.append("AuthenticationCode1: " + authenticationCode1 + ", ");
+        if (authenticationCode2 != null) sb.append("AuthenticationCode2: " + authenticationCode2 + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getUserName() == null) ? 0 : getUserName().hashCode()); 
+        hashCode = prime * hashCode + ((getSerialNumber() == null) ? 0 : getSerialNumber().hashCode()); 
+        hashCode = prime * hashCode + ((getAuthenticationCode1() == null) ? 0 : getAuthenticationCode1().hashCode()); 
+        hashCode = prime * hashCode + ((getAuthenticationCode2() == null) ? 0 : getAuthenticationCode2().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof ResyncMFADeviceRequest == false) return false;
+        ResyncMFADeviceRequest other = (ResyncMFADeviceRequest)obj;
+        
+        if (other.getUserName() == null ^ this.getUserName() == null) return false;
+        if (other.getUserName() != null && other.getUserName().equals(this.getUserName()) == false) return false; 
+        if (other.getSerialNumber() == null ^ this.getSerialNumber() == null) return false;
+        if (other.getSerialNumber() != null && other.getSerialNumber().equals(this.getSerialNumber()) == false) return false; 
+        if (other.getAuthenticationCode1() == null ^ this.getAuthenticationCode1() == null) return false;
+        if (other.getAuthenticationCode1() != null && other.getAuthenticationCode1().equals(this.getAuthenticationCode1()) == false) return false; 
+        if (other.getAuthenticationCode2() == null ^ this.getAuthenticationCode2() == null) return false;
+        if (other.getAuthenticationCode2() != null && other.getAuthenticationCode2().equals(this.getAuthenticationCode2()) == false) return false; 
+        return true;
     }
     
 }

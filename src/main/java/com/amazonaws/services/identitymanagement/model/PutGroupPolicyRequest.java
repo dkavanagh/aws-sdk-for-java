@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,23 +18,19 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#putGroupPolicy(PutGroupPolicyRequest) PutGroupPolicy operation}.
  * <p>
- * Adds (or updates) a policy document associated with the specified
- * group. For information about policies, refer to <a
- * ebservices.com/IAM/latest/UserGuide/index.html?PoliciesOverview.html">
- * Overview of Policies </a> in <i>Using AWS Identity and Access
- * Management</i> .
+ * Adds (or updates) a policy document associated with the specified group. For information about policies, refer to <a
+ * href="http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?PoliciesOverview.html"> Overview of Policies </a> in <i>Using AWS Identity
+ * and Access Management</i> .
  * </p>
  * <p>
- * For information about limits on the number of policies you can
- * associate with a group, see <a
- * s.com/IAM/2010-05-08/UserGuide/index.html?LimitationsOnEntities.html">
- * Limitations on IAM Entities </a> in <i>Using AWS Identity and Access
- * Management</i> .
+ * For information about limits on the number of policies you can associate with a group, see <a
+ * href="http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html"> Limitations on IAM Entities </a> in <i>Using AWS
+ * Identity and Access Management</i> .
  * </p>
  * <p>
- * <b>NOTE:</b>Because policy documents can be large, you should use POST
- * rather than GET when calling PutGroupPolicy. For more information, see
- * Making Query Requests in Using AWS Identity and Access Management.
+ * <b>NOTE:</b>Because policy documents can be large, you should use POST rather than GET when calling PutGroupPolicy. For information about setting up
+ * signatures and authorization through the API, go to Signing AWS API Requests in the AWS General Reference. For general information about using the
+ * Query API with IAM, go to Making Query Requests in Using IAM.
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#putGroupPolicy(PutGroupPolicyRequest)
@@ -88,6 +84,8 @@ public class PutGroupPolicyRequest extends AmazonWebServiceRequest {
         this.policyName = policyName;
         this.policyDocument = policyDocument;
     }
+
+    
     
     /**
      * Name of the group to associate the policy with.
@@ -239,11 +237,39 @@ public class PutGroupPolicyRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("GroupName: " + groupName + ", ");
-        sb.append("PolicyName: " + policyName + ", ");
-        sb.append("PolicyDocument: " + policyDocument + ", ");
+        if (groupName != null) sb.append("GroupName: " + groupName + ", ");
+        if (policyName != null) sb.append("PolicyName: " + policyName + ", ");
+        if (policyDocument != null) sb.append("PolicyDocument: " + policyDocument + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getGroupName() == null) ? 0 : getGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getPolicyName() == null) ? 0 : getPolicyName().hashCode()); 
+        hashCode = prime * hashCode + ((getPolicyDocument() == null) ? 0 : getPolicyDocument().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof PutGroupPolicyRequest == false) return false;
+        PutGroupPolicyRequest other = (PutGroupPolicyRequest)obj;
+        
+        if (other.getGroupName() == null ^ this.getGroupName() == null) return false;
+        if (other.getGroupName() != null && other.getGroupName().equals(this.getGroupName()) == false) return false; 
+        if (other.getPolicyName() == null ^ this.getPolicyName() == null) return false;
+        if (other.getPolicyName() != null && other.getPolicyName().equals(this.getPolicyName()) == false) return false; 
+        if (other.getPolicyDocument() == null ^ this.getPolicyDocument() == null) return false;
+        if (other.getPolicyDocument() != null && other.getPolicyDocument().equals(this.getPolicyDocument()) == false) return false; 
+        return true;
     }
     
 }

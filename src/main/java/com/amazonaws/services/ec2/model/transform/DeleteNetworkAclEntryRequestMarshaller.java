@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.ec2.model.*;
@@ -30,23 +31,23 @@ import com.amazonaws.util.StringUtils;
 public class DeleteNetworkAclEntryRequestMarshaller implements Marshaller<Request<DeleteNetworkAclEntryRequest>, DeleteNetworkAclEntryRequest> {
 
     public Request<DeleteNetworkAclEntryRequest> marshall(DeleteNetworkAclEntryRequest deleteNetworkAclEntryRequest) {
+
+        if (deleteNetworkAclEntryRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<DeleteNetworkAclEntryRequest> request = new DefaultRequest<DeleteNetworkAclEntryRequest>(deleteNetworkAclEntryRequest, "AmazonEC2");
         request.addParameter("Action", "DeleteNetworkAclEntry");
-        request.addParameter("Version", "2011-05-15");
-        if (deleteNetworkAclEntryRequest != null) {
-            if (deleteNetworkAclEntryRequest.getNetworkAclId() != null) {
-                request.addParameter("NetworkAclId", StringUtils.fromString(deleteNetworkAclEntryRequest.getNetworkAclId()));
-            }
+        request.addParameter("Version", "2012-06-15");
+
+        if (deleteNetworkAclEntryRequest.getNetworkAclId() != null) {
+            request.addParameter("NetworkAclId", StringUtils.fromString(deleteNetworkAclEntryRequest.getNetworkAclId()));
         }
-        if (deleteNetworkAclEntryRequest != null) {
-            if (deleteNetworkAclEntryRequest.getRuleNumber() != null) {
-                request.addParameter("RuleNumber", StringUtils.fromInteger(deleteNetworkAclEntryRequest.getRuleNumber()));
-            }
+        if (deleteNetworkAclEntryRequest.getRuleNumber() != null) {
+            request.addParameter("RuleNumber", StringUtils.fromInteger(deleteNetworkAclEntryRequest.getRuleNumber()));
         }
-        if (deleteNetworkAclEntryRequest != null) {
-            if (deleteNetworkAclEntryRequest.isEgress() != null) {
-                request.addParameter("Egress", StringUtils.fromBoolean(deleteNetworkAclEntryRequest.isEgress()));
-            }
+        if (deleteNetworkAclEntryRequest.isEgress() != null) {
+            request.addParameter("Egress", StringUtils.fromBoolean(deleteNetworkAclEntryRequest.isEgress()));
         }
 
 

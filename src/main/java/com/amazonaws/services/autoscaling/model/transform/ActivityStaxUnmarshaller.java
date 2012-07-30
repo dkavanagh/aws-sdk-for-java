@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,12 +32,11 @@ import com.amazonaws.transform.SimpleTypeStaxUnmarshallers.*;
  */
 public class ActivityStaxUnmarshaller implements Unmarshaller<Activity, StaxUnmarshallerContext> {
 
-    
-
     public Activity unmarshall(StaxUnmarshallerContext context) throws Exception {
         Activity activity = new Activity();
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
+
         
         if (context.isStartOfDocument()) targetDepth += 2;
         
@@ -81,6 +80,10 @@ public class ActivityStaxUnmarshaller implements Unmarshaller<Activity, StaxUnma
                 }
                 if (context.testExpression("Progress", targetDepth)) {
                     activity.setProgress(IntegerStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("Details", targetDepth)) {
+                    activity.setDetails(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
             } else if (xmlEvent.isEndElement()) {

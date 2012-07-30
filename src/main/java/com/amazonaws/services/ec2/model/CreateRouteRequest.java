@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,15 +18,11 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#createRoute(CreateRouteRequest) CreateRoute operation}.
  * <p>
- * Creates a new route in a route table within a VPC. The route's target
- * can be either a gateway attached to the VPC or a NAT instance in the
- * VPC.
+ * Creates a new route in a route table within a VPC. The route's target can be either a gateway attached to the VPC or a NAT instance in the VPC.
  * </p>
  * <p>
- * When determining how to route traffic, we use the route with the most
- * specific match. For example, let's say the traffic is destined for
- * <code>192.0.2.3</code> , and the route table includes the following
- * two routes:
+ * When determining how to route traffic, we use the route with the most specific match. For example, let's say the traffic is destined for
+ * <code>192.0.2.3</code> , and the route table includes the following two routes:
  * </p>
  * 
  * <ul>
@@ -35,14 +31,12 @@ import com.amazonaws.AmazonWebServiceRequest;
  * 
  * </ul>
  * <p>
- * Both routes apply to the traffic destined for <code>192.0.2.3</code>
- * . However, the second route in the list is more specific, so we use
- * that route to determine where to target the traffic.
+ * Both routes apply to the traffic destined for <code>192.0.2.3</code> . However, the second route in the list is more specific, so we use that route
+ * to determine where to target the traffic.
  * </p>
  * <p>
- * For more information about route tables, go to <a
- * azonwebservices.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html">
- * Route Tables </a> in the Amazon Virtual Private Cloud User Guide.
+ * For more information about route tables, go to <a href="http://docs.amazonwebservices.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html"> Route
+ * Tables </a> in the Amazon Virtual Private Cloud User Guide.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#createRoute(CreateRouteRequest)
@@ -73,6 +67,8 @@ public class CreateRouteRequest extends AmazonWebServiceRequest {
      * <code>GatewayId</code> or <code>InstanceId</code>, but not both.
      */
     private String instanceId;
+
+    private String networkInterfaceId;
 
     /**
      * The ID of the route table where the route will be added.
@@ -241,6 +237,40 @@ public class CreateRouteRequest extends AmazonWebServiceRequest {
     
     
     /**
+     * Returns the value of the NetworkInterfaceId property for this object.
+     *
+     * @return The value of the NetworkInterfaceId property for this object.
+     */
+    public String getNetworkInterfaceId() {
+        return networkInterfaceId;
+    }
+    
+    /**
+     * Sets the value of the NetworkInterfaceId property for this object.
+     *
+     * @param networkInterfaceId The new value for the NetworkInterfaceId property for this object.
+     */
+    public void setNetworkInterfaceId(String networkInterfaceId) {
+        this.networkInterfaceId = networkInterfaceId;
+    }
+    
+    /**
+     * Sets the value of the NetworkInterfaceId property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param networkInterfaceId The new value for the NetworkInterfaceId property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public CreateRouteRequest withNetworkInterfaceId(String networkInterfaceId) {
+        this.networkInterfaceId = networkInterfaceId;
+        return this;
+    }
+    
+    
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -252,12 +282,47 @@ public class CreateRouteRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("RouteTableId: " + routeTableId + ", ");
-        sb.append("DestinationCidrBlock: " + destinationCidrBlock + ", ");
-        sb.append("GatewayId: " + gatewayId + ", ");
-        sb.append("InstanceId: " + instanceId + ", ");
+        if (routeTableId != null) sb.append("RouteTableId: " + routeTableId + ", ");
+        if (destinationCidrBlock != null) sb.append("DestinationCidrBlock: " + destinationCidrBlock + ", ");
+        if (gatewayId != null) sb.append("GatewayId: " + gatewayId + ", ");
+        if (instanceId != null) sb.append("InstanceId: " + instanceId + ", ");
+        if (networkInterfaceId != null) sb.append("NetworkInterfaceId: " + networkInterfaceId + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getRouteTableId() == null) ? 0 : getRouteTableId().hashCode()); 
+        hashCode = prime * hashCode + ((getDestinationCidrBlock() == null) ? 0 : getDestinationCidrBlock().hashCode()); 
+        hashCode = prime * hashCode + ((getGatewayId() == null) ? 0 : getGatewayId().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceId() == null) ? 0 : getInstanceId().hashCode()); 
+        hashCode = prime * hashCode + ((getNetworkInterfaceId() == null) ? 0 : getNetworkInterfaceId().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof CreateRouteRequest == false) return false;
+        CreateRouteRequest other = (CreateRouteRequest)obj;
+        
+        if (other.getRouteTableId() == null ^ this.getRouteTableId() == null) return false;
+        if (other.getRouteTableId() != null && other.getRouteTableId().equals(this.getRouteTableId()) == false) return false; 
+        if (other.getDestinationCidrBlock() == null ^ this.getDestinationCidrBlock() == null) return false;
+        if (other.getDestinationCidrBlock() != null && other.getDestinationCidrBlock().equals(this.getDestinationCidrBlock()) == false) return false; 
+        if (other.getGatewayId() == null ^ this.getGatewayId() == null) return false;
+        if (other.getGatewayId() != null && other.getGatewayId().equals(this.getGatewayId()) == false) return false; 
+        if (other.getInstanceId() == null ^ this.getInstanceId() == null) return false;
+        if (other.getInstanceId() != null && other.getInstanceId().equals(this.getInstanceId()) == false) return false; 
+        if (other.getNetworkInterfaceId() == null ^ this.getNetworkInterfaceId() == null) return false;
+        if (other.getNetworkInterfaceId() != null && other.getNetworkInterfaceId().equals(this.getNetworkInterfaceId()) == false) return false; 
+        return true;
     }
     
 }

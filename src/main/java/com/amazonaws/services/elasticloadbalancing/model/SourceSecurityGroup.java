@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,12 +16,9 @@ package com.amazonaws.services.elasticloadbalancing.model;
 
 /**
  * <p>
- * This data type is used as a response element in the
- * DescribeLoadBalancers action. For information about Elastic Load
- * Balancing security groups, go to <a
- * /DeveloperGuide/elb-security-features.html#using-elb-security-groups">
- * Using Security Groups With Elastic Load Balancing </a> in the
- * <i>Elastic Load Balancing Developer Guide</i> .
+ * This data type is used as a response element in the DescribeLoadBalancers action. For information about Elastic Load Balancing security groups, go to
+ * <a href="http://docs.amazonwebservices.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-security-features.html#using-elb-security-groups"> Using
+ * Security Groups With Elastic Load Balancing </a> in the <i>Elastic Load Balancing Developer Guide</i> .
  * 
  * </p>
  */
@@ -159,10 +156,35 @@ public class SourceSecurityGroup {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("OwnerAlias: " + ownerAlias + ", ");
-        sb.append("GroupName: " + groupName + ", ");
+        if (ownerAlias != null) sb.append("OwnerAlias: " + ownerAlias + ", ");
+        if (groupName != null) sb.append("GroupName: " + groupName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getOwnerAlias() == null) ? 0 : getOwnerAlias().hashCode()); 
+        hashCode = prime * hashCode + ((getGroupName() == null) ? 0 : getGroupName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof SourceSecurityGroup == false) return false;
+        SourceSecurityGroup other = (SourceSecurityGroup)obj;
+        
+        if (other.getOwnerAlias() == null ^ this.getOwnerAlias() == null) return false;
+        if (other.getOwnerAlias() != null && other.getOwnerAlias().equals(this.getOwnerAlias()) == false) return false; 
+        if (other.getGroupName() == null ^ this.getGroupName() == null) return false;
+        if (other.getGroupName() != null && other.getGroupName().equals(this.getGroupName()) == false) return false; 
+        return true;
     }
     
 }

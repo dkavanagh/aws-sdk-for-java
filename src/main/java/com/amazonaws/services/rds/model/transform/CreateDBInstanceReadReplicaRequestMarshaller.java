@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.rds.model.*;
@@ -30,38 +31,35 @@ import com.amazonaws.util.StringUtils;
 public class CreateDBInstanceReadReplicaRequestMarshaller implements Marshaller<Request<CreateDBInstanceReadReplicaRequest>, CreateDBInstanceReadReplicaRequest> {
 
     public Request<CreateDBInstanceReadReplicaRequest> marshall(CreateDBInstanceReadReplicaRequest createDBInstanceReadReplicaRequest) {
+
+        if (createDBInstanceReadReplicaRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<CreateDBInstanceReadReplicaRequest> request = new DefaultRequest<CreateDBInstanceReadReplicaRequest>(createDBInstanceReadReplicaRequest, "AmazonRDS");
         request.addParameter("Action", "CreateDBInstanceReadReplica");
-        request.addParameter("Version", "2011-04-01");
-        if (createDBInstanceReadReplicaRequest != null) {
-            if (createDBInstanceReadReplicaRequest.getDBInstanceIdentifier() != null) {
-                request.addParameter("DBInstanceIdentifier", StringUtils.fromString(createDBInstanceReadReplicaRequest.getDBInstanceIdentifier()));
-            }
+        request.addParameter("Version", "2012-04-23");
+
+        if (createDBInstanceReadReplicaRequest.getDBInstanceIdentifier() != null) {
+            request.addParameter("DBInstanceIdentifier", StringUtils.fromString(createDBInstanceReadReplicaRequest.getDBInstanceIdentifier()));
         }
-        if (createDBInstanceReadReplicaRequest != null) {
-            if (createDBInstanceReadReplicaRequest.getSourceDBInstanceIdentifier() != null) {
-                request.addParameter("SourceDBInstanceIdentifier", StringUtils.fromString(createDBInstanceReadReplicaRequest.getSourceDBInstanceIdentifier()));
-            }
+        if (createDBInstanceReadReplicaRequest.getSourceDBInstanceIdentifier() != null) {
+            request.addParameter("SourceDBInstanceIdentifier", StringUtils.fromString(createDBInstanceReadReplicaRequest.getSourceDBInstanceIdentifier()));
         }
-        if (createDBInstanceReadReplicaRequest != null) {
-            if (createDBInstanceReadReplicaRequest.getDBInstanceClass() != null) {
-                request.addParameter("DBInstanceClass", StringUtils.fromString(createDBInstanceReadReplicaRequest.getDBInstanceClass()));
-            }
+        if (createDBInstanceReadReplicaRequest.getDBInstanceClass() != null) {
+            request.addParameter("DBInstanceClass", StringUtils.fromString(createDBInstanceReadReplicaRequest.getDBInstanceClass()));
         }
-        if (createDBInstanceReadReplicaRequest != null) {
-            if (createDBInstanceReadReplicaRequest.getAvailabilityZone() != null) {
-                request.addParameter("AvailabilityZone", StringUtils.fromString(createDBInstanceReadReplicaRequest.getAvailabilityZone()));
-            }
+        if (createDBInstanceReadReplicaRequest.getAvailabilityZone() != null) {
+            request.addParameter("AvailabilityZone", StringUtils.fromString(createDBInstanceReadReplicaRequest.getAvailabilityZone()));
         }
-        if (createDBInstanceReadReplicaRequest != null) {
-            if (createDBInstanceReadReplicaRequest.getPort() != null) {
-                request.addParameter("Port", StringUtils.fromInteger(createDBInstanceReadReplicaRequest.getPort()));
-            }
+        if (createDBInstanceReadReplicaRequest.getPort() != null) {
+            request.addParameter("Port", StringUtils.fromInteger(createDBInstanceReadReplicaRequest.getPort()));
         }
-        if (createDBInstanceReadReplicaRequest != null) {
-            if (createDBInstanceReadReplicaRequest.isAutoMinorVersionUpgrade() != null) {
-                request.addParameter("AutoMinorVersionUpgrade", StringUtils.fromBoolean(createDBInstanceReadReplicaRequest.isAutoMinorVersionUpgrade()));
-            }
+        if (createDBInstanceReadReplicaRequest.isAutoMinorVersionUpgrade() != null) {
+            request.addParameter("AutoMinorVersionUpgrade", StringUtils.fromBoolean(createDBInstanceReadReplicaRequest.isAutoMinorVersionUpgrade()));
+        }
+        if (createDBInstanceReadReplicaRequest.getOptionGroupName() != null) {
+            request.addParameter("OptionGroupName", StringUtils.fromString(createDBInstanceReadReplicaRequest.getOptionGroupName()));
         }
 
 

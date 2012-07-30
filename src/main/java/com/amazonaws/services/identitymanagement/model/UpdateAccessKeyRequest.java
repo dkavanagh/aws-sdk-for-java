@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,22 +18,17 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#updateAccessKey(UpdateAccessKeyRequest) UpdateAccessKey operation}.
  * <p>
- * Changes the status of the specified access key from Active to
- * Inactive, or vice versa. This action can be used to disable a User's
- * key as part of a key rotation workflow.
+ * Changes the status of the specified access key from Active to Inactive, or vice versa. This action can be used to disable a user's key as part of a
+ * key rotation work flow.
  * </p>
  * <p>
- * If the <code>UserName</code> field is not specified, the UserName is
- * determined implicitly based on the AWS Access Key ID used to sign the
- * request. Because this action works for access keys under the AWS
- * Account, this API can be used to manage root credentials even if the
- * AWS Account has no associated Users.
+ * If the <code>UserName</code> field is not specified, the UserName is determined implicitly based on the AWS Access Key ID used to sign the request.
+ * Because this action works for access keys under the AWS account, this API can be used to manage root credentials even if the AWS account has no
+ * associated users.
  * </p>
  * <p>
- * For information about rotating keys, see <a
- * ervices.com/IAM/latest/UserGuide/index.html?ManagingCredentials.html">
- * Managing Keys and Certificates </a> in <i>Using AWS Identity and
- * Access Management</i> .
+ * For information about rotating keys, see <a href="http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?ManagingCredentials.html">
+ * Managing Keys and Certificates </a> in <i>Using AWS Identity and Access Management</i> .
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#updateAccessKey(UpdateAccessKeyRequest)
@@ -41,7 +36,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class UpdateAccessKeyRequest extends AmazonWebServiceRequest {
 
     /**
-     * Name of the User whose key you want to update.
+     * Name of the user whose key you want to update.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
@@ -89,35 +84,53 @@ public class UpdateAccessKeyRequest extends AmazonWebServiceRequest {
         this.accessKeyId = accessKeyId;
         this.status = status;
     }
+
+    
     
     /**
-     * Name of the User whose key you want to update.
+     * Constructs a new UpdateAccessKeyRequest object.
+     * Callers should use the setter or fluent setter (with...) methods to
+     * initialize any additional object members.
+     * 
+     * @param accessKeyId The Access Key ID of the Secret Access Key you want
+     * to update.
+     * @param status The status you want to assign to the Secret Access Key.
+     * <code>Active</code> means the key can be used for API calls to AWS,
+     * while <code>Inactive</code> means the key cannot be used.
+     */
+    public UpdateAccessKeyRequest(String accessKeyId, StatusType status) {
+        this.accessKeyId = accessKeyId;
+        this.status = status.toString();
+    }
+    
+    /**
+     * Name of the user whose key you want to update.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @return Name of the User whose key you want to update.
+     * @return Name of the user whose key you want to update.
      */
     public String getUserName() {
         return userName;
     }
     
     /**
-     * Name of the User whose key you want to update.
+     * Name of the user whose key you want to update.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User whose key you want to update.
+     * @param userName Name of the user whose key you want to update.
      */
     public void setUserName(String userName) {
         this.userName = userName;
     }
     
     /**
-     * Name of the User whose key you want to update.
+     * Name of the user whose key you want to update.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -125,7 +138,7 @@ public class UpdateAccessKeyRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User whose key you want to update.
+     * @param userName Name of the user whose key you want to update.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -194,7 +207,7 @@ public class UpdateAccessKeyRequest extends AmazonWebServiceRequest {
      *         <code>Active</code> means the key can be used for API calls to AWS,
      *         while <code>Inactive</code> means the key cannot be used.
      *
-     * @see statusType
+     * @see StatusType
      */
     public String getStatus() {
         return status;
@@ -212,7 +225,7 @@ public class UpdateAccessKeyRequest extends AmazonWebServiceRequest {
      *         <code>Active</code> means the key can be used for API calls to AWS,
      *         while <code>Inactive</code> means the key cannot be used.
      *
-     * @see statusType
+     * @see StatusType
      */
     public void setStatus(String status) {
         this.status = status;
@@ -235,13 +248,55 @@ public class UpdateAccessKeyRequest extends AmazonWebServiceRequest {
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
      *
-     * @see statusType
+     * @see StatusType
      */
     public UpdateAccessKeyRequest withStatus(String status) {
         this.status = status;
         return this;
     }
     
+    
+    /**
+     * The status you want to assign to the Secret Access Key.
+     * <code>Active</code> means the key can be used for API calls to AWS,
+     * while <code>Inactive</code> means the key cannot be used.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>Active, Inactive
+     *
+     * @param status The status you want to assign to the Secret Access Key.
+     *         <code>Active</code> means the key can be used for API calls to AWS,
+     *         while <code>Inactive</code> means the key cannot be used.
+     *
+     * @see StatusType
+     */
+    public void setStatus(StatusType status) {
+        this.status = status.toString();
+    }
+    
+    /**
+     * The status you want to assign to the Secret Access Key.
+     * <code>Active</code> means the key can be used for API calls to AWS,
+     * while <code>Inactive</code> means the key cannot be used.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>Active, Inactive
+     *
+     * @param status The status you want to assign to the Secret Access Key.
+     *         <code>Active</code> means the key can be used for API calls to AWS,
+     *         while <code>Inactive</code> means the key cannot be used.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see StatusType
+     */
+    public UpdateAccessKeyRequest withStatus(StatusType status) {
+        this.status = status.toString();
+        return this;
+    }
     
     /**
      * Returns a string representation of this object; useful for testing and
@@ -255,11 +310,39 @@ public class UpdateAccessKeyRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("UserName: " + userName + ", ");
-        sb.append("AccessKeyId: " + accessKeyId + ", ");
-        sb.append("Status: " + status + ", ");
+        if (userName != null) sb.append("UserName: " + userName + ", ");
+        if (accessKeyId != null) sb.append("AccessKeyId: " + accessKeyId + ", ");
+        if (status != null) sb.append("Status: " + status + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getUserName() == null) ? 0 : getUserName().hashCode()); 
+        hashCode = prime * hashCode + ((getAccessKeyId() == null) ? 0 : getAccessKeyId().hashCode()); 
+        hashCode = prime * hashCode + ((getStatus() == null) ? 0 : getStatus().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof UpdateAccessKeyRequest == false) return false;
+        UpdateAccessKeyRequest other = (UpdateAccessKeyRequest)obj;
+        
+        if (other.getUserName() == null ^ this.getUserName() == null) return false;
+        if (other.getUserName() != null && other.getUserName().equals(this.getUserName()) == false) return false; 
+        if (other.getAccessKeyId() == null ^ this.getAccessKeyId() == null) return false;
+        if (other.getAccessKeyId() != null && other.getAccessKeyId().equals(this.getAccessKeyId()) == false) return false; 
+        if (other.getStatus() == null ^ this.getStatus() == null) return false;
+        if (other.getStatus() != null && other.getStatus().equals(this.getStatus()) == false) return false; 
+        return true;
     }
     
 }

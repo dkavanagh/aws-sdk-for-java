@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -21,9 +21,8 @@ import com.amazonaws.AmazonWebServiceRequest;
  * Deletes the data feed for Spot Instances.
  * </p>
  * <p>
- * For conceptual information about Spot Instances, refer to the Amazon
- * Elastic Compute Cloud Developer Guide or Amazon Elastic Compute Cloud
- * User Guide .
+ * For conceptual information about Spot Instances, refer to the Amazon Elastic Compute Cloud Developer Guide or Amazon Elastic Compute Cloud User Guide
+ * .
  * 
  * </p>
  *
@@ -45,6 +44,25 @@ public class DeleteSpotDatafeedSubscriptionRequest extends AmazonWebServiceReque
         sb.append("{");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DeleteSpotDatafeedSubscriptionRequest == false) return false;
+        DeleteSpotDatafeedSubscriptionRequest other = (DeleteSpotDatafeedSubscriptionRequest)obj;
+        
+        return true;
     }
     
 }

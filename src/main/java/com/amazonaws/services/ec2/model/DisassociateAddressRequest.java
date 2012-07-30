@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,10 +18,8 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#disassociateAddress(DisassociateAddressRequest) DisassociateAddress operation}.
  * <p>
- * The DisassociateAddress operation disassociates the specified elastic
- * IP address from the instance to which it is assigned. This is an
- * idempotent operation. If you enter it more than once, Amazon EC2 does
- * not return an error.
+ * The DisassociateAddress operation disassociates the specified elastic IP address from the instance to which it is assigned. This is an idempotent
+ * operation. If you enter it more than once, Amazon EC2 does not return an error.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#disassociateAddress(DisassociateAddressRequest)
@@ -56,6 +54,8 @@ public class DisassociateAddressRequest extends AmazonWebServiceRequest {
     public DisassociateAddressRequest(String publicIp) {
         this.publicIp = publicIp;
     }
+
+    
     
     /**
      * The elastic IP address that you are disassociating from the instance.
@@ -143,10 +143,35 @@ public class DisassociateAddressRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("PublicIp: " + publicIp + ", ");
-        sb.append("AssociationId: " + associationId + ", ");
+        if (publicIp != null) sb.append("PublicIp: " + publicIp + ", ");
+        if (associationId != null) sb.append("AssociationId: " + associationId + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getPublicIp() == null) ? 0 : getPublicIp().hashCode()); 
+        hashCode = prime * hashCode + ((getAssociationId() == null) ? 0 : getAssociationId().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DisassociateAddressRequest == false) return false;
+        DisassociateAddressRequest other = (DisassociateAddressRequest)obj;
+        
+        if (other.getPublicIp() == null ^ this.getPublicIp() == null) return false;
+        if (other.getPublicIp() != null && other.getPublicIp().equals(this.getPublicIp()) == false) return false; 
+        if (other.getAssociationId() == null ^ this.getAssociationId() == null) return false;
+        if (other.getAssociationId() != null && other.getAssociationId().equals(this.getAssociationId()) == false) return false; 
+        return true;
     }
     
 }

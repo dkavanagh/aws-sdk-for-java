@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.autoscaling.AmazonAutoScaling#deletePolicy(DeletePolicyRequest) DeletePolicy operation}.
  * <p>
- * Deletes a policy created by PutScalingPolicy
+ * Deletes a policy created by PutScalingPolicy.
  * </p>
  *
  * @see com.amazonaws.services.autoscaling.AmazonAutoScaling#deletePolicy(DeletePolicyRequest)
@@ -35,7 +35,7 @@ public class DeletePolicyRequest extends AmazonWebServiceRequest {
     private String autoScalingGroupName;
 
     /**
-     * The name or PolicyARN of the policy you want to delete
+     * The name or PolicyARN of the policy you want to delete.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 1600<br/>
@@ -90,33 +90,33 @@ public class DeletePolicyRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * The name or PolicyARN of the policy you want to delete
+     * The name or PolicyARN of the policy you want to delete.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 1600<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @return The name or PolicyARN of the policy you want to delete
+     * @return The name or PolicyARN of the policy you want to delete.
      */
     public String getPolicyName() {
         return policyName;
     }
     
     /**
-     * The name or PolicyARN of the policy you want to delete
+     * The name or PolicyARN of the policy you want to delete.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 1600<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @param policyName The name or PolicyARN of the policy you want to delete
+     * @param policyName The name or PolicyARN of the policy you want to delete.
      */
     public void setPolicyName(String policyName) {
         this.policyName = policyName;
     }
     
     /**
-     * The name or PolicyARN of the policy you want to delete
+     * The name or PolicyARN of the policy you want to delete.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -124,7 +124,7 @@ public class DeletePolicyRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 1600<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @param policyName The name or PolicyARN of the policy you want to delete
+     * @param policyName The name or PolicyARN of the policy you want to delete.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -147,10 +147,35 @@ public class DeletePolicyRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
-        sb.append("PolicyName: " + policyName + ", ");
+        if (autoScalingGroupName != null) sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
+        if (policyName != null) sb.append("PolicyName: " + policyName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getAutoScalingGroupName() == null) ? 0 : getAutoScalingGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getPolicyName() == null) ? 0 : getPolicyName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DeletePolicyRequest == false) return false;
+        DeletePolicyRequest other = (DeletePolicyRequest)obj;
+        
+        if (other.getAutoScalingGroupName() == null ^ this.getAutoScalingGroupName() == null) return false;
+        if (other.getAutoScalingGroupName() != null && other.getAutoScalingGroupName().equals(this.getAutoScalingGroupName()) == false) return false; 
+        if (other.getPolicyName() == null ^ this.getPolicyName() == null) return false;
+        if (other.getPolicyName() != null && other.getPolicyName().equals(this.getPolicyName()) == false) return false; 
+        return true;
     }
     
 }

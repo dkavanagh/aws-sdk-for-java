@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.rds.model.*;
@@ -30,13 +31,17 @@ import com.amazonaws.util.StringUtils;
 public class DeleteDBSnapshotRequestMarshaller implements Marshaller<Request<DeleteDBSnapshotRequest>, DeleteDBSnapshotRequest> {
 
     public Request<DeleteDBSnapshotRequest> marshall(DeleteDBSnapshotRequest deleteDBSnapshotRequest) {
+
+        if (deleteDBSnapshotRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<DeleteDBSnapshotRequest> request = new DefaultRequest<DeleteDBSnapshotRequest>(deleteDBSnapshotRequest, "AmazonRDS");
         request.addParameter("Action", "DeleteDBSnapshot");
-        request.addParameter("Version", "2011-04-01");
-        if (deleteDBSnapshotRequest != null) {
-            if (deleteDBSnapshotRequest.getDBSnapshotIdentifier() != null) {
-                request.addParameter("DBSnapshotIdentifier", StringUtils.fromString(deleteDBSnapshotRequest.getDBSnapshotIdentifier()));
-            }
+        request.addParameter("Version", "2012-04-23");
+
+        if (deleteDBSnapshotRequest.getDBSnapshotIdentifier() != null) {
+            request.addParameter("DBSnapshotIdentifier", StringUtils.fromString(deleteDBSnapshotRequest.getDBSnapshotIdentifier()));
         }
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -21,17 +21,13 @@ import com.amazonaws.AmazonWebServiceRequest;
  * Updates the name and/or the path of the specified server certificate.
  * </p>
  * <p>
- * <b>IMPORTANT:</b> You should understand the implications of changing a
- * server certificate's path or name. For more information, see Managing
- * Server Certificates in Using AWS Identity and Access Management.
+ * <b>IMPORTANT:</b> You should understand the implications of changing a server certificate's path or name. For more information, see Managing Server
+ * Certificates in Using AWS Identity and Access Management.
  * </p>
  * <p>
- * <b>NOTE:</b>To change a server certificate name the requester must
- * have appropriate permissions on both the source object and the target
- * object. For example, to change the name from ProductionCert to
- * ProdCert, the entity making the request must have permission on
- * ProductionCert and ProdCert, or must have permission on all (*). For
- * more information about permissions, see Permissions and Policies.
+ * <b>NOTE:</b>To change a server certificate name the requester must have appropriate permissions on both the source object and the target object. For
+ * example, to change the name from ProductionCert to ProdCert, the entity making the request must have permission on ProductionCert and ProdCert, or
+ * must have permission on all (*). For more information about permissions, see Permissions and Policies.
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#updateServerCertificate(UpdateServerCertificateRequest)
@@ -84,6 +80,8 @@ public class UpdateServerCertificateRequest extends AmazonWebServiceRequest {
     public UpdateServerCertificateRequest(String serverCertificateName) {
         this.serverCertificateName = serverCertificateName;
     }
+
+    
     
     /**
      * The name of the server certificate that you want to update.
@@ -247,11 +245,39 @@ public class UpdateServerCertificateRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("ServerCertificateName: " + serverCertificateName + ", ");
-        sb.append("NewPath: " + newPath + ", ");
-        sb.append("NewServerCertificateName: " + newServerCertificateName + ", ");
+        if (serverCertificateName != null) sb.append("ServerCertificateName: " + serverCertificateName + ", ");
+        if (newPath != null) sb.append("NewPath: " + newPath + ", ");
+        if (newServerCertificateName != null) sb.append("NewServerCertificateName: " + newServerCertificateName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getServerCertificateName() == null) ? 0 : getServerCertificateName().hashCode()); 
+        hashCode = prime * hashCode + ((getNewPath() == null) ? 0 : getNewPath().hashCode()); 
+        hashCode = prime * hashCode + ((getNewServerCertificateName() == null) ? 0 : getNewServerCertificateName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof UpdateServerCertificateRequest == false) return false;
+        UpdateServerCertificateRequest other = (UpdateServerCertificateRequest)obj;
+        
+        if (other.getServerCertificateName() == null ^ this.getServerCertificateName() == null) return false;
+        if (other.getServerCertificateName() != null && other.getServerCertificateName().equals(this.getServerCertificateName()) == false) return false; 
+        if (other.getNewPath() == null ^ this.getNewPath() == null) return false;
+        if (other.getNewPath() != null && other.getNewPath().equals(this.getNewPath()) == false) return false; 
+        if (other.getNewServerCertificateName() == null ^ this.getNewServerCertificateName() == null) return false;
+        if (other.getNewServerCertificateName() != null && other.getNewServerCertificateName().equals(this.getNewServerCertificateName()) == false) return false; 
+        return true;
     }
     
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -89,6 +89,25 @@ public class InstanceGroupConfig {
      */
     public InstanceGroupConfig(String instanceRole, String instanceType, Integer instanceCount) {
         this.instanceRole = instanceRole;
+        this.instanceType = instanceType;
+        this.instanceCount = instanceCount;
+    }
+
+    
+    
+    /**
+     * Constructs a new InstanceGroupConfig object.
+     * Callers should use the setter or fluent setter (with...) methods to
+     * initialize any additional object members.
+     * 
+     * @param instanceRole The role of the instance group in the cluster.
+     * @param instanceType The Amazon EC2 instance type for all instances in
+     * the instance group.
+     * @param instanceCount Target number of instances for the instance
+     * group.
+     */
+    public InstanceGroupConfig(InstanceRoleType instanceRole, String instanceType, Integer instanceCount) {
+        this.instanceRole = instanceRole.toString();
         this.instanceType = instanceType;
         this.instanceCount = instanceCount;
     }
@@ -189,6 +208,40 @@ public class InstanceGroupConfig {
     
     
     /**
+     * Market type of the Amazon EC2 instances used to create a cluster node.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>ON_DEMAND, SPOT
+     *
+     * @param market Market type of the Amazon EC2 instances used to create a cluster node.
+     *
+     * @see MarketType
+     */
+    public void setMarket(MarketType market) {
+        this.market = market.toString();
+    }
+    
+    /**
+     * Market type of the Amazon EC2 instances used to create a cluster node.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>ON_DEMAND, SPOT
+     *
+     * @param market Market type of the Amazon EC2 instances used to create a cluster node.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see MarketType
+     */
+    public InstanceGroupConfig withMarket(MarketType market) {
+        this.market = market.toString();
+        return this;
+    }
+    
+    /**
      * The role of the instance group in the cluster.
      * <p>
      * <b>Constraints:</b><br/>
@@ -236,6 +289,40 @@ public class InstanceGroupConfig {
         return this;
     }
     
+    
+    /**
+     * The role of the instance group in the cluster.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>MASTER, CORE, TASK
+     *
+     * @param instanceRole The role of the instance group in the cluster.
+     *
+     * @see InstanceRoleType
+     */
+    public void setInstanceRole(InstanceRoleType instanceRole) {
+        this.instanceRole = instanceRole.toString();
+    }
+    
+    /**
+     * The role of the instance group in the cluster.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>MASTER, CORE, TASK
+     *
+     * @param instanceRole The role of the instance group in the cluster.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see InstanceRoleType
+     */
+    public InstanceGroupConfig withInstanceRole(InstanceRoleType instanceRole) {
+        this.instanceRole = instanceRole.toString();
+        return this;
+    }
     
     /**
      * Bid price for each Amazon EC2 instance in the instance group when
@@ -381,14 +468,51 @@ public class InstanceGroupConfig {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Name: " + name + ", ");
-        sb.append("Market: " + market + ", ");
-        sb.append("InstanceRole: " + instanceRole + ", ");
-        sb.append("BidPrice: " + bidPrice + ", ");
-        sb.append("InstanceType: " + instanceType + ", ");
-        sb.append("InstanceCount: " + instanceCount + ", ");
+        if (name != null) sb.append("Name: " + name + ", ");
+        if (market != null) sb.append("Market: " + market + ", ");
+        if (instanceRole != null) sb.append("InstanceRole: " + instanceRole + ", ");
+        if (bidPrice != null) sb.append("BidPrice: " + bidPrice + ", ");
+        if (instanceType != null) sb.append("InstanceType: " + instanceType + ", ");
+        if (instanceCount != null) sb.append("InstanceCount: " + instanceCount + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getName() == null) ? 0 : getName().hashCode()); 
+        hashCode = prime * hashCode + ((getMarket() == null) ? 0 : getMarket().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceRole() == null) ? 0 : getInstanceRole().hashCode()); 
+        hashCode = prime * hashCode + ((getBidPrice() == null) ? 0 : getBidPrice().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceType() == null) ? 0 : getInstanceType().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceCount() == null) ? 0 : getInstanceCount().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof InstanceGroupConfig == false) return false;
+        InstanceGroupConfig other = (InstanceGroupConfig)obj;
+        
+        if (other.getName() == null ^ this.getName() == null) return false;
+        if (other.getName() != null && other.getName().equals(this.getName()) == false) return false; 
+        if (other.getMarket() == null ^ this.getMarket() == null) return false;
+        if (other.getMarket() != null && other.getMarket().equals(this.getMarket()) == false) return false; 
+        if (other.getInstanceRole() == null ^ this.getInstanceRole() == null) return false;
+        if (other.getInstanceRole() != null && other.getInstanceRole().equals(this.getInstanceRole()) == false) return false; 
+        if (other.getBidPrice() == null ^ this.getBidPrice() == null) return false;
+        if (other.getBidPrice() != null && other.getBidPrice().equals(this.getBidPrice()) == false) return false; 
+        if (other.getInstanceType() == null ^ this.getInstanceType() == null) return false;
+        if (other.getInstanceType() != null && other.getInstanceType().equals(this.getInstanceType()) == false) return false; 
+        if (other.getInstanceCount() == null ^ this.getInstanceCount() == null) return false;
+        if (other.getInstanceCount() != null && other.getInstanceCount().equals(this.getInstanceCount()) == false) return false; 
+        return true;
     }
     
 }

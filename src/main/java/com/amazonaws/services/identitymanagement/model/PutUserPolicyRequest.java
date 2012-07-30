@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,23 +18,19 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#putUserPolicy(PutUserPolicyRequest) PutUserPolicy operation}.
  * <p>
- * Adds (or updates) a policy document associated with the specified
- * User. For information about policies, refer to <a
- * ebservices.com/IAM/latest/UserGuide/index.html?PoliciesOverview.html">
- * Overview of Policies </a> in <i>Using AWS Identity and Access
- * Management</i> .
+ * Adds (or updates) a policy document associated with the specified user. For information about policies, refer to <a
+ * href="http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?PoliciesOverview.html"> Overview of Policies </a> in <i>Using AWS Identity
+ * and Access Management</i> .
  * </p>
  * <p>
- * For information about limits on the number of policies you can
- * associate with a User, see <a
- * s.com/IAM/2010-05-08/UserGuide/index.html?LimitationsOnEntities.html">
- * Limitations on IAM Entities </a> in <i>Using AWS Identity and Access
- * Management</i> .
+ * For information about limits on the number of policies you can associate with a user, see <a
+ * href="http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html"> Limitations on IAM Entities </a> in <i>Using AWS
+ * Identity and Access Management</i> .
  * </p>
  * <p>
- * <b>NOTE:</b>Because policy documents can be large, you should use POST
- * rather than GET when calling PutUserPolicy. For more information, see
- * Making Query Requests in Using AWS Identity and Access Management.
+ * <b>NOTE:</b>Because policy documents can be large, you should use POST rather than GET when calling PutUserPolicy. For information about setting up
+ * signatures and authorization through the API, go to Signing AWS API Requests in the AWS General Reference. For general information about using the
+ * Query API with IAM, go to Making Query Requests in Using IAM.
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#putUserPolicy(PutUserPolicyRequest)
@@ -42,7 +38,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class PutUserPolicyRequest extends AmazonWebServiceRequest {
 
     /**
-     * Name of the User to associate the policy with.
+     * Name of the user to associate the policy with.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
@@ -79,7 +75,7 @@ public class PutUserPolicyRequest extends AmazonWebServiceRequest {
      * Callers should use the setter or fluent setter (with...) methods to
      * initialize any additional object members.
      * 
-     * @param userName Name of the User to associate the policy with.
+     * @param userName Name of the user to associate the policy with.
      * @param policyName Name of the policy document.
      * @param policyDocument The policy document.
      */
@@ -88,35 +84,37 @@ public class PutUserPolicyRequest extends AmazonWebServiceRequest {
         this.policyName = policyName;
         this.policyDocument = policyDocument;
     }
+
+    
     
     /**
-     * Name of the User to associate the policy with.
+     * Name of the user to associate the policy with.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @return Name of the User to associate the policy with.
+     * @return Name of the user to associate the policy with.
      */
     public String getUserName() {
         return userName;
     }
     
     /**
-     * Name of the User to associate the policy with.
+     * Name of the user to associate the policy with.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User to associate the policy with.
+     * @param userName Name of the user to associate the policy with.
      */
     public void setUserName(String userName) {
         this.userName = userName;
     }
     
     /**
-     * Name of the User to associate the policy with.
+     * Name of the user to associate the policy with.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -124,7 +122,7 @@ public class PutUserPolicyRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User to associate the policy with.
+     * @param userName Name of the user to associate the policy with.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -239,11 +237,39 @@ public class PutUserPolicyRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("UserName: " + userName + ", ");
-        sb.append("PolicyName: " + policyName + ", ");
-        sb.append("PolicyDocument: " + policyDocument + ", ");
+        if (userName != null) sb.append("UserName: " + userName + ", ");
+        if (policyName != null) sb.append("PolicyName: " + policyName + ", ");
+        if (policyDocument != null) sb.append("PolicyDocument: " + policyDocument + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getUserName() == null) ? 0 : getUserName().hashCode()); 
+        hashCode = prime * hashCode + ((getPolicyName() == null) ? 0 : getPolicyName().hashCode()); 
+        hashCode = prime * hashCode + ((getPolicyDocument() == null) ? 0 : getPolicyDocument().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof PutUserPolicyRequest == false) return false;
+        PutUserPolicyRequest other = (PutUserPolicyRequest)obj;
+        
+        if (other.getUserName() == null ^ this.getUserName() == null) return false;
+        if (other.getUserName() != null && other.getUserName().equals(this.getUserName()) == false) return false; 
+        if (other.getPolicyName() == null ^ this.getPolicyName() == null) return false;
+        if (other.getPolicyName() != null && other.getPolicyName().equals(this.getPolicyName()) == false) return false; 
+        if (other.getPolicyDocument() == null ^ this.getPolicyDocument() == null) return false;
+        if (other.getPolicyDocument() != null && other.getPolicyDocument().equals(this.getPolicyDocument()) == false) return false; 
+        return true;
     }
     
 }

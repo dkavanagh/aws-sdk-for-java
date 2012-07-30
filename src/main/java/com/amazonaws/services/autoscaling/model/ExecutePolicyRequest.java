@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.autoscaling.AmazonAutoScaling#executePolicy(ExecutePolicyRequest) ExecutePolicy operation}.
  * <p>
- * Runs the policy you create for your Auto Scaling group in
- * PutScalingPolicy.
+ * Runs the policy you create for your Auto Scaling group in PutScalingPolicy.
  * </p>
  *
  * @see com.amazonaws.services.autoscaling.AmazonAutoScaling#executePolicy(ExecutePolicyRequest)
@@ -27,7 +26,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class ExecutePolicyRequest extends AmazonWebServiceRequest {
 
     /**
-     * The name or ARN of the Auto Scaling Group.
+     * The name or ARN of the Auto Scaling group.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 1600<br/>
@@ -45,39 +44,39 @@ public class ExecutePolicyRequest extends AmazonWebServiceRequest {
     private String policyName;
 
     /**
-     * Set to True if you want Auto Scaling to reject this request if the
-     * Auto Scaling group is in cooldown.
+     * Set to <code>True</code> if you want Auto Scaling to reject this
+     * request when the Auto Scaling group is in cooldown.
      */
     private Boolean honorCooldown;
 
     /**
-     * The name or ARN of the Auto Scaling Group.
+     * The name or ARN of the Auto Scaling group.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 1600<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @return The name or ARN of the Auto Scaling Group.
+     * @return The name or ARN of the Auto Scaling group.
      */
     public String getAutoScalingGroupName() {
         return autoScalingGroupName;
     }
     
     /**
-     * The name or ARN of the Auto Scaling Group.
+     * The name or ARN of the Auto Scaling group.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 1600<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @param autoScalingGroupName The name or ARN of the Auto Scaling Group.
+     * @param autoScalingGroupName The name or ARN of the Auto Scaling group.
      */
     public void setAutoScalingGroupName(String autoScalingGroupName) {
         this.autoScalingGroupName = autoScalingGroupName;
     }
     
     /**
-     * The name or ARN of the Auto Scaling Group.
+     * The name or ARN of the Auto Scaling group.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -85,7 +84,7 @@ public class ExecutePolicyRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 1600<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @param autoScalingGroupName The name or ARN of the Auto Scaling Group.
+     * @param autoScalingGroupName The name or ARN of the Auto Scaling group.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -143,35 +142,35 @@ public class ExecutePolicyRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * Set to True if you want Auto Scaling to reject this request if the
-     * Auto Scaling group is in cooldown.
+     * Set to <code>True</code> if you want Auto Scaling to reject this
+     * request when the Auto Scaling group is in cooldown.
      *
-     * @return Set to True if you want Auto Scaling to reject this request if the
-     *         Auto Scaling group is in cooldown.
+     * @return Set to <code>True</code> if you want Auto Scaling to reject this
+     *         request when the Auto Scaling group is in cooldown.
      */
     public Boolean isHonorCooldown() {
         return honorCooldown;
     }
     
     /**
-     * Set to True if you want Auto Scaling to reject this request if the
-     * Auto Scaling group is in cooldown.
+     * Set to <code>True</code> if you want Auto Scaling to reject this
+     * request when the Auto Scaling group is in cooldown.
      *
-     * @param honorCooldown Set to True if you want Auto Scaling to reject this request if the
-     *         Auto Scaling group is in cooldown.
+     * @param honorCooldown Set to <code>True</code> if you want Auto Scaling to reject this
+     *         request when the Auto Scaling group is in cooldown.
      */
     public void setHonorCooldown(Boolean honorCooldown) {
         this.honorCooldown = honorCooldown;
     }
     
     /**
-     * Set to True if you want Auto Scaling to reject this request if the
-     * Auto Scaling group is in cooldown.
+     * Set to <code>True</code> if you want Auto Scaling to reject this
+     * request when the Auto Scaling group is in cooldown.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param honorCooldown Set to True if you want Auto Scaling to reject this request if the
-     *         Auto Scaling group is in cooldown.
+     * @param honorCooldown Set to <code>True</code> if you want Auto Scaling to reject this
+     *         request when the Auto Scaling group is in cooldown.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -183,11 +182,11 @@ public class ExecutePolicyRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * Set to True if you want Auto Scaling to reject this request if the
-     * Auto Scaling group is in cooldown.
+     * Set to <code>True</code> if you want Auto Scaling to reject this
+     * request when the Auto Scaling group is in cooldown.
      *
-     * @return Set to True if you want Auto Scaling to reject this request if the
-     *         Auto Scaling group is in cooldown.
+     * @return Set to <code>True</code> if you want Auto Scaling to reject this
+     *         request when the Auto Scaling group is in cooldown.
      */
     public Boolean getHonorCooldown() {
         return honorCooldown;
@@ -205,11 +204,39 @@ public class ExecutePolicyRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
-        sb.append("PolicyName: " + policyName + ", ");
-        sb.append("HonorCooldown: " + honorCooldown + ", ");
+        if (autoScalingGroupName != null) sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
+        if (policyName != null) sb.append("PolicyName: " + policyName + ", ");
+        if (honorCooldown != null) sb.append("HonorCooldown: " + honorCooldown + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getAutoScalingGroupName() == null) ? 0 : getAutoScalingGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getPolicyName() == null) ? 0 : getPolicyName().hashCode()); 
+        hashCode = prime * hashCode + ((isHonorCooldown() == null) ? 0 : isHonorCooldown().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof ExecutePolicyRequest == false) return false;
+        ExecutePolicyRequest other = (ExecutePolicyRequest)obj;
+        
+        if (other.getAutoScalingGroupName() == null ^ this.getAutoScalingGroupName() == null) return false;
+        if (other.getAutoScalingGroupName() != null && other.getAutoScalingGroupName().equals(this.getAutoScalingGroupName()) == false) return false; 
+        if (other.getPolicyName() == null ^ this.getPolicyName() == null) return false;
+        if (other.getPolicyName() != null && other.getPolicyName().equals(this.getPolicyName()) == false) return false; 
+        if (other.isHonorCooldown() == null ^ this.isHonorCooldown() == null) return false;
+        if (other.isHonorCooldown() != null && other.isHonorCooldown().equals(this.isHonorCooldown()) == false) return false; 
+        return true;
     }
     
 }

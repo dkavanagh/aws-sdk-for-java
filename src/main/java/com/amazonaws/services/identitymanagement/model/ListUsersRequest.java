@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,12 +18,10 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#listUsers(ListUsersRequest) ListUsers operation}.
  * <p>
- * Lists the Users that have the specified path prefix. If there are
- * none, the action returns an empty list.
+ * Lists the users that have the specified path prefix. If there are none, the action returns an empty list.
  * </p>
  * <p>
- * You can paginate the results using the <code>MaxItems</code> and
- * <code>Marker</code> parameters.
+ * You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters.
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#listUsers(ListUsersRequest)
@@ -32,11 +30,11 @@ public class ListUsersRequest extends AmazonWebServiceRequest {
 
     /**
      * The path prefix for filtering the results. For example:
-     * <code>/division_abc/subdivision_xyz/</code>, which would get all User
+     * <code>/division_abc/subdivision_xyz/</code>, which would get all user
      * names whose path starts with
      * <code>/division_abc/subdivision_xyz/</code>. <p>This parameter is
      * optional. If it is not included, it defaults to a slash (/), listing
-     * all User names.
+     * all user names.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 512<br/>
@@ -58,8 +56,8 @@ public class ListUsersRequest extends AmazonWebServiceRequest {
 
     /**
      * Use this parameter only when paginating results to indicate the
-     * maximum number of User names you want in the response. If there are
-     * additional User names beyond the maximum you specify, the
+     * maximum number of user names you want in the response. If there are
+     * additional user names beyond the maximum you specify, the
      * <code>IsTruncated</code> response element is <code>true</code>.
      * <p>
      * <b>Constraints:</b><br/>
@@ -75,22 +73,22 @@ public class ListUsersRequest extends AmazonWebServiceRequest {
     
     /**
      * The path prefix for filtering the results. For example:
-     * <code>/division_abc/subdivision_xyz/</code>, which would get all User
+     * <code>/division_abc/subdivision_xyz/</code>, which would get all user
      * names whose path starts with
      * <code>/division_abc/subdivision_xyz/</code>. <p>This parameter is
      * optional. If it is not included, it defaults to a slash (/), listing
-     * all User names.
+     * all user names.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 512<br/>
      * <b>Pattern: </b>\u002F[\u0021-\u007F]*<br/>
      *
      * @return The path prefix for filtering the results. For example:
-     *         <code>/division_abc/subdivision_xyz/</code>, which would get all User
+     *         <code>/division_abc/subdivision_xyz/</code>, which would get all user
      *         names whose path starts with
      *         <code>/division_abc/subdivision_xyz/</code>. <p>This parameter is
      *         optional. If it is not included, it defaults to a slash (/), listing
-     *         all User names.
+     *         all user names.
      */
     public String getPathPrefix() {
         return pathPrefix;
@@ -98,22 +96,22 @@ public class ListUsersRequest extends AmazonWebServiceRequest {
     
     /**
      * The path prefix for filtering the results. For example:
-     * <code>/division_abc/subdivision_xyz/</code>, which would get all User
+     * <code>/division_abc/subdivision_xyz/</code>, which would get all user
      * names whose path starts with
      * <code>/division_abc/subdivision_xyz/</code>. <p>This parameter is
      * optional. If it is not included, it defaults to a slash (/), listing
-     * all User names.
+     * all user names.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 512<br/>
      * <b>Pattern: </b>\u002F[\u0021-\u007F]*<br/>
      *
      * @param pathPrefix The path prefix for filtering the results. For example:
-     *         <code>/division_abc/subdivision_xyz/</code>, which would get all User
+     *         <code>/division_abc/subdivision_xyz/</code>, which would get all user
      *         names whose path starts with
      *         <code>/division_abc/subdivision_xyz/</code>. <p>This parameter is
      *         optional. If it is not included, it defaults to a slash (/), listing
-     *         all User names.
+     *         all user names.
      */
     public void setPathPrefix(String pathPrefix) {
         this.pathPrefix = pathPrefix;
@@ -121,11 +119,11 @@ public class ListUsersRequest extends AmazonWebServiceRequest {
     
     /**
      * The path prefix for filtering the results. For example:
-     * <code>/division_abc/subdivision_xyz/</code>, which would get all User
+     * <code>/division_abc/subdivision_xyz/</code>, which would get all user
      * names whose path starts with
      * <code>/division_abc/subdivision_xyz/</code>. <p>This parameter is
      * optional. If it is not included, it defaults to a slash (/), listing
-     * all User names.
+     * all user names.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -134,11 +132,11 @@ public class ListUsersRequest extends AmazonWebServiceRequest {
      * <b>Pattern: </b>\u002F[\u0021-\u007F]*<br/>
      *
      * @param pathPrefix The path prefix for filtering the results. For example:
-     *         <code>/division_abc/subdivision_xyz/</code>, which would get all User
+     *         <code>/division_abc/subdivision_xyz/</code>, which would get all user
      *         names whose path starts with
      *         <code>/division_abc/subdivision_xyz/</code>. <p>This parameter is
      *         optional. If it is not included, it defaults to a slash (/), listing
-     *         all User names.
+     *         all user names.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -215,16 +213,16 @@ public class ListUsersRequest extends AmazonWebServiceRequest {
     
     /**
      * Use this parameter only when paginating results to indicate the
-     * maximum number of User names you want in the response. If there are
-     * additional User names beyond the maximum you specify, the
+     * maximum number of user names you want in the response. If there are
+     * additional user names beyond the maximum you specify, the
      * <code>IsTruncated</code> response element is <code>true</code>.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Range: </b>1 - 1000<br/>
      *
      * @return Use this parameter only when paginating results to indicate the
-     *         maximum number of User names you want in the response. If there are
-     *         additional User names beyond the maximum you specify, the
+     *         maximum number of user names you want in the response. If there are
+     *         additional user names beyond the maximum you specify, the
      *         <code>IsTruncated</code> response element is <code>true</code>.
      */
     public Integer getMaxItems() {
@@ -233,16 +231,16 @@ public class ListUsersRequest extends AmazonWebServiceRequest {
     
     /**
      * Use this parameter only when paginating results to indicate the
-     * maximum number of User names you want in the response. If there are
-     * additional User names beyond the maximum you specify, the
+     * maximum number of user names you want in the response. If there are
+     * additional user names beyond the maximum you specify, the
      * <code>IsTruncated</code> response element is <code>true</code>.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Range: </b>1 - 1000<br/>
      *
      * @param maxItems Use this parameter only when paginating results to indicate the
-     *         maximum number of User names you want in the response. If there are
-     *         additional User names beyond the maximum you specify, the
+     *         maximum number of user names you want in the response. If there are
+     *         additional user names beyond the maximum you specify, the
      *         <code>IsTruncated</code> response element is <code>true</code>.
      */
     public void setMaxItems(Integer maxItems) {
@@ -251,8 +249,8 @@ public class ListUsersRequest extends AmazonWebServiceRequest {
     
     /**
      * Use this parameter only when paginating results to indicate the
-     * maximum number of User names you want in the response. If there are
-     * additional User names beyond the maximum you specify, the
+     * maximum number of user names you want in the response. If there are
+     * additional user names beyond the maximum you specify, the
      * <code>IsTruncated</code> response element is <code>true</code>.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
@@ -261,8 +259,8 @@ public class ListUsersRequest extends AmazonWebServiceRequest {
      * <b>Range: </b>1 - 1000<br/>
      *
      * @param maxItems Use this parameter only when paginating results to indicate the
-     *         maximum number of User names you want in the response. If there are
-     *         additional User names beyond the maximum you specify, the
+     *         maximum number of user names you want in the response. If there are
+     *         additional user names beyond the maximum you specify, the
      *         <code>IsTruncated</code> response element is <code>true</code>.
      *
      * @return A reference to this updated object so that method calls can be chained 
@@ -286,11 +284,39 @@ public class ListUsersRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("PathPrefix: " + pathPrefix + ", ");
-        sb.append("Marker: " + marker + ", ");
-        sb.append("MaxItems: " + maxItems + ", ");
+        if (pathPrefix != null) sb.append("PathPrefix: " + pathPrefix + ", ");
+        if (marker != null) sb.append("Marker: " + marker + ", ");
+        if (maxItems != null) sb.append("MaxItems: " + maxItems + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getPathPrefix() == null) ? 0 : getPathPrefix().hashCode()); 
+        hashCode = prime * hashCode + ((getMarker() == null) ? 0 : getMarker().hashCode()); 
+        hashCode = prime * hashCode + ((getMaxItems() == null) ? 0 : getMaxItems().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof ListUsersRequest == false) return false;
+        ListUsersRequest other = (ListUsersRequest)obj;
+        
+        if (other.getPathPrefix() == null ^ this.getPathPrefix() == null) return false;
+        if (other.getPathPrefix() != null && other.getPathPrefix().equals(this.getPathPrefix()) == false) return false; 
+        if (other.getMarker() == null ^ this.getMarker() == null) return false;
+        if (other.getMarker() != null && other.getMarker().equals(this.getMarker()) == false) return false; 
+        if (other.getMaxItems() == null ^ this.getMaxItems() == null) return false;
+        if (other.getMaxItems() != null && other.getMaxItems().equals(this.getMaxItems()) == false) return false; 
+        return true;
     }
     
 }

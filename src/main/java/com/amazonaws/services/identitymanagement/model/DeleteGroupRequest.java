@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#deleteGroup(DeleteGroupRequest) DeleteGroup operation}.
  * <p>
- * Deletes the specified group. The group must not contain any Users or
- * have any attached policies.
+ * Deletes the specified group. The group must not contain any users or have any attached policies.
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#deleteGroup(DeleteGroupRequest)
@@ -51,6 +50,8 @@ public class DeleteGroupRequest extends AmazonWebServiceRequest {
     public DeleteGroupRequest(String groupName) {
         this.groupName = groupName;
     }
+
+    
     
     /**
      * Name of the group to delete.
@@ -110,9 +111,31 @@ public class DeleteGroupRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("GroupName: " + groupName + ", ");
+        if (groupName != null) sb.append("GroupName: " + groupName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getGroupName() == null) ? 0 : getGroupName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DeleteGroupRequest == false) return false;
+        DeleteGroupRequest other = (DeleteGroupRequest)obj;
+        
+        if (other.getGroupName() == null ^ this.getGroupName() == null) return false;
+        if (other.getGroupName() != null && other.getGroupName().equals(this.getGroupName()) == false) return false; 
+        return true;
     }
     
 }

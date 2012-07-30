@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@ package com.amazonaws.services.ec2.model;
 
 /**
  * <p>
- * Specifies how an EBS volume should be mapped as part of a block
- * device mapping specification when launching a new instance.
+ * Specifies how an EBS volume should be mapped as part of a block device mapping specification when launching a new instance.
  * </p>
  */
 public class EbsInstanceBlockDeviceSpecification {
@@ -137,10 +136,35 @@ public class EbsInstanceBlockDeviceSpecification {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("VolumeId: " + volumeId + ", ");
-        sb.append("DeleteOnTermination: " + deleteOnTermination + ", ");
+        if (volumeId != null) sb.append("VolumeId: " + volumeId + ", ");
+        if (deleteOnTermination != null) sb.append("DeleteOnTermination: " + deleteOnTermination + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getVolumeId() == null) ? 0 : getVolumeId().hashCode()); 
+        hashCode = prime * hashCode + ((isDeleteOnTermination() == null) ? 0 : isDeleteOnTermination().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof EbsInstanceBlockDeviceSpecification == false) return false;
+        EbsInstanceBlockDeviceSpecification other = (EbsInstanceBlockDeviceSpecification)obj;
+        
+        if (other.getVolumeId() == null ^ this.getVolumeId() == null) return false;
+        if (other.getVolumeId() != null && other.getVolumeId().equals(this.getVolumeId()) == false) return false; 
+        if (other.isDeleteOnTermination() == null ^ this.isDeleteOnTermination() == null) return false;
+        if (other.isDeleteOnTermination() != null && other.isDeleteOnTermination().equals(this.isDeleteOnTermination()) == false) return false; 
+        return true;
     }
     
 }

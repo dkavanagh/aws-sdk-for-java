@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,12 +32,11 @@ import com.amazonaws.transform.SimpleTypeStaxUnmarshallers.*;
  */
 public class JobFlowInstancesDetailStaxUnmarshaller implements Unmarshaller<JobFlowInstancesDetail, StaxUnmarshallerContext> {
 
-    
-
     public JobFlowInstancesDetail unmarshall(StaxUnmarshallerContext context) throws Exception {
         JobFlowInstancesDetail jobFlowInstancesDetail = new JobFlowInstancesDetail();
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
+
         
         if (context.isStartOfDocument()) targetDepth += 2;
         
@@ -77,6 +76,10 @@ public class JobFlowInstancesDetailStaxUnmarshaller implements Unmarshaller<JobF
                 }
                 if (context.testExpression("Ec2KeyName", targetDepth)) {
                     jobFlowInstancesDetail.setEc2KeyName(StringStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("Ec2SubnetId", targetDepth)) {
+                    jobFlowInstancesDetail.setEc2SubnetId(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
                 if (context.testExpression("Placement", targetDepth)) {

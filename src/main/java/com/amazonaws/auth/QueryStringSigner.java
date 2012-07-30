@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -30,6 +30,9 @@ import com.amazonaws.Request;
  * according to the various signature versions and hashing algorithms.
  */
 public class QueryStringSigner extends AbstractAWSSigner implements Signer {
+
+    /** Date override for testing only */
+    private Date overriddenDate;
 
 	/**
 	 * This signer will add "Signature" parameter to the request. Default
@@ -65,7 +68,7 @@ public class QueryStringSigner extends AbstractAWSSigner implements Signer {
         request.addParameter("AWSAccessKeyId", sanitizedCredentials.getAWSAccessKeyId());
         request.addParameter("SignatureVersion", version.toString());
         request.addParameter("Timestamp", getFormattedTimestamp());
-        
+
         if ( sanitizedCredentials instanceof AWSSessionCredentials ) {
             addSessionCredentials(request, (AWSSessionCredentials) sanitizedCredentials);
         }
@@ -75,12 +78,12 @@ public class QueryStringSigner extends AbstractAWSSigner implements Signer {
             stringToSign = calculateStringToSignV1(request.getParameters());
         } else if ( version.equals( SignatureVersion.V2 ) ) {
             request.addParameter("SignatureMethod", algorithm.toString());
-            stringToSign = calculateStringToSignV2(request.getEndpoint(), request.getParameters());
+            stringToSign = calculateStringToSignV2(request);
         } else {
             throw new AmazonClientException("Invalid Signature Version specified");
         }
 
-        String signatureValue = sign(stringToSign, sanitizedCredentials.getAWSSecretKey(), algorithm);
+        String signatureValue = signAndBase64Encode(stringToSign, sanitizedCredentials.getAWSSecretKey(), algorithm);
         request.addParameter("Signature", signatureValue);
     }
 
@@ -109,25 +112,52 @@ public class QueryStringSigner extends AbstractAWSSigner implements Signer {
     /**
      * Calculate string to sign for signature version 2.
      *
-     * @param parameters
-     *            request parameters
-     *
-     * @param serviceUrl
-     *            service url
+     * @param request
+     *            The request being signed.
      *
      * @return String to sign
      *
      * @throws AmazonClientException
      *             If the string to sign cannot be calculated.
      */
-    private String calculateStringToSignV2(URI endpoint,
-            Map<String, String> parameters) throws AmazonClientException {
+    private String calculateStringToSignV2(Request<?> request) throws AmazonClientException {
+        URI endpoint = request.getEndpoint();
+        Map<String, String> parameters = request.getParameters();
+
         StringBuilder data = new StringBuilder();
         data.append("POST").append("\n");
         data.append(getCanonicalizedEndpoint(endpoint)).append("\n");
-        data.append(getCanonicalizedResourcePath(endpoint)).append("\n");
+        data.append(getCanonicalizedResourcePath(request)).append("\n");
         data.append(getCanonicalizedQueryString(parameters));
         return data.toString();
+    }
+
+    private String getCanonicalizedResourcePath(Request<?> request) {
+        String resourcePath = "";
+
+        if (request.getEndpoint().getPath() != null) {
+            resourcePath += request.getEndpoint().getPath();
+        }
+
+        if (request.getResourcePath() != null) {
+            if (resourcePath.length() > 0 &&
+                !resourcePath.endsWith("/") &&
+                !request.getResourcePath().startsWith("/")) {
+                resourcePath += "/";
+            }
+
+            resourcePath += request.getResourcePath();
+        }
+
+        if (!resourcePath.startsWith("/")) {
+            resourcePath = "/" + resourcePath;
+        }
+
+        if (resourcePath.startsWith("//")) {
+            resourcePath = resourcePath.substring(1);
+        }
+
+        return resourcePath;
     }
 
     /**
@@ -137,7 +167,17 @@ public class QueryStringSigner extends AbstractAWSSigner implements Signer {
         SimpleDateFormat df = new SimpleDateFormat(
                 "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         df.setTimeZone(TimeZone.getTimeZone("UTC"));
-        return df.format(new Date());
+
+        if (overriddenDate != null) {
+            return df.format(overriddenDate);
+        } else {
+            return df.format(new Date());
+        }
+    }
+
+    /** For testing purposes only, to control the date used in signing. */
+    void overrideDate(Date date) {
+        this.overriddenDate = date;
     }
 
     @Override

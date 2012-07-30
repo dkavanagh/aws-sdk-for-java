@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -36,8 +36,8 @@ public class DescribeDBEngineVersionsRequest extends AmazonWebServiceRequest {
     private String engineVersion;
 
     /**
-     * The name of a specific database parameter group family to return
-     * details for. <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric
+     * The name of a specific DB Parameter Group family to return details
+     * for. <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric
      * characters</li> <li>First character must be a letter</li> <li>Cannot
      * end with a hyphen or contain two consecutive hyphens</li> </ul>
      */
@@ -63,6 +63,13 @@ public class DescribeDBEngineVersionsRequest extends AmazonWebServiceRequest {
      * engine and major version combination is returned.
      */
     private Boolean defaultOnly;
+
+    /**
+     * If this parameter is specified, and if the requested engine supports
+     * the CharacterSetName parameter for CreateDBInstance, the response
+     * includes a list of supported character sets for each engine version.
+     */
+    private Boolean listSupportedCharacterSets;
 
     /**
      * Default constructor for a new DescribeDBEngineVersionsRequest object.  Callers should use the
@@ -139,13 +146,13 @@ public class DescribeDBEngineVersionsRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * The name of a specific database parameter group family to return
-     * details for. <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric
+     * The name of a specific DB Parameter Group family to return details
+     * for. <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric
      * characters</li> <li>First character must be a letter</li> <li>Cannot
      * end with a hyphen or contain two consecutive hyphens</li> </ul>
      *
-     * @return The name of a specific database parameter group family to return
-     *         details for. <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric
+     * @return The name of a specific DB Parameter Group family to return details
+     *         for. <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric
      *         characters</li> <li>First character must be a letter</li> <li>Cannot
      *         end with a hyphen or contain two consecutive hyphens</li> </ul>
      */
@@ -154,13 +161,13 @@ public class DescribeDBEngineVersionsRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * The name of a specific database parameter group family to return
-     * details for. <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric
+     * The name of a specific DB Parameter Group family to return details
+     * for. <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric
      * characters</li> <li>First character must be a letter</li> <li>Cannot
      * end with a hyphen or contain two consecutive hyphens</li> </ul>
      *
-     * @param dBParameterGroupFamily The name of a specific database parameter group family to return
-     *         details for. <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric
+     * @param dBParameterGroupFamily The name of a specific DB Parameter Group family to return details
+     *         for. <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric
      *         characters</li> <li>First character must be a letter</li> <li>Cannot
      *         end with a hyphen or contain two consecutive hyphens</li> </ul>
      */
@@ -169,15 +176,15 @@ public class DescribeDBEngineVersionsRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * The name of a specific database parameter group family to return
-     * details for. <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric
+     * The name of a specific DB Parameter Group family to return details
+     * for. <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric
      * characters</li> <li>First character must be a letter</li> <li>Cannot
      * end with a hyphen or contain two consecutive hyphens</li> </ul>
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param dBParameterGroupFamily The name of a specific database parameter group family to return
-     *         details for. <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric
+     * @param dBParameterGroupFamily The name of a specific DB Parameter Group family to return details
+     *         for. <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric
      *         characters</li> <li>First character must be a letter</li> <li>Cannot
      *         end with a hyphen or contain two consecutive hyphens</li> </ul>
      *
@@ -340,6 +347,65 @@ public class DescribeDBEngineVersionsRequest extends AmazonWebServiceRequest {
     }
     
     /**
+     * If this parameter is specified, and if the requested engine supports
+     * the CharacterSetName parameter for CreateDBInstance, the response
+     * includes a list of supported character sets for each engine version.
+     *
+     * @return If this parameter is specified, and if the requested engine supports
+     *         the CharacterSetName parameter for CreateDBInstance, the response
+     *         includes a list of supported character sets for each engine version.
+     */
+    public Boolean isListSupportedCharacterSets() {
+        return listSupportedCharacterSets;
+    }
+    
+    /**
+     * If this parameter is specified, and if the requested engine supports
+     * the CharacterSetName parameter for CreateDBInstance, the response
+     * includes a list of supported character sets for each engine version.
+     *
+     * @param listSupportedCharacterSets If this parameter is specified, and if the requested engine supports
+     *         the CharacterSetName parameter for CreateDBInstance, the response
+     *         includes a list of supported character sets for each engine version.
+     */
+    public void setListSupportedCharacterSets(Boolean listSupportedCharacterSets) {
+        this.listSupportedCharacterSets = listSupportedCharacterSets;
+    }
+    
+    /**
+     * If this parameter is specified, and if the requested engine supports
+     * the CharacterSetName parameter for CreateDBInstance, the response
+     * includes a list of supported character sets for each engine version.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param listSupportedCharacterSets If this parameter is specified, and if the requested engine supports
+     *         the CharacterSetName parameter for CreateDBInstance, the response
+     *         includes a list of supported character sets for each engine version.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public DescribeDBEngineVersionsRequest withListSupportedCharacterSets(Boolean listSupportedCharacterSets) {
+        this.listSupportedCharacterSets = listSupportedCharacterSets;
+        return this;
+    }
+    
+    
+    /**
+     * If this parameter is specified, and if the requested engine supports
+     * the CharacterSetName parameter for CreateDBInstance, the response
+     * includes a list of supported character sets for each engine version.
+     *
+     * @return If this parameter is specified, and if the requested engine supports
+     *         the CharacterSetName parameter for CreateDBInstance, the response
+     *         includes a list of supported character sets for each engine version.
+     */
+    public Boolean getListSupportedCharacterSets() {
+        return listSupportedCharacterSets;
+    }
+    
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -351,14 +417,55 @@ public class DescribeDBEngineVersionsRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Engine: " + engine + ", ");
-        sb.append("EngineVersion: " + engineVersion + ", ");
-        sb.append("DBParameterGroupFamily: " + dBParameterGroupFamily + ", ");
-        sb.append("MaxRecords: " + maxRecords + ", ");
-        sb.append("Marker: " + marker + ", ");
-        sb.append("DefaultOnly: " + defaultOnly + ", ");
+        if (engine != null) sb.append("Engine: " + engine + ", ");
+        if (engineVersion != null) sb.append("EngineVersion: " + engineVersion + ", ");
+        if (dBParameterGroupFamily != null) sb.append("DBParameterGroupFamily: " + dBParameterGroupFamily + ", ");
+        if (maxRecords != null) sb.append("MaxRecords: " + maxRecords + ", ");
+        if (marker != null) sb.append("Marker: " + marker + ", ");
+        if (defaultOnly != null) sb.append("DefaultOnly: " + defaultOnly + ", ");
+        if (listSupportedCharacterSets != null) sb.append("ListSupportedCharacterSets: " + listSupportedCharacterSets + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getEngine() == null) ? 0 : getEngine().hashCode()); 
+        hashCode = prime * hashCode + ((getEngineVersion() == null) ? 0 : getEngineVersion().hashCode()); 
+        hashCode = prime * hashCode + ((getDBParameterGroupFamily() == null) ? 0 : getDBParameterGroupFamily().hashCode()); 
+        hashCode = prime * hashCode + ((getMaxRecords() == null) ? 0 : getMaxRecords().hashCode()); 
+        hashCode = prime * hashCode + ((getMarker() == null) ? 0 : getMarker().hashCode()); 
+        hashCode = prime * hashCode + ((isDefaultOnly() == null) ? 0 : isDefaultOnly().hashCode()); 
+        hashCode = prime * hashCode + ((isListSupportedCharacterSets() == null) ? 0 : isListSupportedCharacterSets().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeDBEngineVersionsRequest == false) return false;
+        DescribeDBEngineVersionsRequest other = (DescribeDBEngineVersionsRequest)obj;
+        
+        if (other.getEngine() == null ^ this.getEngine() == null) return false;
+        if (other.getEngine() != null && other.getEngine().equals(this.getEngine()) == false) return false; 
+        if (other.getEngineVersion() == null ^ this.getEngineVersion() == null) return false;
+        if (other.getEngineVersion() != null && other.getEngineVersion().equals(this.getEngineVersion()) == false) return false; 
+        if (other.getDBParameterGroupFamily() == null ^ this.getDBParameterGroupFamily() == null) return false;
+        if (other.getDBParameterGroupFamily() != null && other.getDBParameterGroupFamily().equals(this.getDBParameterGroupFamily()) == false) return false; 
+        if (other.getMaxRecords() == null ^ this.getMaxRecords() == null) return false;
+        if (other.getMaxRecords() != null && other.getMaxRecords().equals(this.getMaxRecords()) == false) return false; 
+        if (other.getMarker() == null ^ this.getMarker() == null) return false;
+        if (other.getMarker() != null && other.getMarker().equals(this.getMarker()) == false) return false; 
+        if (other.isDefaultOnly() == null ^ this.isDefaultOnly() == null) return false;
+        if (other.isDefaultOnly() != null && other.isDefaultOnly().equals(this.isDefaultOnly()) == false) return false; 
+        if (other.isListSupportedCharacterSets() == null ^ this.isListSupportedCharacterSets() == null) return false;
+        if (other.isListSupportedCharacterSets() != null && other.isListSupportedCharacterSets().equals(this.isListSupportedCharacterSets()) == false) return false; 
+        return true;
     }
     
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,12 +18,10 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.elasticbeanstalk.AWSElasticBeanstalk#describeEvents(DescribeEventsRequest) DescribeEvents operation}.
  * <p>
- * Returns list of event descriptions matching criteria up to the last 6
- * weeks.
+ * Returns list of event descriptions matching criteria up to the last 6 weeks.
  * </p>
  * <p>
- * <b>NOTE:</b> This action returns the most recent 1,000 events from the
- * specified NextToken.
+ * <b>NOTE:</b> This action returns the most recent 1,000 events from the specified NextToken.
  * </p>
  *
  * @see com.amazonaws.services.elasticbeanstalk.AWSElasticBeanstalk#describeEvents(DescribeEventsRequest)
@@ -100,6 +98,15 @@ public class DescribeEventsRequest extends AmazonWebServiceRequest {
      * <code>EndTime</code>.
      */
     private java.util.Date endTime;
+
+    /**
+     * Specifies the maximum number of events that can be returned, beginning
+     * with the most recent event.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Range: </b>1 - 1000<br/>
+     */
+    private Integer maxRecords;
 
     /**
      * Pagination token. If specified, the events return the next batch of
@@ -451,6 +458,44 @@ public class DescribeEventsRequest extends AmazonWebServiceRequest {
     
     
     /**
+     * If specified, limits the events returned from this call to include
+     * only those with the specified severity or higher.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>TRACE, DEBUG, INFO, WARN, ERROR, FATAL
+     *
+     * @param severity If specified, limits the events returned from this call to include
+     *         only those with the specified severity or higher.
+     *
+     * @see EventSeverity
+     */
+    public void setSeverity(EventSeverity severity) {
+        this.severity = severity.toString();
+    }
+    
+    /**
+     * If specified, limits the events returned from this call to include
+     * only those with the specified severity or higher.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>TRACE, DEBUG, INFO, WARN, ERROR, FATAL
+     *
+     * @param severity If specified, limits the events returned from this call to include
+     *         only those with the specified severity or higher.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see EventSeverity
+     */
+    public DescribeEventsRequest withSeverity(EventSeverity severity) {
+        this.severity = severity.toString();
+        return this;
+    }
+    
+    /**
      * If specified, AWS Elastic Beanstalk restricts the returned
      * descriptions to those that occur on or after this time.
      *
@@ -537,6 +582,55 @@ public class DescribeEventsRequest extends AmazonWebServiceRequest {
     
     
     /**
+     * Specifies the maximum number of events that can be returned, beginning
+     * with the most recent event.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Range: </b>1 - 1000<br/>
+     *
+     * @return Specifies the maximum number of events that can be returned, beginning
+     *         with the most recent event.
+     */
+    public Integer getMaxRecords() {
+        return maxRecords;
+    }
+    
+    /**
+     * Specifies the maximum number of events that can be returned, beginning
+     * with the most recent event.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Range: </b>1 - 1000<br/>
+     *
+     * @param maxRecords Specifies the maximum number of events that can be returned, beginning
+     *         with the most recent event.
+     */
+    public void setMaxRecords(Integer maxRecords) {
+        this.maxRecords = maxRecords;
+    }
+    
+    /**
+     * Specifies the maximum number of events that can be returned, beginning
+     * with the most recent event.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Range: </b>1 - 1000<br/>
+     *
+     * @param maxRecords Specifies the maximum number of events that can be returned, beginning
+     *         with the most recent event.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public DescribeEventsRequest withMaxRecords(Integer maxRecords) {
+        this.maxRecords = maxRecords;
+        return this;
+    }
+    
+    
+    /**
      * Pagination token. If specified, the events return the next batch of
      * results.
      *
@@ -588,18 +682,71 @@ public class DescribeEventsRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("ApplicationName: " + applicationName + ", ");
-        sb.append("VersionLabel: " + versionLabel + ", ");
-        sb.append("TemplateName: " + templateName + ", ");
-        sb.append("EnvironmentId: " + environmentId + ", ");
-        sb.append("EnvironmentName: " + environmentName + ", ");
-        sb.append("RequestId: " + requestId + ", ");
-        sb.append("Severity: " + severity + ", ");
-        sb.append("StartTime: " + startTime + ", ");
-        sb.append("EndTime: " + endTime + ", ");
-        sb.append("NextToken: " + nextToken + ", ");
+        if (applicationName != null) sb.append("ApplicationName: " + applicationName + ", ");
+        if (versionLabel != null) sb.append("VersionLabel: " + versionLabel + ", ");
+        if (templateName != null) sb.append("TemplateName: " + templateName + ", ");
+        if (environmentId != null) sb.append("EnvironmentId: " + environmentId + ", ");
+        if (environmentName != null) sb.append("EnvironmentName: " + environmentName + ", ");
+        if (requestId != null) sb.append("RequestId: " + requestId + ", ");
+        if (severity != null) sb.append("Severity: " + severity + ", ");
+        if (startTime != null) sb.append("StartTime: " + startTime + ", ");
+        if (endTime != null) sb.append("EndTime: " + endTime + ", ");
+        if (maxRecords != null) sb.append("MaxRecords: " + maxRecords + ", ");
+        if (nextToken != null) sb.append("NextToken: " + nextToken + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getApplicationName() == null) ? 0 : getApplicationName().hashCode()); 
+        hashCode = prime * hashCode + ((getVersionLabel() == null) ? 0 : getVersionLabel().hashCode()); 
+        hashCode = prime * hashCode + ((getTemplateName() == null) ? 0 : getTemplateName().hashCode()); 
+        hashCode = prime * hashCode + ((getEnvironmentId() == null) ? 0 : getEnvironmentId().hashCode()); 
+        hashCode = prime * hashCode + ((getEnvironmentName() == null) ? 0 : getEnvironmentName().hashCode()); 
+        hashCode = prime * hashCode + ((getRequestId() == null) ? 0 : getRequestId().hashCode()); 
+        hashCode = prime * hashCode + ((getSeverity() == null) ? 0 : getSeverity().hashCode()); 
+        hashCode = prime * hashCode + ((getStartTime() == null) ? 0 : getStartTime().hashCode()); 
+        hashCode = prime * hashCode + ((getEndTime() == null) ? 0 : getEndTime().hashCode()); 
+        hashCode = prime * hashCode + ((getMaxRecords() == null) ? 0 : getMaxRecords().hashCode()); 
+        hashCode = prime * hashCode + ((getNextToken() == null) ? 0 : getNextToken().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeEventsRequest == false) return false;
+        DescribeEventsRequest other = (DescribeEventsRequest)obj;
+        
+        if (other.getApplicationName() == null ^ this.getApplicationName() == null) return false;
+        if (other.getApplicationName() != null && other.getApplicationName().equals(this.getApplicationName()) == false) return false; 
+        if (other.getVersionLabel() == null ^ this.getVersionLabel() == null) return false;
+        if (other.getVersionLabel() != null && other.getVersionLabel().equals(this.getVersionLabel()) == false) return false; 
+        if (other.getTemplateName() == null ^ this.getTemplateName() == null) return false;
+        if (other.getTemplateName() != null && other.getTemplateName().equals(this.getTemplateName()) == false) return false; 
+        if (other.getEnvironmentId() == null ^ this.getEnvironmentId() == null) return false;
+        if (other.getEnvironmentId() != null && other.getEnvironmentId().equals(this.getEnvironmentId()) == false) return false; 
+        if (other.getEnvironmentName() == null ^ this.getEnvironmentName() == null) return false;
+        if (other.getEnvironmentName() != null && other.getEnvironmentName().equals(this.getEnvironmentName()) == false) return false; 
+        if (other.getRequestId() == null ^ this.getRequestId() == null) return false;
+        if (other.getRequestId() != null && other.getRequestId().equals(this.getRequestId()) == false) return false; 
+        if (other.getSeverity() == null ^ this.getSeverity() == null) return false;
+        if (other.getSeverity() != null && other.getSeverity().equals(this.getSeverity()) == false) return false; 
+        if (other.getStartTime() == null ^ this.getStartTime() == null) return false;
+        if (other.getStartTime() != null && other.getStartTime().equals(this.getStartTime()) == false) return false; 
+        if (other.getEndTime() == null ^ this.getEndTime() == null) return false;
+        if (other.getEndTime() != null && other.getEndTime().equals(this.getEndTime()) == false) return false; 
+        if (other.getMaxRecords() == null ^ this.getMaxRecords() == null) return false;
+        if (other.getMaxRecords() != null && other.getMaxRecords().equals(this.getMaxRecords()) == false) return false; 
+        if (other.getNextToken() == null ^ this.getNextToken() == null) return false;
+        if (other.getNextToken() != null && other.getNextToken().equals(this.getNextToken()) == false) return false; 
+        return true;
     }
     
 }

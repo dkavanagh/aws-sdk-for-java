@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,25 +18,20 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.cloudwatch.AmazonCloudWatch#putMetricData(PutMetricDataRequest) PutMetricData operation}.
  * <p>
- * Publishes metric data points to Amazon CloudWatch. Amazon Cloudwatch
- * associates the data points with the specified metric. If the specified
- * metric does not exist, Amazon CloudWatch creates the metric.
+ * Publishes metric data points to Amazon CloudWatch. Amazon Cloudwatch associates the data points with the specified metric. If the specified metric
+ * does not exist, Amazon CloudWatch creates the metric.
  * </p>
  * <p>
- * <b>NOTE:</b> If you create a metric with the PutMetricData action,
- * allow up to fifteen minutes for the metric to appear in calls to the
- * ListMetrics action.
+ * <b>NOTE:</b> If you create a metric with the PutMetricData action, allow up to fifteen minutes for the metric to appear in calls to the ListMetrics
+ * action.
  * </p>
  * <p>
- * The size of a PutMetricData request is limited to 8 KB for HTTP GET
- * requests and 40 KB for HTTP POST requests.
+ * The size of a PutMetricData request is limited to 8 KB for HTTP GET requests and 40 KB for HTTP POST requests.
  * </p>
  * <p>
- * <b>IMPORTANT:</b> Although the Value parameter accepts numbers of type
- * Double, Amazon CloudWatch truncates values with very large exponents.
- * Values with base-10 exponents greater than 126 (1 x 10^126) are
- * truncated. Likewise, values with base-10 exponents less than -130 (1 x
- * 10^-130) are also truncated.
+ * <b>IMPORTANT:</b> Although the Value parameter accepts numbers of type Double, Amazon CloudWatch truncates values with very large exponents. Values
+ * with base-10 exponents greater than 126 (1 x 10^126) are truncated. Likewise, values with base-10 exponents less than -130 (1 x 10^-130) are also
+ * truncated.
  * </p>
  *
  * @see com.amazonaws.services.cloudwatch.AmazonCloudWatch#putMetricData(PutMetricDataRequest)
@@ -109,6 +104,7 @@ public class PutMetricDataRequest extends AmazonWebServiceRequest {
      * @return A list of data describing the metric.
      */
     public java.util.List<MetricDatum> getMetricData() {
+        
         if (metricData == null) {
             metricData = new java.util.ArrayList<MetricDatum>();
         }
@@ -121,10 +117,13 @@ public class PutMetricDataRequest extends AmazonWebServiceRequest {
      * @param metricData A list of data describing the metric.
      */
     public void setMetricData(java.util.Collection<MetricDatum> metricData) {
-        java.util.List<MetricDatum> metricDataCopy = new java.util.ArrayList<MetricDatum>();
-        if (metricData != null) {
-            metricDataCopy.addAll(metricData);
+        if (metricData == null) {
+            this.metricData = null;
+            return;
         }
+
+        java.util.List<MetricDatum> metricDataCopy = new java.util.ArrayList<MetricDatum>(metricData.size());
+        metricDataCopy.addAll(metricData);
         this.metricData = metricDataCopy;
     }
     
@@ -139,6 +138,7 @@ public class PutMetricDataRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public PutMetricDataRequest withMetricData(MetricDatum... metricData) {
+        if (getMetricData() == null) setMetricData(new java.util.ArrayList<MetricDatum>(metricData.length));
         for (MetricDatum value : metricData) {
             getMetricData().add(value);
         }
@@ -156,11 +156,13 @@ public class PutMetricDataRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public PutMetricDataRequest withMetricData(java.util.Collection<MetricDatum> metricData) {
-        java.util.List<MetricDatum> metricDataCopy = new java.util.ArrayList<MetricDatum>();
-        if (metricData != null) {
+        if (metricData == null) {
+            this.metricData = null;
+        } else {
+            java.util.List<MetricDatum> metricDataCopy = new java.util.ArrayList<MetricDatum>(metricData.size());
             metricDataCopy.addAll(metricData);
+            this.metricData = metricDataCopy;
         }
-        this.metricData = metricDataCopy;
 
         return this;
     }
@@ -177,10 +179,35 @@ public class PutMetricDataRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Namespace: " + namespace + ", ");
-        sb.append("MetricData: " + metricData + ", ");
+        if (namespace != null) sb.append("Namespace: " + namespace + ", ");
+        if (metricData != null) sb.append("MetricData: " + metricData + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getNamespace() == null) ? 0 : getNamespace().hashCode()); 
+        hashCode = prime * hashCode + ((getMetricData() == null) ? 0 : getMetricData().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof PutMetricDataRequest == false) return false;
+        PutMetricDataRequest other = (PutMetricDataRequest)obj;
+        
+        if (other.getNamespace() == null ^ this.getNamespace() == null) return false;
+        if (other.getNamespace() != null && other.getNamespace().equals(this.getNamespace()) == false) return false; 
+        if (other.getMetricData() == null ^ this.getMetricData() == null) return false;
+        if (other.getMetricData() != null && other.getMetricData().equals(this.getMetricData()) == false) return false; 
+        return true;
     }
     
 }

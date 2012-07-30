@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.identitymanagement.model.*;
@@ -30,23 +31,23 @@ import com.amazonaws.util.StringUtils;
 public class GetGroupRequestMarshaller implements Marshaller<Request<GetGroupRequest>, GetGroupRequest> {
 
     public Request<GetGroupRequest> marshall(GetGroupRequest getGroupRequest) {
+
+        if (getGroupRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<GetGroupRequest> request = new DefaultRequest<GetGroupRequest>(getGroupRequest, "AmazonIdentityManagement");
         request.addParameter("Action", "GetGroup");
         request.addParameter("Version", "2010-05-08");
-        if (getGroupRequest != null) {
-            if (getGroupRequest.getGroupName() != null) {
-                request.addParameter("GroupName", StringUtils.fromString(getGroupRequest.getGroupName()));
-            }
+
+        if (getGroupRequest.getGroupName() != null) {
+            request.addParameter("GroupName", StringUtils.fromString(getGroupRequest.getGroupName()));
         }
-        if (getGroupRequest != null) {
-            if (getGroupRequest.getMarker() != null) {
-                request.addParameter("Marker", StringUtils.fromString(getGroupRequest.getMarker()));
-            }
+        if (getGroupRequest.getMarker() != null) {
+            request.addParameter("Marker", StringUtils.fromString(getGroupRequest.getMarker()));
         }
-        if (getGroupRequest != null) {
-            if (getGroupRequest.getMaxItems() != null) {
-                request.addParameter("MaxItems", StringUtils.fromInteger(getGroupRequest.getMaxItems()));
-            }
+        if (getGroupRequest.getMaxItems() != null) {
+            request.addParameter("MaxItems", StringUtils.fromInteger(getGroupRequest.getMaxItems()));
         }
 
 

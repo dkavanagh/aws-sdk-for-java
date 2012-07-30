@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -22,34 +22,34 @@ package com.amazonaws.services.autoscaling.model;
 public class TerminateInstanceInAutoScalingGroupResult {
 
     /**
-     * A Scaling Activity.
+     * A scaling Activity.
      */
     private Activity activity;
 
     /**
-     * A Scaling Activity.
+     * A scaling Activity.
      *
-     * @return A Scaling Activity.
+     * @return A scaling Activity.
      */
     public Activity getActivity() {
         return activity;
     }
     
     /**
-     * A Scaling Activity.
+     * A scaling Activity.
      *
-     * @param activity A Scaling Activity.
+     * @param activity A scaling Activity.
      */
     public void setActivity(Activity activity) {
         this.activity = activity;
     }
     
     /**
-     * A Scaling Activity.
+     * A scaling Activity.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param activity A Scaling Activity.
+     * @param activity A scaling Activity.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -72,9 +72,31 @@ public class TerminateInstanceInAutoScalingGroupResult {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Activity: " + activity + ", ");
+        if (activity != null) sb.append("Activity: " + activity + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getActivity() == null) ? 0 : getActivity().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof TerminateInstanceInAutoScalingGroupResult == false) return false;
+        TerminateInstanceInAutoScalingGroupResult other = (TerminateInstanceInAutoScalingGroupResult)obj;
+        
+        if (other.getActivity() == null ^ this.getActivity() == null) return false;
+        if (other.getActivity() != null && other.getActivity().equals(this.getActivity()) == false) return false; 
+        return true;
     }
     
 }

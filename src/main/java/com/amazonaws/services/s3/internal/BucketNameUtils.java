@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -73,6 +73,10 @@ public class BucketNameUtils {
         if ( bucketName.contains("-.") ||
              bucketName.contains(".-") )
             throw new IllegalArgumentException("Bucket name should not contain dashes next to periods");
+
+        if ( bucketName.contains(":") ||
+             bucketName.contains(":;") )
+            throw new IllegalArgumentException("Bucket name should not contain colons or semicolons");
     }
 
     /**
@@ -98,4 +102,10 @@ public class BucketNameUtils {
         }
     }
 
+    /**
+     * Convience method that allows the DNS rules to be altered for different SDKs.
+     */
+    public boolean isDNSBucketName(String bucketName) {
+        return isValidV2BucketName( bucketName );
+    }
 }

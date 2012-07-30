@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,26 +18,19 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#describeRouteTables(DescribeRouteTablesRequest) DescribeRouteTables operation}.
  * <p>
- * Gives you information about your route tables. You can filter the
- * results to return information only about tables that match criteria
- * you specify. For example, you could get information only about a table
- * associated with a particular subnet. You can specify multiple values
- * for the filter. The table must match at least one of the specified
- * values for it to be included in the results.
+ * Gives you information about your route tables. You can filter the results to return information only about tables that match criteria you specify.
+ * For example, you could get information only about a table associated with a particular subnet. You can specify multiple values for the filter. The
+ * table must match at least one of the specified values for it to be included in the results.
  * </p>
  * <p>
- * You can specify multiple filters (e.g., the table has a particular
- * route, and is associated with a particular subnet). The result
- * includes information for a particular table only if it matches all
- * your filters. If there's no match, no special message is returned; the
- * response is simply empty.
+ * You can specify multiple filters (e.g., the table has a particular route, and is associated with a particular subnet). The result includes
+ * information for a particular table only if it matches all your filters. If there's no match, no special message is returned; the response is simply
+ * empty.
  * </p>
  * <p>
- * You can use wildcards with the filter values: an asterisk matches
- * zero or more characters, and <code>?</code> matches exactly one
- * character. You can escape special characters using a backslash before
- * the character. For example, a value of <code>\*amazon\?\\</code>
- * searches for the literal string <code>*amazon?\</code> .
+ * You can use wildcards with the filter values: an asterisk matches zero or more characters, and <code>?</code> matches exactly one character. You can
+ * escape special characters using a backslash before the character. For example, a value of <code>\*amazon\?\\</code> searches for the literal string
+ * <code>*amazon?\</code> .
  * 
  * </p>
  *
@@ -65,6 +58,7 @@ public class DescribeRouteTablesRequest extends AmazonWebServiceRequest {
      * @return One or more route table IDs.
      */
     public java.util.List<String> getRouteTableIds() {
+        
         if (routeTableIds == null) {
             routeTableIds = new java.util.ArrayList<String>();
         }
@@ -77,10 +71,13 @@ public class DescribeRouteTablesRequest extends AmazonWebServiceRequest {
      * @param routeTableIds One or more route table IDs.
      */
     public void setRouteTableIds(java.util.Collection<String> routeTableIds) {
-        java.util.List<String> routeTableIdsCopy = new java.util.ArrayList<String>();
-        if (routeTableIds != null) {
-            routeTableIdsCopy.addAll(routeTableIds);
+        if (routeTableIds == null) {
+            this.routeTableIds = null;
+            return;
         }
+
+        java.util.List<String> routeTableIdsCopy = new java.util.ArrayList<String>(routeTableIds.size());
+        routeTableIdsCopy.addAll(routeTableIds);
         this.routeTableIds = routeTableIdsCopy;
     }
     
@@ -95,6 +92,7 @@ public class DescribeRouteTablesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeRouteTablesRequest withRouteTableIds(String... routeTableIds) {
+        if (getRouteTableIds() == null) setRouteTableIds(new java.util.ArrayList<String>(routeTableIds.length));
         for (String value : routeTableIds) {
             getRouteTableIds().add(value);
         }
@@ -112,11 +110,13 @@ public class DescribeRouteTablesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeRouteTablesRequest withRouteTableIds(java.util.Collection<String> routeTableIds) {
-        java.util.List<String> routeTableIdsCopy = new java.util.ArrayList<String>();
-        if (routeTableIds != null) {
+        if (routeTableIds == null) {
+            this.routeTableIds = null;
+        } else {
+            java.util.List<String> routeTableIdsCopy = new java.util.ArrayList<String>(routeTableIds.size());
             routeTableIdsCopy.addAll(routeTableIds);
+            this.routeTableIds = routeTableIdsCopy;
         }
-        this.routeTableIds = routeTableIdsCopy;
 
         return this;
     }
@@ -135,6 +135,7 @@ public class DescribeRouteTablesRequest extends AmazonWebServiceRequest {
      *         EC2 API reference</a>.
      */
     public java.util.List<Filter> getFilters() {
+        
         if (filters == null) {
             filters = new java.util.ArrayList<Filter>();
         }
@@ -155,10 +156,13 @@ public class DescribeRouteTablesRequest extends AmazonWebServiceRequest {
      *         EC2 API reference</a>.
      */
     public void setFilters(java.util.Collection<Filter> filters) {
-        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>();
-        if (filters != null) {
-            filtersCopy.addAll(filters);
+        if (filters == null) {
+            this.filters = null;
+            return;
         }
+
+        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>(filters.size());
+        filtersCopy.addAll(filters);
         this.filters = filtersCopy;
     }
     
@@ -181,6 +185,7 @@ public class DescribeRouteTablesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeRouteTablesRequest withFilters(Filter... filters) {
+        if (getFilters() == null) setFilters(new java.util.ArrayList<Filter>(filters.length));
         for (Filter value : filters) {
             getFilters().add(value);
         }
@@ -206,11 +211,13 @@ public class DescribeRouteTablesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeRouteTablesRequest withFilters(java.util.Collection<Filter> filters) {
-        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>();
-        if (filters != null) {
+        if (filters == null) {
+            this.filters = null;
+        } else {
+            java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>(filters.size());
             filtersCopy.addAll(filters);
+            this.filters = filtersCopy;
         }
-        this.filters = filtersCopy;
 
         return this;
     }
@@ -227,10 +234,35 @@ public class DescribeRouteTablesRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("RouteTableIds: " + routeTableIds + ", ");
-        sb.append("Filters: " + filters + ", ");
+        if (routeTableIds != null) sb.append("RouteTableIds: " + routeTableIds + ", ");
+        if (filters != null) sb.append("Filters: " + filters + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getRouteTableIds() == null) ? 0 : getRouteTableIds().hashCode()); 
+        hashCode = prime * hashCode + ((getFilters() == null) ? 0 : getFilters().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeRouteTablesRequest == false) return false;
+        DescribeRouteTablesRequest other = (DescribeRouteTablesRequest)obj;
+        
+        if (other.getRouteTableIds() == null ^ this.getRouteTableIds() == null) return false;
+        if (other.getRouteTableIds() != null && other.getRouteTableIds().equals(this.getRouteTableIds()) == false) return false; 
+        if (other.getFilters() == null ^ this.getFilters() == null) return false;
+        if (other.getFilters() != null && other.getFilters().equals(this.getFilters()) == false) return false; 
+        return true;
     }
     
 }

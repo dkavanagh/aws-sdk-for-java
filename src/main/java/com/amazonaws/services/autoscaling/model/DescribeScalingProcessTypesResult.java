@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ public class DescribeScalingProcessTypesResult {
      * @return A list of <a>ProcessType</a> names.
      */
     public java.util.List<ProcessType> getProcesses() {
+        
         if (processes == null) {
             processes = new java.util.ArrayList<ProcessType>();
         }
@@ -44,10 +45,13 @@ public class DescribeScalingProcessTypesResult {
      * @param processes A list of <a>ProcessType</a> names.
      */
     public void setProcesses(java.util.Collection<ProcessType> processes) {
-        java.util.List<ProcessType> processesCopy = new java.util.ArrayList<ProcessType>();
-        if (processes != null) {
-            processesCopy.addAll(processes);
+        if (processes == null) {
+            this.processes = null;
+            return;
         }
+
+        java.util.List<ProcessType> processesCopy = new java.util.ArrayList<ProcessType>(processes.size());
+        processesCopy.addAll(processes);
         this.processes = processesCopy;
     }
     
@@ -62,6 +66,7 @@ public class DescribeScalingProcessTypesResult {
      *         together. 
      */
     public DescribeScalingProcessTypesResult withProcesses(ProcessType... processes) {
+        if (getProcesses() == null) setProcesses(new java.util.ArrayList<ProcessType>(processes.length));
         for (ProcessType value : processes) {
             getProcesses().add(value);
         }
@@ -79,11 +84,13 @@ public class DescribeScalingProcessTypesResult {
      *         together. 
      */
     public DescribeScalingProcessTypesResult withProcesses(java.util.Collection<ProcessType> processes) {
-        java.util.List<ProcessType> processesCopy = new java.util.ArrayList<ProcessType>();
-        if (processes != null) {
+        if (processes == null) {
+            this.processes = null;
+        } else {
+            java.util.List<ProcessType> processesCopy = new java.util.ArrayList<ProcessType>(processes.size());
             processesCopy.addAll(processes);
+            this.processes = processesCopy;
         }
-        this.processes = processesCopy;
 
         return this;
     }
@@ -100,9 +107,31 @@ public class DescribeScalingProcessTypesResult {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Processes: " + processes + ", ");
+        if (processes != null) sb.append("Processes: " + processes + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getProcesses() == null) ? 0 : getProcesses().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeScalingProcessTypesResult == false) return false;
+        DescribeScalingProcessTypesResult other = (DescribeScalingProcessTypesResult)obj;
+        
+        if (other.getProcesses() == null ^ this.getProcesses() == null) return false;
+        if (other.getProcesses() != null && other.getProcesses().equals(this.getProcesses()) == false) return false; 
+        return true;
     }
     
 }

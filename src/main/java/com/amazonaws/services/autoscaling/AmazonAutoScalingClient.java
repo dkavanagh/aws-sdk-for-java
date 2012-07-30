@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -22,14 +22,13 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import com.amazonaws.*;
-import com.amazonaws.auth.AWS3Signer;
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.QueryStringSigner;
+import com.amazonaws.auth.*;
 import com.amazonaws.handlers.HandlerChainFactory;
 import com.amazonaws.handlers.RequestHandler;
 import com.amazonaws.http.StaxResponseHandler;
 import com.amazonaws.http.DefaultErrorResponseHandler;
 import com.amazonaws.http.ExecutionContext;
+import com.amazonaws.internal.StaticCredentialsProvider;
 import com.amazonaws.transform.Unmarshaller;
 import com.amazonaws.transform.StaxUnmarshallerContext;
 import com.amazonaws.transform.StandardErrorUnmarshaller;
@@ -44,54 +43,87 @@ import com.amazonaws.services.autoscaling.model.transform.*;
  * completes.
  * <p>
  * Auto Scaling <p>
- * This is the <i>Auto Scaling API Reference</i> . This guide provides
- * detailed information about Auto Scaling actions, data types,
- * parameters, and errors. For detailed information about Auto Scaling
- * features and their associated API calls, go to the <a
- * http://docs.amazonwebservices.com/AutoScaling/latest/DeveloperGuide/">
- * Auto Scaling Developer Guide </a> .
+ * This guide provides detailed information about Auto Scaling actions, data types, parameters, and errors. For detailed information about Auto Scaling
+ * features and their associated API calls, go to the <a href="http://docs.amazonwebservices.com/AutoScaling/latest/DeveloperGuide/"> Auto Scaling
+ * Developer Guide </a> .
  * </p>
  * <p>
- * Auto Scaling is a web service designed to automatically launch or
- * terminate EC2 instances based on user-defined policies, schedules, and
- * health checks. This service is used in conjunction with Amazon
- * CloudWatch and Elastic Load Balancing services.
+ * Auto Scaling is a web service designed to automatically launch or terminate Amazon Elastic Compute Cloud (Amazon EC2) instances based on user-defined
+ * policies, schedules, and health checks. This service is used in conjunction with Amazon CloudWatch and Elastic Load Balancing services.
  * </p>
  * <p>
  * This reference is based on the current WSDL, which is available at:
  * </p>
  * <p>
- * <a
- * ef="http://autoscaling.amazonaws.com/doc/2011-01-01/AutoScaling.wsdl">
- * http://autoscaling.amazonaws.com/doc/2011-01-01/AutoScaling.wsdl </a>
+ * <a href="http://autoscaling.amazonaws.com/doc/2011-01-01/AutoScaling.wsdl"> http://autoscaling.amazonaws.com/doc/2011-01-01/AutoScaling.wsdl </a>
  * </p>
  * <p>
  * <b>Endpoints</b>
  * </p>
  * <p>
- * For information about this product's regions and endpoints, go to <a
- * //docs.amazonwebservices.com/general/latest/gr/index.html?rande.html">
- * Regions and Endpoints </a> in the Amazon Web Services General
- * Reference.
+ * For information about this product's regions and endpoints, go to <a href="http://docs.amazonwebservices.com/general/latest/gr/index.html?rande.html">
+ * Regions and Endpoints </a> in the Amazon Web Services General Reference.
  * </p>
  */
 public class AmazonAutoScalingClient extends AmazonWebServiceClient implements AmazonAutoScaling {
 
-    /**
-     * The AWS credentials (access key ID and secret key) to use when
-     * authenticating with AWS services.
-     */
-    private AWSCredentials awsCredentials;
+    /** Provider for AWS credentials. */
+    private AWSCredentialsProvider awsCredentialsProvider;
 
     /**
      * List of exception unmarshallers for all AmazonAutoScaling exceptions.
      */
-    protected final List<Unmarshaller<AmazonServiceException, Node>> exceptionUnmarshallers;
+    protected final List<Unmarshaller<AmazonServiceException, Node>> exceptionUnmarshallers
+            = new ArrayList<Unmarshaller<AmazonServiceException, Node>>();
 
     
     /** AWS signer for authenticating requests. */
-    private QueryStringSigner signer;
+    private AWS4Signer signer;
 
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonAutoScaling.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonAutoScalingClient() {
+        this(new DefaultAWSCredentialsProviderChain(), new ClientConfiguration());
+    }
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonAutoScaling.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param clientConfiguration The client configuration options controlling how this
+     *                       client connects to AmazonAutoScaling
+     *                       (ex: proxy settings, retry counts, etc.).
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonAutoScalingClient(ClientConfiguration clientConfiguration) {
+        this(new DefaultAWSCredentialsProviderChain(), clientConfiguration);
+    }
 
     /**
      * Constructs a new client to invoke service methods on
@@ -125,9 +157,49 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      */
     public AmazonAutoScalingClient(AWSCredentials awsCredentials, ClientConfiguration clientConfiguration) {
         super(clientConfiguration);
-        this.awsCredentials = awsCredentials;
+        this.awsCredentialsProvider = new StaticCredentialsProvider(awsCredentials);
+        init();
+    }
 
-        exceptionUnmarshallers = new ArrayList<Unmarshaller<AmazonServiceException, Node>>();
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonAutoScaling using the specified AWS account credentials provider.
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param awsCredentialsProvider
+     *            The AWS credentials provider which will provide credentials
+     *            to authenticate requests with AWS services.
+     */
+    public AmazonAutoScalingClient(AWSCredentialsProvider awsCredentialsProvider) {
+        this(awsCredentialsProvider, new ClientConfiguration());
+    }
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonAutoScaling using the specified AWS account credentials
+     * provider and client configuration options.
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param awsCredentialsProvider
+     *            The AWS credentials provider which will provide credentials
+     *            to authenticate requests with AWS services.
+     * @param clientConfiguration The client configuration options controlling how this
+     *                       client connects to AmazonAutoScaling
+     *                       (ex: proxy settings, retry counts, etc.).
+     */
+    public AmazonAutoScalingClient(AWSCredentialsProvider awsCredentialsProvider, ClientConfiguration clientConfiguration) {
+        super(clientConfiguration);
+        this.awsCredentialsProvider = awsCredentialsProvider;
+        init();
+    }
+
+    private void init() {
         exceptionUnmarshallers.add(new InvalidNextTokenExceptionUnmarshaller());
         exceptionUnmarshallers.add(new ScalingActivityInProgressExceptionUnmarshaller());
         exceptionUnmarshallers.add(new LimitExceededExceptionUnmarshaller());
@@ -137,7 +209,10 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
         exceptionUnmarshallers.add(new StandardErrorUnmarshaller());
         setEndpoint("autoscaling.amazonaws.com");
 
-        signer = new QueryStringSigner();
+        signer = new AWS4Signer();
+        
+        signer.setServiceName("autoscaling");
+        
 
         HandlerChainFactory chainFactory = new HandlerChainFactory();
 		requestHandlers.addAll(chainFactory.newRequestHandlerChain(
@@ -155,7 +230,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * <p>
      * This action supports pagination by returning a token if there are
      * more pages to retrieve. To get the next page, call this action again
-     * with the returned token as the NextToken parameter.
+     * with the returned token as the <code>NextToken</code> parameter.
      * </p>
      *
      * @param describeAutoScalingGroupsRequest Container for the necessary
@@ -184,13 +259,14 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
     /**
      * <p>
      * Enables monitoring of group metrics for the Auto Scaling group
-     * specified in AutoScalingGroupName. You can specify the list of enabled
-     * metrics with the Metrics parameter.
+     * specified in <code>AutoScalingGroupName</code> .
+     * You can specify the list of enabled metrics with the
+     * <code>Metrics</code> parameter.
      * </p>
      * <p>
      * Auto scaling metrics collection can be turned on only if the
-     * <code>InstanceMonitoring.Enabled</code> flag, in the Auto Scaling
-     * group's launch configuration, is set to <code>true</code> .
+     * <code>InstanceMonitoring</code> flag, in the Auto Scaling group's
+     * launch configuration, is set to <code>True</code> .
      * 
      * </p>
      *
@@ -272,7 +348,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * Returns descriptions of what each policy does. This action supports
      * pagination. If the response includes a token, there are more records
      * available. To get the additional records, repeat the request with the
-     * response token as the NextToken parameter.
+     * response token as the <code>NextToken</code> parameter.
      * </p>
      *
      * @param describePoliciesRequest Container for the necessary parameters
@@ -327,9 +403,9 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
     
     /**
      * <p>
-     * Creates a new Auto Scaling group with the specified name. When the
-     * creation request is completed, the Auto Scaling group is ready to be
-     * used in other calls.
+     * Creates a new Auto Scaling group with the specified name and other
+     * attributes. When the creation request is completed, the Auto Scaling
+     * group is ready to be used in other calls.
      * </p>
      * <p>
      * <b>NOTE:</b> The Auto Scaling group name must be unique within the
@@ -363,15 +439,16 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * Returns the scaling activities for the specified Auto Scaling group.
      * </p>
      * <p>
-     * If the specified <i>ActivityIds</i> list is empty, all the activities
-     * from the past six weeks are returned. Activities are sorted by
-     * completion time. Activities still in progress appear first on the
+     * If the specified <code>ActivityIds</code> list is empty, all the
+     * activities from the past six weeks are returned. Activities are sorted
+     * by completion time. Activities still in progress appear first on the
      * list.
      * </p>
      * <p>
      * This action supports pagination. If the response includes a token,
      * there are more records available. To get the additional records,
-     * repeat the request with the response token as the NextToken parameter.
+     * repeat the request with the response token as the
+     * <code>NextToken</code> parameter.
      * </p>
      *
      * @param describeScalingActivitiesRequest Container for the necessary
@@ -428,6 +505,45 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
     
     /**
      * <p>
+     * Lists the Auto Scaling group tags.
+     * </p>
+     * <p>
+     * You can use filters to limit results when describing tags. For
+     * example, you can query for tags of a particular Auto Scaling group.
+     * You can specify multiple values for a filter. A tag must match at
+     * least one of the specified values for it to be included in the
+     * results.
+     * </p>
+     * <p>
+     * You can also specify multiple filters. The result includes
+     * information for a particular tag only if it matches all your filters.
+     * If there's no match, no special message is returned.
+     * </p>
+     *
+     * @param describeTagsRequest Container for the necessary parameters to
+     *           execute the DescribeTags service method on AmazonAutoScaling.
+     * 
+     * @return The response from the DescribeTags service method, as returned
+     *         by AmazonAutoScaling.
+     * 
+     * @throws InvalidNextTokenException
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonAutoScaling indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public DescribeTagsResult describeTags(DescribeTagsRequest describeTagsRequest) 
+            throws AmazonServiceException, AmazonClientException {
+        Request<DescribeTagsRequest> request = new DescribeTagsRequestMarshaller().marshall(describeTagsRequest);
+        return invoke(request, new DescribeTagsResultStaxUnmarshaller());
+    }
+    
+    /**
+     * <p>
      * Runs the policy you create for your Auto Scaling group in
      * PutScalingPolicy.
      * </p>
@@ -448,6 +564,29 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
     public void executePolicy(ExecutePolicyRequest executePolicyRequest) 
             throws AmazonServiceException, AmazonClientException {
         Request<ExecutePolicyRequest> request = new ExecutePolicyRequestMarshaller().marshall(executePolicyRequest);
+        invoke(request, null);
+    }
+    
+    /**
+     * <p>
+     * Removes the specified tags or a set of tags from a set of resources.
+     * </p>
+     *
+     * @param deleteTagsRequest Container for the necessary parameters to
+     *           execute the DeleteTags service method on AmazonAutoScaling.
+     * 
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonAutoScaling indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public void deleteTags(DeleteTagsRequest deleteTagsRequest) 
+            throws AmazonServiceException, AmazonClientException {
+        Request<DeleteTagsRequest> request = new DeleteTagsRequestMarshaller().marshall(deleteTagsRequest);
         invoke(request, null);
     }
     
@@ -514,7 +653,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
     
     /**
      * <p>
-     * Deletes a policy created by PutScalingPolicy
+     * Deletes a policy created by PutScalingPolicy.
      * </p>
      *
      * @param deletePolicyRequest Container for the necessary parameters to
@@ -638,6 +777,38 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
     
     /**
      * <p>
+     * Creates new tags or updates existing tags for an Auto Scaling group.
+     * </p>
+     * <p>
+     * <b>NOTE:</b> A tag's definition is composed of a resource ID, resource
+     * type, key and value, and the propagate flag. Value and the propagate
+     * flag are optional parameters. See the Request Parameters for more
+     * information.
+     * </p>
+     *
+     * @param createOrUpdateTagsRequest Container for the necessary
+     *           parameters to execute the CreateOrUpdateTags service method on
+     *           AmazonAutoScaling.
+     * 
+     * @throws LimitExceededException
+     * @throws AlreadyExistsException
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonAutoScaling indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public void createOrUpdateTags(CreateOrUpdateTagsRequest createOrUpdateTagsRequest) 
+            throws AmazonServiceException, AmazonClientException {
+        Request<CreateOrUpdateTagsRequest> request = new CreateOrUpdateTagsRequestMarshaller().marshall(createOrUpdateTagsRequest);
+        invoke(request, null);
+    }
+    
+    /**
+     * <p>
      * Suspends Auto Scaling processes for an Auto Scaling group. To suspend
      * specific process types, specify them by name with the
      * <code>ScalingProcesses.member.N</code> parameter. To suspend all
@@ -675,14 +846,14 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
     /**
      * <p>
      * Returns a description of each Auto Scaling instance in the
-     * InstanceIds list. If a list is not provided, the service returns the
-     * full details of all instances up to a maximum of fifty. By default,
-     * the service returns a list of 20 items.
+     * <code>InstanceIds</code> list. If a list is not provided, the service
+     * returns the full details of all instances up to a maximum of 50. By
+     * default, the service returns a list of 20 items.
      * </p>
      * <p>
      * This action supports pagination by returning a token if there are
      * more pages to retrieve. To get the next page, call this action again
-     * with the returned token as the NextToken parameter.
+     * with the returned token as the <code>NextToken</code> parameter.
      * </p>
      *
      * @param describeAutoScalingInstancesRequest Container for the necessary
@@ -720,15 +891,11 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * You can create a launch configuration with Amazon EC2 security groups
      * or with Amazon VPC security groups. However, you can't use Amazon EC2
      * security groups together with Amazon VPC security groups, or vice
-     * versa. In addition, you can only create Auto Scaling launch
-     * configurations with Amazon VPC security groups in the Regions where
-     * Amazon VPC is supported. Amazon VPC is currently available only in the
-     * Amazon EC2 US-East (Northern Virginia) Region, and in the Amazon EC2
-     * EU-West (Ireland) Region.
+     * versa.
      * </p>
      * <p>
      * <b>NOTE:</b> At this time, Auto Scaling launch configurations don't
-     * support compressed (e.g. gzipped) user data files.
+     * support compressed (e.g. zipped) user data files.
      * </p>
      *
      * @param createLaunchConfigurationRequest Container for the necessary
@@ -754,7 +921,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
     
     /**
      * <p>
-     * Deletes the specified auto scaling group if the group has no
+     * Deletes the specified Auto Scaling group if the group has no
      * instances and no scaling activities in progress.
      * </p>
      * <p>
@@ -787,8 +954,9 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
     /**
      * <p>
      * Disables monitoring of group metrics for the Auto Scaling group
-     * specified in AutoScalingGroupName. You can specify the list of
-     * affected metrics with the Metrics parameter.
+     * specified in <code>AutoScalingGroupName</code> .
+     * You can specify the list of affected metrics with the
+     * <code>Metrics</code> parameter.
      * </p>
      *
      * @param disableMetricsCollectionRequest Container for the necessary
@@ -816,10 +984,10 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * </p>
      * <p>
      * <b>NOTE:</b> To update an Auto Scaling group with a launch
-     * configuration that has the InstanceMonitoring.enabled flag set to
-     * false, you must first ensure that collection of group metrics is
-     * disabled. Otherwise, calls to UpdateAutoScalingGroup will fail. If you
-     * have previously enabled group metrics collection, you can disable
+     * configuration that has the InstanceMonitoring flag set to False, you
+     * must first ensure that collection of group metrics is disabled.
+     * Otherwise, calls to UpdateAutoScalingGroup will fail. If you have
+     * previously enabled group metrics collection, you can disable
      * collection of all group metrics by calling DisableMetricsCollection.
      * </p>
      * <p>
@@ -828,10 +996,15 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * call returns. Triggers that are currently in progress aren't affected.
      * </p>
      * <p>
-     * <b>NOTE:</b> If the new values are specified for the MinSize or
-     * MaxSize parameters, then there will be an implicit call to
-     * SetDesiredCapacity to set the group to the new MaxSize. All optional
-     * parameters are left unchanged if not passed in the request.
+     * <b>NOTE:</b> If a new value is specified for MinSize without
+     * specifying the value for DesiredCapacity, and if the new MinSize is
+     * larger than the current size of the Auto Scaling Group, there will be
+     * an implicit call to SetDesiredCapacity to set the group to the new
+     * MinSize. If a new value is specified for MaxSize without specifying
+     * the value for DesiredCapacity, and the new MaxSize is smaller than the
+     * current size of the Auto Scaling Group, there will be an implicit call
+     * to SetDesiredCapacity to set the group to the new MaxSize. All other
+     * optional parameters are left unchanged if not passed in the request.
      * </p>
      *
      * @param updateAutoScalingGroupRequest Container for the necessary
@@ -856,11 +1029,11 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
     
     /**
      * <p>
-     * Returns a full description of the launch configurations given the
-     * specified names.
+     * Returns a full description of the launch configurations, or the
+     * specified launch configurations, if they exist.
      * </p>
      * <p>
-     * If no names are specified, then the full details of all launch
+     * If no name is specified, then the full details of all launch
      * configurations are returned.
      * </p>
      *
@@ -918,7 +1091,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
     /**
      * <p>
      * Lists all the actions scheduled for your Auto Scaling group that
-     * haven't been executed. To see a list of action already executed, see
+     * haven't been executed. To see a list of actions already executed, see
      * the activity record returned in DescribeScalingActivities.
      * </p>
      *
@@ -947,7 +1120,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
     
     /**
      * <p>
-     * Creates a scheduled scaling action for a Auto Scaling group. If you
+     * Creates a scheduled scaling action for an Auto Scaling group. If you
      * leave a parameter unspecified, the corresponding value remains
      * unchanged in the affected Auto Scaling group.
      * </p>
@@ -1005,8 +1178,8 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * <p>
      * Adjusts the desired size of the AutoScalingGroup by initiating
      * scaling activities. When reducing the size of the group, it is not
-     * possible to define which EC2 instances will be terminated. This
-     * applies to any auto-scaling decisions that might result in terminating
+     * possible to define which Amazon EC2 instances will be terminated. This
+     * applies to any Auto Scaling decisions that might result in terminating
      * instances.
      * </p>
      * <p>
@@ -1021,7 +1194,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * group without regard to the cooldown period. This could be useful, for
      * example, if Auto Scaling did something unexpected for some reason. If
      * your cooldown period is 10 minutes, Auto Scaling would normally reject
-     * requests to change the size of the group for that entire 10 minute
+     * requests to change the size of the group for that entire 10-minute
      * period. The <code>SetDesiredCapacity</code> command allows you to
      * circumvent this restriction and change the size of the group before
      * the end of the cooldown period.
@@ -1100,7 +1273,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * <p>
      * This action supports pagination by returning a token if there are
      * more pages to retrieve. To get the next page, call this action again
-     * with the returned token as the NextToken parameter.
+     * with the returned token as the <code>NextToken</code> parameter.
      * </p>
      * 
      * @return The response from the DescribeAutoScalingGroups service
@@ -1125,7 +1298,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * Returns descriptions of what each policy does. This action supports
      * pagination. If the response includes a token, there are more records
      * available. To get the additional records, repeat the request with the
-     * response token as the NextToken parameter.
+     * response token as the <code>NextToken</code> parameter.
      * </p>
      * 
      * @return The response from the DescribePolicies service method, as
@@ -1172,15 +1345,16 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * Returns the scaling activities for the specified Auto Scaling group.
      * </p>
      * <p>
-     * If the specified <i>ActivityIds</i> list is empty, all the activities
-     * from the past six weeks are returned. Activities are sorted by
-     * completion time. Activities still in progress appear first on the
+     * If the specified <code>ActivityIds</code> list is empty, all the
+     * activities from the past six weeks are returned. Activities are sorted
+     * by completion time. Activities still in progress appear first on the
      * list.
      * </p>
      * <p>
      * This action supports pagination. If the response includes a token,
      * there are more records available. To get the additional records,
-     * repeat the request with the response token as the NextToken parameter.
+     * repeat the request with the response token as the
+     * <code>NextToken</code> parameter.
      * </p>
      * 
      * @return The response from the DescribeScalingActivities service
@@ -1225,6 +1399,40 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
     
     /**
      * <p>
+     * Lists the Auto Scaling group tags.
+     * </p>
+     * <p>
+     * You can use filters to limit results when describing tags. For
+     * example, you can query for tags of a particular Auto Scaling group.
+     * You can specify multiple values for a filter. A tag must match at
+     * least one of the specified values for it to be included in the
+     * results.
+     * </p>
+     * <p>
+     * You can also specify multiple filters. The result includes
+     * information for a particular tag only if it matches all your filters.
+     * If there's no match, no special message is returned.
+     * </p>
+     * 
+     * @return The response from the DescribeTags service method, as returned
+     *         by AmazonAutoScaling.
+     * 
+     * @throws InvalidNextTokenException
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonAutoScaling indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public DescribeTagsResult describeTags() throws AmazonServiceException, AmazonClientException {
+        return describeTags(new DescribeTagsRequest());
+    }
+    
+    /**
+     * <p>
      * Returns a list of all notification types that are supported by Auto
      * Scaling.
      * </p>
@@ -1248,14 +1456,14 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
     /**
      * <p>
      * Returns a description of each Auto Scaling instance in the
-     * InstanceIds list. If a list is not provided, the service returns the
-     * full details of all instances up to a maximum of fifty. By default,
-     * the service returns a list of 20 items.
+     * <code>InstanceIds</code> list. If a list is not provided, the service
+     * returns the full details of all instances up to a maximum of 50. By
+     * default, the service returns a list of 20 items.
      * </p>
      * <p>
      * This action supports pagination by returning a token if there are
      * more pages to retrieve. To get the next page, call this action again
-     * with the returned token as the NextToken parameter.
+     * with the returned token as the <code>NextToken</code> parameter.
      * </p>
      * 
      * @return The response from the DescribeAutoScalingInstances service
@@ -1277,11 +1485,11 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
     
     /**
      * <p>
-     * Returns a full description of the launch configurations given the
-     * specified names.
+     * Returns a full description of the launch configurations, or the
+     * specified launch configurations, if they exist.
      * </p>
      * <p>
-     * If no names are specified, then the full details of all launch
+     * If no name is specified, then the full details of all launch
      * configurations are returned.
      * </p>
      * 
@@ -1327,7 +1535,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
     /**
      * <p>
      * Lists all the actions scheduled for your Auto Scaling group that
-     * haven't been executed. To see a list of action already executed, see
+     * haven't been executed. To see a list of actions already executed, see
      * the activity record returned in DescribeScalingActivities.
      * </p>
      * 
@@ -1370,7 +1578,47 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
         return describeMetricCollectionTypes(new DescribeMetricCollectionTypesRequest());
     }
     
-
+    /**
+     * Overrides the default endpoint for this client and explicitly provides
+     * an AWS region ID and AWS service name to use when the client calculates a signature
+     * for requests.  In almost all cases, this region ID and service name
+     * are automatically determined from the endpoint, and callers should use the simpler
+     * one-argument form of setEndpoint instead of this method.
+     * <p>
+     * <b>This method is not threadsafe. Endpoints should be configured when the
+     * client is created and before any service requests are made. Changing it
+     * afterwards creates inevitable race conditions for any service requests in
+     * transit.</b>
+     * <p>
+     * Callers can pass in just the endpoint (ex: "ec2.amazonaws.com") or a full
+     * URL, including the protocol (ex: "https://ec2.amazonaws.com"). If the
+     * protocol is not specified here, the default protocol from this client's
+     * {@link ClientConfiguration} will be used, which by default is HTTPS.
+     * <p>
+     * For more information on using AWS regions with the AWS SDK for Java, and
+     * a complete list of all available endpoints for all AWS services, see:
+     * <a href="http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912">
+     * http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912</a>
+     *
+     * @param endpoint
+     *            The endpoint (ex: "ec2.amazonaws.com") or a full URL,
+     *            including the protocol (ex: "https://ec2.amazonaws.com") of
+     *            the region specific AWS endpoint this client will communicate
+     *            with.
+     * @param serviceName
+     *            The name of the AWS service to use when signing requests.
+     * @param regionId
+     *            The ID of the region in which this service resides.
+     *
+     * @throws IllegalArgumentException
+     *             If any problems are detected with the specified endpoint.
+     */
+    public void setEndpoint(String endpoint, String serviceName, String regionId) throws IllegalArgumentException {
+        setEndpoint(endpoint);
+        signer.setServiceName(serviceName);
+        signer.setRegionName(regionId);
+    }
+    
 
     /**
      * Returns additional metadata for a previously executed successful, request, typically used for
@@ -1398,24 +1646,19 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
             request.addParameter(entry.getKey(), entry.getValue());
         }
 
-        // Apply any additional service specific request handlers that need to be run
-        if (requestHandlers != null) {
-            for (RequestHandler requestHandler : requestHandlers) {
-                requestHandler.beforeRequest(request);
-            }
+        AWSCredentials credentials = awsCredentialsProvider.getCredentials();
+        AmazonWebServiceRequest originalRequest = request.getOriginalRequest();
+        if (originalRequest != null && originalRequest.getRequestCredentials() != null) {
+        	credentials = originalRequest.getRequestCredentials();
         }
 
-        if (request.getOriginalRequest().getRequestCredentials() != null) {
-	        signer.sign(request, request.getOriginalRequest().getRequestCredentials());
-        } else {
-    	    signer.sign(request, awsCredentials);
-        }
-
+        ExecutionContext executionContext = createExecutionContext();
+        executionContext.setSigner(signer);
+        executionContext.setCredentials(credentials);
         
         StaxResponseHandler<X> responseHandler = new StaxResponseHandler<X>(unmarshaller);
         DefaultErrorResponseHandler errorResponseHandler = new DefaultErrorResponseHandler(exceptionUnmarshallers);
 
-        ExecutionContext executionContext = createExecutionContext();
         return (X)client.execute(request, responseHandler, errorResponseHandler, executionContext);
     }
 }

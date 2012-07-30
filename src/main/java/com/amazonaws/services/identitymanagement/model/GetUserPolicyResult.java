@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,14 +16,13 @@ package com.amazonaws.services.identitymanagement.model;
 
 /**
  * <p>
- * Contains the result of a successful invocation of the GetUserPolicy
- * action.
+ * Contains the result of a successful invocation of the GetUserPolicy action.
  * </p>
  */
 public class GetUserPolicyResult {
 
     /**
-     * The User the policy is associated with.
+     * The user the policy is associated with.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
@@ -50,33 +49,33 @@ public class GetUserPolicyResult {
     private String policyDocument;
 
     /**
-     * The User the policy is associated with.
+     * The user the policy is associated with.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @return The User the policy is associated with.
+     * @return The user the policy is associated with.
      */
     public String getUserName() {
         return userName;
     }
     
     /**
-     * The User the policy is associated with.
+     * The user the policy is associated with.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName The User the policy is associated with.
+     * @param userName The user the policy is associated with.
      */
     public void setUserName(String userName) {
         this.userName = userName;
     }
     
     /**
-     * The User the policy is associated with.
+     * The user the policy is associated with.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -84,7 +83,7 @@ public class GetUserPolicyResult {
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName The User the policy is associated with.
+     * @param userName The user the policy is associated with.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -199,11 +198,39 @@ public class GetUserPolicyResult {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("UserName: " + userName + ", ");
-        sb.append("PolicyName: " + policyName + ", ");
-        sb.append("PolicyDocument: " + policyDocument + ", ");
+        if (userName != null) sb.append("UserName: " + userName + ", ");
+        if (policyName != null) sb.append("PolicyName: " + policyName + ", ");
+        if (policyDocument != null) sb.append("PolicyDocument: " + policyDocument + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getUserName() == null) ? 0 : getUserName().hashCode()); 
+        hashCode = prime * hashCode + ((getPolicyName() == null) ? 0 : getPolicyName().hashCode()); 
+        hashCode = prime * hashCode + ((getPolicyDocument() == null) ? 0 : getPolicyDocument().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof GetUserPolicyResult == false) return false;
+        GetUserPolicyResult other = (GetUserPolicyResult)obj;
+        
+        if (other.getUserName() == null ^ this.getUserName() == null) return false;
+        if (other.getUserName() != null && other.getUserName().equals(this.getUserName()) == false) return false; 
+        if (other.getPolicyName() == null ^ this.getPolicyName() == null) return false;
+        if (other.getPolicyName() != null && other.getPolicyName().equals(this.getPolicyName()) == false) return false; 
+        if (other.getPolicyDocument() == null ^ this.getPolicyDocument() == null) return false;
+        if (other.getPolicyDocument() != null && other.getPolicyDocument().equals(this.getPolicyDocument()) == false) return false; 
+        return true;
     }
     
 }

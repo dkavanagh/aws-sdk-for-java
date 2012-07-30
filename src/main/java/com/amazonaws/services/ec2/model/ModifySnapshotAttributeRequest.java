@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -33,6 +33,9 @@ public class ModifySnapshotAttributeRequest extends AmazonWebServiceRequest {
     /**
      * The name of the attribute being modified. <p> Available attribute
      * names: <code>createVolumePermission</code>
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>productCodes, createVolumePermission
      */
     private String attribute;
 
@@ -85,6 +88,26 @@ public class ModifySnapshotAttributeRequest extends AmazonWebServiceRequest {
         this.attribute = attribute;
         this.operationType = operationType;
     }
+
+    
+    
+    /**
+     * Constructs a new ModifySnapshotAttributeRequest object.
+     * Callers should use the setter or fluent setter (with...) methods to
+     * initialize any additional object members.
+     * 
+     * @param snapshotId The ID of the EBS snapshot whose attributes are
+     * being modified.
+     * @param attribute The name of the attribute being modified. <p>
+     * Available attribute names: <code>createVolumePermission</code>
+     * @param operationType The operation to perform on the attribute. <p>
+     * Available operation names: <code>add</code>, <code>remove</code>
+     */
+    public ModifySnapshotAttributeRequest(String snapshotId, SnapshotAttributeName attribute, String operationType) {
+        this.snapshotId = snapshotId;
+        this.attribute = attribute.toString();
+        this.operationType = operationType;
+    }
     
     /**
      * The ID of the EBS snapshot whose attributes are being modified.
@@ -123,9 +146,14 @@ public class ModifySnapshotAttributeRequest extends AmazonWebServiceRequest {
     /**
      * The name of the attribute being modified. <p> Available attribute
      * names: <code>createVolumePermission</code>
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>productCodes, createVolumePermission
      *
      * @return The name of the attribute being modified. <p> Available attribute
      *         names: <code>createVolumePermission</code>
+     *
+     * @see SnapshotAttributeName
      */
     public String getAttribute() {
         return attribute;
@@ -134,9 +162,14 @@ public class ModifySnapshotAttributeRequest extends AmazonWebServiceRequest {
     /**
      * The name of the attribute being modified. <p> Available attribute
      * names: <code>createVolumePermission</code>
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>productCodes, createVolumePermission
      *
      * @param attribute The name of the attribute being modified. <p> Available attribute
      *         names: <code>createVolumePermission</code>
+     *
+     * @see SnapshotAttributeName
      */
     public void setAttribute(String attribute) {
         this.attribute = attribute;
@@ -147,18 +180,61 @@ public class ModifySnapshotAttributeRequest extends AmazonWebServiceRequest {
      * names: <code>createVolumePermission</code>
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>productCodes, createVolumePermission
      *
      * @param attribute The name of the attribute being modified. <p> Available attribute
      *         names: <code>createVolumePermission</code>
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
+     *
+     * @see SnapshotAttributeName
      */
     public ModifySnapshotAttributeRequest withAttribute(String attribute) {
         this.attribute = attribute;
         return this;
     }
     
+    
+    /**
+     * The name of the attribute being modified. <p> Available attribute
+     * names: <code>createVolumePermission</code>
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>productCodes, createVolumePermission
+     *
+     * @param attribute The name of the attribute being modified. <p> Available attribute
+     *         names: <code>createVolumePermission</code>
+     *
+     * @see SnapshotAttributeName
+     */
+    public void setAttribute(SnapshotAttributeName attribute) {
+        this.attribute = attribute.toString();
+    }
+    
+    /**
+     * The name of the attribute being modified. <p> Available attribute
+     * names: <code>createVolumePermission</code>
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>productCodes, createVolumePermission
+     *
+     * @param attribute The name of the attribute being modified. <p> Available attribute
+     *         names: <code>createVolumePermission</code>
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see SnapshotAttributeName
+     */
+    public ModifySnapshotAttributeRequest withAttribute(SnapshotAttributeName attribute) {
+        this.attribute = attribute.toString();
+        return this;
+    }
     
     /**
      * The operation to perform on the attribute. <p> Available operation
@@ -214,6 +290,7 @@ public class ModifySnapshotAttributeRequest extends AmazonWebServiceRequest {
      *         </note>
      */
     public java.util.List<String> getUserIds() {
+        
         if (userIds == null) {
             userIds = new java.util.ArrayList<String>();
         }
@@ -234,10 +311,13 @@ public class ModifySnapshotAttributeRequest extends AmazonWebServiceRequest {
      *         </note>
      */
     public void setUserIds(java.util.Collection<String> userIds) {
-        java.util.List<String> userIdsCopy = new java.util.ArrayList<String>();
-        if (userIds != null) {
-            userIdsCopy.addAll(userIds);
+        if (userIds == null) {
+            this.userIds = null;
+            return;
         }
+
+        java.util.List<String> userIdsCopy = new java.util.ArrayList<String>(userIds.size());
+        userIdsCopy.addAll(userIds);
         this.userIds = userIdsCopy;
     }
     
@@ -260,6 +340,7 @@ public class ModifySnapshotAttributeRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public ModifySnapshotAttributeRequest withUserIds(String... userIds) {
+        if (getUserIds() == null) setUserIds(new java.util.ArrayList<String>(userIds.length));
         for (String value : userIds) {
             getUserIds().add(value);
         }
@@ -285,11 +366,13 @@ public class ModifySnapshotAttributeRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public ModifySnapshotAttributeRequest withUserIds(java.util.Collection<String> userIds) {
-        java.util.List<String> userIdsCopy = new java.util.ArrayList<String>();
-        if (userIds != null) {
+        if (userIds == null) {
+            this.userIds = null;
+        } else {
+            java.util.List<String> userIdsCopy = new java.util.ArrayList<String>(userIds.size());
             userIdsCopy.addAll(userIds);
+            this.userIds = userIdsCopy;
         }
-        this.userIds = userIdsCopy;
 
         return this;
     }
@@ -308,6 +391,7 @@ public class ModifySnapshotAttributeRequest extends AmazonWebServiceRequest {
      *         </note>
      */
     public java.util.List<String> getGroupNames() {
+        
         if (groupNames == null) {
             groupNames = new java.util.ArrayList<String>();
         }
@@ -328,10 +412,13 @@ public class ModifySnapshotAttributeRequest extends AmazonWebServiceRequest {
      *         </note>
      */
     public void setGroupNames(java.util.Collection<String> groupNames) {
-        java.util.List<String> groupNamesCopy = new java.util.ArrayList<String>();
-        if (groupNames != null) {
-            groupNamesCopy.addAll(groupNames);
+        if (groupNames == null) {
+            this.groupNames = null;
+            return;
         }
+
+        java.util.List<String> groupNamesCopy = new java.util.ArrayList<String>(groupNames.size());
+        groupNamesCopy.addAll(groupNames);
         this.groupNames = groupNamesCopy;
     }
     
@@ -354,6 +441,7 @@ public class ModifySnapshotAttributeRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public ModifySnapshotAttributeRequest withGroupNames(String... groupNames) {
+        if (getGroupNames() == null) setGroupNames(new java.util.ArrayList<String>(groupNames.length));
         for (String value : groupNames) {
             getGroupNames().add(value);
         }
@@ -379,11 +467,13 @@ public class ModifySnapshotAttributeRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public ModifySnapshotAttributeRequest withGroupNames(java.util.Collection<String> groupNames) {
-        java.util.List<String> groupNamesCopy = new java.util.ArrayList<String>();
-        if (groupNames != null) {
+        if (groupNames == null) {
+            this.groupNames = null;
+        } else {
+            java.util.List<String> groupNamesCopy = new java.util.ArrayList<String>(groupNames.size());
             groupNamesCopy.addAll(groupNames);
+            this.groupNames = groupNamesCopy;
         }
-        this.groupNames = groupNamesCopy;
 
         return this;
     }
@@ -435,14 +525,51 @@ public class ModifySnapshotAttributeRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("SnapshotId: " + snapshotId + ", ");
-        sb.append("Attribute: " + attribute + ", ");
-        sb.append("OperationType: " + operationType + ", ");
-        sb.append("UserIds: " + userIds + ", ");
-        sb.append("GroupNames: " + groupNames + ", ");
-        sb.append("CreateVolumePermission: " + createVolumePermission + ", ");
+        if (snapshotId != null) sb.append("SnapshotId: " + snapshotId + ", ");
+        if (attribute != null) sb.append("Attribute: " + attribute + ", ");
+        if (operationType != null) sb.append("OperationType: " + operationType + ", ");
+        if (userIds != null) sb.append("UserIds: " + userIds + ", ");
+        if (groupNames != null) sb.append("GroupNames: " + groupNames + ", ");
+        if (createVolumePermission != null) sb.append("CreateVolumePermission: " + createVolumePermission + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getSnapshotId() == null) ? 0 : getSnapshotId().hashCode()); 
+        hashCode = prime * hashCode + ((getAttribute() == null) ? 0 : getAttribute().hashCode()); 
+        hashCode = prime * hashCode + ((getOperationType() == null) ? 0 : getOperationType().hashCode()); 
+        hashCode = prime * hashCode + ((getUserIds() == null) ? 0 : getUserIds().hashCode()); 
+        hashCode = prime * hashCode + ((getGroupNames() == null) ? 0 : getGroupNames().hashCode()); 
+        hashCode = prime * hashCode + ((getCreateVolumePermission() == null) ? 0 : getCreateVolumePermission().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof ModifySnapshotAttributeRequest == false) return false;
+        ModifySnapshotAttributeRequest other = (ModifySnapshotAttributeRequest)obj;
+        
+        if (other.getSnapshotId() == null ^ this.getSnapshotId() == null) return false;
+        if (other.getSnapshotId() != null && other.getSnapshotId().equals(this.getSnapshotId()) == false) return false; 
+        if (other.getAttribute() == null ^ this.getAttribute() == null) return false;
+        if (other.getAttribute() != null && other.getAttribute().equals(this.getAttribute()) == false) return false; 
+        if (other.getOperationType() == null ^ this.getOperationType() == null) return false;
+        if (other.getOperationType() != null && other.getOperationType().equals(this.getOperationType()) == false) return false; 
+        if (other.getUserIds() == null ^ this.getUserIds() == null) return false;
+        if (other.getUserIds() != null && other.getUserIds().equals(this.getUserIds()) == false) return false; 
+        if (other.getGroupNames() == null ^ this.getGroupNames() == null) return false;
+        if (other.getGroupNames() != null && other.getGroupNames().equals(this.getGroupNames()) == false) return false; 
+        if (other.getCreateVolumePermission() == null ^ this.getCreateVolumePermission() == null) return false;
+        if (other.getCreateVolumePermission() != null && other.getCreateVolumePermission().equals(this.getCreateVolumePermission()) == false) return false; 
+        return true;
     }
     
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,11 +18,9 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#purchaseReservedInstancesOffering(PurchaseReservedInstancesOfferingRequest) PurchaseReservedInstancesOffering operation}.
  * <p>
- * The PurchaseReservedInstancesOffering operation purchases a Reserved
- * Instance for use with your account. With Amazon EC2 Reserved
- * Instances, you purchase the right to launch Amazon EC2 instances for a
- * period of time (without getting insufficient capacity errors) and pay
- * a lower usage rate for the actual time used.
+ * The PurchaseReservedInstancesOffering operation purchases a Reserved Instance for use with your account. With Amazon EC2 Reserved Instances, you
+ * purchase the right to launch Amazon EC2 instances for a period of time (without getting insufficient capacity errors) and pay a lower usage rate for
+ * the actual time used.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#purchaseReservedInstancesOffering(PurchaseReservedInstancesOfferingRequest)
@@ -58,6 +56,8 @@ public class PurchaseReservedInstancesOfferingRequest extends AmazonWebServiceRe
         this.reservedInstancesOfferingId = reservedInstancesOfferingId;
         this.instanceCount = instanceCount;
     }
+
+    
     
     /**
      * The unique ID of the Reserved Instances offering being purchased.
@@ -139,10 +139,35 @@ public class PurchaseReservedInstancesOfferingRequest extends AmazonWebServiceRe
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("ReservedInstancesOfferingId: " + reservedInstancesOfferingId + ", ");
-        sb.append("InstanceCount: " + instanceCount + ", ");
+        if (reservedInstancesOfferingId != null) sb.append("ReservedInstancesOfferingId: " + reservedInstancesOfferingId + ", ");
+        if (instanceCount != null) sb.append("InstanceCount: " + instanceCount + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getReservedInstancesOfferingId() == null) ? 0 : getReservedInstancesOfferingId().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceCount() == null) ? 0 : getInstanceCount().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof PurchaseReservedInstancesOfferingRequest == false) return false;
+        PurchaseReservedInstancesOfferingRequest other = (PurchaseReservedInstancesOfferingRequest)obj;
+        
+        if (other.getReservedInstancesOfferingId() == null ^ this.getReservedInstancesOfferingId() == null) return false;
+        if (other.getReservedInstancesOfferingId() != null && other.getReservedInstancesOfferingId().equals(this.getReservedInstancesOfferingId()) == false) return false; 
+        if (other.getInstanceCount() == null ^ this.getInstanceCount() == null) return false;
+        if (other.getInstanceCount() != null && other.getInstanceCount().equals(this.getInstanceCount()) == false) return false; 
+        return true;
     }
     
 }

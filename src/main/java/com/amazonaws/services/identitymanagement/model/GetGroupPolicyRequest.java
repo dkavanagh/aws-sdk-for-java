@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,11 +18,8 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#getGroupPolicy(GetGroupPolicyRequest) GetGroupPolicy operation}.
  * <p>
- * Retrieves the specified policy document for the specified group. The
- * returned policy is URL-encoded according to RFC 3986. For more
- * information about RFC 3986, go to <a
- * href="http://www.faqs.org/rfcs/rfc3986.html">
- * http://www.faqs.org/rfcs/rfc3986.html </a> .
+ * Retrieves the specified policy document for the specified group. The returned policy is URL-encoded according to RFC 3986. For more information about
+ * RFC 3986, go to <a href="http://www.faqs.org/rfcs/rfc3986.html"> http://www.faqs.org/rfcs/rfc3986.html </a> .
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#getGroupPolicy(GetGroupPolicyRequest)
@@ -65,6 +62,8 @@ public class GetGroupPolicyRequest extends AmazonWebServiceRequest {
         this.groupName = groupName;
         this.policyName = policyName;
     }
+
+    
     
     /**
      * Name of the group the policy is associated with.
@@ -170,10 +169,35 @@ public class GetGroupPolicyRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("GroupName: " + groupName + ", ");
-        sb.append("PolicyName: " + policyName + ", ");
+        if (groupName != null) sb.append("GroupName: " + groupName + ", ");
+        if (policyName != null) sb.append("PolicyName: " + policyName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getGroupName() == null) ? 0 : getGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getPolicyName() == null) ? 0 : getPolicyName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof GetGroupPolicyRequest == false) return false;
+        GetGroupPolicyRequest other = (GetGroupPolicyRequest)obj;
+        
+        if (other.getGroupName() == null ^ this.getGroupName() == null) return false;
+        if (other.getGroupName() != null && other.getGroupName().equals(this.getGroupName()) == false) return false; 
+        if (other.getPolicyName() == null ^ this.getPolicyName() == null) return false;
+        if (other.getPolicyName() != null && other.getPolicyName().equals(this.getPolicyName()) == false) return false; 
+        return true;
     }
     
 }

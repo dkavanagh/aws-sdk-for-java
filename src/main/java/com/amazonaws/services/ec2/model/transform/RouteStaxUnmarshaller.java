@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,12 +32,11 @@ import com.amazonaws.transform.SimpleTypeStaxUnmarshallers.*;
  */
 public class RouteStaxUnmarshaller implements Unmarshaller<Route, StaxUnmarshallerContext> {
 
-    
-
     public Route unmarshall(StaxUnmarshallerContext context) throws Exception {
         Route route = new Route();
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
+
         
         if (context.isStartOfDocument()) targetDepth += 1;
         
@@ -57,6 +56,14 @@ public class RouteStaxUnmarshaller implements Unmarshaller<Route, StaxUnmarshall
                 }
                 if (context.testExpression("instanceId", targetDepth)) {
                     route.setInstanceId(StringStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("instanceOwnerId", targetDepth)) {
+                    route.setInstanceOwnerId(StringStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("networkInterfaceId", targetDepth)) {
+                    route.setNetworkInterfaceId(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
                 if (context.testExpression("state", targetDepth)) {

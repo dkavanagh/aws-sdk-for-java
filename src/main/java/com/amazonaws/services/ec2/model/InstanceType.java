@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ public enum InstanceType {
     
     T1Micro("t1.micro"),
     M1Small("m1.small"),
+    M1Medium("m1.medium"),
     M1Large("m1.large"),
     M1Xlarge("m1.xlarge"),
     M2Xlarge("m2.xlarge"),
@@ -29,6 +30,7 @@ public enum InstanceType {
     C1Medium("c1.medium"),
     C1Xlarge("c1.xlarge"),
     Cc14xlarge("cc1.4xlarge"),
+    Cc28xlarge("cc2.8xlarge"),
     Cg14xlarge("cg1.4xlarge");
 
     private String value;
@@ -57,6 +59,8 @@ public enum InstanceType {
             return InstanceType.T1Micro;
         } else if ("m1.small".equals(value)) {
             return InstanceType.M1Small;
+        } else if ("m1.medium".equals(value)) {
+            return InstanceType.M1Medium;
         } else if ("m1.large".equals(value)) {
             return InstanceType.M1Large;
         } else if ("m1.xlarge".equals(value)) {
@@ -73,6 +77,8 @@ public enum InstanceType {
             return InstanceType.C1Xlarge;
         } else if ("cc1.4xlarge".equals(value)) {
             return InstanceType.Cc14xlarge;
+        } else if ("cc2.8xlarge".equals(value)) {
+            return InstanceType.Cc28xlarge;
         } else if ("cg1.4xlarge".equals(value)) {
             return InstanceType.Cg14xlarge;
         } else {

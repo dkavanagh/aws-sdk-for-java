@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,13 +18,11 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.autoscaling.AmazonAutoScaling#deleteAutoScalingGroup(DeleteAutoScalingGroupRequest) DeleteAutoScalingGroup operation}.
  * <p>
- * Deletes the specified auto scaling group if the group has no
- * instances and no scaling activities in progress.
+ * Deletes the specified Auto Scaling group if the group has no instances and no scaling activities in progress.
  * </p>
  * <p>
- * <b>NOTE:</b> To remove all instances before calling
- * DeleteAutoScalingGroup, you can call UpdateAutoScalingGroup to set the
- * minimum and maximum size of the AutoScalingGroup to zero.
+ * <b>NOTE:</b> To remove all instances before calling DeleteAutoScalingGroup, you can call UpdateAutoScalingGroup to set the minimum and maximum size of
+ * the AutoScalingGroup to zero.
  * </p>
  *
  * @see com.amazonaws.services.autoscaling.AmazonAutoScaling#deleteAutoScalingGroup(DeleteAutoScalingGroupRequest)
@@ -164,10 +162,35 @@ public class DeleteAutoScalingGroupRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
-        sb.append("ForceDelete: " + forceDelete + ", ");
+        if (autoScalingGroupName != null) sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
+        if (forceDelete != null) sb.append("ForceDelete: " + forceDelete + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getAutoScalingGroupName() == null) ? 0 : getAutoScalingGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((isForceDelete() == null) ? 0 : isForceDelete().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DeleteAutoScalingGroupRequest == false) return false;
+        DeleteAutoScalingGroupRequest other = (DeleteAutoScalingGroupRequest)obj;
+        
+        if (other.getAutoScalingGroupName() == null ^ this.getAutoScalingGroupName() == null) return false;
+        if (other.getAutoScalingGroupName() != null && other.getAutoScalingGroupName().equals(this.getAutoScalingGroupName()) == false) return false; 
+        if (other.isForceDelete() == null ^ this.isForceDelete() == null) return false;
+        if (other.isForceDelete() != null && other.isForceDelete().equals(this.isForceDelete()) == false) return false; 
+        return true;
     }
     
 }

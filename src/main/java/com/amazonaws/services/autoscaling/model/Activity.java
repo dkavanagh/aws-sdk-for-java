@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,10 +16,8 @@ package com.amazonaws.services.autoscaling.model;
 
 /**
  * <p>
- * A Scaling Activity is a long-running process that represents a change
- * to your AutoScalingGroup, such as changing the size of the group. It
- * can also be a process to replace an instance, or a process to perform
- * any other long-running operations supported by the API.
+ * A scaling Activity is a long-running process that represents a change to your AutoScalingGroup, such as changing the size of the group. It can also
+ * be a process to replace an instance, or a process to perform any other long-running operations supported by the API.
  * </p>
  */
 public class Activity {
@@ -72,7 +70,7 @@ public class Activity {
      * Contains the current status of the activity.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
+     * <b>Allowed Values: </b>WaitingForSpotInstanceRequestId, WaitingForSpotInstanceId, WaitingForInstanceId, PreInService, InProgress, Successful, Failed, Cancelled
      */
     private String statusCode;
 
@@ -90,6 +88,14 @@ public class Activity {
      * activity.
      */
     private Integer progress;
+
+    /**
+     * Contains details of the scaling activity.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
+     */
+    private String details;
 
     /**
      * Specifies the ID of the activity.
@@ -341,9 +347,11 @@ public class Activity {
      * Contains the current status of the activity.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
+     * <b>Allowed Values: </b>WaitingForSpotInstanceRequestId, WaitingForSpotInstanceId, WaitingForInstanceId, PreInService, InProgress, Successful, Failed, Cancelled
      *
      * @return Contains the current status of the activity.
+     *
+     * @see ScalingActivityStatusCode
      */
     public String getStatusCode() {
         return statusCode;
@@ -353,9 +361,11 @@ public class Activity {
      * Contains the current status of the activity.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
+     * <b>Allowed Values: </b>WaitingForSpotInstanceRequestId, WaitingForSpotInstanceId, WaitingForInstanceId, PreInService, InProgress, Successful, Failed, Cancelled
      *
      * @param statusCode Contains the current status of the activity.
+     *
+     * @see ScalingActivityStatusCode
      */
     public void setStatusCode(String statusCode) {
         this.statusCode = statusCode;
@@ -367,18 +377,54 @@ public class Activity {
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
+     * <b>Allowed Values: </b>WaitingForSpotInstanceRequestId, WaitingForSpotInstanceId, WaitingForInstanceId, PreInService, InProgress, Successful, Failed, Cancelled
      *
      * @param statusCode Contains the current status of the activity.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
+     *
+     * @see ScalingActivityStatusCode
      */
     public Activity withStatusCode(String statusCode) {
         this.statusCode = statusCode;
         return this;
     }
     
+    
+    /**
+     * Contains the current status of the activity.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>WaitingForSpotInstanceRequestId, WaitingForSpotInstanceId, WaitingForInstanceId, PreInService, InProgress, Successful, Failed, Cancelled
+     *
+     * @param statusCode Contains the current status of the activity.
+     *
+     * @see ScalingActivityStatusCode
+     */
+    public void setStatusCode(ScalingActivityStatusCode statusCode) {
+        this.statusCode = statusCode.toString();
+    }
+    
+    /**
+     * Contains the current status of the activity.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>WaitingForSpotInstanceRequestId, WaitingForSpotInstanceId, WaitingForInstanceId, PreInService, InProgress, Successful, Failed, Cancelled
+     *
+     * @param statusCode Contains the current status of the activity.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see ScalingActivityStatusCode
+     */
+    public Activity withStatusCode(ScalingActivityStatusCode statusCode) {
+        this.statusCode = statusCode.toString();
+        return this;
+    }
     
     /**
      * Contains a friendly, more verbose description of the activity status.
@@ -467,6 +513,49 @@ public class Activity {
     
     
     /**
+     * Contains details of the scaling activity.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
+     *
+     * @return Contains details of the scaling activity.
+     */
+    public String getDetails() {
+        return details;
+    }
+    
+    /**
+     * Contains details of the scaling activity.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
+     *
+     * @param details Contains details of the scaling activity.
+     */
+    public void setDetails(String details) {
+        this.details = details;
+    }
+    
+    /**
+     * Contains details of the scaling activity.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
+     *
+     * @param details Contains details of the scaling activity.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public Activity withDetails(String details) {
+        this.details = details;
+        return this;
+    }
+    
+    
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -478,17 +567,67 @@ public class Activity {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("ActivityId: " + activityId + ", ");
-        sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
-        sb.append("Description: " + description + ", ");
-        sb.append("Cause: " + cause + ", ");
-        sb.append("StartTime: " + startTime + ", ");
-        sb.append("EndTime: " + endTime + ", ");
-        sb.append("StatusCode: " + statusCode + ", ");
-        sb.append("StatusMessage: " + statusMessage + ", ");
-        sb.append("Progress: " + progress + ", ");
+        if (activityId != null) sb.append("ActivityId: " + activityId + ", ");
+        if (autoScalingGroupName != null) sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
+        if (description != null) sb.append("Description: " + description + ", ");
+        if (cause != null) sb.append("Cause: " + cause + ", ");
+        if (startTime != null) sb.append("StartTime: " + startTime + ", ");
+        if (endTime != null) sb.append("EndTime: " + endTime + ", ");
+        if (statusCode != null) sb.append("StatusCode: " + statusCode + ", ");
+        if (statusMessage != null) sb.append("StatusMessage: " + statusMessage + ", ");
+        if (progress != null) sb.append("Progress: " + progress + ", ");
+        if (details != null) sb.append("Details: " + details + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getActivityId() == null) ? 0 : getActivityId().hashCode()); 
+        hashCode = prime * hashCode + ((getAutoScalingGroupName() == null) ? 0 : getAutoScalingGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getDescription() == null) ? 0 : getDescription().hashCode()); 
+        hashCode = prime * hashCode + ((getCause() == null) ? 0 : getCause().hashCode()); 
+        hashCode = prime * hashCode + ((getStartTime() == null) ? 0 : getStartTime().hashCode()); 
+        hashCode = prime * hashCode + ((getEndTime() == null) ? 0 : getEndTime().hashCode()); 
+        hashCode = prime * hashCode + ((getStatusCode() == null) ? 0 : getStatusCode().hashCode()); 
+        hashCode = prime * hashCode + ((getStatusMessage() == null) ? 0 : getStatusMessage().hashCode()); 
+        hashCode = prime * hashCode + ((getProgress() == null) ? 0 : getProgress().hashCode()); 
+        hashCode = prime * hashCode + ((getDetails() == null) ? 0 : getDetails().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof Activity == false) return false;
+        Activity other = (Activity)obj;
+        
+        if (other.getActivityId() == null ^ this.getActivityId() == null) return false;
+        if (other.getActivityId() != null && other.getActivityId().equals(this.getActivityId()) == false) return false; 
+        if (other.getAutoScalingGroupName() == null ^ this.getAutoScalingGroupName() == null) return false;
+        if (other.getAutoScalingGroupName() != null && other.getAutoScalingGroupName().equals(this.getAutoScalingGroupName()) == false) return false; 
+        if (other.getDescription() == null ^ this.getDescription() == null) return false;
+        if (other.getDescription() != null && other.getDescription().equals(this.getDescription()) == false) return false; 
+        if (other.getCause() == null ^ this.getCause() == null) return false;
+        if (other.getCause() != null && other.getCause().equals(this.getCause()) == false) return false; 
+        if (other.getStartTime() == null ^ this.getStartTime() == null) return false;
+        if (other.getStartTime() != null && other.getStartTime().equals(this.getStartTime()) == false) return false; 
+        if (other.getEndTime() == null ^ this.getEndTime() == null) return false;
+        if (other.getEndTime() != null && other.getEndTime().equals(this.getEndTime()) == false) return false; 
+        if (other.getStatusCode() == null ^ this.getStatusCode() == null) return false;
+        if (other.getStatusCode() != null && other.getStatusCode().equals(this.getStatusCode()) == false) return false; 
+        if (other.getStatusMessage() == null ^ this.getStatusMessage() == null) return false;
+        if (other.getStatusMessage() != null && other.getStatusMessage().equals(this.getStatusMessage()) == false) return false; 
+        if (other.getProgress() == null ^ this.getProgress() == null) return false;
+        if (other.getProgress() != null && other.getProgress().equals(this.getProgress()) == false) return false; 
+        if (other.getDetails() == null ^ this.getDetails() == null) return false;
+        if (other.getDetails() != null && other.getDetails().equals(this.getDetails()) == false) return false; 
+        return true;
     }
     
 }

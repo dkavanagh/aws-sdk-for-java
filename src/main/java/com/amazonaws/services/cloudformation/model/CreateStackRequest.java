@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,13 +18,11 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.cloudformation.AmazonCloudFormation#createStack(CreateStackRequest) CreateStack operation}.
  * <p>
- * Creates a stack as specified in the template. After the call
- * completes successfully, the stack creation starts. You can check the
- * status of the stack via the DescribeStacks API.
+ * Creates a stack as specified in the template. After the call completes successfully, the stack creation starts. You can check the status of the stack
+ * via the DescribeStacks API.
  * </p>
  * <p>
- * <b>NOTE:</b> Currently, the limit for stacks is 20 stacks per account
- * per region.
+ * <b>NOTE:</b> Currently, the limit for stacks is 20 stacks per account per region.
  * </p>
  *
  * @see com.amazonaws.services.cloudformation.AmazonCloudFormation#createStack(CreateStackRequest)
@@ -43,7 +41,7 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
      * Structure containing the template body. (For more information, go to
      * the <a
      * p://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide">AWS
-     * CloudFormation User Guide</a>.) <p>Condition: You must pass
+     * CloudFormation User Guide</a>.) <p>Conditional: You must pass
      * <code>TemplateBody</code> or <code>TemplateURL</code>. If both are
      * passed, only <code>TemplateBody</code> is used.
      * <p>
@@ -67,7 +65,8 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
     private String templateURL;
 
     /**
-     * A list of <code>Parameter</code> structures.
+     * A list of <code>Parameter</code> structures that specify input
+     * parameters for the stack.
      */
     private java.util.List<Parameter> parameters;
 
@@ -97,6 +96,23 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>0 - 5<br/>
      */
     private java.util.List<String> notificationARNs;
+
+    /**
+     * The list of capabilities that you want to allow in the stack. If your
+     * template contains IAM resources, you must specify the CAPABILITY_IAM
+     * value for this parameter; otherwise, this action returns an
+     * InsufficientCapabilities error. IAM resources are the following: <a
+     * /UserGuide/aws-properties-iam-accesskey.html">AWS::IAM::AccessKey</a>,
+     * <a
+     * n/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
+     * <a
+     * latest/UserGuide/aws-properties-iam-policy.html">AWS::IAM::Policy</a>,
+     * <a
+     * ion/latest/UserGuide/aws-properties-iam-user.html">AWS::IAM::User</a>,
+     * and <a
+     * properties-iam-addusertogroup.html">AWS::IAM::UserToGroupAddition</a>.
+     */
+    private java.util.List<String> capabilities;
 
     /**
      * The name associated with the stack. The name must be unique within
@@ -154,7 +170,7 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
      * Structure containing the template body. (For more information, go to
      * the <a
      * p://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide">AWS
-     * CloudFormation User Guide</a>.) <p>Condition: You must pass
+     * CloudFormation User Guide</a>.) <p>Conditional: You must pass
      * <code>TemplateBody</code> or <code>TemplateURL</code>. If both are
      * passed, only <code>TemplateBody</code> is used.
      * <p>
@@ -164,7 +180,7 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
      * @return Structure containing the template body. (For more information, go to
      *         the <a
      *         p://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide">AWS
-     *         CloudFormation User Guide</a>.) <p>Condition: You must pass
+     *         CloudFormation User Guide</a>.) <p>Conditional: You must pass
      *         <code>TemplateBody</code> or <code>TemplateURL</code>. If both are
      *         passed, only <code>TemplateBody</code> is used.
      */
@@ -176,7 +192,7 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
      * Structure containing the template body. (For more information, go to
      * the <a
      * p://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide">AWS
-     * CloudFormation User Guide</a>.) <p>Condition: You must pass
+     * CloudFormation User Guide</a>.) <p>Conditional: You must pass
      * <code>TemplateBody</code> or <code>TemplateURL</code>. If both are
      * passed, only <code>TemplateBody</code> is used.
      * <p>
@@ -186,7 +202,7 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
      * @param templateBody Structure containing the template body. (For more information, go to
      *         the <a
      *         p://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide">AWS
-     *         CloudFormation User Guide</a>.) <p>Condition: You must pass
+     *         CloudFormation User Guide</a>.) <p>Conditional: You must pass
      *         <code>TemplateBody</code> or <code>TemplateURL</code>. If both are
      *         passed, only <code>TemplateBody</code> is used.
      */
@@ -198,7 +214,7 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
      * Structure containing the template body. (For more information, go to
      * the <a
      * p://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide">AWS
-     * CloudFormation User Guide</a>.) <p>Condition: You must pass
+     * CloudFormation User Guide</a>.) <p>Conditional: You must pass
      * <code>TemplateBody</code> or <code>TemplateURL</code>. If both are
      * passed, only <code>TemplateBody</code> is used.
      * <p>
@@ -210,7 +226,7 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
      * @param templateBody Structure containing the template body. (For more information, go to
      *         the <a
      *         p://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide">AWS
-     *         CloudFormation User Guide</a>.) <p>Condition: You must pass
+     *         CloudFormation User Guide</a>.) <p>Conditional: You must pass
      *         <code>TemplateBody</code> or <code>TemplateURL</code>. If both are
      *         passed, only <code>TemplateBody</code> is used.
      *
@@ -303,11 +319,14 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * A list of <code>Parameter</code> structures.
+     * A list of <code>Parameter</code> structures that specify input
+     * parameters for the stack.
      *
-     * @return A list of <code>Parameter</code> structures.
+     * @return A list of <code>Parameter</code> structures that specify input
+     *         parameters for the stack.
      */
     public java.util.List<Parameter> getParameters() {
+        
         if (parameters == null) {
             parameters = new java.util.ArrayList<Parameter>();
         }
@@ -315,29 +334,37 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * A list of <code>Parameter</code> structures.
+     * A list of <code>Parameter</code> structures that specify input
+     * parameters for the stack.
      *
-     * @param parameters A list of <code>Parameter</code> structures.
+     * @param parameters A list of <code>Parameter</code> structures that specify input
+     *         parameters for the stack.
      */
     public void setParameters(java.util.Collection<Parameter> parameters) {
-        java.util.List<Parameter> parametersCopy = new java.util.ArrayList<Parameter>();
-        if (parameters != null) {
-            parametersCopy.addAll(parameters);
+        if (parameters == null) {
+            this.parameters = null;
+            return;
         }
+
+        java.util.List<Parameter> parametersCopy = new java.util.ArrayList<Parameter>(parameters.size());
+        parametersCopy.addAll(parameters);
         this.parameters = parametersCopy;
     }
     
     /**
-     * A list of <code>Parameter</code> structures.
+     * A list of <code>Parameter</code> structures that specify input
+     * parameters for the stack.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param parameters A list of <code>Parameter</code> structures.
+     * @param parameters A list of <code>Parameter</code> structures that specify input
+     *         parameters for the stack.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
      */
     public CreateStackRequest withParameters(Parameter... parameters) {
+        if (getParameters() == null) setParameters(new java.util.ArrayList<Parameter>(parameters.length));
         for (Parameter value : parameters) {
             getParameters().add(value);
         }
@@ -345,21 +372,25 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * A list of <code>Parameter</code> structures.
+     * A list of <code>Parameter</code> structures that specify input
+     * parameters for the stack.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param parameters A list of <code>Parameter</code> structures.
+     * @param parameters A list of <code>Parameter</code> structures that specify input
+     *         parameters for the stack.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
      */
     public CreateStackRequest withParameters(java.util.Collection<Parameter> parameters) {
-        java.util.List<Parameter> parametersCopy = new java.util.ArrayList<Parameter>();
-        if (parameters != null) {
+        if (parameters == null) {
+            this.parameters = null;
+        } else {
+            java.util.List<Parameter> parametersCopy = new java.util.ArrayList<Parameter>(parameters.size());
             parametersCopy.addAll(parameters);
+            this.parameters = parametersCopy;
         }
-        this.parameters = parametersCopy;
 
         return this;
     }
@@ -485,6 +516,7 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
      *         Command Line Interface (CLI).
      */
     public java.util.List<String> getNotificationARNs() {
+        
         if (notificationARNs == null) {
             notificationARNs = new java.util.ArrayList<String>();
         }
@@ -506,10 +538,13 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
      *         Command Line Interface (CLI).
      */
     public void setNotificationARNs(java.util.Collection<String> notificationARNs) {
-        java.util.List<String> notificationARNsCopy = new java.util.ArrayList<String>();
-        if (notificationARNs != null) {
-            notificationARNsCopy.addAll(notificationARNs);
+        if (notificationARNs == null) {
+            this.notificationARNs = null;
+            return;
         }
+
+        java.util.List<String> notificationARNsCopy = new java.util.ArrayList<String>(notificationARNs.size());
+        notificationARNsCopy.addAll(notificationARNs);
         this.notificationARNs = notificationARNsCopy;
     }
     
@@ -533,6 +568,7 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public CreateStackRequest withNotificationARNs(String... notificationARNs) {
+        if (getNotificationARNs() == null) setNotificationARNs(new java.util.ArrayList<String>(notificationARNs.length));
         for (String value : notificationARNs) {
             getNotificationARNs().add(value);
         }
@@ -559,11 +595,178 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public CreateStackRequest withNotificationARNs(java.util.Collection<String> notificationARNs) {
-        java.util.List<String> notificationARNsCopy = new java.util.ArrayList<String>();
-        if (notificationARNs != null) {
+        if (notificationARNs == null) {
+            this.notificationARNs = null;
+        } else {
+            java.util.List<String> notificationARNsCopy = new java.util.ArrayList<String>(notificationARNs.size());
             notificationARNsCopy.addAll(notificationARNs);
+            this.notificationARNs = notificationARNsCopy;
         }
-        this.notificationARNs = notificationARNsCopy;
+
+        return this;
+    }
+    
+    /**
+     * The list of capabilities that you want to allow in the stack. If your
+     * template contains IAM resources, you must specify the CAPABILITY_IAM
+     * value for this parameter; otherwise, this action returns an
+     * InsufficientCapabilities error. IAM resources are the following: <a
+     * /UserGuide/aws-properties-iam-accesskey.html">AWS::IAM::AccessKey</a>,
+     * <a
+     * n/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
+     * <a
+     * latest/UserGuide/aws-properties-iam-policy.html">AWS::IAM::Policy</a>,
+     * <a
+     * ion/latest/UserGuide/aws-properties-iam-user.html">AWS::IAM::User</a>,
+     * and <a
+     * properties-iam-addusertogroup.html">AWS::IAM::UserToGroupAddition</a>.
+     *
+     * @return The list of capabilities that you want to allow in the stack. If your
+     *         template contains IAM resources, you must specify the CAPABILITY_IAM
+     *         value for this parameter; otherwise, this action returns an
+     *         InsufficientCapabilities error. IAM resources are the following: <a
+     *         /UserGuide/aws-properties-iam-accesskey.html">AWS::IAM::AccessKey</a>,
+     *         <a
+     *         n/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
+     *         <a
+     *         latest/UserGuide/aws-properties-iam-policy.html">AWS::IAM::Policy</a>,
+     *         <a
+     *         ion/latest/UserGuide/aws-properties-iam-user.html">AWS::IAM::User</a>,
+     *         and <a
+     *         properties-iam-addusertogroup.html">AWS::IAM::UserToGroupAddition</a>.
+     */
+    public java.util.List<String> getCapabilities() {
+        
+        if (capabilities == null) {
+            capabilities = new java.util.ArrayList<String>();
+        }
+        return capabilities;
+    }
+    
+    /**
+     * The list of capabilities that you want to allow in the stack. If your
+     * template contains IAM resources, you must specify the CAPABILITY_IAM
+     * value for this parameter; otherwise, this action returns an
+     * InsufficientCapabilities error. IAM resources are the following: <a
+     * /UserGuide/aws-properties-iam-accesskey.html">AWS::IAM::AccessKey</a>,
+     * <a
+     * n/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
+     * <a
+     * latest/UserGuide/aws-properties-iam-policy.html">AWS::IAM::Policy</a>,
+     * <a
+     * ion/latest/UserGuide/aws-properties-iam-user.html">AWS::IAM::User</a>,
+     * and <a
+     * properties-iam-addusertogroup.html">AWS::IAM::UserToGroupAddition</a>.
+     *
+     * @param capabilities The list of capabilities that you want to allow in the stack. If your
+     *         template contains IAM resources, you must specify the CAPABILITY_IAM
+     *         value for this parameter; otherwise, this action returns an
+     *         InsufficientCapabilities error. IAM resources are the following: <a
+     *         /UserGuide/aws-properties-iam-accesskey.html">AWS::IAM::AccessKey</a>,
+     *         <a
+     *         n/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
+     *         <a
+     *         latest/UserGuide/aws-properties-iam-policy.html">AWS::IAM::Policy</a>,
+     *         <a
+     *         ion/latest/UserGuide/aws-properties-iam-user.html">AWS::IAM::User</a>,
+     *         and <a
+     *         properties-iam-addusertogroup.html">AWS::IAM::UserToGroupAddition</a>.
+     */
+    public void setCapabilities(java.util.Collection<String> capabilities) {
+        if (capabilities == null) {
+            this.capabilities = null;
+            return;
+        }
+
+        java.util.List<String> capabilitiesCopy = new java.util.ArrayList<String>(capabilities.size());
+        capabilitiesCopy.addAll(capabilities);
+        this.capabilities = capabilitiesCopy;
+    }
+    
+    /**
+     * The list of capabilities that you want to allow in the stack. If your
+     * template contains IAM resources, you must specify the CAPABILITY_IAM
+     * value for this parameter; otherwise, this action returns an
+     * InsufficientCapabilities error. IAM resources are the following: <a
+     * /UserGuide/aws-properties-iam-accesskey.html">AWS::IAM::AccessKey</a>,
+     * <a
+     * n/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
+     * <a
+     * latest/UserGuide/aws-properties-iam-policy.html">AWS::IAM::Policy</a>,
+     * <a
+     * ion/latest/UserGuide/aws-properties-iam-user.html">AWS::IAM::User</a>,
+     * and <a
+     * properties-iam-addusertogroup.html">AWS::IAM::UserToGroupAddition</a>.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param capabilities The list of capabilities that you want to allow in the stack. If your
+     *         template contains IAM resources, you must specify the CAPABILITY_IAM
+     *         value for this parameter; otherwise, this action returns an
+     *         InsufficientCapabilities error. IAM resources are the following: <a
+     *         /UserGuide/aws-properties-iam-accesskey.html">AWS::IAM::AccessKey</a>,
+     *         <a
+     *         n/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
+     *         <a
+     *         latest/UserGuide/aws-properties-iam-policy.html">AWS::IAM::Policy</a>,
+     *         <a
+     *         ion/latest/UserGuide/aws-properties-iam-user.html">AWS::IAM::User</a>,
+     *         and <a
+     *         properties-iam-addusertogroup.html">AWS::IAM::UserToGroupAddition</a>.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public CreateStackRequest withCapabilities(String... capabilities) {
+        if (getCapabilities() == null) setCapabilities(new java.util.ArrayList<String>(capabilities.length));
+        for (String value : capabilities) {
+            getCapabilities().add(value);
+        }
+        return this;
+    }
+    
+    /**
+     * The list of capabilities that you want to allow in the stack. If your
+     * template contains IAM resources, you must specify the CAPABILITY_IAM
+     * value for this parameter; otherwise, this action returns an
+     * InsufficientCapabilities error. IAM resources are the following: <a
+     * /UserGuide/aws-properties-iam-accesskey.html">AWS::IAM::AccessKey</a>,
+     * <a
+     * n/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
+     * <a
+     * latest/UserGuide/aws-properties-iam-policy.html">AWS::IAM::Policy</a>,
+     * <a
+     * ion/latest/UserGuide/aws-properties-iam-user.html">AWS::IAM::User</a>,
+     * and <a
+     * properties-iam-addusertogroup.html">AWS::IAM::UserToGroupAddition</a>.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param capabilities The list of capabilities that you want to allow in the stack. If your
+     *         template contains IAM resources, you must specify the CAPABILITY_IAM
+     *         value for this parameter; otherwise, this action returns an
+     *         InsufficientCapabilities error. IAM resources are the following: <a
+     *         /UserGuide/aws-properties-iam-accesskey.html">AWS::IAM::AccessKey</a>,
+     *         <a
+     *         n/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
+     *         <a
+     *         latest/UserGuide/aws-properties-iam-policy.html">AWS::IAM::Policy</a>,
+     *         <a
+     *         ion/latest/UserGuide/aws-properties-iam-user.html">AWS::IAM::User</a>,
+     *         and <a
+     *         properties-iam-addusertogroup.html">AWS::IAM::UserToGroupAddition</a>.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public CreateStackRequest withCapabilities(java.util.Collection<String> capabilities) {
+        if (capabilities == null) {
+            this.capabilities = null;
+        } else {
+            java.util.List<String> capabilitiesCopy = new java.util.ArrayList<String>(capabilities.size());
+            capabilitiesCopy.addAll(capabilities);
+            this.capabilities = capabilitiesCopy;
+        }
 
         return this;
     }
@@ -580,15 +783,59 @@ public class CreateStackRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("StackName: " + stackName + ", ");
-        sb.append("TemplateBody: " + templateBody + ", ");
-        sb.append("TemplateURL: " + templateURL + ", ");
-        sb.append("Parameters: " + parameters + ", ");
-        sb.append("DisableRollback: " + disableRollback + ", ");
-        sb.append("TimeoutInMinutes: " + timeoutInMinutes + ", ");
-        sb.append("NotificationARNs: " + notificationARNs + ", ");
+        if (stackName != null) sb.append("StackName: " + stackName + ", ");
+        if (templateBody != null) sb.append("TemplateBody: " + templateBody + ", ");
+        if (templateURL != null) sb.append("TemplateURL: " + templateURL + ", ");
+        if (parameters != null) sb.append("Parameters: " + parameters + ", ");
+        if (disableRollback != null) sb.append("DisableRollback: " + disableRollback + ", ");
+        if (timeoutInMinutes != null) sb.append("TimeoutInMinutes: " + timeoutInMinutes + ", ");
+        if (notificationARNs != null) sb.append("NotificationARNs: " + notificationARNs + ", ");
+        if (capabilities != null) sb.append("Capabilities: " + capabilities + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getStackName() == null) ? 0 : getStackName().hashCode()); 
+        hashCode = prime * hashCode + ((getTemplateBody() == null) ? 0 : getTemplateBody().hashCode()); 
+        hashCode = prime * hashCode + ((getTemplateURL() == null) ? 0 : getTemplateURL().hashCode()); 
+        hashCode = prime * hashCode + ((getParameters() == null) ? 0 : getParameters().hashCode()); 
+        hashCode = prime * hashCode + ((isDisableRollback() == null) ? 0 : isDisableRollback().hashCode()); 
+        hashCode = prime * hashCode + ((getTimeoutInMinutes() == null) ? 0 : getTimeoutInMinutes().hashCode()); 
+        hashCode = prime * hashCode + ((getNotificationARNs() == null) ? 0 : getNotificationARNs().hashCode()); 
+        hashCode = prime * hashCode + ((getCapabilities() == null) ? 0 : getCapabilities().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof CreateStackRequest == false) return false;
+        CreateStackRequest other = (CreateStackRequest)obj;
+        
+        if (other.getStackName() == null ^ this.getStackName() == null) return false;
+        if (other.getStackName() != null && other.getStackName().equals(this.getStackName()) == false) return false; 
+        if (other.getTemplateBody() == null ^ this.getTemplateBody() == null) return false;
+        if (other.getTemplateBody() != null && other.getTemplateBody().equals(this.getTemplateBody()) == false) return false; 
+        if (other.getTemplateURL() == null ^ this.getTemplateURL() == null) return false;
+        if (other.getTemplateURL() != null && other.getTemplateURL().equals(this.getTemplateURL()) == false) return false; 
+        if (other.getParameters() == null ^ this.getParameters() == null) return false;
+        if (other.getParameters() != null && other.getParameters().equals(this.getParameters()) == false) return false; 
+        if (other.isDisableRollback() == null ^ this.isDisableRollback() == null) return false;
+        if (other.isDisableRollback() != null && other.isDisableRollback().equals(this.isDisableRollback()) == false) return false; 
+        if (other.getTimeoutInMinutes() == null ^ this.getTimeoutInMinutes() == null) return false;
+        if (other.getTimeoutInMinutes() != null && other.getTimeoutInMinutes().equals(this.getTimeoutInMinutes()) == false) return false; 
+        if (other.getNotificationARNs() == null ^ this.getNotificationARNs() == null) return false;
+        if (other.getNotificationARNs() != null && other.getNotificationARNs().equals(this.getNotificationARNs()) == false) return false; 
+        if (other.getCapabilities() == null ^ this.getCapabilities() == null) return false;
+        if (other.getCapabilities() != null && other.getCapabilities().equals(this.getCapabilities()) == false) return false; 
+        return true;
     }
     
 }

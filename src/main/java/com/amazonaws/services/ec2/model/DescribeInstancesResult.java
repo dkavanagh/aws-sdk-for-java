@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ public class DescribeInstancesResult {
      * @return The list of reservations containing the describes instances.
      */
     public java.util.List<Reservation> getReservations() {
+        
         if (reservations == null) {
             reservations = new java.util.ArrayList<Reservation>();
         }
@@ -44,10 +45,13 @@ public class DescribeInstancesResult {
      * @param reservations The list of reservations containing the describes instances.
      */
     public void setReservations(java.util.Collection<Reservation> reservations) {
-        java.util.List<Reservation> reservationsCopy = new java.util.ArrayList<Reservation>();
-        if (reservations != null) {
-            reservationsCopy.addAll(reservations);
+        if (reservations == null) {
+            this.reservations = null;
+            return;
         }
+
+        java.util.List<Reservation> reservationsCopy = new java.util.ArrayList<Reservation>(reservations.size());
+        reservationsCopy.addAll(reservations);
         this.reservations = reservationsCopy;
     }
     
@@ -62,6 +66,7 @@ public class DescribeInstancesResult {
      *         together. 
      */
     public DescribeInstancesResult withReservations(Reservation... reservations) {
+        if (getReservations() == null) setReservations(new java.util.ArrayList<Reservation>(reservations.length));
         for (Reservation value : reservations) {
             getReservations().add(value);
         }
@@ -79,11 +84,13 @@ public class DescribeInstancesResult {
      *         together. 
      */
     public DescribeInstancesResult withReservations(java.util.Collection<Reservation> reservations) {
-        java.util.List<Reservation> reservationsCopy = new java.util.ArrayList<Reservation>();
-        if (reservations != null) {
+        if (reservations == null) {
+            this.reservations = null;
+        } else {
+            java.util.List<Reservation> reservationsCopy = new java.util.ArrayList<Reservation>(reservations.size());
             reservationsCopy.addAll(reservations);
+            this.reservations = reservationsCopy;
         }
-        this.reservations = reservationsCopy;
 
         return this;
     }
@@ -100,9 +107,31 @@ public class DescribeInstancesResult {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Reservations: " + reservations + ", ");
+        if (reservations != null) sb.append("Reservations: " + reservations + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getReservations() == null) ? 0 : getReservations().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeInstancesResult == false) return false;
+        DescribeInstancesResult other = (DescribeInstancesResult)obj;
+        
+        if (other.getReservations() == null ^ this.getReservations() == null) return false;
+        if (other.getReservations() != null && other.getReservations().equals(this.getReservations()) == false) return false; 
+        return true;
     }
     
 }

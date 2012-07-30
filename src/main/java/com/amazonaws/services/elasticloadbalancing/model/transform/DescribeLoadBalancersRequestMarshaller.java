@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.elasticloadbalancing.model.*;
@@ -30,19 +31,28 @@ import com.amazonaws.util.StringUtils;
 public class DescribeLoadBalancersRequestMarshaller implements Marshaller<Request<DescribeLoadBalancersRequest>, DescribeLoadBalancersRequest> {
 
     public Request<DescribeLoadBalancersRequest> marshall(DescribeLoadBalancersRequest describeLoadBalancersRequest) {
+
+        if (describeLoadBalancersRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<DescribeLoadBalancersRequest> request = new DefaultRequest<DescribeLoadBalancersRequest>(describeLoadBalancersRequest, "AmazonElasticLoadBalancing");
         request.addParameter("Action", "DescribeLoadBalancers");
-        request.addParameter("Version", "2011-04-05");
-        if (describeLoadBalancersRequest != null) {
-            java.util.List<String> loadBalancerNamesList = describeLoadBalancersRequest.getLoadBalancerNames();
-            int loadBalancerNamesListIndex = 1;
+        request.addParameter("Version", "2012-06-01");
 
-            for (String loadBalancerNamesListValue : loadBalancerNamesList) {
-                if (loadBalancerNamesListValue != null) {
-                    request.addParameter("LoadBalancerNames.member." + loadBalancerNamesListIndex, StringUtils.fromString(loadBalancerNamesListValue));
-                }
-                loadBalancerNamesListIndex++;
+
+        java.util.List<String> loadBalancerNamesList = describeLoadBalancersRequest.getLoadBalancerNames();
+        int loadBalancerNamesListIndex = 1;
+
+        for (String loadBalancerNamesListValue : loadBalancerNamesList) {
+            if (loadBalancerNamesListValue != null) {
+                request.addParameter("LoadBalancerNames.member." + loadBalancerNamesListIndex, StringUtils.fromString(loadBalancerNamesListValue));
             }
+
+            loadBalancerNamesListIndex++;
+        }
+        if (describeLoadBalancersRequest.getMarker() != null) {
+            request.addParameter("Marker", StringUtils.fromString(describeLoadBalancersRequest.getMarker()));
         }
 
 

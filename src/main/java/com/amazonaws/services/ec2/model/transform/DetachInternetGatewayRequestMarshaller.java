@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.ec2.model.*;
@@ -30,18 +31,20 @@ import com.amazonaws.util.StringUtils;
 public class DetachInternetGatewayRequestMarshaller implements Marshaller<Request<DetachInternetGatewayRequest>, DetachInternetGatewayRequest> {
 
     public Request<DetachInternetGatewayRequest> marshall(DetachInternetGatewayRequest detachInternetGatewayRequest) {
+
+        if (detachInternetGatewayRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<DetachInternetGatewayRequest> request = new DefaultRequest<DetachInternetGatewayRequest>(detachInternetGatewayRequest, "AmazonEC2");
         request.addParameter("Action", "DetachInternetGateway");
-        request.addParameter("Version", "2011-05-15");
-        if (detachInternetGatewayRequest != null) {
-            if (detachInternetGatewayRequest.getInternetGatewayId() != null) {
-                request.addParameter("InternetGatewayId", StringUtils.fromString(detachInternetGatewayRequest.getInternetGatewayId()));
-            }
+        request.addParameter("Version", "2012-06-15");
+
+        if (detachInternetGatewayRequest.getInternetGatewayId() != null) {
+            request.addParameter("InternetGatewayId", StringUtils.fromString(detachInternetGatewayRequest.getInternetGatewayId()));
         }
-        if (detachInternetGatewayRequest != null) {
-            if (detachInternetGatewayRequest.getVpcId() != null) {
-                request.addParameter("VpcId", StringUtils.fromString(detachInternetGatewayRequest.getVpcId()));
-            }
+        if (detachInternetGatewayRequest.getVpcId() != null) {
+            request.addParameter("VpcId", StringUtils.fromString(detachInternetGatewayRequest.getVpcId()));
         }
 
 

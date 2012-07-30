@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.elasticloadbalancing.model.*;
@@ -30,24 +31,28 @@ import com.amazonaws.util.StringUtils;
 public class DeleteLoadBalancerListenersRequestMarshaller implements Marshaller<Request<DeleteLoadBalancerListenersRequest>, DeleteLoadBalancerListenersRequest> {
 
     public Request<DeleteLoadBalancerListenersRequest> marshall(DeleteLoadBalancerListenersRequest deleteLoadBalancerListenersRequest) {
+
+        if (deleteLoadBalancerListenersRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<DeleteLoadBalancerListenersRequest> request = new DefaultRequest<DeleteLoadBalancerListenersRequest>(deleteLoadBalancerListenersRequest, "AmazonElasticLoadBalancing");
         request.addParameter("Action", "DeleteLoadBalancerListeners");
-        request.addParameter("Version", "2011-04-05");
-        if (deleteLoadBalancerListenersRequest != null) {
-            if (deleteLoadBalancerListenersRequest.getLoadBalancerName() != null) {
-                request.addParameter("LoadBalancerName", StringUtils.fromString(deleteLoadBalancerListenersRequest.getLoadBalancerName()));
-            }
-        }
-        if (deleteLoadBalancerListenersRequest != null) {
-            java.util.List<Integer> loadBalancerPortsList = deleteLoadBalancerListenersRequest.getLoadBalancerPorts();
-            int loadBalancerPortsListIndex = 1;
+        request.addParameter("Version", "2012-06-01");
 
-            for (Integer loadBalancerPortsListValue : loadBalancerPortsList) {
-                if (loadBalancerPortsListValue != null) {
-                    request.addParameter("LoadBalancerPorts.member." + loadBalancerPortsListIndex, StringUtils.fromInteger(loadBalancerPortsListValue));
-                }
-                loadBalancerPortsListIndex++;
+        if (deleteLoadBalancerListenersRequest.getLoadBalancerName() != null) {
+            request.addParameter("LoadBalancerName", StringUtils.fromString(deleteLoadBalancerListenersRequest.getLoadBalancerName()));
+        }
+
+        java.util.List<Integer> loadBalancerPortsList = deleteLoadBalancerListenersRequest.getLoadBalancerPorts();
+        int loadBalancerPortsListIndex = 1;
+
+        for (Integer loadBalancerPortsListValue : loadBalancerPortsList) {
+            if (loadBalancerPortsListValue != null) {
+                request.addParameter("LoadBalancerPorts.member." + loadBalancerPortsListIndex, StringUtils.fromInteger(loadBalancerPortsListValue));
             }
+
+            loadBalancerPortsListIndex++;
         }
 
 

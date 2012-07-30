@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,12 +32,11 @@ import com.amazonaws.transform.SimpleTypeStaxUnmarshallers.*;
  */
 public class LoadBalancerDescriptionStaxUnmarshaller implements Unmarshaller<LoadBalancerDescription, StaxUnmarshallerContext> {
 
-    
-
     public LoadBalancerDescription unmarshall(StaxUnmarshallerContext context) throws Exception {
         LoadBalancerDescription loadBalancerDescription = new LoadBalancerDescription();
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
+
         
         if (context.isStartOfDocument()) targetDepth += 2;
         
@@ -71,8 +70,20 @@ public class LoadBalancerDescriptionStaxUnmarshaller implements Unmarshaller<Loa
                     loadBalancerDescription.setPolicies(PoliciesStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
+                if (context.testExpression("BackendServerDescriptions/member", targetDepth)) {
+                    loadBalancerDescription.getBackendServerDescriptions().add(BackendServerDescriptionStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
                 if (context.testExpression("AvailabilityZones/member", targetDepth)) {
                     loadBalancerDescription.getAvailabilityZones().add(StringStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("Subnets/member", targetDepth)) {
+                    loadBalancerDescription.getSubnets().add(StringStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("VPCId", targetDepth)) {
+                    loadBalancerDescription.setVPCId(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
                 if (context.testExpression("Instances/member", targetDepth)) {
@@ -87,8 +98,16 @@ public class LoadBalancerDescriptionStaxUnmarshaller implements Unmarshaller<Loa
                     loadBalancerDescription.setSourceSecurityGroup(SourceSecurityGroupStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
+                if (context.testExpression("SecurityGroups/member", targetDepth)) {
+                    loadBalancerDescription.getSecurityGroups().add(StringStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
                 if (context.testExpression("CreatedTime", targetDepth)) {
                     loadBalancerDescription.setCreatedTime(DateStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("Scheme", targetDepth)) {
+                    loadBalancerDescription.setScheme(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
             } else if (xmlEvent.isEndElement()) {

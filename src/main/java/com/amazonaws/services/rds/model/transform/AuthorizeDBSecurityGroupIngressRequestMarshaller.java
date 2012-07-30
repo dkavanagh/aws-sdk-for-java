@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.rds.model.*;
@@ -30,28 +31,29 @@ import com.amazonaws.util.StringUtils;
 public class AuthorizeDBSecurityGroupIngressRequestMarshaller implements Marshaller<Request<AuthorizeDBSecurityGroupIngressRequest>, AuthorizeDBSecurityGroupIngressRequest> {
 
     public Request<AuthorizeDBSecurityGroupIngressRequest> marshall(AuthorizeDBSecurityGroupIngressRequest authorizeDBSecurityGroupIngressRequest) {
+
+        if (authorizeDBSecurityGroupIngressRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<AuthorizeDBSecurityGroupIngressRequest> request = new DefaultRequest<AuthorizeDBSecurityGroupIngressRequest>(authorizeDBSecurityGroupIngressRequest, "AmazonRDS");
         request.addParameter("Action", "AuthorizeDBSecurityGroupIngress");
-        request.addParameter("Version", "2011-04-01");
-        if (authorizeDBSecurityGroupIngressRequest != null) {
-            if (authorizeDBSecurityGroupIngressRequest.getDBSecurityGroupName() != null) {
-                request.addParameter("DBSecurityGroupName", StringUtils.fromString(authorizeDBSecurityGroupIngressRequest.getDBSecurityGroupName()));
-            }
+        request.addParameter("Version", "2012-04-23");
+
+        if (authorizeDBSecurityGroupIngressRequest.getDBSecurityGroupName() != null) {
+            request.addParameter("DBSecurityGroupName", StringUtils.fromString(authorizeDBSecurityGroupIngressRequest.getDBSecurityGroupName()));
         }
-        if (authorizeDBSecurityGroupIngressRequest != null) {
-            if (authorizeDBSecurityGroupIngressRequest.getCIDRIP() != null) {
-                request.addParameter("CIDRIP", StringUtils.fromString(authorizeDBSecurityGroupIngressRequest.getCIDRIP()));
-            }
+        if (authorizeDBSecurityGroupIngressRequest.getCIDRIP() != null) {
+            request.addParameter("CIDRIP", StringUtils.fromString(authorizeDBSecurityGroupIngressRequest.getCIDRIP()));
         }
-        if (authorizeDBSecurityGroupIngressRequest != null) {
-            if (authorizeDBSecurityGroupIngressRequest.getEC2SecurityGroupName() != null) {
-                request.addParameter("EC2SecurityGroupName", StringUtils.fromString(authorizeDBSecurityGroupIngressRequest.getEC2SecurityGroupName()));
-            }
+        if (authorizeDBSecurityGroupIngressRequest.getEC2SecurityGroupName() != null) {
+            request.addParameter("EC2SecurityGroupName", StringUtils.fromString(authorizeDBSecurityGroupIngressRequest.getEC2SecurityGroupName()));
         }
-        if (authorizeDBSecurityGroupIngressRequest != null) {
-            if (authorizeDBSecurityGroupIngressRequest.getEC2SecurityGroupOwnerId() != null) {
-                request.addParameter("EC2SecurityGroupOwnerId", StringUtils.fromString(authorizeDBSecurityGroupIngressRequest.getEC2SecurityGroupOwnerId()));
-            }
+        if (authorizeDBSecurityGroupIngressRequest.getEC2SecurityGroupId() != null) {
+            request.addParameter("EC2SecurityGroupId", StringUtils.fromString(authorizeDBSecurityGroupIngressRequest.getEC2SecurityGroupId()));
+        }
+        if (authorizeDBSecurityGroupIngressRequest.getEC2SecurityGroupOwnerId() != null) {
+            request.addParameter("EC2SecurityGroupOwnerId", StringUtils.fromString(authorizeDBSecurityGroupIngressRequest.getEC2SecurityGroupOwnerId()));
         }
 
 

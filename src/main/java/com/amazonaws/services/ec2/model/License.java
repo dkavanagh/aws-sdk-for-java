@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@ package com.amazonaws.services.ec2.model;
 
 /**
  * <p>
- * A software license that can be associated with an Amazon EC2 instance
- * when launched (ex. a Microsoft Windows license).
+ * A software license that can be associated with an Amazon EC2 instance when launched (ex. a Microsoft Windows license).
  * </p>
  */
 public class License {
@@ -161,6 +160,7 @@ public class License {
      *         instances can be supported, etc.
      */
     public java.util.List<LicenseCapacity> getCapacities() {
+        
         if (capacities == null) {
             capacities = new java.util.ArrayList<LicenseCapacity>();
         }
@@ -177,10 +177,13 @@ public class License {
      *         instances can be supported, etc.
      */
     public void setCapacities(java.util.Collection<LicenseCapacity> capacities) {
-        java.util.List<LicenseCapacity> capacitiesCopy = new java.util.ArrayList<LicenseCapacity>();
-        if (capacities != null) {
-            capacitiesCopy.addAll(capacities);
+        if (capacities == null) {
+            this.capacities = null;
+            return;
         }
+
+        java.util.List<LicenseCapacity> capacitiesCopy = new java.util.ArrayList<LicenseCapacity>(capacities.size());
+        capacitiesCopy.addAll(capacities);
         this.capacities = capacitiesCopy;
     }
     
@@ -199,6 +202,7 @@ public class License {
      *         together. 
      */
     public License withCapacities(LicenseCapacity... capacities) {
+        if (getCapacities() == null) setCapacities(new java.util.ArrayList<LicenseCapacity>(capacities.length));
         for (LicenseCapacity value : capacities) {
             getCapacities().add(value);
         }
@@ -220,11 +224,13 @@ public class License {
      *         together. 
      */
     public License withCapacities(java.util.Collection<LicenseCapacity> capacities) {
-        java.util.List<LicenseCapacity> capacitiesCopy = new java.util.ArrayList<LicenseCapacity>();
-        if (capacities != null) {
+        if (capacities == null) {
+            this.capacities = null;
+        } else {
+            java.util.List<LicenseCapacity> capacitiesCopy = new java.util.ArrayList<LicenseCapacity>(capacities.size());
             capacitiesCopy.addAll(capacities);
+            this.capacities = capacitiesCopy;
         }
-        this.capacities = capacitiesCopy;
 
         return this;
     }
@@ -235,6 +241,7 @@ public class License {
      * @return A list of tags for the License.
      */
     public java.util.List<Tag> getTags() {
+        
         if (tags == null) {
             tags = new java.util.ArrayList<Tag>();
         }
@@ -247,10 +254,13 @@ public class License {
      * @param tags A list of tags for the License.
      */
     public void setTags(java.util.Collection<Tag> tags) {
-        java.util.List<Tag> tagsCopy = new java.util.ArrayList<Tag>();
-        if (tags != null) {
-            tagsCopy.addAll(tags);
+        if (tags == null) {
+            this.tags = null;
+            return;
         }
+
+        java.util.List<Tag> tagsCopy = new java.util.ArrayList<Tag>(tags.size());
+        tagsCopy.addAll(tags);
         this.tags = tagsCopy;
     }
     
@@ -265,6 +275,7 @@ public class License {
      *         together. 
      */
     public License withTags(Tag... tags) {
+        if (getTags() == null) setTags(new java.util.ArrayList<Tag>(tags.length));
         for (Tag value : tags) {
             getTags().add(value);
         }
@@ -282,11 +293,13 @@ public class License {
      *         together. 
      */
     public License withTags(java.util.Collection<Tag> tags) {
-        java.util.List<Tag> tagsCopy = new java.util.ArrayList<Tag>();
-        if (tags != null) {
+        if (tags == null) {
+            this.tags = null;
+        } else {
+            java.util.List<Tag> tagsCopy = new java.util.ArrayList<Tag>(tags.size());
             tagsCopy.addAll(tags);
+            this.tags = tagsCopy;
         }
-        this.tags = tagsCopy;
 
         return this;
     }
@@ -303,13 +316,47 @@ public class License {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("LicenseId: " + licenseId + ", ");
-        sb.append("Type: " + type + ", ");
-        sb.append("Pool: " + pool + ", ");
-        sb.append("Capacities: " + capacities + ", ");
-        sb.append("Tags: " + tags + ", ");
+        if (licenseId != null) sb.append("LicenseId: " + licenseId + ", ");
+        if (type != null) sb.append("Type: " + type + ", ");
+        if (pool != null) sb.append("Pool: " + pool + ", ");
+        if (capacities != null) sb.append("Capacities: " + capacities + ", ");
+        if (tags != null) sb.append("Tags: " + tags + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getLicenseId() == null) ? 0 : getLicenseId().hashCode()); 
+        hashCode = prime * hashCode + ((getType() == null) ? 0 : getType().hashCode()); 
+        hashCode = prime * hashCode + ((getPool() == null) ? 0 : getPool().hashCode()); 
+        hashCode = prime * hashCode + ((getCapacities() == null) ? 0 : getCapacities().hashCode()); 
+        hashCode = prime * hashCode + ((getTags() == null) ? 0 : getTags().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof License == false) return false;
+        License other = (License)obj;
+        
+        if (other.getLicenseId() == null ^ this.getLicenseId() == null) return false;
+        if (other.getLicenseId() != null && other.getLicenseId().equals(this.getLicenseId()) == false) return false; 
+        if (other.getType() == null ^ this.getType() == null) return false;
+        if (other.getType() != null && other.getType().equals(this.getType()) == false) return false; 
+        if (other.getPool() == null ^ this.getPool() == null) return false;
+        if (other.getPool() != null && other.getPool().equals(this.getPool()) == false) return false; 
+        if (other.getCapacities() == null ^ this.getCapacities() == null) return false;
+        if (other.getCapacities() != null && other.getCapacities().equals(this.getCapacities()) == false) return false; 
+        if (other.getTags() == null ^ this.getTags() == null) return false;
+        if (other.getTags() != null && other.getTags().equals(this.getTags()) == false) return false; 
+        return true;
     }
     
 }

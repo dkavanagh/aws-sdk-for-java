@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.autoscaling.model.*;
@@ -30,33 +31,32 @@ import com.amazonaws.util.StringUtils;
 public class PutScalingPolicyRequestMarshaller implements Marshaller<Request<PutScalingPolicyRequest>, PutScalingPolicyRequest> {
 
     public Request<PutScalingPolicyRequest> marshall(PutScalingPolicyRequest putScalingPolicyRequest) {
+
+        if (putScalingPolicyRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<PutScalingPolicyRequest> request = new DefaultRequest<PutScalingPolicyRequest>(putScalingPolicyRequest, "AmazonAutoScaling");
         request.addParameter("Action", "PutScalingPolicy");
         request.addParameter("Version", "2011-01-01");
-        if (putScalingPolicyRequest != null) {
-            if (putScalingPolicyRequest.getAutoScalingGroupName() != null) {
-                request.addParameter("AutoScalingGroupName", StringUtils.fromString(putScalingPolicyRequest.getAutoScalingGroupName()));
-            }
+
+        if (putScalingPolicyRequest.getAutoScalingGroupName() != null) {
+            request.addParameter("AutoScalingGroupName", StringUtils.fromString(putScalingPolicyRequest.getAutoScalingGroupName()));
         }
-        if (putScalingPolicyRequest != null) {
-            if (putScalingPolicyRequest.getPolicyName() != null) {
-                request.addParameter("PolicyName", StringUtils.fromString(putScalingPolicyRequest.getPolicyName()));
-            }
+        if (putScalingPolicyRequest.getPolicyName() != null) {
+            request.addParameter("PolicyName", StringUtils.fromString(putScalingPolicyRequest.getPolicyName()));
         }
-        if (putScalingPolicyRequest != null) {
-            if (putScalingPolicyRequest.getScalingAdjustment() != null) {
-                request.addParameter("ScalingAdjustment", StringUtils.fromInteger(putScalingPolicyRequest.getScalingAdjustment()));
-            }
+        if (putScalingPolicyRequest.getScalingAdjustment() != null) {
+            request.addParameter("ScalingAdjustment", StringUtils.fromInteger(putScalingPolicyRequest.getScalingAdjustment()));
         }
-        if (putScalingPolicyRequest != null) {
-            if (putScalingPolicyRequest.getAdjustmentType() != null) {
-                request.addParameter("AdjustmentType", StringUtils.fromString(putScalingPolicyRequest.getAdjustmentType()));
-            }
+        if (putScalingPolicyRequest.getAdjustmentType() != null) {
+            request.addParameter("AdjustmentType", StringUtils.fromString(putScalingPolicyRequest.getAdjustmentType()));
         }
-        if (putScalingPolicyRequest != null) {
-            if (putScalingPolicyRequest.getCooldown() != null) {
-                request.addParameter("Cooldown", StringUtils.fromInteger(putScalingPolicyRequest.getCooldown()));
-            }
+        if (putScalingPolicyRequest.getCooldown() != null) {
+            request.addParameter("Cooldown", StringUtils.fromInteger(putScalingPolicyRequest.getCooldown()));
+        }
+        if (putScalingPolicyRequest.getMinAdjustmentStep() != null) {
+            request.addParameter("MinAdjustmentStep", StringUtils.fromInteger(putScalingPolicyRequest.getMinAdjustmentStep()));
         }
 
 

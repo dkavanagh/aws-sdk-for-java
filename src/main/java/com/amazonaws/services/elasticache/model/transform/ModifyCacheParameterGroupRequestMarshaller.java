@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -35,10 +35,10 @@ public class ModifyCacheParameterGroupRequestMarshaller implements Marshaller<Re
         if (modifyCacheParameterGroupRequest == null) {
 		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
 		}
-		
+
         Request<ModifyCacheParameterGroupRequest> request = new DefaultRequest<ModifyCacheParameterGroupRequest>(modifyCacheParameterGroupRequest, "AmazonElastiCache");
         request.addParameter("Action", "ModifyCacheParameterGroup");
-        request.addParameter("Version", "2011-07-15");
+        request.addParameter("Version", "2012-03-09");
 
         if (modifyCacheParameterGroupRequest.getCacheParameterGroupName() != null) {
             request.addParameter("CacheParameterGroupName", StringUtils.fromString(modifyCacheParameterGroupRequest.getCacheParameterGroupName()));
@@ -46,6 +46,7 @@ public class ModifyCacheParameterGroupRequestMarshaller implements Marshaller<Re
 
         java.util.List<ParameterNameValue> parameterNameValuesList = modifyCacheParameterGroupRequest.getParameterNameValues();
         int parameterNameValuesListIndex = 1;
+
         for (ParameterNameValue parameterNameValuesListValue : parameterNameValuesList) {
             ParameterNameValue parameterNameValueMember = parameterNameValuesListValue;
             if (parameterNameValueMember != null) {

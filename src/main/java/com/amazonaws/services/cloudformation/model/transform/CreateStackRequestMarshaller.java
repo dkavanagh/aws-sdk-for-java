@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.cloudformation.model.*;
@@ -30,63 +31,68 @@ import com.amazonaws.util.StringUtils;
 public class CreateStackRequestMarshaller implements Marshaller<Request<CreateStackRequest>, CreateStackRequest> {
 
     public Request<CreateStackRequest> marshall(CreateStackRequest createStackRequest) {
+
+        if (createStackRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<CreateStackRequest> request = new DefaultRequest<CreateStackRequest>(createStackRequest, "AmazonCloudFormation");
         request.addParameter("Action", "CreateStack");
         request.addParameter("Version", "2010-05-15");
-        if (createStackRequest != null) {
-            if (createStackRequest.getStackName() != null) {
-                request.addParameter("StackName", StringUtils.fromString(createStackRequest.getStackName()));
-            }
+
+        if (createStackRequest.getStackName() != null) {
+            request.addParameter("StackName", StringUtils.fromString(createStackRequest.getStackName()));
         }
-        if (createStackRequest != null) {
-            if (createStackRequest.getTemplateBody() != null) {
-                request.addParameter("TemplateBody", StringUtils.fromString(createStackRequest.getTemplateBody()));
-            }
+        if (createStackRequest.getTemplateBody() != null) {
+            request.addParameter("TemplateBody", StringUtils.fromString(createStackRequest.getTemplateBody()));
         }
-        if (createStackRequest != null) {
-            if (createStackRequest.getTemplateURL() != null) {
-                request.addParameter("TemplateURL", StringUtils.fromString(createStackRequest.getTemplateURL()));
-            }
+        if (createStackRequest.getTemplateURL() != null) {
+            request.addParameter("TemplateURL", StringUtils.fromString(createStackRequest.getTemplateURL()));
         }
 
-        if (createStackRequest != null) {
-            java.util.List<Parameter> parametersList = createStackRequest.getParameters();
-            int parametersListIndex = 1;
-            for (Parameter parametersListValue : parametersList) {
-                if (parametersListValue != null) {
-                    if (parametersListValue.getParameterKey() != null) {
-                        request.addParameter("Parameters.member." + parametersListIndex + ".ParameterKey", StringUtils.fromString(parametersListValue.getParameterKey()));
-                    }
-                }
-                if (parametersListValue != null) {
-                    if (parametersListValue.getParameterValue() != null) {
-                        request.addParameter("Parameters.member." + parametersListIndex + ".ParameterValue", StringUtils.fromString(parametersListValue.getParameterValue()));
-                    }
-                }
+        java.util.List<Parameter> parametersList = createStackRequest.getParameters();
+        int parametersListIndex = 1;
 
-                parametersListIndex++;
-            }
-        }
-        if (createStackRequest != null) {
-            if (createStackRequest.isDisableRollback() != null) {
-                request.addParameter("DisableRollback", StringUtils.fromBoolean(createStackRequest.isDisableRollback()));
-            }
-        }
-        if (createStackRequest != null) {
-            if (createStackRequest.getTimeoutInMinutes() != null) {
-                request.addParameter("TimeoutInMinutes", StringUtils.fromInteger(createStackRequest.getTimeoutInMinutes()));
-            }
-        }
-        if (createStackRequest != null) {
-            java.util.List<String> notificationARNsList = createStackRequest.getNotificationARNs();
-            int notificationARNsListIndex = 1;
-
-            for (String notificationARNsListValue : notificationARNsList) {
-                if (notificationARNsListValue != null) {
-                    request.addParameter("NotificationARNs.member." + notificationARNsListIndex, StringUtils.fromString(notificationARNsListValue));
+        for (Parameter parametersListValue : parametersList) {
+            Parameter parameterMember = parametersListValue;
+            if (parameterMember != null) {
+                if (parameterMember.getParameterKey() != null) {
+                    request.addParameter("Parameters.member." + parametersListIndex + ".ParameterKey", StringUtils.fromString(parameterMember.getParameterKey()));
                 }
-                notificationARNsListIndex++;
+                if (parameterMember.getParameterValue() != null) {
+                    request.addParameter("Parameters.member." + parametersListIndex + ".ParameterValue", StringUtils.fromString(parameterMember.getParameterValue()));
+                }
             }
+
+            parametersListIndex++;
+        }
+        if (createStackRequest.isDisableRollback() != null) {
+            request.addParameter("DisableRollback", StringUtils.fromBoolean(createStackRequest.isDisableRollback()));
+        }
+        if (createStackRequest.getTimeoutInMinutes() != null) {
+            request.addParameter("TimeoutInMinutes", StringUtils.fromInteger(createStackRequest.getTimeoutInMinutes()));
+        }
+
+        java.util.List<String> notificationARNsList = createStackRequest.getNotificationARNs();
+        int notificationARNsListIndex = 1;
+
+        for (String notificationARNsListValue : notificationARNsList) {
+            if (notificationARNsListValue != null) {
+                request.addParameter("NotificationARNs.member." + notificationARNsListIndex, StringUtils.fromString(notificationARNsListValue));
+            }
+
+            notificationARNsListIndex++;
+        }
+
+        java.util.List<String> capabilitiesList = createStackRequest.getCapabilities();
+        int capabilitiesListIndex = 1;
+
+        for (String capabilitiesListValue : capabilitiesList) {
+            if (capabilitiesListValue != null) {
+                request.addParameter("Capabilities.member." + capabilitiesListIndex, StringUtils.fromString(capabilitiesListValue));
+            }
+
+            capabilitiesListIndex++;
         }
 
 

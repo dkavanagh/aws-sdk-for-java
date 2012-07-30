@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@ package com.amazonaws.services.elasticbeanstalk.model;
 
 /**
  * <p>
- * The results from a request to change the configuration settings of an
- * environment.
+ * The results from a request to change the configuration settings of an environment.
  * </p>
  */
 public class DescribeConfigurationSettingsResult {
@@ -33,6 +32,7 @@ public class DescribeConfigurationSettingsResult {
      * @return A list of <a>ConfigurationSettingsDescription</a>.
      */
     public java.util.List<ConfigurationSettingsDescription> getConfigurationSettings() {
+        
         if (configurationSettings == null) {
             configurationSettings = new java.util.ArrayList<ConfigurationSettingsDescription>();
         }
@@ -45,10 +45,13 @@ public class DescribeConfigurationSettingsResult {
      * @param configurationSettings A list of <a>ConfigurationSettingsDescription</a>.
      */
     public void setConfigurationSettings(java.util.Collection<ConfigurationSettingsDescription> configurationSettings) {
-        java.util.List<ConfigurationSettingsDescription> configurationSettingsCopy = new java.util.ArrayList<ConfigurationSettingsDescription>();
-        if (configurationSettings != null) {
-            configurationSettingsCopy.addAll(configurationSettings);
+        if (configurationSettings == null) {
+            this.configurationSettings = null;
+            return;
         }
+
+        java.util.List<ConfigurationSettingsDescription> configurationSettingsCopy = new java.util.ArrayList<ConfigurationSettingsDescription>(configurationSettings.size());
+        configurationSettingsCopy.addAll(configurationSettings);
         this.configurationSettings = configurationSettingsCopy;
     }
     
@@ -63,6 +66,7 @@ public class DescribeConfigurationSettingsResult {
      *         together. 
      */
     public DescribeConfigurationSettingsResult withConfigurationSettings(ConfigurationSettingsDescription... configurationSettings) {
+        if (getConfigurationSettings() == null) setConfigurationSettings(new java.util.ArrayList<ConfigurationSettingsDescription>(configurationSettings.length));
         for (ConfigurationSettingsDescription value : configurationSettings) {
             getConfigurationSettings().add(value);
         }
@@ -80,11 +84,13 @@ public class DescribeConfigurationSettingsResult {
      *         together. 
      */
     public DescribeConfigurationSettingsResult withConfigurationSettings(java.util.Collection<ConfigurationSettingsDescription> configurationSettings) {
-        java.util.List<ConfigurationSettingsDescription> configurationSettingsCopy = new java.util.ArrayList<ConfigurationSettingsDescription>();
-        if (configurationSettings != null) {
+        if (configurationSettings == null) {
+            this.configurationSettings = null;
+        } else {
+            java.util.List<ConfigurationSettingsDescription> configurationSettingsCopy = new java.util.ArrayList<ConfigurationSettingsDescription>(configurationSettings.size());
             configurationSettingsCopy.addAll(configurationSettings);
+            this.configurationSettings = configurationSettingsCopy;
         }
-        this.configurationSettings = configurationSettingsCopy;
 
         return this;
     }
@@ -101,9 +107,31 @@ public class DescribeConfigurationSettingsResult {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("ConfigurationSettings: " + configurationSettings + ", ");
+        if (configurationSettings != null) sb.append("ConfigurationSettings: " + configurationSettings + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getConfigurationSettings() == null) ? 0 : getConfigurationSettings().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeConfigurationSettingsResult == false) return false;
+        DescribeConfigurationSettingsResult other = (DescribeConfigurationSettingsResult)obj;
+        
+        if (other.getConfigurationSettings() == null ^ this.getConfigurationSettings() == null) return false;
+        if (other.getConfigurationSettings() != null && other.getConfigurationSettings().equals(this.getConfigurationSettings()) == false) return false; 
+        return true;
     }
     
 }

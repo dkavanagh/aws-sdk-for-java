@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.rds.model.*;
@@ -30,28 +31,26 @@ import com.amazonaws.util.StringUtils;
 public class DescribeDBParametersRequestMarshaller implements Marshaller<Request<DescribeDBParametersRequest>, DescribeDBParametersRequest> {
 
     public Request<DescribeDBParametersRequest> marshall(DescribeDBParametersRequest describeDBParametersRequest) {
+
+        if (describeDBParametersRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<DescribeDBParametersRequest> request = new DefaultRequest<DescribeDBParametersRequest>(describeDBParametersRequest, "AmazonRDS");
         request.addParameter("Action", "DescribeDBParameters");
-        request.addParameter("Version", "2011-04-01");
-        if (describeDBParametersRequest != null) {
-            if (describeDBParametersRequest.getDBParameterGroupName() != null) {
-                request.addParameter("DBParameterGroupName", StringUtils.fromString(describeDBParametersRequest.getDBParameterGroupName()));
-            }
+        request.addParameter("Version", "2012-04-23");
+
+        if (describeDBParametersRequest.getDBParameterGroupName() != null) {
+            request.addParameter("DBParameterGroupName", StringUtils.fromString(describeDBParametersRequest.getDBParameterGroupName()));
         }
-        if (describeDBParametersRequest != null) {
-            if (describeDBParametersRequest.getSource() != null) {
-                request.addParameter("Source", StringUtils.fromString(describeDBParametersRequest.getSource()));
-            }
+        if (describeDBParametersRequest.getSource() != null) {
+            request.addParameter("Source", StringUtils.fromString(describeDBParametersRequest.getSource()));
         }
-        if (describeDBParametersRequest != null) {
-            if (describeDBParametersRequest.getMaxRecords() != null) {
-                request.addParameter("MaxRecords", StringUtils.fromInteger(describeDBParametersRequest.getMaxRecords()));
-            }
+        if (describeDBParametersRequest.getMaxRecords() != null) {
+            request.addParameter("MaxRecords", StringUtils.fromInteger(describeDBParametersRequest.getMaxRecords()));
         }
-        if (describeDBParametersRequest != null) {
-            if (describeDBParametersRequest.getMarker() != null) {
-                request.addParameter("Marker", StringUtils.fromString(describeDBParametersRequest.getMarker()));
-            }
+        if (describeDBParametersRequest.getMarker() != null) {
+            request.addParameter("Marker", StringUtils.fromString(describeDBParametersRequest.getMarker()));
         }
 
 

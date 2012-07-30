@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,14 +18,12 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#createUser(CreateUserRequest) CreateUser operation}.
  * <p>
- * Creates a new User for your AWS Account.
+ * Creates a new user for your AWS account.
  * </p>
  * <p>
- * For information about limitations on the number of Users you can
- * create, see <a
- * vices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html">
- * Limitations on IAM Entities </a> in <i>Using AWS Identity and Access
- * Management</i> .
+ * For information about limitations on the number of users you can create, see <a
+ * href="http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html"> Limitations on IAM Entities </a> in <i>Using AWS
+ * Identity and Access Management</i> .
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#createUser(CreateUserRequest)
@@ -33,7 +31,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class CreateUserRequest extends AmazonWebServiceRequest {
 
     /**
-     * The path for the User name. For more information about paths, see <a
+     * The path for the user name. For more information about paths, see <a
      * ebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html"
      * target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS
      * Identity and Access Management</i>. <p>This parameter is optional. If
@@ -46,10 +44,10 @@ public class CreateUserRequest extends AmazonWebServiceRequest {
     private String path;
 
     /**
-     * Name of the User to create.
+     * Name of the user to create.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Length: </b>1 - 128<br/>
+     * <b>Length: </b>1 - 64<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      */
     private String userName;
@@ -65,14 +63,16 @@ public class CreateUserRequest extends AmazonWebServiceRequest {
      * Callers should use the setter or fluent setter (with...) methods to
      * initialize any additional object members.
      * 
-     * @param userName Name of the User to create.
+     * @param userName Name of the user to create.
      */
     public CreateUserRequest(String userName) {
         this.userName = userName;
     }
+
+    
     
     /**
-     * The path for the User name. For more information about paths, see <a
+     * The path for the user name. For more information about paths, see <a
      * ebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html"
      * target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS
      * Identity and Access Management</i>. <p>This parameter is optional. If
@@ -82,7 +82,7 @@ public class CreateUserRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 512<br/>
      * <b>Pattern: </b>(\u002F)|(\u002F[\u0021-\u007F]+\u002F)<br/>
      *
-     * @return The path for the User name. For more information about paths, see <a
+     * @return The path for the user name. For more information about paths, see <a
      *         ebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html"
      *         target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS
      *         Identity and Access Management</i>. <p>This parameter is optional. If
@@ -93,7 +93,7 @@ public class CreateUserRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * The path for the User name. For more information about paths, see <a
+     * The path for the user name. For more information about paths, see <a
      * ebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html"
      * target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS
      * Identity and Access Management</i>. <p>This parameter is optional. If
@@ -103,7 +103,7 @@ public class CreateUserRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 512<br/>
      * <b>Pattern: </b>(\u002F)|(\u002F[\u0021-\u007F]+\u002F)<br/>
      *
-     * @param path The path for the User name. For more information about paths, see <a
+     * @param path The path for the user name. For more information about paths, see <a
      *         ebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html"
      *         target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS
      *         Identity and Access Management</i>. <p>This parameter is optional. If
@@ -114,7 +114,7 @@ public class CreateUserRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * The path for the User name. For more information about paths, see <a
+     * The path for the user name. For more information about paths, see <a
      * ebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html"
      * target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS
      * Identity and Access Management</i>. <p>This parameter is optional. If
@@ -126,7 +126,7 @@ public class CreateUserRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 512<br/>
      * <b>Pattern: </b>(\u002F)|(\u002F[\u0021-\u007F]+\u002F)<br/>
      *
-     * @param path The path for the User name. For more information about paths, see <a
+     * @param path The path for the user name. For more information about paths, see <a
      *         ebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html"
      *         target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS
      *         Identity and Access Management</i>. <p>This parameter is optional. If
@@ -142,41 +142,41 @@ public class CreateUserRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * Name of the User to create.
+     * Name of the user to create.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Length: </b>1 - 128<br/>
+     * <b>Length: </b>1 - 64<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @return Name of the User to create.
+     * @return Name of the user to create.
      */
     public String getUserName() {
         return userName;
     }
     
     /**
-     * Name of the User to create.
+     * Name of the user to create.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Length: </b>1 - 128<br/>
+     * <b>Length: </b>1 - 64<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User to create.
+     * @param userName Name of the user to create.
      */
     public void setUserName(String userName) {
         this.userName = userName;
     }
     
     /**
-     * Name of the User to create.
+     * Name of the user to create.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Length: </b>1 - 128<br/>
+     * <b>Length: </b>1 - 64<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User to create.
+     * @param userName Name of the user to create.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -199,10 +199,35 @@ public class CreateUserRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Path: " + path + ", ");
-        sb.append("UserName: " + userName + ", ");
+        if (path != null) sb.append("Path: " + path + ", ");
+        if (userName != null) sb.append("UserName: " + userName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getPath() == null) ? 0 : getPath().hashCode()); 
+        hashCode = prime * hashCode + ((getUserName() == null) ? 0 : getUserName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof CreateUserRequest == false) return false;
+        CreateUserRequest other = (CreateUserRequest)obj;
+        
+        if (other.getPath() == null ^ this.getPath() == null) return false;
+        if (other.getPath() != null && other.getPath().equals(this.getPath()) == false) return false; 
+        if (other.getUserName() == null ^ this.getUserName() == null) return false;
+        if (other.getUserName() != null && other.getUserName().equals(this.getUserName()) == false) return false; 
+        return true;
     }
     
 }

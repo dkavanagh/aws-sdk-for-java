@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ public class RawMessage {
      * The raw data of the message. The client must ensure that the message
      * format complies with Internet email standards regarding email header
      * fields, MIME types, MIME encoding, and base64 encoding (if necessary).
-     * <p>For more information, go to the <a
+     * <p>For more information, go to the<a
      * f="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide">Amazon
      * SES Developer Guide</a>.
      */
@@ -45,26 +45,28 @@ public class RawMessage {
      * @param data The raw data of the message. The client must ensure that
      * the message format complies with Internet email standards regarding
      * email header fields, MIME types, MIME encoding, and base64 encoding
-     * (if necessary). <p>For more information, go to the <a
+     * (if necessary). <p>For more information, go to the<a
      * f="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide">Amazon
      * SES Developer Guide</a>.
      */
     public RawMessage(java.nio.ByteBuffer data) {
         this.data = data;
     }
+
+    
     
     /**
      * The raw data of the message. The client must ensure that the message
      * format complies with Internet email standards regarding email header
      * fields, MIME types, MIME encoding, and base64 encoding (if necessary).
-     * <p>For more information, go to the <a
+     * <p>For more information, go to the<a
      * f="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide">Amazon
      * SES Developer Guide</a>.
      *
      * @return The raw data of the message. The client must ensure that the message
      *         format complies with Internet email standards regarding email header
      *         fields, MIME types, MIME encoding, and base64 encoding (if necessary).
-     *         <p>For more information, go to the <a
+     *         <p>For more information, go to the<a
      *         f="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide">Amazon
      *         SES Developer Guide</a>.
      */
@@ -76,14 +78,14 @@ public class RawMessage {
      * The raw data of the message. The client must ensure that the message
      * format complies with Internet email standards regarding email header
      * fields, MIME types, MIME encoding, and base64 encoding (if necessary).
-     * <p>For more information, go to the <a
+     * <p>For more information, go to the<a
      * f="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide">Amazon
      * SES Developer Guide</a>.
      *
      * @param data The raw data of the message. The client must ensure that the message
      *         format complies with Internet email standards regarding email header
      *         fields, MIME types, MIME encoding, and base64 encoding (if necessary).
-     *         <p>For more information, go to the <a
+     *         <p>For more information, go to the<a
      *         f="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide">Amazon
      *         SES Developer Guide</a>.
      */
@@ -95,7 +97,7 @@ public class RawMessage {
      * The raw data of the message. The client must ensure that the message
      * format complies with Internet email standards regarding email header
      * fields, MIME types, MIME encoding, and base64 encoding (if necessary).
-     * <p>For more information, go to the <a
+     * <p>For more information, go to the<a
      * f="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide">Amazon
      * SES Developer Guide</a>.
      * <p>
@@ -104,7 +106,7 @@ public class RawMessage {
      * @param data The raw data of the message. The client must ensure that the message
      *         format complies with Internet email standards regarding email header
      *         fields, MIME types, MIME encoding, and base64 encoding (if necessary).
-     *         <p>For more information, go to the <a
+     *         <p>For more information, go to the<a
      *         f="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide">Amazon
      *         SES Developer Guide</a>.
      *
@@ -129,9 +131,31 @@ public class RawMessage {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Data: " + data + ", ");
+        if (data != null) sb.append("Data: " + data + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getData() == null) ? 0 : getData().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof RawMessage == false) return false;
+        RawMessage other = (RawMessage)obj;
+        
+        if (other.getData() == null ^ this.getData() == null) return false;
+        if (other.getData() != null && other.getData().equals(this.getData()) == false) return false; 
+        return true;
     }
     
 }

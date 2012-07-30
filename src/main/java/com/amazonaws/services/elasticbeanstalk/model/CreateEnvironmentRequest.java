@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.elasticbeanstalk.AWSElasticBeanstalk#createEnvironment(CreateEnvironmentRequest) CreateEnvironment operation}.
  * <p>
- * Launches an environment for the specified application using the
- * specified configuration.
+ * Launches an environment for the specified application using the specified configuration.
  * </p>
  *
  * @see com.amazonaws.services.elasticbeanstalk.AWSElasticBeanstalk#createEnvironment(CreateEnvironmentRequest)
@@ -68,7 +67,7 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
     /**
      * The name of the configuration template to use in deployment. If no
      * configuration template is found with this name, AWS Elastic Beanstalk
-     * returns an <code>InvalidParameterValue</code> error. <p> Conditional:
+     * returns an <code>InvalidParameterValue</code> error. <p> Condition:
      * You must specify either this parameter or a
      * <code>SolutionStackName</code>, but not both. If you specify both, AWS
      * Elastic Beanstalk returns an <code>InvalidParameterCombination</code>
@@ -156,6 +155,8 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
         this.applicationName = applicationName;
         this.environmentName = environmentName;
     }
+
+    
     
     /**
      * The name of the application that contains the version to be deployed.
@@ -379,7 +380,7 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
     /**
      * The name of the configuration template to use in deployment. If no
      * configuration template is found with this name, AWS Elastic Beanstalk
-     * returns an <code>InvalidParameterValue</code> error. <p> Conditional:
+     * returns an <code>InvalidParameterValue</code> error. <p> Condition:
      * You must specify either this parameter or a
      * <code>SolutionStackName</code>, but not both. If you specify both, AWS
      * Elastic Beanstalk returns an <code>InvalidParameterCombination</code>
@@ -391,7 +392,7 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
      *
      * @return The name of the configuration template to use in deployment. If no
      *         configuration template is found with this name, AWS Elastic Beanstalk
-     *         returns an <code>InvalidParameterValue</code> error. <p> Conditional:
+     *         returns an <code>InvalidParameterValue</code> error. <p> Condition:
      *         You must specify either this parameter or a
      *         <code>SolutionStackName</code>, but not both. If you specify both, AWS
      *         Elastic Beanstalk returns an <code>InvalidParameterCombination</code>
@@ -405,7 +406,7 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
     /**
      * The name of the configuration template to use in deployment. If no
      * configuration template is found with this name, AWS Elastic Beanstalk
-     * returns an <code>InvalidParameterValue</code> error. <p> Conditional:
+     * returns an <code>InvalidParameterValue</code> error. <p> Condition:
      * You must specify either this parameter or a
      * <code>SolutionStackName</code>, but not both. If you specify both, AWS
      * Elastic Beanstalk returns an <code>InvalidParameterCombination</code>
@@ -417,7 +418,7 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
      *
      * @param templateName The name of the configuration template to use in deployment. If no
      *         configuration template is found with this name, AWS Elastic Beanstalk
-     *         returns an <code>InvalidParameterValue</code> error. <p> Conditional:
+     *         returns an <code>InvalidParameterValue</code> error. <p> Condition:
      *         You must specify either this parameter or a
      *         <code>SolutionStackName</code>, but not both. If you specify both, AWS
      *         Elastic Beanstalk returns an <code>InvalidParameterCombination</code>
@@ -431,7 +432,7 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
     /**
      * The name of the configuration template to use in deployment. If no
      * configuration template is found with this name, AWS Elastic Beanstalk
-     * returns an <code>InvalidParameterValue</code> error. <p> Conditional:
+     * returns an <code>InvalidParameterValue</code> error. <p> Condition:
      * You must specify either this parameter or a
      * <code>SolutionStackName</code>, but not both. If you specify both, AWS
      * Elastic Beanstalk returns an <code>InvalidParameterCombination</code>
@@ -445,7 +446,7 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
      *
      * @param templateName The name of the configuration template to use in deployment. If no
      *         configuration template is found with this name, AWS Elastic Beanstalk
-     *         returns an <code>InvalidParameterValue</code> error. <p> Conditional:
+     *         returns an <code>InvalidParameterValue</code> error. <p> Condition:
      *         You must specify either this parameter or a
      *         <code>SolutionStackName</code>, but not both. If you specify both, AWS
      *         Elastic Beanstalk returns an <code>InvalidParameterCombination</code>
@@ -656,6 +657,7 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
      *         stack or the configuration template.
      */
     public java.util.List<ConfigurationOptionSetting> getOptionSettings() {
+        
         if (optionSettings == null) {
             optionSettings = new java.util.ArrayList<ConfigurationOptionSetting>();
         }
@@ -674,10 +676,13 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
      *         stack or the configuration template.
      */
     public void setOptionSettings(java.util.Collection<ConfigurationOptionSetting> optionSettings) {
-        java.util.List<ConfigurationOptionSetting> optionSettingsCopy = new java.util.ArrayList<ConfigurationOptionSetting>();
-        if (optionSettings != null) {
-            optionSettingsCopy.addAll(optionSettings);
+        if (optionSettings == null) {
+            this.optionSettings = null;
+            return;
         }
+
+        java.util.List<ConfigurationOptionSetting> optionSettingsCopy = new java.util.ArrayList<ConfigurationOptionSetting>(optionSettings.size());
+        optionSettingsCopy.addAll(optionSettings);
         this.optionSettings = optionSettingsCopy;
     }
     
@@ -698,6 +703,7 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public CreateEnvironmentRequest withOptionSettings(ConfigurationOptionSetting... optionSettings) {
+        if (getOptionSettings() == null) setOptionSettings(new java.util.ArrayList<ConfigurationOptionSetting>(optionSettings.length));
         for (ConfigurationOptionSetting value : optionSettings) {
             getOptionSettings().add(value);
         }
@@ -721,11 +727,13 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public CreateEnvironmentRequest withOptionSettings(java.util.Collection<ConfigurationOptionSetting> optionSettings) {
-        java.util.List<ConfigurationOptionSetting> optionSettingsCopy = new java.util.ArrayList<ConfigurationOptionSetting>();
-        if (optionSettings != null) {
+        if (optionSettings == null) {
+            this.optionSettings = null;
+        } else {
+            java.util.List<ConfigurationOptionSetting> optionSettingsCopy = new java.util.ArrayList<ConfigurationOptionSetting>(optionSettings.size());
             optionSettingsCopy.addAll(optionSettings);
+            this.optionSettings = optionSettingsCopy;
         }
-        this.optionSettings = optionSettingsCopy;
 
         return this;
     }
@@ -738,6 +746,7 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
      *         configuration set for this new environment.
      */
     public java.util.List<OptionSpecification> getOptionsToRemove() {
+        
         if (optionsToRemove == null) {
             optionsToRemove = new java.util.ArrayList<OptionSpecification>();
         }
@@ -752,10 +761,13 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
      *         configuration set for this new environment.
      */
     public void setOptionsToRemove(java.util.Collection<OptionSpecification> optionsToRemove) {
-        java.util.List<OptionSpecification> optionsToRemoveCopy = new java.util.ArrayList<OptionSpecification>();
-        if (optionsToRemove != null) {
-            optionsToRemoveCopy.addAll(optionsToRemove);
+        if (optionsToRemove == null) {
+            this.optionsToRemove = null;
+            return;
         }
+
+        java.util.List<OptionSpecification> optionsToRemoveCopy = new java.util.ArrayList<OptionSpecification>(optionsToRemove.size());
+        optionsToRemoveCopy.addAll(optionsToRemove);
         this.optionsToRemove = optionsToRemoveCopy;
     }
     
@@ -772,6 +784,7 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public CreateEnvironmentRequest withOptionsToRemove(OptionSpecification... optionsToRemove) {
+        if (getOptionsToRemove() == null) setOptionsToRemove(new java.util.ArrayList<OptionSpecification>(optionsToRemove.length));
         for (OptionSpecification value : optionsToRemove) {
             getOptionsToRemove().add(value);
         }
@@ -791,11 +804,13 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public CreateEnvironmentRequest withOptionsToRemove(java.util.Collection<OptionSpecification> optionsToRemove) {
-        java.util.List<OptionSpecification> optionsToRemoveCopy = new java.util.ArrayList<OptionSpecification>();
-        if (optionsToRemove != null) {
+        if (optionsToRemove == null) {
+            this.optionsToRemove = null;
+        } else {
+            java.util.List<OptionSpecification> optionsToRemoveCopy = new java.util.ArrayList<OptionSpecification>(optionsToRemove.size());
             optionsToRemoveCopy.addAll(optionsToRemove);
+            this.optionsToRemove = optionsToRemoveCopy;
         }
-        this.optionsToRemove = optionsToRemoveCopy;
 
         return this;
     }
@@ -812,17 +827,63 @@ public class CreateEnvironmentRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("ApplicationName: " + applicationName + ", ");
-        sb.append("VersionLabel: " + versionLabel + ", ");
-        sb.append("EnvironmentName: " + environmentName + ", ");
-        sb.append("TemplateName: " + templateName + ", ");
-        sb.append("SolutionStackName: " + solutionStackName + ", ");
-        sb.append("CNAMEPrefix: " + cNAMEPrefix + ", ");
-        sb.append("Description: " + description + ", ");
-        sb.append("OptionSettings: " + optionSettings + ", ");
-        sb.append("OptionsToRemove: " + optionsToRemove + ", ");
+        if (applicationName != null) sb.append("ApplicationName: " + applicationName + ", ");
+        if (versionLabel != null) sb.append("VersionLabel: " + versionLabel + ", ");
+        if (environmentName != null) sb.append("EnvironmentName: " + environmentName + ", ");
+        if (templateName != null) sb.append("TemplateName: " + templateName + ", ");
+        if (solutionStackName != null) sb.append("SolutionStackName: " + solutionStackName + ", ");
+        if (cNAMEPrefix != null) sb.append("CNAMEPrefix: " + cNAMEPrefix + ", ");
+        if (description != null) sb.append("Description: " + description + ", ");
+        if (optionSettings != null) sb.append("OptionSettings: " + optionSettings + ", ");
+        if (optionsToRemove != null) sb.append("OptionsToRemove: " + optionsToRemove + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getApplicationName() == null) ? 0 : getApplicationName().hashCode()); 
+        hashCode = prime * hashCode + ((getVersionLabel() == null) ? 0 : getVersionLabel().hashCode()); 
+        hashCode = prime * hashCode + ((getEnvironmentName() == null) ? 0 : getEnvironmentName().hashCode()); 
+        hashCode = prime * hashCode + ((getTemplateName() == null) ? 0 : getTemplateName().hashCode()); 
+        hashCode = prime * hashCode + ((getSolutionStackName() == null) ? 0 : getSolutionStackName().hashCode()); 
+        hashCode = prime * hashCode + ((getCNAMEPrefix() == null) ? 0 : getCNAMEPrefix().hashCode()); 
+        hashCode = prime * hashCode + ((getDescription() == null) ? 0 : getDescription().hashCode()); 
+        hashCode = prime * hashCode + ((getOptionSettings() == null) ? 0 : getOptionSettings().hashCode()); 
+        hashCode = prime * hashCode + ((getOptionsToRemove() == null) ? 0 : getOptionsToRemove().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof CreateEnvironmentRequest == false) return false;
+        CreateEnvironmentRequest other = (CreateEnvironmentRequest)obj;
+        
+        if (other.getApplicationName() == null ^ this.getApplicationName() == null) return false;
+        if (other.getApplicationName() != null && other.getApplicationName().equals(this.getApplicationName()) == false) return false; 
+        if (other.getVersionLabel() == null ^ this.getVersionLabel() == null) return false;
+        if (other.getVersionLabel() != null && other.getVersionLabel().equals(this.getVersionLabel()) == false) return false; 
+        if (other.getEnvironmentName() == null ^ this.getEnvironmentName() == null) return false;
+        if (other.getEnvironmentName() != null && other.getEnvironmentName().equals(this.getEnvironmentName()) == false) return false; 
+        if (other.getTemplateName() == null ^ this.getTemplateName() == null) return false;
+        if (other.getTemplateName() != null && other.getTemplateName().equals(this.getTemplateName()) == false) return false; 
+        if (other.getSolutionStackName() == null ^ this.getSolutionStackName() == null) return false;
+        if (other.getSolutionStackName() != null && other.getSolutionStackName().equals(this.getSolutionStackName()) == false) return false; 
+        if (other.getCNAMEPrefix() == null ^ this.getCNAMEPrefix() == null) return false;
+        if (other.getCNAMEPrefix() != null && other.getCNAMEPrefix().equals(this.getCNAMEPrefix()) == false) return false; 
+        if (other.getDescription() == null ^ this.getDescription() == null) return false;
+        if (other.getDescription() != null && other.getDescription().equals(this.getDescription()) == false) return false; 
+        if (other.getOptionSettings() == null ^ this.getOptionSettings() == null) return false;
+        if (other.getOptionSettings() != null && other.getOptionSettings().equals(this.getOptionSettings()) == false) return false; 
+        if (other.getOptionsToRemove() == null ^ this.getOptionsToRemove() == null) return false;
+        if (other.getOptionsToRemove() != null && other.getOptionsToRemove().equals(this.getOptionsToRemove()) == false) return false; 
+        return true;
     }
     
 }

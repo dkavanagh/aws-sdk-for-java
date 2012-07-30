@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,21 +18,15 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#describeSubnets(DescribeSubnetsRequest) DescribeSubnets operation}.
  * <p>
- * Gives you information about your subnets. You can filter the results
- * to return information only about subnets that match criteria you
- * specify.
+ * Gives you information about your subnets. You can filter the results to return information only about subnets that match criteria you specify.
  * </p>
  * <p>
- * For example, you could ask to get information about a particular
- * subnet (or all) only if the subnet's state is available. You can
- * specify multiple filters (e.g., the subnet is in a particular VPC, and
- * the subnet's state is available).
+ * For example, you could ask to get information about a particular subnet (or all) only if the subnet's state is available. You can specify multiple
+ * filters (e.g., the subnet is in a particular VPC, and the subnet's state is available).
  * </p>
  * <p>
- * The result includes information for a particular subnet only if the
- * subnet matches all your filters. If there's no match, no special
- * message is returned; the response is simply empty. The following table
- * shows the available filters.
+ * The result includes information for a particular subnet only if the subnet matches all your filters. If there's no match, no special message is
+ * returned; the response is simply empty. The following table shows the available filters.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#describeSubnets(DescribeSubnetsRequest)
@@ -58,6 +52,7 @@ public class DescribeSubnetsRequest extends AmazonWebServiceRequest {
      * @return A set of one or more subnet IDs.
      */
     public java.util.List<String> getSubnetIds() {
+        
         if (subnetIds == null) {
             subnetIds = new java.util.ArrayList<String>();
         }
@@ -70,10 +65,13 @@ public class DescribeSubnetsRequest extends AmazonWebServiceRequest {
      * @param subnetIds A set of one or more subnet IDs.
      */
     public void setSubnetIds(java.util.Collection<String> subnetIds) {
-        java.util.List<String> subnetIdsCopy = new java.util.ArrayList<String>();
-        if (subnetIds != null) {
-            subnetIdsCopy.addAll(subnetIds);
+        if (subnetIds == null) {
+            this.subnetIds = null;
+            return;
         }
+
+        java.util.List<String> subnetIdsCopy = new java.util.ArrayList<String>(subnetIds.size());
+        subnetIdsCopy.addAll(subnetIds);
         this.subnetIds = subnetIdsCopy;
     }
     
@@ -88,6 +86,7 @@ public class DescribeSubnetsRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeSubnetsRequest withSubnetIds(String... subnetIds) {
+        if (getSubnetIds() == null) setSubnetIds(new java.util.ArrayList<String>(subnetIds.length));
         for (String value : subnetIds) {
             getSubnetIds().add(value);
         }
@@ -105,11 +104,13 @@ public class DescribeSubnetsRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeSubnetsRequest withSubnetIds(java.util.Collection<String> subnetIds) {
-        java.util.List<String> subnetIdsCopy = new java.util.ArrayList<String>();
-        if (subnetIds != null) {
+        if (subnetIds == null) {
+            this.subnetIds = null;
+        } else {
+            java.util.List<String> subnetIdsCopy = new java.util.ArrayList<String>(subnetIds.size());
             subnetIdsCopy.addAll(subnetIds);
+            this.subnetIds = subnetIdsCopy;
         }
-        this.subnetIds = subnetIdsCopy;
 
         return this;
     }
@@ -126,6 +127,7 @@ public class DescribeSubnetsRequest extends AmazonWebServiceRequest {
      *         EC2 API reference</a>.
      */
     public java.util.List<Filter> getFilters() {
+        
         if (filters == null) {
             filters = new java.util.ArrayList<Filter>();
         }
@@ -144,10 +146,13 @@ public class DescribeSubnetsRequest extends AmazonWebServiceRequest {
      *         EC2 API reference</a>.
      */
     public void setFilters(java.util.Collection<Filter> filters) {
-        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>();
-        if (filters != null) {
-            filtersCopy.addAll(filters);
+        if (filters == null) {
+            this.filters = null;
+            return;
         }
+
+        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>(filters.size());
+        filtersCopy.addAll(filters);
         this.filters = filtersCopy;
     }
     
@@ -168,6 +173,7 @@ public class DescribeSubnetsRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeSubnetsRequest withFilters(Filter... filters) {
+        if (getFilters() == null) setFilters(new java.util.ArrayList<Filter>(filters.length));
         for (Filter value : filters) {
             getFilters().add(value);
         }
@@ -191,11 +197,13 @@ public class DescribeSubnetsRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeSubnetsRequest withFilters(java.util.Collection<Filter> filters) {
-        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>();
-        if (filters != null) {
+        if (filters == null) {
+            this.filters = null;
+        } else {
+            java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>(filters.size());
             filtersCopy.addAll(filters);
+            this.filters = filtersCopy;
         }
-        this.filters = filtersCopy;
 
         return this;
     }
@@ -212,10 +220,35 @@ public class DescribeSubnetsRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("SubnetIds: " + subnetIds + ", ");
-        sb.append("Filters: " + filters + ", ");
+        if (subnetIds != null) sb.append("SubnetIds: " + subnetIds + ", ");
+        if (filters != null) sb.append("Filters: " + filters + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getSubnetIds() == null) ? 0 : getSubnetIds().hashCode()); 
+        hashCode = prime * hashCode + ((getFilters() == null) ? 0 : getFilters().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeSubnetsRequest == false) return false;
+        DescribeSubnetsRequest other = (DescribeSubnetsRequest)obj;
+        
+        if (other.getSubnetIds() == null ^ this.getSubnetIds() == null) return false;
+        if (other.getSubnetIds() != null && other.getSubnetIds().equals(this.getSubnetIds()) == false) return false; 
+        if (other.getFilters() == null ^ this.getFilters() == null) return false;
+        if (other.getFilters() != null && other.getFilters().equals(this.getFilters()) == false) return false; 
+        return true;
     }
     
 }

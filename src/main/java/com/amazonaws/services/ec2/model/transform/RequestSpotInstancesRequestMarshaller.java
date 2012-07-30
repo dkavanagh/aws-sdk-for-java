@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.ec2.model.*;
@@ -30,174 +31,201 @@ import com.amazonaws.util.StringUtils;
 public class RequestSpotInstancesRequestMarshaller implements Marshaller<Request<RequestSpotInstancesRequest>, RequestSpotInstancesRequest> {
 
     public Request<RequestSpotInstancesRequest> marshall(RequestSpotInstancesRequest requestSpotInstancesRequest) {
+
+        if (requestSpotInstancesRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<RequestSpotInstancesRequest> request = new DefaultRequest<RequestSpotInstancesRequest>(requestSpotInstancesRequest, "AmazonEC2");
         request.addParameter("Action", "RequestSpotInstances");
-        request.addParameter("Version", "2011-05-15");
-        if (requestSpotInstancesRequest != null) {
-            if (requestSpotInstancesRequest.getSpotPrice() != null) {
-                request.addParameter("SpotPrice", StringUtils.fromString(requestSpotInstancesRequest.getSpotPrice()));
-            }
+        request.addParameter("Version", "2012-06-15");
+
+        if (requestSpotInstancesRequest.getSpotPrice() != null) {
+            request.addParameter("SpotPrice", StringUtils.fromString(requestSpotInstancesRequest.getSpotPrice()));
         }
-        if (requestSpotInstancesRequest != null) {
-            if (requestSpotInstancesRequest.getInstanceCount() != null) {
-                request.addParameter("InstanceCount", StringUtils.fromInteger(requestSpotInstancesRequest.getInstanceCount()));
-            }
+        if (requestSpotInstancesRequest.getInstanceCount() != null) {
+            request.addParameter("InstanceCount", StringUtils.fromInteger(requestSpotInstancesRequest.getInstanceCount()));
         }
-        if (requestSpotInstancesRequest != null) {
-            if (requestSpotInstancesRequest.getType() != null) {
-                request.addParameter("Type", StringUtils.fromString(requestSpotInstancesRequest.getType()));
-            }
+        if (requestSpotInstancesRequest.getType() != null) {
+            request.addParameter("Type", StringUtils.fromString(requestSpotInstancesRequest.getType()));
         }
-        if (requestSpotInstancesRequest != null) {
-            if (requestSpotInstancesRequest.getValidFrom() != null) {
-                request.addParameter("ValidFrom", StringUtils.fromDate(requestSpotInstancesRequest.getValidFrom()));
-            }
+        if (requestSpotInstancesRequest.getValidFrom() != null) {
+            request.addParameter("ValidFrom", StringUtils.fromDate(requestSpotInstancesRequest.getValidFrom()));
         }
-        if (requestSpotInstancesRequest != null) {
-            if (requestSpotInstancesRequest.getValidUntil() != null) {
-                request.addParameter("ValidUntil", StringUtils.fromDate(requestSpotInstancesRequest.getValidUntil()));
-            }
+        if (requestSpotInstancesRequest.getValidUntil() != null) {
+            request.addParameter("ValidUntil", StringUtils.fromDate(requestSpotInstancesRequest.getValidUntil()));
         }
-        if (requestSpotInstancesRequest != null) {
-            if (requestSpotInstancesRequest.getLaunchGroup() != null) {
-                request.addParameter("LaunchGroup", StringUtils.fromString(requestSpotInstancesRequest.getLaunchGroup()));
-            }
+        if (requestSpotInstancesRequest.getLaunchGroup() != null) {
+            request.addParameter("LaunchGroup", StringUtils.fromString(requestSpotInstancesRequest.getLaunchGroup()));
         }
-        if (requestSpotInstancesRequest != null) {
-            if (requestSpotInstancesRequest.getAvailabilityZoneGroup() != null) {
-                request.addParameter("AvailabilityZoneGroup", StringUtils.fromString(requestSpotInstancesRequest.getAvailabilityZoneGroup()));
-            }
+        if (requestSpotInstancesRequest.getAvailabilityZoneGroup() != null) {
+            request.addParameter("AvailabilityZoneGroup", StringUtils.fromString(requestSpotInstancesRequest.getAvailabilityZoneGroup()));
         }
-        if (requestSpotInstancesRequest != null) {
-            LaunchSpecification launchSpecification = requestSpotInstancesRequest.getLaunchSpecification();
-            if (launchSpecification != null) {
-                if (launchSpecification.getImageId() != null) {
-                    request.addParameter("LaunchSpecification.ImageId", StringUtils.fromString(launchSpecification.getImageId()));
-                }
+        LaunchSpecification launchSpecificationLaunchSpecification = requestSpotInstancesRequest.getLaunchSpecification();
+        if (launchSpecificationLaunchSpecification != null) {
+            if (launchSpecificationLaunchSpecification.getImageId() != null) {
+                request.addParameter("LaunchSpecification.ImageId", StringUtils.fromString(launchSpecificationLaunchSpecification.getImageId()));
             }
-            if (launchSpecification != null) {
-                if (launchSpecification.getKeyName() != null) {
-                    request.addParameter("LaunchSpecification.KeyName", StringUtils.fromString(launchSpecification.getKeyName()));
-                }
+            if (launchSpecificationLaunchSpecification.getKeyName() != null) {
+                request.addParameter("LaunchSpecification.KeyName", StringUtils.fromString(launchSpecificationLaunchSpecification.getKeyName()));
             }
 
-            if (launchSpecification != null) {
-                java.util.List<GroupIdentifier> allSecurityGroupsList = launchSpecification.getAllSecurityGroups();
-                int allSecurityGroupsListIndex = 1;
-                for (GroupIdentifier allSecurityGroupsListValue : allSecurityGroupsList) {
-                    if (allSecurityGroupsListValue != null) {
-                        if (allSecurityGroupsListValue.getGroupName() != null) {
-                            request.addParameter("LaunchSpecification.GroupSet." + allSecurityGroupsListIndex + ".GroupName", StringUtils.fromString(allSecurityGroupsListValue.getGroupName()));
-                        }
-                    }
-                    if (allSecurityGroupsListValue != null) {
-                        if (allSecurityGroupsListValue.getGroupId() != null) {
-                            request.addParameter("LaunchSpecification.GroupSet." + allSecurityGroupsListIndex + ".GroupId", StringUtils.fromString(allSecurityGroupsListValue.getGroupId()));
-                        }
-                    }
+            java.util.List<GroupIdentifier> allSecurityGroupsList = launchSpecificationLaunchSpecification.getAllSecurityGroups();
+            int allSecurityGroupsListIndex = 1;
 
-                    allSecurityGroupsListIndex++;
+            for (GroupIdentifier allSecurityGroupsListValue : allSecurityGroupsList) {
+                GroupIdentifier groupIdentifierMember = allSecurityGroupsListValue;
+                if (groupIdentifierMember != null) {
+                    if (groupIdentifierMember.getGroupName() != null) {
+                        request.addParameter("LaunchSpecification.GroupSet." + allSecurityGroupsListIndex + ".GroupName", StringUtils.fromString(groupIdentifierMember.getGroupName()));
+                    }
+                    if (groupIdentifierMember.getGroupId() != null) {
+                        request.addParameter("LaunchSpecification.GroupSet." + allSecurityGroupsListIndex + ".GroupId", StringUtils.fromString(groupIdentifierMember.getGroupId()));
+                    }
                 }
-            }
-            if (launchSpecification != null) {
-                java.util.List<String> securityGroupsList = launchSpecification.getSecurityGroups();
-                int securityGroupsListIndex = 1;
 
-                for (String securityGroupsListValue : securityGroupsList) {
-                    if (securityGroupsListValue != null) {
-                        request.addParameter("LaunchSpecification.SecurityGroup." + securityGroupsListIndex, StringUtils.fromString(securityGroupsListValue));
-                    }
-                    securityGroupsListIndex++;
-                }
-            }
-            if (launchSpecification != null) {
-                if (launchSpecification.getUserData() != null) {
-                    request.addParameter("LaunchSpecification.UserData", StringUtils.fromString(launchSpecification.getUserData()));
-                }
-            }
-            if (launchSpecification != null) {
-                if (launchSpecification.getAddressingType() != null) {
-                    request.addParameter("LaunchSpecification.AddressingType", StringUtils.fromString(launchSpecification.getAddressingType()));
-                }
-            }
-            if (launchSpecification != null) {
-                if (launchSpecification.getInstanceType() != null) {
-                    request.addParameter("LaunchSpecification.InstanceType", StringUtils.fromString(launchSpecification.getInstanceType()));
-                }
-            }
-            if (launchSpecification != null) {
-                SpotPlacement placement = launchSpecification.getPlacement();
-                if (placement != null) {
-                    if (placement.getAvailabilityZone() != null) {
-                        request.addParameter("LaunchSpecification.Placement.AvailabilityZone", StringUtils.fromString(placement.getAvailabilityZone()));
-                    }
-                }
-                if (placement != null) {
-                    if (placement.getGroupName() != null) {
-                        request.addParameter("LaunchSpecification.Placement.GroupName", StringUtils.fromString(placement.getGroupName()));
-                    }
-                }
-            }
-            if (launchSpecification != null) {
-                if (launchSpecification.getKernelId() != null) {
-                    request.addParameter("LaunchSpecification.KernelId", StringUtils.fromString(launchSpecification.getKernelId()));
-                }
-            }
-            if (launchSpecification != null) {
-                if (launchSpecification.getRamdiskId() != null) {
-                    request.addParameter("LaunchSpecification.RamdiskId", StringUtils.fromString(launchSpecification.getRamdiskId()));
-                }
+                allSecurityGroupsListIndex++;
             }
 
-            if (launchSpecification != null) {
-                java.util.List<BlockDeviceMapping> blockDeviceMappingsList = launchSpecification.getBlockDeviceMappings();
-                int blockDeviceMappingsListIndex = 1;
-                for (BlockDeviceMapping blockDeviceMappingsListValue : blockDeviceMappingsList) {
-                    if (blockDeviceMappingsListValue != null) {
-                        if (blockDeviceMappingsListValue.getVirtualName() != null) {
-                            request.addParameter("LaunchSpecification.BlockDeviceMapping." + blockDeviceMappingsListIndex + ".VirtualName", StringUtils.fromString(blockDeviceMappingsListValue.getVirtualName()));
+            java.util.List<String> securityGroupsList = launchSpecificationLaunchSpecification.getSecurityGroups();
+            int securityGroupsListIndex = 1;
+
+            for (String securityGroupsListValue : securityGroupsList) {
+                if (securityGroupsListValue != null) {
+                    request.addParameter("LaunchSpecification.SecurityGroup." + securityGroupsListIndex, StringUtils.fromString(securityGroupsListValue));
+                }
+
+                securityGroupsListIndex++;
+            }
+            if (launchSpecificationLaunchSpecification.getUserData() != null) {
+                request.addParameter("LaunchSpecification.UserData", StringUtils.fromString(launchSpecificationLaunchSpecification.getUserData()));
+            }
+            if (launchSpecificationLaunchSpecification.getAddressingType() != null) {
+                request.addParameter("LaunchSpecification.AddressingType", StringUtils.fromString(launchSpecificationLaunchSpecification.getAddressingType()));
+            }
+            if (launchSpecificationLaunchSpecification.getInstanceType() != null) {
+                request.addParameter("LaunchSpecification.InstanceType", StringUtils.fromString(launchSpecificationLaunchSpecification.getInstanceType()));
+            }
+            SpotPlacement spotPlacementPlacement = launchSpecificationLaunchSpecification.getPlacement();
+            if (spotPlacementPlacement != null) {
+                if (spotPlacementPlacement.getAvailabilityZone() != null) {
+                    request.addParameter("LaunchSpecification.Placement.AvailabilityZone", StringUtils.fromString(spotPlacementPlacement.getAvailabilityZone()));
+                }
+                if (spotPlacementPlacement.getGroupName() != null) {
+                    request.addParameter("LaunchSpecification.Placement.GroupName", StringUtils.fromString(spotPlacementPlacement.getGroupName()));
+                }
+            }
+            if (launchSpecificationLaunchSpecification.getKernelId() != null) {
+                request.addParameter("LaunchSpecification.KernelId", StringUtils.fromString(launchSpecificationLaunchSpecification.getKernelId()));
+            }
+            if (launchSpecificationLaunchSpecification.getRamdiskId() != null) {
+                request.addParameter("LaunchSpecification.RamdiskId", StringUtils.fromString(launchSpecificationLaunchSpecification.getRamdiskId()));
+            }
+
+            java.util.List<BlockDeviceMapping> blockDeviceMappingsList = launchSpecificationLaunchSpecification.getBlockDeviceMappings();
+            int blockDeviceMappingsListIndex = 1;
+
+            for (BlockDeviceMapping blockDeviceMappingsListValue : blockDeviceMappingsList) {
+                BlockDeviceMapping blockDeviceMappingMember = blockDeviceMappingsListValue;
+                if (blockDeviceMappingMember != null) {
+                    if (blockDeviceMappingMember.getVirtualName() != null) {
+                        request.addParameter("LaunchSpecification.BlockDeviceMapping." + blockDeviceMappingsListIndex + ".VirtualName", StringUtils.fromString(blockDeviceMappingMember.getVirtualName()));
+                    }
+                    if (blockDeviceMappingMember.getDeviceName() != null) {
+                        request.addParameter("LaunchSpecification.BlockDeviceMapping." + blockDeviceMappingsListIndex + ".DeviceName", StringUtils.fromString(blockDeviceMappingMember.getDeviceName()));
+                    }
+                    EbsBlockDevice ebsBlockDeviceEbs = blockDeviceMappingMember.getEbs();
+                    if (ebsBlockDeviceEbs != null) {
+                        if (ebsBlockDeviceEbs.getSnapshotId() != null) {
+                            request.addParameter("LaunchSpecification.BlockDeviceMapping." + blockDeviceMappingsListIndex + ".Ebs.SnapshotId", StringUtils.fromString(ebsBlockDeviceEbs.getSnapshotId()));
+                        }
+                        if (ebsBlockDeviceEbs.getVolumeSize() != null) {
+                            request.addParameter("LaunchSpecification.BlockDeviceMapping." + blockDeviceMappingsListIndex + ".Ebs.VolumeSize", StringUtils.fromInteger(ebsBlockDeviceEbs.getVolumeSize()));
+                        }
+                        if (ebsBlockDeviceEbs.isDeleteOnTermination() != null) {
+                            request.addParameter("LaunchSpecification.BlockDeviceMapping." + blockDeviceMappingsListIndex + ".Ebs.DeleteOnTermination", StringUtils.fromBoolean(ebsBlockDeviceEbs.isDeleteOnTermination()));
                         }
                     }
-                    if (blockDeviceMappingsListValue != null) {
-                        if (blockDeviceMappingsListValue.getDeviceName() != null) {
-                            request.addParameter("LaunchSpecification.BlockDeviceMapping." + blockDeviceMappingsListIndex + ".DeviceName", StringUtils.fromString(blockDeviceMappingsListValue.getDeviceName()));
-                        }
+                    if (blockDeviceMappingMember.getNoDevice() != null) {
+                        request.addParameter("LaunchSpecification.BlockDeviceMapping." + blockDeviceMappingsListIndex + ".NoDevice", StringUtils.fromString(blockDeviceMappingMember.getNoDevice()));
                     }
-                    if (blockDeviceMappingsListValue != null) {
-                        EbsBlockDevice ebs = blockDeviceMappingsListValue.getEbs();
-                        if (ebs != null) {
-                            if (ebs.getSnapshotId() != null) {
-                                request.addParameter("LaunchSpecification.BlockDeviceMapping." + blockDeviceMappingsListIndex + ".Ebs.SnapshotId", StringUtils.fromString(ebs.getSnapshotId()));
+                }
+
+                blockDeviceMappingsListIndex++;
+            }
+            if (launchSpecificationLaunchSpecification.isMonitoringEnabled() != null) {
+                request.addParameter("LaunchSpecification.Monitoring.Enabled", StringUtils.fromBoolean(launchSpecificationLaunchSpecification.isMonitoringEnabled()));
+            }
+            if (launchSpecificationLaunchSpecification.getSubnetId() != null) {
+                request.addParameter("LaunchSpecification.SubnetId", StringUtils.fromString(launchSpecificationLaunchSpecification.getSubnetId()));
+            }
+
+            java.util.List<InstanceNetworkInterfaceSpecification> networkInterfacesList = launchSpecificationLaunchSpecification.getNetworkInterfaces();
+            int networkInterfacesListIndex = 1;
+
+            for (InstanceNetworkInterfaceSpecification networkInterfacesListValue : networkInterfacesList) {
+                InstanceNetworkInterfaceSpecification instanceNetworkInterfaceSpecificationMember = networkInterfacesListValue;
+                if (instanceNetworkInterfaceSpecificationMember != null) {
+                    if (instanceNetworkInterfaceSpecificationMember.getNetworkInterfaceId() != null) {
+                        request.addParameter("LaunchSpecification.NetworkInterfaceSet." + networkInterfacesListIndex + ".NetworkInterfaceId", StringUtils.fromString(instanceNetworkInterfaceSpecificationMember.getNetworkInterfaceId()));
+                    }
+                    if (instanceNetworkInterfaceSpecificationMember.getDeviceIndex() != null) {
+                        request.addParameter("LaunchSpecification.NetworkInterfaceSet." + networkInterfacesListIndex + ".DeviceIndex", StringUtils.fromInteger(instanceNetworkInterfaceSpecificationMember.getDeviceIndex()));
+                    }
+                    if (instanceNetworkInterfaceSpecificationMember.getSubnetId() != null) {
+                        request.addParameter("LaunchSpecification.NetworkInterfaceSet." + networkInterfacesListIndex + ".SubnetId", StringUtils.fromString(instanceNetworkInterfaceSpecificationMember.getSubnetId()));
+                    }
+                    if (instanceNetworkInterfaceSpecificationMember.getDescription() != null) {
+                        request.addParameter("LaunchSpecification.NetworkInterfaceSet." + networkInterfacesListIndex + ".Description", StringUtils.fromString(instanceNetworkInterfaceSpecificationMember.getDescription()));
+                    }
+                    if (instanceNetworkInterfaceSpecificationMember.getPrivateIpAddress() != null) {
+                        request.addParameter("LaunchSpecification.NetworkInterfaceSet." + networkInterfacesListIndex + ".PrivateIpAddress", StringUtils.fromString(instanceNetworkInterfaceSpecificationMember.getPrivateIpAddress()));
+                    }
+
+                    java.util.List<String> groupsList = instanceNetworkInterfaceSpecificationMember.getGroups();
+                    int groupsListIndex = 1;
+
+                    for (String groupsListValue : groupsList) {
+                        if (groupsListValue != null) {
+                            request.addParameter("LaunchSpecification.NetworkInterfaceSet." + networkInterfacesListIndex + ".SecurityGroupId." + groupsListIndex, StringUtils.fromString(groupsListValue));
+                        }
+
+                        groupsListIndex++;
+                    }
+                    if (instanceNetworkInterfaceSpecificationMember.isDeleteOnTermination() != null) {
+                        request.addParameter("LaunchSpecification.NetworkInterfaceSet." + networkInterfacesListIndex + ".DeleteOnTermination", StringUtils.fromBoolean(instanceNetworkInterfaceSpecificationMember.isDeleteOnTermination()));
+                    }
+
+                    java.util.List<PrivateIpAddressSpecification> privateIpAddressesList = instanceNetworkInterfaceSpecificationMember.getPrivateIpAddresses();
+                    int privateIpAddressesListIndex = 1;
+
+                    for (PrivateIpAddressSpecification privateIpAddressesListValue : privateIpAddressesList) {
+                        PrivateIpAddressSpecification privateIpAddressSpecificationMember = privateIpAddressesListValue;
+                        if (privateIpAddressSpecificationMember != null) {
+                            if (privateIpAddressSpecificationMember.getPrivateIpAddress() != null) {
+                                request.addParameter("LaunchSpecification.NetworkInterfaceSet." + networkInterfacesListIndex + ".PrivateIpAddresses." + privateIpAddressesListIndex + ".PrivateIpAddress", StringUtils.fromString(privateIpAddressSpecificationMember.getPrivateIpAddress()));
+                            }
+                            if (privateIpAddressSpecificationMember.isPrimary() != null) {
+                                request.addParameter("LaunchSpecification.NetworkInterfaceSet." + networkInterfacesListIndex + ".PrivateIpAddresses." + privateIpAddressesListIndex + ".Primary", StringUtils.fromBoolean(privateIpAddressSpecificationMember.isPrimary()));
                             }
                         }
-                        if (ebs != null) {
-                            if (ebs.getVolumeSize() != null) {
-                                request.addParameter("LaunchSpecification.BlockDeviceMapping." + blockDeviceMappingsListIndex + ".Ebs.VolumeSize", StringUtils.fromInteger(ebs.getVolumeSize()));
-                            }
-                        }
-                        if (ebs != null) {
-                            if (ebs.isDeleteOnTermination() != null) {
-                                request.addParameter("LaunchSpecification.BlockDeviceMapping." + blockDeviceMappingsListIndex + ".Ebs.DeleteOnTermination", StringUtils.fromBoolean(ebs.isDeleteOnTermination()));
-                            }
-                        }
-                    }
-                    if (blockDeviceMappingsListValue != null) {
-                        if (blockDeviceMappingsListValue.getNoDevice() != null) {
-                            request.addParameter("LaunchSpecification.BlockDeviceMapping." + blockDeviceMappingsListIndex + ".NoDevice", StringUtils.fromString(blockDeviceMappingsListValue.getNoDevice()));
-                        }
-                    }
 
-                    blockDeviceMappingsListIndex++;
+                        privateIpAddressesListIndex++;
+                    }
+                    if (instanceNetworkInterfaceSpecificationMember.getSecondaryPrivateIpAddressCount() != null) {
+                        request.addParameter("LaunchSpecification.NetworkInterfaceSet." + networkInterfacesListIndex + ".SecondaryPrivateIpAddressCount", StringUtils.fromInteger(instanceNetworkInterfaceSpecificationMember.getSecondaryPrivateIpAddressCount()));
+                    }
                 }
+
+                networkInterfacesListIndex++;
             }
-            if (launchSpecification != null) {
-                if (launchSpecification.isMonitoringEnabled() != null) {
-                    request.addParameter("LaunchSpecification.Monitoring.Enabled", StringUtils.fromBoolean(launchSpecification.isMonitoringEnabled()));
+            IamInstanceProfileSpecification iamInstanceProfileSpecificationIamInstanceProfile = launchSpecificationLaunchSpecification.getIamInstanceProfile();
+            if (iamInstanceProfileSpecificationIamInstanceProfile != null) {
+                if (iamInstanceProfileSpecificationIamInstanceProfile.getArn() != null) {
+                    request.addParameter("LaunchSpecification.IamInstanceProfile.Arn", StringUtils.fromString(iamInstanceProfileSpecificationIamInstanceProfile.getArn()));
                 }
-            }
-            if (launchSpecification != null) {
-                if (launchSpecification.getSubnetId() != null) {
-                    request.addParameter("LaunchSpecification.SubnetId", StringUtils.fromString(launchSpecification.getSubnetId()));
+                if (iamInstanceProfileSpecificationIamInstanceProfile.getName() != null) {
+                    request.addParameter("LaunchSpecification.IamInstanceProfile.Name", StringUtils.fromString(iamInstanceProfileSpecificationIamInstanceProfile.getName()));
                 }
             }
         }

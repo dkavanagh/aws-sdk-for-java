@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,10 +18,8 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancing#createLoadBalancerListeners(CreateLoadBalancerListenersRequest) CreateLoadBalancerListeners operation}.
  * <p>
- * Creates one or more listeners on a LoadBalancer for the specified
- * port. If a listener with the given port does not already exist, it
- * will be created; otherwise, the properties of the new listener must
- * match the properties of the existing listener.
+ * Creates one or more listeners on a LoadBalancer for the specified port. If a listener with the given port does not already exist, it will be created;
+ * otherwise, the properties of the new listener must match the properties of the existing listener.
  * </p>
  *
  * @see com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancing#createLoadBalancerListeners(CreateLoadBalancerListenersRequest)
@@ -35,7 +33,7 @@ public class CreateLoadBalancerListenersRequest extends AmazonWebServiceRequest 
     private String loadBalancerName;
 
     /**
-     * A list of LoadBalancerPort, <code>InstancePort</code>,
+     * A list of <code>LoadBalancerPort</code>, <code>InstancePort</code>,
      * <code>Protocol</code>, and <code>SSLCertificateId</code> items.
      */
     private java.util.List<Listener> listeners;
@@ -53,7 +51,7 @@ public class CreateLoadBalancerListenersRequest extends AmazonWebServiceRequest 
      * 
      * @param loadBalancerName The name of the new LoadBalancer. The name
      * must be unique within your AWS account.
-     * @param listeners A list of LoadBalancerPort,
+     * @param listeners A list of <code>LoadBalancerPort</code>,
      * <code>InstancePort</code>, <code>Protocol</code>, and
      * <code>SSLCertificateId</code> items.
      */
@@ -61,6 +59,8 @@ public class CreateLoadBalancerListenersRequest extends AmazonWebServiceRequest 
         this.loadBalancerName = loadBalancerName;
         this.listeners = listeners;
     }
+
+    
     
     /**
      * The name of the new LoadBalancer. The name must be unique within your
@@ -103,13 +103,14 @@ public class CreateLoadBalancerListenersRequest extends AmazonWebServiceRequest 
     
     
     /**
-     * A list of LoadBalancerPort, <code>InstancePort</code>,
+     * A list of <code>LoadBalancerPort</code>, <code>InstancePort</code>,
      * <code>Protocol</code>, and <code>SSLCertificateId</code> items.
      *
-     * @return A list of LoadBalancerPort, <code>InstancePort</code>,
+     * @return A list of <code>LoadBalancerPort</code>, <code>InstancePort</code>,
      *         <code>Protocol</code>, and <code>SSLCertificateId</code> items.
      */
     public java.util.List<Listener> getListeners() {
+        
         if (listeners == null) {
             listeners = new java.util.ArrayList<Listener>();
         }
@@ -117,33 +118,37 @@ public class CreateLoadBalancerListenersRequest extends AmazonWebServiceRequest 
     }
     
     /**
-     * A list of LoadBalancerPort, <code>InstancePort</code>,
+     * A list of <code>LoadBalancerPort</code>, <code>InstancePort</code>,
      * <code>Protocol</code>, and <code>SSLCertificateId</code> items.
      *
-     * @param listeners A list of LoadBalancerPort, <code>InstancePort</code>,
+     * @param listeners A list of <code>LoadBalancerPort</code>, <code>InstancePort</code>,
      *         <code>Protocol</code>, and <code>SSLCertificateId</code> items.
      */
     public void setListeners(java.util.Collection<Listener> listeners) {
-        java.util.List<Listener> listenersCopy = new java.util.ArrayList<Listener>();
-        if (listeners != null) {
-            listenersCopy.addAll(listeners);
+        if (listeners == null) {
+            this.listeners = null;
+            return;
         }
+
+        java.util.List<Listener> listenersCopy = new java.util.ArrayList<Listener>(listeners.size());
+        listenersCopy.addAll(listeners);
         this.listeners = listenersCopy;
     }
     
     /**
-     * A list of LoadBalancerPort, <code>InstancePort</code>,
+     * A list of <code>LoadBalancerPort</code>, <code>InstancePort</code>,
      * <code>Protocol</code>, and <code>SSLCertificateId</code> items.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param listeners A list of LoadBalancerPort, <code>InstancePort</code>,
+     * @param listeners A list of <code>LoadBalancerPort</code>, <code>InstancePort</code>,
      *         <code>Protocol</code>, and <code>SSLCertificateId</code> items.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
      */
     public CreateLoadBalancerListenersRequest withListeners(Listener... listeners) {
+        if (getListeners() == null) setListeners(new java.util.ArrayList<Listener>(listeners.length));
         for (Listener value : listeners) {
             getListeners().add(value);
         }
@@ -151,23 +156,25 @@ public class CreateLoadBalancerListenersRequest extends AmazonWebServiceRequest 
     }
     
     /**
-     * A list of LoadBalancerPort, <code>InstancePort</code>,
+     * A list of <code>LoadBalancerPort</code>, <code>InstancePort</code>,
      * <code>Protocol</code>, and <code>SSLCertificateId</code> items.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param listeners A list of LoadBalancerPort, <code>InstancePort</code>,
+     * @param listeners A list of <code>LoadBalancerPort</code>, <code>InstancePort</code>,
      *         <code>Protocol</code>, and <code>SSLCertificateId</code> items.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
      */
     public CreateLoadBalancerListenersRequest withListeners(java.util.Collection<Listener> listeners) {
-        java.util.List<Listener> listenersCopy = new java.util.ArrayList<Listener>();
-        if (listeners != null) {
+        if (listeners == null) {
+            this.listeners = null;
+        } else {
+            java.util.List<Listener> listenersCopy = new java.util.ArrayList<Listener>(listeners.size());
             listenersCopy.addAll(listeners);
+            this.listeners = listenersCopy;
         }
-        this.listeners = listenersCopy;
 
         return this;
     }
@@ -184,10 +191,35 @@ public class CreateLoadBalancerListenersRequest extends AmazonWebServiceRequest 
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("LoadBalancerName: " + loadBalancerName + ", ");
-        sb.append("Listeners: " + listeners + ", ");
+        if (loadBalancerName != null) sb.append("LoadBalancerName: " + loadBalancerName + ", ");
+        if (listeners != null) sb.append("Listeners: " + listeners + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getLoadBalancerName() == null) ? 0 : getLoadBalancerName().hashCode()); 
+        hashCode = prime * hashCode + ((getListeners() == null) ? 0 : getListeners().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof CreateLoadBalancerListenersRequest == false) return false;
+        CreateLoadBalancerListenersRequest other = (CreateLoadBalancerListenersRequest)obj;
+        
+        if (other.getLoadBalancerName() == null ^ this.getLoadBalancerName() == null) return false;
+        if (other.getLoadBalancerName() != null && other.getLoadBalancerName().equals(this.getLoadBalancerName()) == false) return false; 
+        if (other.getListeners() == null ^ this.getListeners() == null) return false;
+        if (other.getListeners() != null && other.getListeners().equals(this.getListeners()) == false) return false; 
+        return true;
     }
     
 }

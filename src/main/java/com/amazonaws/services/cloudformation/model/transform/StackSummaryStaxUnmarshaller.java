@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,12 +32,11 @@ import com.amazonaws.transform.SimpleTypeStaxUnmarshallers.*;
  */
 public class StackSummaryStaxUnmarshaller implements Unmarshaller<StackSummary, StaxUnmarshallerContext> {
 
-    
-
     public StackSummary unmarshall(StaxUnmarshallerContext context) throws Exception {
         StackSummary stackSummary = new StackSummary();
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
+
         
         if (context.isStartOfDocument()) targetDepth += 2;
         
@@ -63,12 +62,20 @@ public class StackSummaryStaxUnmarshaller implements Unmarshaller<StackSummary, 
                     stackSummary.setCreationTime(DateStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
+                if (context.testExpression("LastUpdatedTime", targetDepth)) {
+                    stackSummary.setLastUpdatedTime(DateStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
                 if (context.testExpression("DeletionTime", targetDepth)) {
                     stackSummary.setDeletionTime(DateStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
                 if (context.testExpression("StackStatus", targetDepth)) {
                     stackSummary.setStackStatus(StringStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("StackStatusReason", targetDepth)) {
+                    stackSummary.setStackStatusReason(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
             } else if (xmlEvent.isEndElement()) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -21,12 +21,9 @@ import com.amazonaws.AmazonWebServiceRequest;
  * The DeleteSecurityGroup operation deletes a security group.
  * </p>
  * <p>
- * <b>NOTE:</b> If you attempt to delete a security group that contains
- * instances, a fault is returned. If you attempt to delete a security
- * group that is referenced by another security group, a fault is
- * returned. For example, if security group B has a rule that allows
- * access from security group A, security group A cannot be deleted until
- * the allow rule is removed.
+ * <b>NOTE:</b> If you attempt to delete a security group that contains instances, a fault is returned. If you attempt to delete a security group that is
+ * referenced by another security group, a fault is returned. For example, if security group B has a rule that allows access from security group A,
+ * security group A cannot be deleted until the allow rule is removed.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#deleteSecurityGroup(DeleteSecurityGroupRequest)
@@ -59,6 +56,8 @@ public class DeleteSecurityGroupRequest extends AmazonWebServiceRequest {
     public DeleteSecurityGroupRequest(String groupName) {
         this.groupName = groupName;
     }
+
+    
     
     /**
      * The name of the Amazon EC2 security group to delete.
@@ -140,10 +139,35 @@ public class DeleteSecurityGroupRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("GroupName: " + groupName + ", ");
-        sb.append("GroupId: " + groupId + ", ");
+        if (groupName != null) sb.append("GroupName: " + groupName + ", ");
+        if (groupId != null) sb.append("GroupId: " + groupId + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getGroupName() == null) ? 0 : getGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getGroupId() == null) ? 0 : getGroupId().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DeleteSecurityGroupRequest == false) return false;
+        DeleteSecurityGroupRequest other = (DeleteSecurityGroupRequest)obj;
+        
+        if (other.getGroupName() == null ^ this.getGroupName() == null) return false;
+        if (other.getGroupName() != null && other.getGroupName().equals(this.getGroupName()) == false) return false; 
+        if (other.getGroupId() == null ^ this.getGroupId() == null) return false;
+        if (other.getGroupId() != null && other.getGroupId().equals(this.getGroupId()) == false) return false; 
+        return true;
     }
     
 }

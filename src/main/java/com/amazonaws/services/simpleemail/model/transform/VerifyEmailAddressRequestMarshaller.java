@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.simpleemail.model.*;
@@ -30,13 +31,17 @@ import com.amazonaws.util.StringUtils;
 public class VerifyEmailAddressRequestMarshaller implements Marshaller<Request<VerifyEmailAddressRequest>, VerifyEmailAddressRequest> {
 
     public Request<VerifyEmailAddressRequest> marshall(VerifyEmailAddressRequest verifyEmailAddressRequest) {
+
+        if (verifyEmailAddressRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<VerifyEmailAddressRequest> request = new DefaultRequest<VerifyEmailAddressRequest>(verifyEmailAddressRequest, "AmazonSimpleEmailService");
         request.addParameter("Action", "VerifyEmailAddress");
         request.addParameter("Version", "2010-12-01");
-        if (verifyEmailAddressRequest != null) {
-            if (verifyEmailAddressRequest.getEmailAddress() != null) {
-                request.addParameter("EmailAddress", StringUtils.fromString(verifyEmailAddressRequest.getEmailAddress()));
-            }
+
+        if (verifyEmailAddressRequest.getEmailAddress() != null) {
+            request.addParameter("EmailAddress", StringUtils.fromString(verifyEmailAddressRequest.getEmailAddress()));
         }
 
 

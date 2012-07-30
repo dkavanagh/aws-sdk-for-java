@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@ package com.amazonaws.services.rds.model;
 
 /**
  * <p>
- * Contains the result of a successful invocation of the
- * DescribeDBParameterGroups action.
+ * Contains the result of a successful invocation of the DescribeDBParameterGroups action.
  * </p>
  */
 public class DescribeDBParameterGroupsResult {
@@ -72,6 +71,7 @@ public class DescribeDBParameterGroupsResult {
      * @return A list of <a>DBParameterGroup</a> instances.
      */
     public java.util.List<DBParameterGroup> getDBParameterGroups() {
+        
         if (dBParameterGroups == null) {
             dBParameterGroups = new java.util.ArrayList<DBParameterGroup>();
         }
@@ -84,10 +84,13 @@ public class DescribeDBParameterGroupsResult {
      * @param dBParameterGroups A list of <a>DBParameterGroup</a> instances.
      */
     public void setDBParameterGroups(java.util.Collection<DBParameterGroup> dBParameterGroups) {
-        java.util.List<DBParameterGroup> dBParameterGroupsCopy = new java.util.ArrayList<DBParameterGroup>();
-        if (dBParameterGroups != null) {
-            dBParameterGroupsCopy.addAll(dBParameterGroups);
+        if (dBParameterGroups == null) {
+            this.dBParameterGroups = null;
+            return;
         }
+
+        java.util.List<DBParameterGroup> dBParameterGroupsCopy = new java.util.ArrayList<DBParameterGroup>(dBParameterGroups.size());
+        dBParameterGroupsCopy.addAll(dBParameterGroups);
         this.dBParameterGroups = dBParameterGroupsCopy;
     }
     
@@ -102,6 +105,7 @@ public class DescribeDBParameterGroupsResult {
      *         together. 
      */
     public DescribeDBParameterGroupsResult withDBParameterGroups(DBParameterGroup... dBParameterGroups) {
+        if (getDBParameterGroups() == null) setDBParameterGroups(new java.util.ArrayList<DBParameterGroup>(dBParameterGroups.length));
         for (DBParameterGroup value : dBParameterGroups) {
             getDBParameterGroups().add(value);
         }
@@ -119,11 +123,13 @@ public class DescribeDBParameterGroupsResult {
      *         together. 
      */
     public DescribeDBParameterGroupsResult withDBParameterGroups(java.util.Collection<DBParameterGroup> dBParameterGroups) {
-        java.util.List<DBParameterGroup> dBParameterGroupsCopy = new java.util.ArrayList<DBParameterGroup>();
-        if (dBParameterGroups != null) {
+        if (dBParameterGroups == null) {
+            this.dBParameterGroups = null;
+        } else {
+            java.util.List<DBParameterGroup> dBParameterGroupsCopy = new java.util.ArrayList<DBParameterGroup>(dBParameterGroups.size());
             dBParameterGroupsCopy.addAll(dBParameterGroups);
+            this.dBParameterGroups = dBParameterGroupsCopy;
         }
-        this.dBParameterGroups = dBParameterGroupsCopy;
 
         return this;
     }
@@ -140,10 +146,35 @@ public class DescribeDBParameterGroupsResult {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Marker: " + marker + ", ");
-        sb.append("DBParameterGroups: " + dBParameterGroups + ", ");
+        if (marker != null) sb.append("Marker: " + marker + ", ");
+        if (dBParameterGroups != null) sb.append("DBParameterGroups: " + dBParameterGroups + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getMarker() == null) ? 0 : getMarker().hashCode()); 
+        hashCode = prime * hashCode + ((getDBParameterGroups() == null) ? 0 : getDBParameterGroups().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeDBParameterGroupsResult == false) return false;
+        DescribeDBParameterGroupsResult other = (DescribeDBParameterGroupsResult)obj;
+        
+        if (other.getMarker() == null ^ this.getMarker() == null) return false;
+        if (other.getMarker() != null && other.getMarker().equals(this.getMarker()) == false) return false; 
+        if (other.getDBParameterGroups() == null ^ this.getDBParameterGroups() == null) return false;
+        if (other.getDBParameterGroups() != null && other.getDBParameterGroups().equals(this.getDBParameterGroups()) == false) return false; 
+        return true;
     }
     
 }

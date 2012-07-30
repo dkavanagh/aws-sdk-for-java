@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,9 +18,8 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#createVpnGateway(CreateVpnGatewayRequest) CreateVpnGateway operation}.
  * <p>
- * Creates a new VPN gateway. A VPN gateway is the VPC-side endpoint for
- * your VPN connection. You can create a VPN gateway before creating the
- * VPC itself.
+ * Creates a new VPN gateway. A VPN gateway is the VPC-side endpoint for your VPN connection. You can create a VPN gateway before creating the VPC
+ * itself.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#createVpnGateway(CreateVpnGatewayRequest)
@@ -53,6 +52,8 @@ public class CreateVpnGatewayRequest extends AmazonWebServiceRequest {
     public CreateVpnGatewayRequest(String type) {
         this.type = type;
     }
+
+    
     
     /**
      * The type of VPN connection this VPN gateway supports.
@@ -134,10 +135,35 @@ public class CreateVpnGatewayRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Type: " + type + ", ");
-        sb.append("AvailabilityZone: " + availabilityZone + ", ");
+        if (type != null) sb.append("Type: " + type + ", ");
+        if (availabilityZone != null) sb.append("AvailabilityZone: " + availabilityZone + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getType() == null) ? 0 : getType().hashCode()); 
+        hashCode = prime * hashCode + ((getAvailabilityZone() == null) ? 0 : getAvailabilityZone().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof CreateVpnGatewayRequest == false) return false;
+        CreateVpnGatewayRequest other = (CreateVpnGatewayRequest)obj;
+        
+        if (other.getType() == null ^ this.getType() == null) return false;
+        if (other.getType() != null && other.getType().equals(this.getType()) == false) return false; 
+        if (other.getAvailabilityZone() == null ^ this.getAvailabilityZone() == null) return false;
+        if (other.getAvailabilityZone() != null && other.getAvailabilityZone().equals(this.getAvailabilityZone()) == false) return false; 
+        return true;
     }
     
 }

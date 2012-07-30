@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,12 +32,11 @@ import com.amazonaws.transform.SimpleTypeStaxUnmarshallers.*;
  */
 public class JobFlowDetailStaxUnmarshaller implements Unmarshaller<JobFlowDetail, StaxUnmarshallerContext> {
 
-    
-
     public JobFlowDetail unmarshall(StaxUnmarshallerContext context) throws Exception {
         JobFlowDetail jobFlowDetail = new JobFlowDetail();
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
+
         
         if (context.isStartOfDocument()) targetDepth += 2;
         
@@ -77,6 +76,10 @@ public class JobFlowDetailStaxUnmarshaller implements Unmarshaller<JobFlowDetail
                 }
                 if (context.testExpression("BootstrapActions/member", targetDepth)) {
                     jobFlowDetail.getBootstrapActions().add(BootstrapActionDetailStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("SupportedProducts/member", targetDepth)) {
+                    jobFlowDetail.getSupportedProducts().add(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
             } else if (xmlEvent.isEndElement()) {

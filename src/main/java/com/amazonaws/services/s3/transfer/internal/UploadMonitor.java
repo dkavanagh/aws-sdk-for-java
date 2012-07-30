@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 Amazon Technologies, Inc.
+ * Copyright 2011-2012 Amazon Technologies, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
@@ -48,32 +47,18 @@ import com.amazonaws.services.s3.transfer.model.UploadResult;
  */
 public class UploadMonitor implements Callable<UploadResult>, TransferMonitor {
 
-    private static ScheduledExecutorService timedThreadPoool; 
-    
-    /*
-     * Returns shared the scheduled executor, initializing it first if
-     * necessary.
-     */
-    private static synchronized ScheduledExecutorService getDelayExecutor() {
-        if ( timedThreadPoool == null )
-            timedThreadPoool = new ScheduledThreadPoolExecutor(1);
-        return timedThreadPoool;
-    }
-    
-    public static synchronized void shutdownNow() {
-    	if (timedThreadPoool != null) timedThreadPoool.shutdownNow();
-    }
-    
+
     private final AmazonS3 s3;
     private final ExecutorService threadPool;
     private final PutObjectRequest putObjectRequest;
+    private ScheduledExecutorService timedThreadPool;
 
     private static final Log log = LogFactory.getLog(UploadMonitor.class);
     private final TransferManagerConfiguration configuration;
     private final ProgressListenerChain progressListenerChain;
-    private final UploadCallable mulipartUploadCallable;
-    private final UploadImpl transfer;   
-    
+    private final UploadCallable multipartUploadCallable;
+    private final UploadImpl transfer;
+
     /*
      * State for tracking the upload's progress
      */
@@ -83,13 +68,13 @@ public class UploadMonitor implements Callable<UploadResult>, TransferMonitor {
     /*
      * State for clients wishing to poll for completion
      */
-    private boolean isUploadDone = false;    
+    private boolean isUploadDone = false;
     private Future<UploadResult> nextFuture;
-    
+
     public synchronized Future<UploadResult> getFuture() {
         return nextFuture;
     }
-    
+
     private synchronized void setNextFuture(Future<UploadResult> nextFuture) {
         this.nextFuture = nextFuture;
     }
@@ -105,11 +90,11 @@ public class UploadMonitor implements Callable<UploadResult>, TransferMonitor {
     // TODO: this could be configured in the configuration object (which we're
     // not using right now)
     private int pollInterval = 5000;
-    
+
     /**
      * Constructs a new upload watcher, which immediately submits itself to the
      * thread pool.
-     * 
+     *
      * @param manager
      *            The {@link TransferManager} that owns this upload.
      * @param transfer
@@ -128,17 +113,21 @@ public class UploadMonitor implements Callable<UploadResult>, TransferMonitor {
     public UploadMonitor(TransferManager manager, UploadImpl transfer, ExecutorService threadPool,
             UploadCallable multipartUploadCallable, PutObjectRequest putObjectRequest,
             ProgressListenerChain progressListenerChain) {
-        
+
         this.s3 = manager.getAmazonS3Client();
         this.configuration = manager.getConfiguration();
 
-        this.mulipartUploadCallable = multipartUploadCallable;
+        this.multipartUploadCallable = multipartUploadCallable;
         this.threadPool = threadPool;
         this.putObjectRequest = putObjectRequest;
         this.progressListenerChain = progressListenerChain;
         this.transfer = transfer;
 
         setNextFuture(threadPool.submit(this));
+    }
+
+    public void setTimedThreadPool(ScheduledExecutorService timedThreadPool) {
+        this.timedThreadPool = timedThreadPool;
     }
 
     @Override
@@ -187,27 +176,32 @@ public class UploadMonitor implements Callable<UploadResult>, TransferMonitor {
      */
     private UploadResult upload() throws Exception, InterruptedException {
 
-        UploadResult result = mulipartUploadCallable.call();
+        UploadResult result = multipartUploadCallable.call();
 
         if ( result != null ) {
             uploadComplete();
         } else {
-            uploadId = mulipartUploadCallable.getMultipartUploadId();
-            futures.addAll(mulipartUploadCallable.getFutures());
+            uploadId = multipartUploadCallable.getMultipartUploadId();
+            futures.addAll(multipartUploadCallable.getFutures());
             reschedule();
         }
-        
+
         return result;
     }
 
     private void uploadComplete() {
         markAllDone();
         transfer.setState(TransferState.Completed);
-        fireProgressEvent(ProgressEvent.COMPLETED_EVENT_CODE);
+
+        // AmazonS3Client takes care of all the events for single part uploads,
+        // so we only need to send a completed event for multipart uploads.
+        if (multipartUploadCallable.isMultipartUpload()) {
+        	fireProgressEvent(ProgressEvent.COMPLETED_EVENT_CODE);
+        }
     }
 
     private void reschedule()  {
-        setNextFuture(getDelayExecutor().schedule(new Callable<UploadResult>() {
+        setNextFuture(timedThreadPool.schedule(new Callable<UploadResult>() {
             public UploadResult call() throws Exception {
                 setNextFuture(threadPool.submit(UploadMonitor.this));
                 return null;
@@ -221,7 +215,7 @@ public class UploadMonitor implements Callable<UploadResult>, TransferMonitor {
         event.setEventCode(eventType);
         progressListenerChain.progressChanged(event);
     }
-    
+
     /**
      * Completes the multipart upload and returns the result.
      */
@@ -229,9 +223,9 @@ public class UploadMonitor implements Callable<UploadResult>, TransferMonitor {
         CompleteMultipartUploadResult completeMultipartUploadResult = s3
                 .completeMultipartUpload(new CompleteMultipartUploadRequest(putObjectRequest.getBucketName(),
                         putObjectRequest.getKey(), uploadId, collectPartETags()));
-    
+
         uploadComplete();
-    
+
         UploadResult uploadResult = new UploadResult();
         uploadResult.setBucketName(completeMultipartUploadResult.getBucketName());
         uploadResult.setKey(completeMultipartUploadResult.getKey());

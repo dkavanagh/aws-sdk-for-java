@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -69,6 +69,8 @@ public class InstanceAttribute {
      * up of a virtualName and a deviceName.
      */
     private java.util.List<InstanceBlockDeviceMapping> blockDeviceMappings;
+
+    private java.util.List<ProductCode> productCodes;
 
     /**
      * The ID of the associated instance.
@@ -379,6 +381,7 @@ public class InstanceAttribute {
      *         up of a virtualName and a deviceName.
      */
     public java.util.List<InstanceBlockDeviceMapping> getBlockDeviceMappings() {
+        
         if (blockDeviceMappings == null) {
             blockDeviceMappings = new java.util.ArrayList<InstanceBlockDeviceMapping>();
         }
@@ -393,10 +396,13 @@ public class InstanceAttribute {
      *         up of a virtualName and a deviceName.
      */
     public void setBlockDeviceMappings(java.util.Collection<InstanceBlockDeviceMapping> blockDeviceMappings) {
-        java.util.List<InstanceBlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<InstanceBlockDeviceMapping>();
-        if (blockDeviceMappings != null) {
-            blockDeviceMappingsCopy.addAll(blockDeviceMappings);
+        if (blockDeviceMappings == null) {
+            this.blockDeviceMappings = null;
+            return;
         }
+
+        java.util.List<InstanceBlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<InstanceBlockDeviceMapping>(blockDeviceMappings.size());
+        blockDeviceMappingsCopy.addAll(blockDeviceMappings);
         this.blockDeviceMappings = blockDeviceMappingsCopy;
     }
     
@@ -413,6 +419,7 @@ public class InstanceAttribute {
      *         together. 
      */
     public InstanceAttribute withBlockDeviceMappings(InstanceBlockDeviceMapping... blockDeviceMappings) {
+        if (getBlockDeviceMappings() == null) setBlockDeviceMappings(new java.util.ArrayList<InstanceBlockDeviceMapping>(blockDeviceMappings.length));
         for (InstanceBlockDeviceMapping value : blockDeviceMappings) {
             getBlockDeviceMappings().add(value);
         }
@@ -432,11 +439,82 @@ public class InstanceAttribute {
      *         together. 
      */
     public InstanceAttribute withBlockDeviceMappings(java.util.Collection<InstanceBlockDeviceMapping> blockDeviceMappings) {
-        java.util.List<InstanceBlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<InstanceBlockDeviceMapping>();
-        if (blockDeviceMappings != null) {
+        if (blockDeviceMappings == null) {
+            this.blockDeviceMappings = null;
+        } else {
+            java.util.List<InstanceBlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<InstanceBlockDeviceMapping>(blockDeviceMappings.size());
             blockDeviceMappingsCopy.addAll(blockDeviceMappings);
+            this.blockDeviceMappings = blockDeviceMappingsCopy;
         }
-        this.blockDeviceMappings = blockDeviceMappingsCopy;
+
+        return this;
+    }
+    
+    /**
+     * Returns the value of the ProductCodes property for this object.
+     *
+     * @return The value of the ProductCodes property for this object.
+     */
+    public java.util.List<ProductCode> getProductCodes() {
+        
+        if (productCodes == null) {
+            productCodes = new java.util.ArrayList<ProductCode>();
+        }
+        return productCodes;
+    }
+    
+    /**
+     * Sets the value of the ProductCodes property for this object.
+     *
+     * @param productCodes The new value for the ProductCodes property for this object.
+     */
+    public void setProductCodes(java.util.Collection<ProductCode> productCodes) {
+        if (productCodes == null) {
+            this.productCodes = null;
+            return;
+        }
+
+        java.util.List<ProductCode> productCodesCopy = new java.util.ArrayList<ProductCode>(productCodes.size());
+        productCodesCopy.addAll(productCodes);
+        this.productCodes = productCodesCopy;
+    }
+    
+    /**
+     * Sets the value of the ProductCodes property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param productCodes The new value for the ProductCodes property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public InstanceAttribute withProductCodes(ProductCode... productCodes) {
+        if (getProductCodes() == null) setProductCodes(new java.util.ArrayList<ProductCode>(productCodes.length));
+        for (ProductCode value : productCodes) {
+            getProductCodes().add(value);
+        }
+        return this;
+    }
+    
+    /**
+     * Sets the value of the ProductCodes property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param productCodes The new value for the ProductCodes property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public InstanceAttribute withProductCodes(java.util.Collection<ProductCode> productCodes) {
+        if (productCodes == null) {
+            this.productCodes = null;
+        } else {
+            java.util.List<ProductCode> productCodesCopy = new java.util.ArrayList<ProductCode>(productCodes.size());
+            productCodesCopy.addAll(productCodes);
+            this.productCodes = productCodesCopy;
+        }
 
         return this;
     }
@@ -453,17 +531,67 @@ public class InstanceAttribute {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("InstanceId: " + instanceId + ", ");
-        sb.append("InstanceType: " + instanceType + ", ");
-        sb.append("KernelId: " + kernelId + ", ");
-        sb.append("RamdiskId: " + ramdiskId + ", ");
-        sb.append("UserData: " + userData + ", ");
-        sb.append("DisableApiTermination: " + disableApiTermination + ", ");
-        sb.append("InstanceInitiatedShutdownBehavior: " + instanceInitiatedShutdownBehavior + ", ");
-        sb.append("RootDeviceName: " + rootDeviceName + ", ");
-        sb.append("BlockDeviceMappings: " + blockDeviceMappings + ", ");
+        if (instanceId != null) sb.append("InstanceId: " + instanceId + ", ");
+        if (instanceType != null) sb.append("InstanceType: " + instanceType + ", ");
+        if (kernelId != null) sb.append("KernelId: " + kernelId + ", ");
+        if (ramdiskId != null) sb.append("RamdiskId: " + ramdiskId + ", ");
+        if (userData != null) sb.append("UserData: " + userData + ", ");
+        if (disableApiTermination != null) sb.append("DisableApiTermination: " + disableApiTermination + ", ");
+        if (instanceInitiatedShutdownBehavior != null) sb.append("InstanceInitiatedShutdownBehavior: " + instanceInitiatedShutdownBehavior + ", ");
+        if (rootDeviceName != null) sb.append("RootDeviceName: " + rootDeviceName + ", ");
+        if (blockDeviceMappings != null) sb.append("BlockDeviceMappings: " + blockDeviceMappings + ", ");
+        if (productCodes != null) sb.append("ProductCodes: " + productCodes + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getInstanceId() == null) ? 0 : getInstanceId().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceType() == null) ? 0 : getInstanceType().hashCode()); 
+        hashCode = prime * hashCode + ((getKernelId() == null) ? 0 : getKernelId().hashCode()); 
+        hashCode = prime * hashCode + ((getRamdiskId() == null) ? 0 : getRamdiskId().hashCode()); 
+        hashCode = prime * hashCode + ((getUserData() == null) ? 0 : getUserData().hashCode()); 
+        hashCode = prime * hashCode + ((isDisableApiTermination() == null) ? 0 : isDisableApiTermination().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceInitiatedShutdownBehavior() == null) ? 0 : getInstanceInitiatedShutdownBehavior().hashCode()); 
+        hashCode = prime * hashCode + ((getRootDeviceName() == null) ? 0 : getRootDeviceName().hashCode()); 
+        hashCode = prime * hashCode + ((getBlockDeviceMappings() == null) ? 0 : getBlockDeviceMappings().hashCode()); 
+        hashCode = prime * hashCode + ((getProductCodes() == null) ? 0 : getProductCodes().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof InstanceAttribute == false) return false;
+        InstanceAttribute other = (InstanceAttribute)obj;
+        
+        if (other.getInstanceId() == null ^ this.getInstanceId() == null) return false;
+        if (other.getInstanceId() != null && other.getInstanceId().equals(this.getInstanceId()) == false) return false; 
+        if (other.getInstanceType() == null ^ this.getInstanceType() == null) return false;
+        if (other.getInstanceType() != null && other.getInstanceType().equals(this.getInstanceType()) == false) return false; 
+        if (other.getKernelId() == null ^ this.getKernelId() == null) return false;
+        if (other.getKernelId() != null && other.getKernelId().equals(this.getKernelId()) == false) return false; 
+        if (other.getRamdiskId() == null ^ this.getRamdiskId() == null) return false;
+        if (other.getRamdiskId() != null && other.getRamdiskId().equals(this.getRamdiskId()) == false) return false; 
+        if (other.getUserData() == null ^ this.getUserData() == null) return false;
+        if (other.getUserData() != null && other.getUserData().equals(this.getUserData()) == false) return false; 
+        if (other.isDisableApiTermination() == null ^ this.isDisableApiTermination() == null) return false;
+        if (other.isDisableApiTermination() != null && other.isDisableApiTermination().equals(this.isDisableApiTermination()) == false) return false; 
+        if (other.getInstanceInitiatedShutdownBehavior() == null ^ this.getInstanceInitiatedShutdownBehavior() == null) return false;
+        if (other.getInstanceInitiatedShutdownBehavior() != null && other.getInstanceInitiatedShutdownBehavior().equals(this.getInstanceInitiatedShutdownBehavior()) == false) return false; 
+        if (other.getRootDeviceName() == null ^ this.getRootDeviceName() == null) return false;
+        if (other.getRootDeviceName() != null && other.getRootDeviceName().equals(this.getRootDeviceName()) == false) return false; 
+        if (other.getBlockDeviceMappings() == null ^ this.getBlockDeviceMappings() == null) return false;
+        if (other.getBlockDeviceMappings() != null && other.getBlockDeviceMappings().equals(this.getBlockDeviceMappings()) == false) return false; 
+        if (other.getProductCodes() == null ^ this.getProductCodes() == null) return false;
+        if (other.getProductCodes() != null && other.getProductCodes().equals(this.getProductCodes()) == false) return false; 
+        return true;
     }
     
 }

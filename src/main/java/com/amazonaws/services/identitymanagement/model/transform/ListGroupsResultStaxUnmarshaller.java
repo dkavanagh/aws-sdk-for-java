@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,12 +32,11 @@ import com.amazonaws.transform.SimpleTypeStaxUnmarshallers.*;
  */
 public class ListGroupsResultStaxUnmarshaller implements Unmarshaller<ListGroupsResult, StaxUnmarshallerContext> {
 
-    
-
     public ListGroupsResult unmarshall(StaxUnmarshallerContext context) throws Exception {
         ListGroupsResult listGroupsResult = new ListGroupsResult();
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
+
         
         if (context.isStartOfDocument()) targetDepth += 2;
         

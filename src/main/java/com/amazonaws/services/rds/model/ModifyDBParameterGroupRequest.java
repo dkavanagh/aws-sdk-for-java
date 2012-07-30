@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,10 +18,13 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.rds.AmazonRDS#modifyDBParameterGroup(ModifyDBParameterGroupRequest) ModifyDBParameterGroup operation}.
  * <p>
- * Modifies the parameters of a DBParameterGroup. To modify more than
- * one parameter submit a list of the following: ParameterName,
- * ParameterValue, and ApplyMethod. A maximum of 20 parameters can be
- * modified in a single request.
+ * Modifies the parameters of a DBParameterGroup. To modify more than one parameter submit a list of the following: ParameterName, ParameterValue, and
+ * ApplyMethod. A maximum of 20 parameters can be modified in a single request.
+ * </p>
+ * <p>
+ * <b>NOTE:</b> The apply-immediate method can be used only for dynamic parameters; the pending-reboot method can be used with MySQL and Oracle DB
+ * Instances for either dynamic or static parameters. For Microsoft SQL Server DB Instances, the pending-reboot method can be used only for static
+ * parameters.
  * </p>
  *
  * @see com.amazonaws.services.rds.AmazonRDS#modifyDBParameterGroup(ModifyDBParameterGroupRequest)
@@ -29,11 +32,11 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class ModifyDBParameterGroupRequest extends AmazonWebServiceRequest {
 
     /**
-     * The name of the database parameter group. <p>Constraints: <ul>
-     * <li>Must be the name of an existing database parameter group</li>
-     * <li>Must be 1 to 255 alphanumeric characters</li> <li>First character
-     * must be a letter</li> <li>Cannot end with a hyphen or contain two
-     * consecutive hyphens</li> </ul>
+     * The name of the DB Parameter Group. <p>Constraints: <ul> <li>Must be
+     * the name of an existing DB Parameter Group</li> <li>Must be 1 to 255
+     * alphanumeric characters</li> <li>First character must be a letter</li>
+     * <li>Cannot end with a hyphen or contain two consecutive hyphens</li>
+     * </ul>
      */
     private String dBParameterGroupName;
 
@@ -60,11 +63,11 @@ public class ModifyDBParameterGroupRequest extends AmazonWebServiceRequest {
      * Callers should use the setter or fluent setter (with...) methods to
      * initialize any additional object members.
      * 
-     * @param dBParameterGroupName The name of the database parameter group.
-     * <p>Constraints: <ul> <li>Must be the name of an existing database
-     * parameter group</li> <li>Must be 1 to 255 alphanumeric characters</li>
-     * <li>First character must be a letter</li> <li>Cannot end with a hyphen
-     * or contain two consecutive hyphens</li> </ul>
+     * @param dBParameterGroupName The name of the DB Parameter Group.
+     * <p>Constraints: <ul> <li>Must be the name of an existing DB Parameter
+     * Group</li> <li>Must be 1 to 255 alphanumeric characters</li> <li>First
+     * character must be a letter</li> <li>Cannot end with a hyphen or
+     * contain two consecutive hyphens</li> </ul>
      * @param parameters An array of parameter names, values, and the apply
      * method for the parameter update. At least one parameter name, value,
      * and apply method must be supplied; subsequent arguments are optional.
@@ -79,55 +82,57 @@ public class ModifyDBParameterGroupRequest extends AmazonWebServiceRequest {
         this.dBParameterGroupName = dBParameterGroupName;
         this.parameters = parameters;
     }
+
+    
     
     /**
-     * The name of the database parameter group. <p>Constraints: <ul>
-     * <li>Must be the name of an existing database parameter group</li>
-     * <li>Must be 1 to 255 alphanumeric characters</li> <li>First character
-     * must be a letter</li> <li>Cannot end with a hyphen or contain two
-     * consecutive hyphens</li> </ul>
+     * The name of the DB Parameter Group. <p>Constraints: <ul> <li>Must be
+     * the name of an existing DB Parameter Group</li> <li>Must be 1 to 255
+     * alphanumeric characters</li> <li>First character must be a letter</li>
+     * <li>Cannot end with a hyphen or contain two consecutive hyphens</li>
+     * </ul>
      *
-     * @return The name of the database parameter group. <p>Constraints: <ul>
-     *         <li>Must be the name of an existing database parameter group</li>
-     *         <li>Must be 1 to 255 alphanumeric characters</li> <li>First character
-     *         must be a letter</li> <li>Cannot end with a hyphen or contain two
-     *         consecutive hyphens</li> </ul>
+     * @return The name of the DB Parameter Group. <p>Constraints: <ul> <li>Must be
+     *         the name of an existing DB Parameter Group</li> <li>Must be 1 to 255
+     *         alphanumeric characters</li> <li>First character must be a letter</li>
+     *         <li>Cannot end with a hyphen or contain two consecutive hyphens</li>
+     *         </ul>
      */
     public String getDBParameterGroupName() {
         return dBParameterGroupName;
     }
     
     /**
-     * The name of the database parameter group. <p>Constraints: <ul>
-     * <li>Must be the name of an existing database parameter group</li>
-     * <li>Must be 1 to 255 alphanumeric characters</li> <li>First character
-     * must be a letter</li> <li>Cannot end with a hyphen or contain two
-     * consecutive hyphens</li> </ul>
+     * The name of the DB Parameter Group. <p>Constraints: <ul> <li>Must be
+     * the name of an existing DB Parameter Group</li> <li>Must be 1 to 255
+     * alphanumeric characters</li> <li>First character must be a letter</li>
+     * <li>Cannot end with a hyphen or contain two consecutive hyphens</li>
+     * </ul>
      *
-     * @param dBParameterGroupName The name of the database parameter group. <p>Constraints: <ul>
-     *         <li>Must be the name of an existing database parameter group</li>
-     *         <li>Must be 1 to 255 alphanumeric characters</li> <li>First character
-     *         must be a letter</li> <li>Cannot end with a hyphen or contain two
-     *         consecutive hyphens</li> </ul>
+     * @param dBParameterGroupName The name of the DB Parameter Group. <p>Constraints: <ul> <li>Must be
+     *         the name of an existing DB Parameter Group</li> <li>Must be 1 to 255
+     *         alphanumeric characters</li> <li>First character must be a letter</li>
+     *         <li>Cannot end with a hyphen or contain two consecutive hyphens</li>
+     *         </ul>
      */
     public void setDBParameterGroupName(String dBParameterGroupName) {
         this.dBParameterGroupName = dBParameterGroupName;
     }
     
     /**
-     * The name of the database parameter group. <p>Constraints: <ul>
-     * <li>Must be the name of an existing database parameter group</li>
-     * <li>Must be 1 to 255 alphanumeric characters</li> <li>First character
-     * must be a letter</li> <li>Cannot end with a hyphen or contain two
-     * consecutive hyphens</li> </ul>
+     * The name of the DB Parameter Group. <p>Constraints: <ul> <li>Must be
+     * the name of an existing DB Parameter Group</li> <li>Must be 1 to 255
+     * alphanumeric characters</li> <li>First character must be a letter</li>
+     * <li>Cannot end with a hyphen or contain two consecutive hyphens</li>
+     * </ul>
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param dBParameterGroupName The name of the database parameter group. <p>Constraints: <ul>
-     *         <li>Must be the name of an existing database parameter group</li>
-     *         <li>Must be 1 to 255 alphanumeric characters</li> <li>First character
-     *         must be a letter</li> <li>Cannot end with a hyphen or contain two
-     *         consecutive hyphens</li> </ul>
+     * @param dBParameterGroupName The name of the DB Parameter Group. <p>Constraints: <ul> <li>Must be
+     *         the name of an existing DB Parameter Group</li> <li>Must be 1 to 255
+     *         alphanumeric characters</li> <li>First character must be a letter</li>
+     *         <li>Cannot end with a hyphen or contain two consecutive hyphens</li>
+     *         </ul>
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -158,6 +163,7 @@ public class ModifyDBParameterGroupRequest extends AmazonWebServiceRequest {
      *         parameters, and changes are applied when DB Instance reboots. </note>
      */
     public java.util.List<Parameter> getParameters() {
+        
         if (parameters == null) {
             parameters = new java.util.ArrayList<Parameter>();
         }
@@ -184,10 +190,13 @@ public class ModifyDBParameterGroupRequest extends AmazonWebServiceRequest {
      *         parameters, and changes are applied when DB Instance reboots. </note>
      */
     public void setParameters(java.util.Collection<Parameter> parameters) {
-        java.util.List<Parameter> parametersCopy = new java.util.ArrayList<Parameter>();
-        if (parameters != null) {
-            parametersCopy.addAll(parameters);
+        if (parameters == null) {
+            this.parameters = null;
+            return;
         }
+
+        java.util.List<Parameter> parametersCopy = new java.util.ArrayList<Parameter>(parameters.size());
+        parametersCopy.addAll(parameters);
         this.parameters = parametersCopy;
     }
     
@@ -216,6 +225,7 @@ public class ModifyDBParameterGroupRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public ModifyDBParameterGroupRequest withParameters(Parameter... parameters) {
+        if (getParameters() == null) setParameters(new java.util.ArrayList<Parameter>(parameters.length));
         for (Parameter value : parameters) {
             getParameters().add(value);
         }
@@ -247,11 +257,13 @@ public class ModifyDBParameterGroupRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public ModifyDBParameterGroupRequest withParameters(java.util.Collection<Parameter> parameters) {
-        java.util.List<Parameter> parametersCopy = new java.util.ArrayList<Parameter>();
-        if (parameters != null) {
+        if (parameters == null) {
+            this.parameters = null;
+        } else {
+            java.util.List<Parameter> parametersCopy = new java.util.ArrayList<Parameter>(parameters.size());
             parametersCopy.addAll(parameters);
+            this.parameters = parametersCopy;
         }
-        this.parameters = parametersCopy;
 
         return this;
     }
@@ -268,10 +280,35 @@ public class ModifyDBParameterGroupRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("DBParameterGroupName: " + dBParameterGroupName + ", ");
-        sb.append("Parameters: " + parameters + ", ");
+        if (dBParameterGroupName != null) sb.append("DBParameterGroupName: " + dBParameterGroupName + ", ");
+        if (parameters != null) sb.append("Parameters: " + parameters + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getDBParameterGroupName() == null) ? 0 : getDBParameterGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getParameters() == null) ? 0 : getParameters().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof ModifyDBParameterGroupRequest == false) return false;
+        ModifyDBParameterGroupRequest other = (ModifyDBParameterGroupRequest)obj;
+        
+        if (other.getDBParameterGroupName() == null ^ this.getDBParameterGroupName() == null) return false;
+        if (other.getDBParameterGroupName() != null && other.getDBParameterGroupName().equals(this.getDBParameterGroupName()) == false) return false; 
+        if (other.getParameters() == null ^ this.getParameters() == null) return false;
+        if (other.getParameters() != null && other.getParameters().equals(this.getParameters()) == false) return false; 
+        return true;
     }
     
 }

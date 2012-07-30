@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.identitymanagement.model.*;
@@ -30,18 +31,20 @@ import com.amazonaws.util.StringUtils;
 public class RemoveUserFromGroupRequestMarshaller implements Marshaller<Request<RemoveUserFromGroupRequest>, RemoveUserFromGroupRequest> {
 
     public Request<RemoveUserFromGroupRequest> marshall(RemoveUserFromGroupRequest removeUserFromGroupRequest) {
+
+        if (removeUserFromGroupRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<RemoveUserFromGroupRequest> request = new DefaultRequest<RemoveUserFromGroupRequest>(removeUserFromGroupRequest, "AmazonIdentityManagement");
         request.addParameter("Action", "RemoveUserFromGroup");
         request.addParameter("Version", "2010-05-08");
-        if (removeUserFromGroupRequest != null) {
-            if (removeUserFromGroupRequest.getGroupName() != null) {
-                request.addParameter("GroupName", StringUtils.fromString(removeUserFromGroupRequest.getGroupName()));
-            }
+
+        if (removeUserFromGroupRequest.getGroupName() != null) {
+            request.addParameter("GroupName", StringUtils.fromString(removeUserFromGroupRequest.getGroupName()));
         }
-        if (removeUserFromGroupRequest != null) {
-            if (removeUserFromGroupRequest.getUserName() != null) {
-                request.addParameter("UserName", StringUtils.fromString(removeUserFromGroupRequest.getUserName()));
-            }
+        if (removeUserFromGroupRequest.getUserName() != null) {
+            request.addParameter("UserName", StringUtils.fromString(removeUserFromGroupRequest.getUserName()));
         }
 
 

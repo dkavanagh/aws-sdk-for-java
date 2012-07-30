@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.ec2.model.*;
@@ -30,13 +31,17 @@ import com.amazonaws.util.StringUtils;
 public class DisassociateRouteTableRequestMarshaller implements Marshaller<Request<DisassociateRouteTableRequest>, DisassociateRouteTableRequest> {
 
     public Request<DisassociateRouteTableRequest> marshall(DisassociateRouteTableRequest disassociateRouteTableRequest) {
+
+        if (disassociateRouteTableRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<DisassociateRouteTableRequest> request = new DefaultRequest<DisassociateRouteTableRequest>(disassociateRouteTableRequest, "AmazonEC2");
         request.addParameter("Action", "DisassociateRouteTable");
-        request.addParameter("Version", "2011-05-15");
-        if (disassociateRouteTableRequest != null) {
-            if (disassociateRouteTableRequest.getAssociationId() != null) {
-                request.addParameter("AssociationId", StringUtils.fromString(disassociateRouteTableRequest.getAssociationId()));
-            }
+        request.addParameter("Version", "2012-06-15");
+
+        if (disassociateRouteTableRequest.getAssociationId() != null) {
+            request.addParameter("AssociationId", StringUtils.fromString(disassociateRouteTableRequest.getAssociationId()));
         }
 
 

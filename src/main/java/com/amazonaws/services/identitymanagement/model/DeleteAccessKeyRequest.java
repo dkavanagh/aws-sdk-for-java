@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,14 +18,11 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#deleteAccessKey(DeleteAccessKeyRequest) DeleteAccessKey operation}.
  * <p>
- * Deletes the access key associated with the specified User.
+ * Deletes the access key associated with the specified user.
  * </p>
  * <p>
- * If you do not specify a User name, IAM determines the User name
- * implicitly based on the AWS Access Key ID signing the request. Because
- * this action works for access keys under the AWS Account, you can use
- * this API to manage root credentials even if the AWS Account has no
- * associated Users.
+ * If you do not specify a user name, IAM determines the user name implicitly based on the AWS Access Key ID signing the request. Because this action
+ * works for access keys under the AWS account, you can use this API to manage root credentials even if the AWS account has no associated users.
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#deleteAccessKey(DeleteAccessKeyRequest)
@@ -33,7 +30,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class DeleteAccessKeyRequest extends AmazonWebServiceRequest {
 
     /**
-     * Name of the User whose key you want to delete.
+     * Name of the user whose key you want to delete.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
@@ -68,35 +65,37 @@ public class DeleteAccessKeyRequest extends AmazonWebServiceRequest {
     public DeleteAccessKeyRequest(String accessKeyId) {
         this.accessKeyId = accessKeyId;
     }
+
+    
     
     /**
-     * Name of the User whose key you want to delete.
+     * Name of the user whose key you want to delete.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @return Name of the User whose key you want to delete.
+     * @return Name of the user whose key you want to delete.
      */
     public String getUserName() {
         return userName;
     }
     
     /**
-     * Name of the User whose key you want to delete.
+     * Name of the user whose key you want to delete.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User whose key you want to delete.
+     * @param userName Name of the user whose key you want to delete.
      */
     public void setUserName(String userName) {
         this.userName = userName;
     }
     
     /**
-     * Name of the User whose key you want to delete.
+     * Name of the user whose key you want to delete.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -104,7 +103,7 @@ public class DeleteAccessKeyRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User whose key you want to delete.
+     * @param userName Name of the user whose key you want to delete.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -179,10 +178,35 @@ public class DeleteAccessKeyRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("UserName: " + userName + ", ");
-        sb.append("AccessKeyId: " + accessKeyId + ", ");
+        if (userName != null) sb.append("UserName: " + userName + ", ");
+        if (accessKeyId != null) sb.append("AccessKeyId: " + accessKeyId + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getUserName() == null) ? 0 : getUserName().hashCode()); 
+        hashCode = prime * hashCode + ((getAccessKeyId() == null) ? 0 : getAccessKeyId().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DeleteAccessKeyRequest == false) return false;
+        DeleteAccessKeyRequest other = (DeleteAccessKeyRequest)obj;
+        
+        if (other.getUserName() == null ^ this.getUserName() == null) return false;
+        if (other.getUserName() != null && other.getUserName().equals(this.getUserName()) == false) return false; 
+        if (other.getAccessKeyId() == null ^ this.getAccessKeyId() == null) return false;
+        if (other.getAccessKeyId() != null && other.getAccessKeyId().equals(this.getAccessKeyId()) == false) return false; 
+        return true;
     }
     
 }

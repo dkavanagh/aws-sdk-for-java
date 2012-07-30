@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,15 +18,12 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.autoscaling.AmazonAutoScaling#describeAutoScalingInstances(DescribeAutoScalingInstancesRequest) DescribeAutoScalingInstances operation}.
  * <p>
- * Returns a description of each Auto Scaling instance in the
- * InstanceIds list. If a list is not provided, the service returns the
- * full details of all instances up to a maximum of fifty. By default,
- * the service returns a list of 20 items.
+ * Returns a description of each Auto Scaling instance in the <code>InstanceIds</code> list. If a list is not provided, the service returns the full
+ * details of all instances up to a maximum of 50. By default, the service returns a list of 20 items.
  * </p>
  * <p>
- * This action supports pagination by returning a token if there are
- * more pages to retrieve. To get the next page, call this action again
- * with the returned token as the NextToken parameter.
+ * This action supports pagination by returning a token if there are more pages to retrieve. To get the next page, call this action again with the
+ * returned token as the <code>NextToken</code> parameter.
  * </p>
  *
  * @see com.amazonaws.services.autoscaling.AmazonAutoScaling#describeAutoScalingInstances(DescribeAutoScalingInstancesRequest)
@@ -71,6 +68,7 @@ public class DescribeAutoScalingInstancesRequest extends AmazonWebServiceRequest
      *         instances are requested, they are ignored with no error.
      */
     public java.util.List<String> getInstanceIds() {
+        
         if (instanceIds == null) {
             instanceIds = new java.util.ArrayList<String>();
         }
@@ -89,10 +87,13 @@ public class DescribeAutoScalingInstancesRequest extends AmazonWebServiceRequest
      *         instances are requested, they are ignored with no error.
      */
     public void setInstanceIds(java.util.Collection<String> instanceIds) {
-        java.util.List<String> instanceIdsCopy = new java.util.ArrayList<String>();
-        if (instanceIds != null) {
-            instanceIdsCopy.addAll(instanceIds);
+        if (instanceIds == null) {
+            this.instanceIds = null;
+            return;
         }
+
+        java.util.List<String> instanceIdsCopy = new java.util.ArrayList<String>(instanceIds.size());
+        instanceIdsCopy.addAll(instanceIds);
         this.instanceIds = instanceIdsCopy;
     }
     
@@ -113,6 +114,7 @@ public class DescribeAutoScalingInstancesRequest extends AmazonWebServiceRequest
      *         together. 
      */
     public DescribeAutoScalingInstancesRequest withInstanceIds(String... instanceIds) {
+        if (getInstanceIds() == null) setInstanceIds(new java.util.ArrayList<String>(instanceIds.length));
         for (String value : instanceIds) {
             getInstanceIds().add(value);
         }
@@ -136,11 +138,13 @@ public class DescribeAutoScalingInstancesRequest extends AmazonWebServiceRequest
      *         together. 
      */
     public DescribeAutoScalingInstancesRequest withInstanceIds(java.util.Collection<String> instanceIds) {
-        java.util.List<String> instanceIdsCopy = new java.util.ArrayList<String>();
-        if (instanceIds != null) {
+        if (instanceIds == null) {
+            this.instanceIds = null;
+        } else {
+            java.util.List<String> instanceIdsCopy = new java.util.ArrayList<String>(instanceIds.size());
             instanceIdsCopy.addAll(instanceIds);
+            this.instanceIds = instanceIdsCopy;
         }
-        this.instanceIds = instanceIdsCopy;
 
         return this;
     }
@@ -255,11 +259,39 @@ public class DescribeAutoScalingInstancesRequest extends AmazonWebServiceRequest
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("InstanceIds: " + instanceIds + ", ");
-        sb.append("MaxRecords: " + maxRecords + ", ");
-        sb.append("NextToken: " + nextToken + ", ");
+        if (instanceIds != null) sb.append("InstanceIds: " + instanceIds + ", ");
+        if (maxRecords != null) sb.append("MaxRecords: " + maxRecords + ", ");
+        if (nextToken != null) sb.append("NextToken: " + nextToken + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getInstanceIds() == null) ? 0 : getInstanceIds().hashCode()); 
+        hashCode = prime * hashCode + ((getMaxRecords() == null) ? 0 : getMaxRecords().hashCode()); 
+        hashCode = prime * hashCode + ((getNextToken() == null) ? 0 : getNextToken().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeAutoScalingInstancesRequest == false) return false;
+        DescribeAutoScalingInstancesRequest other = (DescribeAutoScalingInstancesRequest)obj;
+        
+        if (other.getInstanceIds() == null ^ this.getInstanceIds() == null) return false;
+        if (other.getInstanceIds() != null && other.getInstanceIds().equals(this.getInstanceIds()) == false) return false; 
+        if (other.getMaxRecords() == null ^ this.getMaxRecords() == null) return false;
+        if (other.getMaxRecords() != null && other.getMaxRecords().equals(this.getMaxRecords()) == false) return false; 
+        if (other.getNextToken() == null ^ this.getNextToken() == null) return false;
+        if (other.getNextToken() != null && other.getNextToken().equals(this.getNextToken()) == false) return false; 
+        return true;
     }
     
 }

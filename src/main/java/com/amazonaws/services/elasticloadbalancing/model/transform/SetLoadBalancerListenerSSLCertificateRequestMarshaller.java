@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.elasticloadbalancing.model.*;
@@ -30,23 +31,23 @@ import com.amazonaws.util.StringUtils;
 public class SetLoadBalancerListenerSSLCertificateRequestMarshaller implements Marshaller<Request<SetLoadBalancerListenerSSLCertificateRequest>, SetLoadBalancerListenerSSLCertificateRequest> {
 
     public Request<SetLoadBalancerListenerSSLCertificateRequest> marshall(SetLoadBalancerListenerSSLCertificateRequest setLoadBalancerListenerSSLCertificateRequest) {
+
+        if (setLoadBalancerListenerSSLCertificateRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<SetLoadBalancerListenerSSLCertificateRequest> request = new DefaultRequest<SetLoadBalancerListenerSSLCertificateRequest>(setLoadBalancerListenerSSLCertificateRequest, "AmazonElasticLoadBalancing");
         request.addParameter("Action", "SetLoadBalancerListenerSSLCertificate");
-        request.addParameter("Version", "2011-04-05");
-        if (setLoadBalancerListenerSSLCertificateRequest != null) {
-            if (setLoadBalancerListenerSSLCertificateRequest.getLoadBalancerName() != null) {
-                request.addParameter("LoadBalancerName", StringUtils.fromString(setLoadBalancerListenerSSLCertificateRequest.getLoadBalancerName()));
-            }
+        request.addParameter("Version", "2012-06-01");
+
+        if (setLoadBalancerListenerSSLCertificateRequest.getLoadBalancerName() != null) {
+            request.addParameter("LoadBalancerName", StringUtils.fromString(setLoadBalancerListenerSSLCertificateRequest.getLoadBalancerName()));
         }
-        if (setLoadBalancerListenerSSLCertificateRequest != null) {
-            if (setLoadBalancerListenerSSLCertificateRequest.getLoadBalancerPort() != null) {
-                request.addParameter("LoadBalancerPort", StringUtils.fromInteger(setLoadBalancerListenerSSLCertificateRequest.getLoadBalancerPort()));
-            }
+        if (setLoadBalancerListenerSSLCertificateRequest.getLoadBalancerPort() != null) {
+            request.addParameter("LoadBalancerPort", StringUtils.fromInteger(setLoadBalancerListenerSSLCertificateRequest.getLoadBalancerPort()));
         }
-        if (setLoadBalancerListenerSSLCertificateRequest != null) {
-            if (setLoadBalancerListenerSSLCertificateRequest.getSSLCertificateId() != null) {
-                request.addParameter("SSLCertificateId", StringUtils.fromString(setLoadBalancerListenerSSLCertificateRequest.getSSLCertificateId()));
-            }
+        if (setLoadBalancerListenerSSLCertificateRequest.getSSLCertificateId() != null) {
+            request.addParameter("SSLCertificateId", StringUtils.fromString(setLoadBalancerListenerSSLCertificateRequest.getSSLCertificateId()));
         }
 
 

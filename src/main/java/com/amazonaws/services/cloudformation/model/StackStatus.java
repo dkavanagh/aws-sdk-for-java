@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -27,7 +27,14 @@ public enum StackStatus {
     ROLLBACK_COMPLETE("ROLLBACK_COMPLETE"),
     DELETE_IN_PROGRESS("DELETE_IN_PROGRESS"),
     DELETE_FAILED("DELETE_FAILED"),
-    DELETE_COMPLETE("DELETE_COMPLETE");
+    DELETE_COMPLETE("DELETE_COMPLETE"),
+    UPDATE_IN_PROGRESS("UPDATE_IN_PROGRESS"),
+    UPDATE_COMPLETE_CLEANUP_IN_PROGRESS("UPDATE_COMPLETE_CLEANUP_IN_PROGRESS"),
+    UPDATE_COMPLETE("UPDATE_COMPLETE"),
+    UPDATE_ROLLBACK_IN_PROGRESS("UPDATE_ROLLBACK_IN_PROGRESS"),
+    UPDATE_ROLLBACK_FAILED("UPDATE_ROLLBACK_FAILED"),
+    UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS("UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS"),
+    UPDATE_ROLLBACK_COMPLETE("UPDATE_ROLLBACK_COMPLETE");
 
     private String value;
 
@@ -69,6 +76,20 @@ public enum StackStatus {
             return StackStatus.DELETE_FAILED;
         } else if ("DELETE_COMPLETE".equals(value)) {
             return StackStatus.DELETE_COMPLETE;
+        } else if ("UPDATE_IN_PROGRESS".equals(value)) {
+            return StackStatus.UPDATE_IN_PROGRESS;
+        } else if ("UPDATE_COMPLETE_CLEANUP_IN_PROGRESS".equals(value)) {
+            return StackStatus.UPDATE_COMPLETE_CLEANUP_IN_PROGRESS;
+        } else if ("UPDATE_COMPLETE".equals(value)) {
+            return StackStatus.UPDATE_COMPLETE;
+        } else if ("UPDATE_ROLLBACK_IN_PROGRESS".equals(value)) {
+            return StackStatus.UPDATE_ROLLBACK_IN_PROGRESS;
+        } else if ("UPDATE_ROLLBACK_FAILED".equals(value)) {
+            return StackStatus.UPDATE_ROLLBACK_FAILED;
+        } else if ("UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS".equals(value)) {
+            return StackStatus.UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS;
+        } else if ("UPDATE_ROLLBACK_COMPLETE".equals(value)) {
+            return StackStatus.UPDATE_ROLLBACK_COMPLETE;
         } else {
             throw new IllegalArgumentException("Cannot create enum from " + value + " value!");
         }

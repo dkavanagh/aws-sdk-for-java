@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.elasticache.AmazonElastiCache#deleteCacheParameterGroup(DeleteCacheParameterGroupRequest) DeleteCacheParameterGroup operation}.
  * <p>
- * Deletes the specified CacheParameterGroup. The CacheParameterGroup
- * cannot be deleted if it is associated with any cache clusters.
+ * Deletes the specified CacheParameterGroup. The CacheParameterGroup cannot be deleted if it is associated with any cache clusters.
  * </p>
  *
  * @see com.amazonaws.services.elasticache.AmazonElastiCache#deleteCacheParameterGroup(DeleteCacheParameterGroupRequest)
@@ -51,6 +50,8 @@ public class DeleteCacheParameterGroupRequest extends AmazonWebServiceRequest {
     public DeleteCacheParameterGroupRequest(String cacheParameterGroupName) {
         this.cacheParameterGroupName = cacheParameterGroupName;
     }
+
+    
     
     /**
      * The name of the Cache Parameter Group to delete. <note> The specified
@@ -110,9 +111,31 @@ public class DeleteCacheParameterGroupRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("CacheParameterGroupName: " + cacheParameterGroupName + ", ");
+        if (cacheParameterGroupName != null) sb.append("CacheParameterGroupName: " + cacheParameterGroupName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getCacheParameterGroupName() == null) ? 0 : getCacheParameterGroupName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DeleteCacheParameterGroupRequest == false) return false;
+        DeleteCacheParameterGroupRequest other = (DeleteCacheParameterGroupRequest)obj;
+        
+        if (other.getCacheParameterGroupName() == null ^ this.getCacheParameterGroupName() == null) return false;
+        if (other.getCacheParameterGroupName() != null && other.getCacheParameterGroupName().equals(this.getCacheParameterGroupName()) == false) return false; 
+        return true;
     }
     
 }

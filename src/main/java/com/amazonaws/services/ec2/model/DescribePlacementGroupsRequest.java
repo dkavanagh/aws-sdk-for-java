@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#describePlacementGroups(DescribePlacementGroupsRequest) DescribePlacementGroups operation}.
  * <p>
- * Returns information about one or more PlacementGroup instances in a
- * user's account.
+ * Returns information about one or more PlacementGroup instances in a user's account.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#describePlacementGroups(DescribePlacementGroupsRequest)
@@ -46,6 +45,7 @@ public class DescribePlacementGroupsRequest extends AmazonWebServiceRequest {
      * @return The name of the <code>PlacementGroup</code>.
      */
     public java.util.List<String> getGroupNames() {
+        
         if (groupNames == null) {
             groupNames = new java.util.ArrayList<String>();
         }
@@ -58,10 +58,13 @@ public class DescribePlacementGroupsRequest extends AmazonWebServiceRequest {
      * @param groupNames The name of the <code>PlacementGroup</code>.
      */
     public void setGroupNames(java.util.Collection<String> groupNames) {
-        java.util.List<String> groupNamesCopy = new java.util.ArrayList<String>();
-        if (groupNames != null) {
-            groupNamesCopy.addAll(groupNames);
+        if (groupNames == null) {
+            this.groupNames = null;
+            return;
         }
+
+        java.util.List<String> groupNamesCopy = new java.util.ArrayList<String>(groupNames.size());
+        groupNamesCopy.addAll(groupNames);
         this.groupNames = groupNamesCopy;
     }
     
@@ -76,6 +79,7 @@ public class DescribePlacementGroupsRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribePlacementGroupsRequest withGroupNames(String... groupNames) {
+        if (getGroupNames() == null) setGroupNames(new java.util.ArrayList<String>(groupNames.length));
         for (String value : groupNames) {
             getGroupNames().add(value);
         }
@@ -93,11 +97,13 @@ public class DescribePlacementGroupsRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribePlacementGroupsRequest withGroupNames(java.util.Collection<String> groupNames) {
-        java.util.List<String> groupNamesCopy = new java.util.ArrayList<String>();
-        if (groupNames != null) {
+        if (groupNames == null) {
+            this.groupNames = null;
+        } else {
+            java.util.List<String> groupNamesCopy = new java.util.ArrayList<String>(groupNames.size());
             groupNamesCopy.addAll(groupNames);
+            this.groupNames = groupNamesCopy;
         }
-        this.groupNames = groupNamesCopy;
 
         return this;
     }
@@ -116,6 +122,7 @@ public class DescribePlacementGroupsRequest extends AmazonWebServiceRequest {
      *         EC2 API reference</a>.
      */
     public java.util.List<Filter> getFilters() {
+        
         if (filters == null) {
             filters = new java.util.ArrayList<Filter>();
         }
@@ -136,10 +143,13 @@ public class DescribePlacementGroupsRequest extends AmazonWebServiceRequest {
      *         EC2 API reference</a>.
      */
     public void setFilters(java.util.Collection<Filter> filters) {
-        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>();
-        if (filters != null) {
-            filtersCopy.addAll(filters);
+        if (filters == null) {
+            this.filters = null;
+            return;
         }
+
+        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>(filters.size());
+        filtersCopy.addAll(filters);
         this.filters = filtersCopy;
     }
     
@@ -162,6 +172,7 @@ public class DescribePlacementGroupsRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribePlacementGroupsRequest withFilters(Filter... filters) {
+        if (getFilters() == null) setFilters(new java.util.ArrayList<Filter>(filters.length));
         for (Filter value : filters) {
             getFilters().add(value);
         }
@@ -187,11 +198,13 @@ public class DescribePlacementGroupsRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribePlacementGroupsRequest withFilters(java.util.Collection<Filter> filters) {
-        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>();
-        if (filters != null) {
+        if (filters == null) {
+            this.filters = null;
+        } else {
+            java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>(filters.size());
             filtersCopy.addAll(filters);
+            this.filters = filtersCopy;
         }
-        this.filters = filtersCopy;
 
         return this;
     }
@@ -208,10 +221,35 @@ public class DescribePlacementGroupsRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("GroupNames: " + groupNames + ", ");
-        sb.append("Filters: " + filters + ", ");
+        if (groupNames != null) sb.append("GroupNames: " + groupNames + ", ");
+        if (filters != null) sb.append("Filters: " + filters + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getGroupNames() == null) ? 0 : getGroupNames().hashCode()); 
+        hashCode = prime * hashCode + ((getFilters() == null) ? 0 : getFilters().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribePlacementGroupsRequest == false) return false;
+        DescribePlacementGroupsRequest other = (DescribePlacementGroupsRequest)obj;
+        
+        if (other.getGroupNames() == null ^ this.getGroupNames() == null) return false;
+        if (other.getGroupNames() != null && other.getGroupNames().equals(this.getGroupNames()) == false) return false; 
+        if (other.getFilters() == null ^ this.getFilters() == null) return false;
+        if (other.getFilters() != null && other.getFilters().equals(this.getFilters()) == false) return false; 
+        return true;
     }
     
 }

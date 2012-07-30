@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -21,16 +21,12 @@ import com.amazonaws.services.elasticmapreduce.model.*;
 /**
  * Interface for accessing AmazonElasticMapReduce.
  * <p>
- * This is the <i>Amazon Elastic MapReduce API Reference</i> . This
- * guide provides descriptions and samples of the Amazon Elastic
- * MapReduce APIs.
+ * This is the <i>Amazon Elastic MapReduce API Reference</i> . This guide provides descriptions and samples of the Amazon Elastic MapReduce APIs.
  * </p>
  * <p>
- * Amazon Elastic MapReduce is a web service that makes it easy to
- * process large amounts of data efficiently. Elastic MapReduce uses
- * Hadoop processing combined with several AWS products to do tasks such
- * as web indexing, data mining, log file analysis, machine learning,
- * scientific simulation, and data warehousing.
+ * Amazon Elastic MapReduce is a web service that makes it easy to process large amounts of data efficiently. Elastic MapReduce uses Hadoop processing
+ * combined with several AWS products to do tasks such as web indexing, data mining, log file analysis, machine learning, scientific simulation, and data
+ * warehousing.
  * </p>
  */
 public interface AmazonElasticMapReduce {
@@ -266,13 +262,13 @@ public interface AmazonElasticMapReduce {
      * will run the steps specified. Once the job flow completes, the cluster
      * is stopped and the HDFS partition is lost. To prevent loss of data,
      * configure the last step of the job flow to store results in Amazon S3.
-     * If the JobFlowInstancesDetail <code>KeepJobFlowAliveWhenNoSteps</code>
+     * If the JobFlowInstancesConfig <code>KeepJobFlowAliveWhenNoSteps</code>
      * parameter is set to <code>TRUE</code> , the job flow will transition
      * to the WAITING state rather than shutting down once the steps have
      * completed.
      * </p>
      * <p>
-     * For additional protection, you can set the JobFlowInstancesDetail
+     * For additional protection, you can set the JobFlowInstancesConfig
      * <code>TerminationProtected</code> parameter to <code>TRUE</code> to
      * lock the job flow and prevent it from being terminated by API call,
      * user intervention, or in the event of a job flow error.

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,23 +18,18 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#uploadServerCertificate(UploadServerCertificateRequest) UploadServerCertificate operation}.
  * <p>
- * Uploads a server certificate entity for the AWS Account. The server
- * certificate entity includes a public key certificate, a private key,
- * and an optional certificate chain, which should all be PEM-encoded.
+ * Uploads a server certificate entity for the AWS account. The server certificate entity includes a public key certificate, a private key, and an
+ * optional certificate chain, which should all be PEM-encoded.
  * </p>
  * <p>
- * For information about the number of server certificates you can
- * upload, see <a
- * vices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html">
- * Limitations on IAM Entities </a> in <i>Using AWS Identity and Access
- * Management</i> .
+ * For information about the number of server certificates you can upload, see <a
+ * href="http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html"> Limitations on IAM Entities </a> in <i>Using AWS
+ * Identity and Access Management</i> .
  * </p>
  * <p>
- * <b>NOTE:</b>Because the body of the public key certificate, private
- * key, and the certificate chain can be large, you should use POST
- * rather than GET when calling UploadServerCertificate. For more
- * information, see Making Query Requests in Using AWS Identity and
- * Access Management.
+ * <b>NOTE:</b>Because the body of the public key certificate, private key, and the certificate chain can be large, you should use POST rather than GET
+ * when calling UploadServerCertificate. For information about setting up signatures and authorization through the API, go to Signing AWS API Requests in
+ * the AWS General Reference. For general information about using the Query API with IAM, go to Making Query Requests in Using IAM.
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#uploadServerCertificate(UploadServerCertificateRequest)
@@ -116,6 +111,8 @@ public class UploadServerCertificateRequest extends AmazonWebServiceRequest {
         this.certificateBody = certificateBody;
         this.privateKey = privateKey;
     }
+
+    
     
     /**
      * The path for the server certificate. For more information about paths,
@@ -401,13 +398,47 @@ public class UploadServerCertificateRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Path: " + path + ", ");
-        sb.append("ServerCertificateName: " + serverCertificateName + ", ");
-        sb.append("CertificateBody: " + certificateBody + ", ");
-        sb.append("PrivateKey: " + privateKey + ", ");
-        sb.append("CertificateChain: " + certificateChain + ", ");
+        if (path != null) sb.append("Path: " + path + ", ");
+        if (serverCertificateName != null) sb.append("ServerCertificateName: " + serverCertificateName + ", ");
+        if (certificateBody != null) sb.append("CertificateBody: " + certificateBody + ", ");
+        if (privateKey != null) sb.append("PrivateKey: " + privateKey + ", ");
+        if (certificateChain != null) sb.append("CertificateChain: " + certificateChain + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getPath() == null) ? 0 : getPath().hashCode()); 
+        hashCode = prime * hashCode + ((getServerCertificateName() == null) ? 0 : getServerCertificateName().hashCode()); 
+        hashCode = prime * hashCode + ((getCertificateBody() == null) ? 0 : getCertificateBody().hashCode()); 
+        hashCode = prime * hashCode + ((getPrivateKey() == null) ? 0 : getPrivateKey().hashCode()); 
+        hashCode = prime * hashCode + ((getCertificateChain() == null) ? 0 : getCertificateChain().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof UploadServerCertificateRequest == false) return false;
+        UploadServerCertificateRequest other = (UploadServerCertificateRequest)obj;
+        
+        if (other.getPath() == null ^ this.getPath() == null) return false;
+        if (other.getPath() != null && other.getPath().equals(this.getPath()) == false) return false; 
+        if (other.getServerCertificateName() == null ^ this.getServerCertificateName() == null) return false;
+        if (other.getServerCertificateName() != null && other.getServerCertificateName().equals(this.getServerCertificateName()) == false) return false; 
+        if (other.getCertificateBody() == null ^ this.getCertificateBody() == null) return false;
+        if (other.getCertificateBody() != null && other.getCertificateBody().equals(this.getCertificateBody()) == false) return false; 
+        if (other.getPrivateKey() == null ^ this.getPrivateKey() == null) return false;
+        if (other.getPrivateKey() != null && other.getPrivateKey().equals(this.getPrivateKey()) == false) return false; 
+        if (other.getCertificateChain() == null ^ this.getCertificateChain() == null) return false;
+        if (other.getCertificateChain() != null && other.getCertificateChain().equals(this.getCertificateChain()) == false) return false; 
+        return true;
     }
     
 }

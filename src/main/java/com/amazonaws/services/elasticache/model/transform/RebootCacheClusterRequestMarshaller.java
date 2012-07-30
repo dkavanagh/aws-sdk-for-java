@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -35,10 +35,10 @@ public class RebootCacheClusterRequestMarshaller implements Marshaller<Request<R
         if (rebootCacheClusterRequest == null) {
 		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
 		}
-		
+
         Request<RebootCacheClusterRequest> request = new DefaultRequest<RebootCacheClusterRequest>(rebootCacheClusterRequest, "AmazonElastiCache");
         request.addParameter("Action", "RebootCacheCluster");
-        request.addParameter("Version", "2011-07-15");
+        request.addParameter("Version", "2012-03-09");
 
         if (rebootCacheClusterRequest.getCacheClusterId() != null) {
             request.addParameter("CacheClusterId", StringUtils.fromString(rebootCacheClusterRequest.getCacheClusterId()));
@@ -46,6 +46,7 @@ public class RebootCacheClusterRequestMarshaller implements Marshaller<Request<R
 
         java.util.List<String> cacheNodeIdsToRebootList = rebootCacheClusterRequest.getCacheNodeIdsToReboot();
         int cacheNodeIdsToRebootListIndex = 1;
+
         for (String cacheNodeIdsToRebootListValue : cacheNodeIdsToRebootList) {
             if (cacheNodeIdsToRebootListValue != null) {
                 request.addParameter("CacheNodeIdsToReboot.CacheNodeId." + cacheNodeIdsToRebootListIndex, StringUtils.fromString(cacheNodeIdsToRebootListValue));

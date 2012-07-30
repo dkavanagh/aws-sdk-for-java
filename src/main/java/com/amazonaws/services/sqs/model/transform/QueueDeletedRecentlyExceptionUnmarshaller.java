@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ public class QueueDeletedRecentlyExceptionUnmarshaller extends StandardErrorUnma
         // Bail out if this isn't the right error code that this
         // marshaller understands.
         String errorCode = parseErrorCode(node);
-        if (errorCode == null || !errorCode.equals("QueueDeletedRecently"))
+        if (errorCode == null || !errorCode.equals("AWS.SimpleQueueService.QueueDeletedRecently"))
             return null;
 
         QueueDeletedRecentlyException e = (QueueDeletedRecentlyException)super.unmarshall(node);

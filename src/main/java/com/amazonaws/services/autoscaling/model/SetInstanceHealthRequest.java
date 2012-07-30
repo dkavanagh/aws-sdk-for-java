@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class SetInstanceHealthRequest extends AmazonWebServiceRequest {
 
     /**
-     * The identifier of the EC2 instance.
+     * The identifier of the Amazon EC2 instance.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 16<br/>
@@ -52,33 +52,33 @@ public class SetInstanceHealthRequest extends AmazonWebServiceRequest {
     private Boolean shouldRespectGracePeriod;
 
     /**
-     * The identifier of the EC2 instance.
+     * The identifier of the Amazon EC2 instance.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 16<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @return The identifier of the EC2 instance.
+     * @return The identifier of the Amazon EC2 instance.
      */
     public String getInstanceId() {
         return instanceId;
     }
     
     /**
-     * The identifier of the EC2 instance.
+     * The identifier of the Amazon EC2 instance.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 16<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @param instanceId The identifier of the EC2 instance.
+     * @param instanceId The identifier of the Amazon EC2 instance.
      */
     public void setInstanceId(String instanceId) {
         this.instanceId = instanceId;
     }
     
     /**
-     * The identifier of the EC2 instance.
+     * The identifier of the Amazon EC2 instance.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -86,7 +86,7 @@ public class SetInstanceHealthRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 16<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @param instanceId The identifier of the EC2 instance.
+     * @param instanceId The identifier of the Amazon EC2 instance.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -218,11 +218,39 @@ public class SetInstanceHealthRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("InstanceId: " + instanceId + ", ");
-        sb.append("HealthStatus: " + healthStatus + ", ");
-        sb.append("ShouldRespectGracePeriod: " + shouldRespectGracePeriod + ", ");
+        if (instanceId != null) sb.append("InstanceId: " + instanceId + ", ");
+        if (healthStatus != null) sb.append("HealthStatus: " + healthStatus + ", ");
+        if (shouldRespectGracePeriod != null) sb.append("ShouldRespectGracePeriod: " + shouldRespectGracePeriod + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getInstanceId() == null) ? 0 : getInstanceId().hashCode()); 
+        hashCode = prime * hashCode + ((getHealthStatus() == null) ? 0 : getHealthStatus().hashCode()); 
+        hashCode = prime * hashCode + ((isShouldRespectGracePeriod() == null) ? 0 : isShouldRespectGracePeriod().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof SetInstanceHealthRequest == false) return false;
+        SetInstanceHealthRequest other = (SetInstanceHealthRequest)obj;
+        
+        if (other.getInstanceId() == null ^ this.getInstanceId() == null) return false;
+        if (other.getInstanceId() != null && other.getInstanceId().equals(this.getInstanceId()) == false) return false; 
+        if (other.getHealthStatus() == null ^ this.getHealthStatus() == null) return false;
+        if (other.getHealthStatus() != null && other.getHealthStatus().equals(this.getHealthStatus()) == false) return false; 
+        if (other.isShouldRespectGracePeriod() == null ^ this.isShouldRespectGracePeriod() == null) return false;
+        if (other.isShouldRespectGracePeriod() != null && other.isShouldRespectGracePeriod().equals(this.isShouldRespectGracePeriod()) == false) return false; 
+        return true;
     }
     
 }

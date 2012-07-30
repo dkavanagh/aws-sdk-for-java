@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,10 +18,8 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#deleteDhcpOptions(DeleteDhcpOptionsRequest) DeleteDhcpOptions operation}.
  * <p>
- * Deletes a set of DHCP options that you specify. Amazon VPC returns an
- * error if the set of options you specify is currently associated with a
- * VPC. You can disassociate the set of options by associating either a
- * new set of options or the default options with the VPC.
+ * Deletes a set of DHCP options that you specify. Amazon VPC returns an error if the set of options you specify is currently associated with a VPC. You
+ * can disassociate the set of options by associating either a new set of options or the default options with the VPC.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#deleteDhcpOptions(DeleteDhcpOptionsRequest)
@@ -49,6 +47,8 @@ public class DeleteDhcpOptionsRequest extends AmazonWebServiceRequest {
     public DeleteDhcpOptionsRequest(String dhcpOptionsId) {
         this.dhcpOptionsId = dhcpOptionsId;
     }
+
+    
     
     /**
      * The ID of the DHCP options set to delete.
@@ -96,9 +96,31 @@ public class DeleteDhcpOptionsRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("DhcpOptionsId: " + dhcpOptionsId + ", ");
+        if (dhcpOptionsId != null) sb.append("DhcpOptionsId: " + dhcpOptionsId + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getDhcpOptionsId() == null) ? 0 : getDhcpOptionsId().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DeleteDhcpOptionsRequest == false) return false;
+        DeleteDhcpOptionsRequest other = (DeleteDhcpOptionsRequest)obj;
+        
+        if (other.getDhcpOptionsId() == null ^ this.getDhcpOptionsId() == null) return false;
+        if (other.getDhcpOptionsId() != null && other.getDhcpOptionsId().equals(this.getDhcpOptionsId()) == false) return false; 
+        return true;
     }
     
 }

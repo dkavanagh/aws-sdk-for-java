@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,12 +18,8 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.rds.AmazonRDS#restoreDBInstanceFromDBSnapshot(RestoreDBInstanceFromDBSnapshotRequest) RestoreDBInstanceFromDBSnapshot operation}.
  * <p>
- * Restores a DB Instance to an arbitrary point-in-time. Users can
- * restore to any point in time before the latestRestorableTime for up to
- * backupRetentionPeriod days. The target database is created from the
- * source database with the same configuration as the original database
- * except that the DB instance is created with the default DB security
- * group.
+ * Creates a new DB Instance from a DB snapshot. The target database is created from the source database restore point with the same configuration as
+ * the original source database, except that the new RDS instance is created with the default security group.
  * </p>
  *
  * @see com.amazonaws.services.rds.AmazonRDS#restoreDBInstanceFromDBSnapshot(RestoreDBInstanceFromDBSnapshotRequest)
@@ -49,15 +45,15 @@ public class RestoreDBInstanceFromDBSnapshotRequest extends AmazonWebServiceRequ
 
     /**
      * The compute and memory capacity of the Amazon RDS DB instance.
-     * <p>Valid Values: <code>db.m1.small | db.m1.large | db.m1.xlarge |
-     * db.m2.2xlarge | db.m2.4xlarge</code>
+     * <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.large |
+     * db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge</code>
      */
     private String dBInstanceClass;
 
     /**
      * The port number on which the database accepts connections. <p>Default:
      * The same port as the original DB Instance <p>Constraints: Value must
-     * be <code>1115-65535</code>
+     * be <code>1150-65535</code>
      */
     private Integer port;
 
@@ -69,6 +65,11 @@ public class RestoreDBInstanceFromDBSnapshotRequest extends AmazonWebServiceRequ
      * <code>us-east-1a</code>
      */
     private String availabilityZone;
+
+    /**
+     * The DB Subnet Group name to use for the new instance.
+     */
+    private String dBSubnetGroupName;
 
     /**
      * Specifies if the DB Instance is a Multi-AZ deployment. <p>Constraint:
@@ -104,6 +105,8 @@ public class RestoreDBInstanceFromDBSnapshotRequest extends AmazonWebServiceRequ
      */
     private String engine;
 
+    private String optionGroupName;
+
     /**
      * Default constructor for a new RestoreDBInstanceFromDBSnapshotRequest object.  Callers should use the
      * setter or fluent setter (with...) methods to initialize this object after creating it.
@@ -131,6 +134,8 @@ public class RestoreDBInstanceFromDBSnapshotRequest extends AmazonWebServiceRequ
         this.dBInstanceIdentifier = dBInstanceIdentifier;
         this.dBSnapshotIdentifier = dBSnapshotIdentifier;
     }
+
+    
     
     /**
      * The identifier for the DB Snapshot to restore from. <p>Constraints:
@@ -244,12 +249,12 @@ public class RestoreDBInstanceFromDBSnapshotRequest extends AmazonWebServiceRequ
     
     /**
      * The compute and memory capacity of the Amazon RDS DB instance.
-     * <p>Valid Values: <code>db.m1.small | db.m1.large | db.m1.xlarge |
-     * db.m2.2xlarge | db.m2.4xlarge</code>
+     * <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.large |
+     * db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge</code>
      *
      * @return The compute and memory capacity of the Amazon RDS DB instance.
-     *         <p>Valid Values: <code>db.m1.small | db.m1.large | db.m1.xlarge |
-     *         db.m2.2xlarge | db.m2.4xlarge</code>
+     *         <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.large |
+     *         db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge</code>
      */
     public String getDBInstanceClass() {
         return dBInstanceClass;
@@ -257,12 +262,12 @@ public class RestoreDBInstanceFromDBSnapshotRequest extends AmazonWebServiceRequ
     
     /**
      * The compute and memory capacity of the Amazon RDS DB instance.
-     * <p>Valid Values: <code>db.m1.small | db.m1.large | db.m1.xlarge |
-     * db.m2.2xlarge | db.m2.4xlarge</code>
+     * <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.large |
+     * db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge</code>
      *
      * @param dBInstanceClass The compute and memory capacity of the Amazon RDS DB instance.
-     *         <p>Valid Values: <code>db.m1.small | db.m1.large | db.m1.xlarge |
-     *         db.m2.2xlarge | db.m2.4xlarge</code>
+     *         <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.large |
+     *         db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge</code>
      */
     public void setDBInstanceClass(String dBInstanceClass) {
         this.dBInstanceClass = dBInstanceClass;
@@ -270,14 +275,14 @@ public class RestoreDBInstanceFromDBSnapshotRequest extends AmazonWebServiceRequ
     
     /**
      * The compute and memory capacity of the Amazon RDS DB instance.
-     * <p>Valid Values: <code>db.m1.small | db.m1.large | db.m1.xlarge |
-     * db.m2.2xlarge | db.m2.4xlarge</code>
+     * <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.large |
+     * db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge</code>
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
      * @param dBInstanceClass The compute and memory capacity of the Amazon RDS DB instance.
-     *         <p>Valid Values: <code>db.m1.small | db.m1.large | db.m1.xlarge |
-     *         db.m2.2xlarge | db.m2.4xlarge</code>
+     *         <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.large |
+     *         db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge</code>
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -291,11 +296,11 @@ public class RestoreDBInstanceFromDBSnapshotRequest extends AmazonWebServiceRequ
     /**
      * The port number on which the database accepts connections. <p>Default:
      * The same port as the original DB Instance <p>Constraints: Value must
-     * be <code>1115-65535</code>
+     * be <code>1150-65535</code>
      *
      * @return The port number on which the database accepts connections. <p>Default:
      *         The same port as the original DB Instance <p>Constraints: Value must
-     *         be <code>1115-65535</code>
+     *         be <code>1150-65535</code>
      */
     public Integer getPort() {
         return port;
@@ -304,11 +309,11 @@ public class RestoreDBInstanceFromDBSnapshotRequest extends AmazonWebServiceRequ
     /**
      * The port number on which the database accepts connections. <p>Default:
      * The same port as the original DB Instance <p>Constraints: Value must
-     * be <code>1115-65535</code>
+     * be <code>1150-65535</code>
      *
      * @param port The port number on which the database accepts connections. <p>Default:
      *         The same port as the original DB Instance <p>Constraints: Value must
-     *         be <code>1115-65535</code>
+     *         be <code>1150-65535</code>
      */
     public void setPort(Integer port) {
         this.port = port;
@@ -317,13 +322,13 @@ public class RestoreDBInstanceFromDBSnapshotRequest extends AmazonWebServiceRequ
     /**
      * The port number on which the database accepts connections. <p>Default:
      * The same port as the original DB Instance <p>Constraints: Value must
-     * be <code>1115-65535</code>
+     * be <code>1150-65535</code>
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
      * @param port The port number on which the database accepts connections. <p>Default:
      *         The same port as the original DB Instance <p>Constraints: Value must
-     *         be <code>1115-65535</code>
+     *         be <code>1150-65535</code>
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -388,6 +393,40 @@ public class RestoreDBInstanceFromDBSnapshotRequest extends AmazonWebServiceRequ
      */
     public RestoreDBInstanceFromDBSnapshotRequest withAvailabilityZone(String availabilityZone) {
         this.availabilityZone = availabilityZone;
+        return this;
+    }
+    
+    
+    /**
+     * The DB Subnet Group name to use for the new instance.
+     *
+     * @return The DB Subnet Group name to use for the new instance.
+     */
+    public String getDBSubnetGroupName() {
+        return dBSubnetGroupName;
+    }
+    
+    /**
+     * The DB Subnet Group name to use for the new instance.
+     *
+     * @param dBSubnetGroupName The DB Subnet Group name to use for the new instance.
+     */
+    public void setDBSubnetGroupName(String dBSubnetGroupName) {
+        this.dBSubnetGroupName = dBSubnetGroupName;
+    }
+    
+    /**
+     * The DB Subnet Group name to use for the new instance.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param dBSubnetGroupName The DB Subnet Group name to use for the new instance.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public RestoreDBInstanceFromDBSnapshotRequest withDBSubnetGroupName(String dBSubnetGroupName) {
+        this.dBSubnetGroupName = dBSubnetGroupName;
         return this;
     }
     
@@ -641,6 +680,40 @@ public class RestoreDBInstanceFromDBSnapshotRequest extends AmazonWebServiceRequ
     
     
     /**
+     * Returns the value of the OptionGroupName property for this object.
+     *
+     * @return The value of the OptionGroupName property for this object.
+     */
+    public String getOptionGroupName() {
+        return optionGroupName;
+    }
+    
+    /**
+     * Sets the value of the OptionGroupName property for this object.
+     *
+     * @param optionGroupName The new value for the OptionGroupName property for this object.
+     */
+    public void setOptionGroupName(String optionGroupName) {
+        this.optionGroupName = optionGroupName;
+    }
+    
+    /**
+     * Sets the value of the OptionGroupName property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param optionGroupName The new value for the OptionGroupName property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public RestoreDBInstanceFromDBSnapshotRequest withOptionGroupName(String optionGroupName) {
+        this.optionGroupName = optionGroupName;
+        return this;
+    }
+    
+    
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -652,18 +725,75 @@ public class RestoreDBInstanceFromDBSnapshotRequest extends AmazonWebServiceRequ
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("DBInstanceIdentifier: " + dBInstanceIdentifier + ", ");
-        sb.append("DBSnapshotIdentifier: " + dBSnapshotIdentifier + ", ");
-        sb.append("DBInstanceClass: " + dBInstanceClass + ", ");
-        sb.append("Port: " + port + ", ");
-        sb.append("AvailabilityZone: " + availabilityZone + ", ");
-        sb.append("MultiAZ: " + multiAZ + ", ");
-        sb.append("AutoMinorVersionUpgrade: " + autoMinorVersionUpgrade + ", ");
-        sb.append("LicenseModel: " + licenseModel + ", ");
-        sb.append("DBName: " + dBName + ", ");
-        sb.append("Engine: " + engine + ", ");
+        if (dBInstanceIdentifier != null) sb.append("DBInstanceIdentifier: " + dBInstanceIdentifier + ", ");
+        if (dBSnapshotIdentifier != null) sb.append("DBSnapshotIdentifier: " + dBSnapshotIdentifier + ", ");
+        if (dBInstanceClass != null) sb.append("DBInstanceClass: " + dBInstanceClass + ", ");
+        if (port != null) sb.append("Port: " + port + ", ");
+        if (availabilityZone != null) sb.append("AvailabilityZone: " + availabilityZone + ", ");
+        if (dBSubnetGroupName != null) sb.append("DBSubnetGroupName: " + dBSubnetGroupName + ", ");
+        if (multiAZ != null) sb.append("MultiAZ: " + multiAZ + ", ");
+        if (autoMinorVersionUpgrade != null) sb.append("AutoMinorVersionUpgrade: " + autoMinorVersionUpgrade + ", ");
+        if (licenseModel != null) sb.append("LicenseModel: " + licenseModel + ", ");
+        if (dBName != null) sb.append("DBName: " + dBName + ", ");
+        if (engine != null) sb.append("Engine: " + engine + ", ");
+        if (optionGroupName != null) sb.append("OptionGroupName: " + optionGroupName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getDBInstanceIdentifier() == null) ? 0 : getDBInstanceIdentifier().hashCode()); 
+        hashCode = prime * hashCode + ((getDBSnapshotIdentifier() == null) ? 0 : getDBSnapshotIdentifier().hashCode()); 
+        hashCode = prime * hashCode + ((getDBInstanceClass() == null) ? 0 : getDBInstanceClass().hashCode()); 
+        hashCode = prime * hashCode + ((getPort() == null) ? 0 : getPort().hashCode()); 
+        hashCode = prime * hashCode + ((getAvailabilityZone() == null) ? 0 : getAvailabilityZone().hashCode()); 
+        hashCode = prime * hashCode + ((getDBSubnetGroupName() == null) ? 0 : getDBSubnetGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((isMultiAZ() == null) ? 0 : isMultiAZ().hashCode()); 
+        hashCode = prime * hashCode + ((isAutoMinorVersionUpgrade() == null) ? 0 : isAutoMinorVersionUpgrade().hashCode()); 
+        hashCode = prime * hashCode + ((getLicenseModel() == null) ? 0 : getLicenseModel().hashCode()); 
+        hashCode = prime * hashCode + ((getDBName() == null) ? 0 : getDBName().hashCode()); 
+        hashCode = prime * hashCode + ((getEngine() == null) ? 0 : getEngine().hashCode()); 
+        hashCode = prime * hashCode + ((getOptionGroupName() == null) ? 0 : getOptionGroupName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof RestoreDBInstanceFromDBSnapshotRequest == false) return false;
+        RestoreDBInstanceFromDBSnapshotRequest other = (RestoreDBInstanceFromDBSnapshotRequest)obj;
+        
+        if (other.getDBInstanceIdentifier() == null ^ this.getDBInstanceIdentifier() == null) return false;
+        if (other.getDBInstanceIdentifier() != null && other.getDBInstanceIdentifier().equals(this.getDBInstanceIdentifier()) == false) return false; 
+        if (other.getDBSnapshotIdentifier() == null ^ this.getDBSnapshotIdentifier() == null) return false;
+        if (other.getDBSnapshotIdentifier() != null && other.getDBSnapshotIdentifier().equals(this.getDBSnapshotIdentifier()) == false) return false; 
+        if (other.getDBInstanceClass() == null ^ this.getDBInstanceClass() == null) return false;
+        if (other.getDBInstanceClass() != null && other.getDBInstanceClass().equals(this.getDBInstanceClass()) == false) return false; 
+        if (other.getPort() == null ^ this.getPort() == null) return false;
+        if (other.getPort() != null && other.getPort().equals(this.getPort()) == false) return false; 
+        if (other.getAvailabilityZone() == null ^ this.getAvailabilityZone() == null) return false;
+        if (other.getAvailabilityZone() != null && other.getAvailabilityZone().equals(this.getAvailabilityZone()) == false) return false; 
+        if (other.getDBSubnetGroupName() == null ^ this.getDBSubnetGroupName() == null) return false;
+        if (other.getDBSubnetGroupName() != null && other.getDBSubnetGroupName().equals(this.getDBSubnetGroupName()) == false) return false; 
+        if (other.isMultiAZ() == null ^ this.isMultiAZ() == null) return false;
+        if (other.isMultiAZ() != null && other.isMultiAZ().equals(this.isMultiAZ()) == false) return false; 
+        if (other.isAutoMinorVersionUpgrade() == null ^ this.isAutoMinorVersionUpgrade() == null) return false;
+        if (other.isAutoMinorVersionUpgrade() != null && other.isAutoMinorVersionUpgrade().equals(this.isAutoMinorVersionUpgrade()) == false) return false; 
+        if (other.getLicenseModel() == null ^ this.getLicenseModel() == null) return false;
+        if (other.getLicenseModel() != null && other.getLicenseModel().equals(this.getLicenseModel()) == false) return false; 
+        if (other.getDBName() == null ^ this.getDBName() == null) return false;
+        if (other.getDBName() != null && other.getDBName().equals(this.getDBName()) == false) return false; 
+        if (other.getEngine() == null ^ this.getEngine() == null) return false;
+        if (other.getEngine() != null && other.getEngine().equals(this.getEngine()) == false) return false; 
+        if (other.getOptionGroupName() == null ^ this.getOptionGroupName() == null) return false;
+        if (other.getOptionGroupName() != null && other.getOptionGroupName().equals(this.getOptionGroupName()) == false) return false; 
+        return true;
     }
     
 }

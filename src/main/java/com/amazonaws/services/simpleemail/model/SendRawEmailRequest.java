@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,17 +18,25 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.simpleemail.AmazonSimpleEmailService#sendRawEmail(SendRawEmailRequest) SendRawEmail operation}.
  * <p>
- * Sends an email message, with header and content specified by the
- * client. The <code>SendRawEmail</code> action is useful for sending
- * multipart MIME emails, with attachments or inline content. The raw
- * text of the message must comply with Internet email standards;
- * otherwise, the message cannot be sent.
+ * Sends an email message, with header and content specified by the client. The <code>SendRawEmail</code> action is useful for sending multipart MIME
+ * emails. The raw text of the message must comply with Internet email standards; otherwise, the message cannot be sent.
  * </p>
  * <p>
- * <b>IMPORTANT:</b>If you have not yet requested production access to
- * Amazon SES, then you will only be able to send email to and from
- * verified email addresses. For more information, go to the Amazon SES
- * Developer Guide.
+ * <b>IMPORTANT:</b>If you have not yet requested production access to Amazon SES, then you will only be able to send email to and from verified email
+ * addresses and domains. For more information, go to the Amazon SES Developer Guide.
+ * </p>
+ * <p>
+ * The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message.
+ * </p>
+ * <p>
+ * Amazon SES has a limit on the total number of recipients per message: The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If
+ * you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES
+ * repeatedly to send the message to each group.
+ * </p>
+ * <p>
+ * For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your <i>sending quota</i> - the maximum number
+ * of emails you can send in a 24-hour period. For information about your sending quota, go to the "Managing Your Sending Activity" section of the<a
+ * href="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide"> Amazon SES Developer Guide </a> .
  * </p>
  *
  * @see com.amazonaws.services.simpleemail.AmazonSimpleEmailService#sendRawEmail(SendRawEmailRequest)
@@ -36,7 +44,11 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class SendRawEmailRequest extends AmazonWebServiceRequest {
 
     /**
-     * The sender's email address.
+     * The identity's email address. <note>If you specify the
+     * <code>Source</code> parameter, then bounce notifications and
+     * complaints will be sent to this email address. This takes precedence
+     * over any <i>Return-Path</i> header that you might include in the raw
+     * text of the message. </note>
      */
     private String source;
 
@@ -53,7 +65,7 @@ public class SendRawEmailRequest extends AmazonWebServiceRequest {
      * formatted properly.</li> <li>MIME content types must be among those
      * supported by Amazon SES. Refer to the <a
      * f="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide">Amazon
-     * SES Developer Guide</a> for more details.</li> <li>Content must be
+     * SES Developer Guide</a> for more details. </li> <li>Content must be
      * base64-encoded, if MIME requires it.</li> </ul>
      */
     private RawMessage rawMessage;
@@ -77,37 +89,63 @@ public class SendRawEmailRequest extends AmazonWebServiceRequest {
      * content types must be among those supported by Amazon SES. Refer to
      * the <a
      * f="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide">Amazon
-     * SES Developer Guide</a> for more details.</li> <li>Content must be
+     * SES Developer Guide</a> for more details. </li> <li>Content must be
      * base64-encoded, if MIME requires it.</li> </ul>
      */
     public SendRawEmailRequest(RawMessage rawMessage) {
         this.rawMessage = rawMessage;
     }
+
+    
     
     /**
-     * The sender's email address.
+     * The identity's email address. <note>If you specify the
+     * <code>Source</code> parameter, then bounce notifications and
+     * complaints will be sent to this email address. This takes precedence
+     * over any <i>Return-Path</i> header that you might include in the raw
+     * text of the message. </note>
      *
-     * @return The sender's email address.
+     * @return The identity's email address. <note>If you specify the
+     *         <code>Source</code> parameter, then bounce notifications and
+     *         complaints will be sent to this email address. This takes precedence
+     *         over any <i>Return-Path</i> header that you might include in the raw
+     *         text of the message. </note>
      */
     public String getSource() {
         return source;
     }
     
     /**
-     * The sender's email address.
+     * The identity's email address. <note>If you specify the
+     * <code>Source</code> parameter, then bounce notifications and
+     * complaints will be sent to this email address. This takes precedence
+     * over any <i>Return-Path</i> header that you might include in the raw
+     * text of the message. </note>
      *
-     * @param source The sender's email address.
+     * @param source The identity's email address. <note>If you specify the
+     *         <code>Source</code> parameter, then bounce notifications and
+     *         complaints will be sent to this email address. This takes precedence
+     *         over any <i>Return-Path</i> header that you might include in the raw
+     *         text of the message. </note>
      */
     public void setSource(String source) {
         this.source = source;
     }
     
     /**
-     * The sender's email address.
+     * The identity's email address. <note>If you specify the
+     * <code>Source</code> parameter, then bounce notifications and
+     * complaints will be sent to this email address. This takes precedence
+     * over any <i>Return-Path</i> header that you might include in the raw
+     * text of the message. </note>
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param source The sender's email address.
+     * @param source The identity's email address. <note>If you specify the
+     *         <code>Source</code> parameter, then bounce notifications and
+     *         complaints will be sent to this email address. This takes precedence
+     *         over any <i>Return-Path</i> header that you might include in the raw
+     *         text of the message. </note>
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -124,6 +162,7 @@ public class SendRawEmailRequest extends AmazonWebServiceRequest {
      * @return A list of destinations for the message.
      */
     public java.util.List<String> getDestinations() {
+        
         if (destinations == null) {
             destinations = new java.util.ArrayList<String>();
         }
@@ -136,10 +175,13 @@ public class SendRawEmailRequest extends AmazonWebServiceRequest {
      * @param destinations A list of destinations for the message.
      */
     public void setDestinations(java.util.Collection<String> destinations) {
-        java.util.List<String> destinationsCopy = new java.util.ArrayList<String>();
-        if (destinations != null) {
-            destinationsCopy.addAll(destinations);
+        if (destinations == null) {
+            this.destinations = null;
+            return;
         }
+
+        java.util.List<String> destinationsCopy = new java.util.ArrayList<String>(destinations.size());
+        destinationsCopy.addAll(destinations);
         this.destinations = destinationsCopy;
     }
     
@@ -154,6 +196,7 @@ public class SendRawEmailRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public SendRawEmailRequest withDestinations(String... destinations) {
+        if (getDestinations() == null) setDestinations(new java.util.ArrayList<String>(destinations.length));
         for (String value : destinations) {
             getDestinations().add(value);
         }
@@ -171,11 +214,13 @@ public class SendRawEmailRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public SendRawEmailRequest withDestinations(java.util.Collection<String> destinations) {
-        java.util.List<String> destinationsCopy = new java.util.ArrayList<String>();
-        if (destinations != null) {
+        if (destinations == null) {
+            this.destinations = null;
+        } else {
+            java.util.List<String> destinationsCopy = new java.util.ArrayList<String>(destinations.size());
             destinationsCopy.addAll(destinations);
+            this.destinations = destinationsCopy;
         }
-        this.destinations = destinationsCopy;
 
         return this;
     }
@@ -188,7 +233,7 @@ public class SendRawEmailRequest extends AmazonWebServiceRequest {
      * formatted properly.</li> <li>MIME content types must be among those
      * supported by Amazon SES. Refer to the <a
      * f="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide">Amazon
-     * SES Developer Guide</a> for more details.</li> <li>Content must be
+     * SES Developer Guide</a> for more details. </li> <li>Content must be
      * base64-encoded, if MIME requires it.</li> </ul>
      *
      * @return The raw text of the message. The client is responsible for ensuring
@@ -198,7 +243,7 @@ public class SendRawEmailRequest extends AmazonWebServiceRequest {
      *         formatted properly.</li> <li>MIME content types must be among those
      *         supported by Amazon SES. Refer to the <a
      *         f="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide">Amazon
-     *         SES Developer Guide</a> for more details.</li> <li>Content must be
+     *         SES Developer Guide</a> for more details. </li> <li>Content must be
      *         base64-encoded, if MIME requires it.</li> </ul>
      */
     public RawMessage getRawMessage() {
@@ -213,7 +258,7 @@ public class SendRawEmailRequest extends AmazonWebServiceRequest {
      * formatted properly.</li> <li>MIME content types must be among those
      * supported by Amazon SES. Refer to the <a
      * f="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide">Amazon
-     * SES Developer Guide</a> for more details.</li> <li>Content must be
+     * SES Developer Guide</a> for more details. </li> <li>Content must be
      * base64-encoded, if MIME requires it.</li> </ul>
      *
      * @param rawMessage The raw text of the message. The client is responsible for ensuring
@@ -223,7 +268,7 @@ public class SendRawEmailRequest extends AmazonWebServiceRequest {
      *         formatted properly.</li> <li>MIME content types must be among those
      *         supported by Amazon SES. Refer to the <a
      *         f="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide">Amazon
-     *         SES Developer Guide</a> for more details.</li> <li>Content must be
+     *         SES Developer Guide</a> for more details. </li> <li>Content must be
      *         base64-encoded, if MIME requires it.</li> </ul>
      */
     public void setRawMessage(RawMessage rawMessage) {
@@ -238,7 +283,7 @@ public class SendRawEmailRequest extends AmazonWebServiceRequest {
      * formatted properly.</li> <li>MIME content types must be among those
      * supported by Amazon SES. Refer to the <a
      * f="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide">Amazon
-     * SES Developer Guide</a> for more details.</li> <li>Content must be
+     * SES Developer Guide</a> for more details. </li> <li>Content must be
      * base64-encoded, if MIME requires it.</li> </ul>
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
@@ -250,7 +295,7 @@ public class SendRawEmailRequest extends AmazonWebServiceRequest {
      *         formatted properly.</li> <li>MIME content types must be among those
      *         supported by Amazon SES. Refer to the <a
      *         f="http://docs.amazonwebservices.com/ses/latest/DeveloperGuide">Amazon
-     *         SES Developer Guide</a> for more details.</li> <li>Content must be
+     *         SES Developer Guide</a> for more details. </li> <li>Content must be
      *         base64-encoded, if MIME requires it.</li> </ul>
      *
      * @return A reference to this updated object so that method calls can be chained 
@@ -274,11 +319,39 @@ public class SendRawEmailRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Source: " + source + ", ");
-        sb.append("Destinations: " + destinations + ", ");
-        sb.append("RawMessage: " + rawMessage + ", ");
+        if (source != null) sb.append("Source: " + source + ", ");
+        if (destinations != null) sb.append("Destinations: " + destinations + ", ");
+        if (rawMessage != null) sb.append("RawMessage: " + rawMessage + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getSource() == null) ? 0 : getSource().hashCode()); 
+        hashCode = prime * hashCode + ((getDestinations() == null) ? 0 : getDestinations().hashCode()); 
+        hashCode = prime * hashCode + ((getRawMessage() == null) ? 0 : getRawMessage().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof SendRawEmailRequest == false) return false;
+        SendRawEmailRequest other = (SendRawEmailRequest)obj;
+        
+        if (other.getSource() == null ^ this.getSource() == null) return false;
+        if (other.getSource() != null && other.getSource().equals(this.getSource()) == false) return false; 
+        if (other.getDestinations() == null ^ this.getDestinations() == null) return false;
+        if (other.getDestinations() != null && other.getDestinations().equals(this.getDestinations()) == false) return false; 
+        if (other.getRawMessage() == null ^ this.getRawMessage() == null) return false;
+        if (other.getRawMessage() != null && other.getRawMessage().equals(this.getRawMessage()) == false) return false; 
+        return true;
     }
     
 }

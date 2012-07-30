@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,9 +18,8 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.autoscaling.AmazonAutoScaling#disableMetricsCollection(DisableMetricsCollectionRequest) DisableMetricsCollection operation}.
  * <p>
- * Disables monitoring of group metrics for the Auto Scaling group
- * specified in AutoScalingGroupName. You can specify the list of
- * affected metrics with the Metrics parameter.
+ * Disables monitoring of group metrics for the Auto Scaling group specified in <code>AutoScalingGroupName</code> .
+ * You can specify the list of affected metrics with the <code>Metrics</code> parameter.
  * </p>
  *
  * @see com.amazonaws.services.autoscaling.AmazonAutoScaling#disableMetricsCollection(DisableMetricsCollectionRequest)
@@ -111,6 +110,7 @@ public class DisableMetricsCollectionRequest extends AmazonWebServiceRequest {
      *         </ul>
      */
     public java.util.List<String> getMetrics() {
+        
         if (metrics == null) {
             metrics = new java.util.ArrayList<String>();
         }
@@ -135,10 +135,13 @@ public class DisableMetricsCollectionRequest extends AmazonWebServiceRequest {
      *         </ul>
      */
     public void setMetrics(java.util.Collection<String> metrics) {
-        java.util.List<String> metricsCopy = new java.util.ArrayList<String>();
-        if (metrics != null) {
-            metricsCopy.addAll(metrics);
+        if (metrics == null) {
+            this.metrics = null;
+            return;
         }
+
+        java.util.List<String> metricsCopy = new java.util.ArrayList<String>(metrics.size());
+        metricsCopy.addAll(metrics);
         this.metrics = metricsCopy;
     }
     
@@ -165,6 +168,7 @@ public class DisableMetricsCollectionRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DisableMetricsCollectionRequest withMetrics(String... metrics) {
+        if (getMetrics() == null) setMetrics(new java.util.ArrayList<String>(metrics.length));
         for (String value : metrics) {
             getMetrics().add(value);
         }
@@ -194,11 +198,13 @@ public class DisableMetricsCollectionRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DisableMetricsCollectionRequest withMetrics(java.util.Collection<String> metrics) {
-        java.util.List<String> metricsCopy = new java.util.ArrayList<String>();
-        if (metrics != null) {
+        if (metrics == null) {
+            this.metrics = null;
+        } else {
+            java.util.List<String> metricsCopy = new java.util.ArrayList<String>(metrics.size());
             metricsCopy.addAll(metrics);
+            this.metrics = metricsCopy;
         }
-        this.metrics = metricsCopy;
 
         return this;
     }
@@ -215,10 +221,35 @@ public class DisableMetricsCollectionRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
-        sb.append("Metrics: " + metrics + ", ");
+        if (autoScalingGroupName != null) sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
+        if (metrics != null) sb.append("Metrics: " + metrics + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getAutoScalingGroupName() == null) ? 0 : getAutoScalingGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getMetrics() == null) ? 0 : getMetrics().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DisableMetricsCollectionRequest == false) return false;
+        DisableMetricsCollectionRequest other = (DisableMetricsCollectionRequest)obj;
+        
+        if (other.getAutoScalingGroupName() == null ^ this.getAutoScalingGroupName() == null) return false;
+        if (other.getAutoScalingGroupName() != null && other.getAutoScalingGroupName().equals(this.getAutoScalingGroupName()) == false) return false; 
+        if (other.getMetrics() == null ^ this.getMetrics() == null) return false;
+        if (other.getMetrics() != null && other.getMetrics().equals(this.getMetrics()) == false) return false; 
+        return true;
     }
     
 }

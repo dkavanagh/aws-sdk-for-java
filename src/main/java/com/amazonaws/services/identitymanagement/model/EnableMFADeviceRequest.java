@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,9 +18,8 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#enableMFADevice(EnableMFADeviceRequest) EnableMFADevice operation}.
  * <p>
- * Enables the specified MFA device and associates it with the specified
- * User name. When enabled, the MFA device is required for every
- * subsequent login by the User name associated with the device.
+ * Enables the specified MFA device and associates it with the specified user name. When enabled, the MFA device is required for every subsequent login
+ * by the user name associated with the device.
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#enableMFADevice(EnableMFADeviceRequest)
@@ -28,7 +27,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class EnableMFADeviceRequest extends AmazonWebServiceRequest {
 
     /**
-     * Name of the User for whom you want to enable the MFA device.
+     * Name of the user for whom you want to enable the MFA device.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
@@ -37,11 +36,12 @@ public class EnableMFADeviceRequest extends AmazonWebServiceRequest {
     private String userName;
 
     /**
-     * The serial number that uniquely identifies the MFA device.
+     * The serial number that uniquely identifies the MFA device. For virtual
+     * MFA devices, the serial number is the device ARN.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Length: </b>9 - 48<br/>
-     * <b>Pattern: </b>[\w]*<br/>
+     * <b>Length: </b>9 - 256<br/>
+     * <b>Pattern: </b>[\w+=/:,.@-]*<br/>
      */
     private String serialNumber;
 
@@ -74,10 +74,10 @@ public class EnableMFADeviceRequest extends AmazonWebServiceRequest {
      * Callers should use the setter or fluent setter (with...) methods to
      * initialize any additional object members.
      * 
-     * @param userName Name of the User for whom you want to enable the MFA
+     * @param userName Name of the user for whom you want to enable the MFA
      * device.
      * @param serialNumber The serial number that uniquely identifies the MFA
-     * device.
+     * device. For virtual MFA devices, the serial number is the device ARN.
      * @param authenticationCode1 An authentication code emitted by the
      * device.
      * @param authenticationCode2 A subsequent authentication code emitted by
@@ -89,35 +89,37 @@ public class EnableMFADeviceRequest extends AmazonWebServiceRequest {
         this.authenticationCode1 = authenticationCode1;
         this.authenticationCode2 = authenticationCode2;
     }
+
+    
     
     /**
-     * Name of the User for whom you want to enable the MFA device.
+     * Name of the user for whom you want to enable the MFA device.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @return Name of the User for whom you want to enable the MFA device.
+     * @return Name of the user for whom you want to enable the MFA device.
      */
     public String getUserName() {
         return userName;
     }
     
     /**
-     * Name of the User for whom you want to enable the MFA device.
+     * Name of the user for whom you want to enable the MFA device.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User for whom you want to enable the MFA device.
+     * @param userName Name of the user for whom you want to enable the MFA device.
      */
     public void setUserName(String userName) {
         this.userName = userName;
     }
     
     /**
-     * Name of the User for whom you want to enable the MFA device.
+     * Name of the user for whom you want to enable the MFA device.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -125,7 +127,7 @@ public class EnableMFADeviceRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User for whom you want to enable the MFA device.
+     * @param userName Name of the user for whom you want to enable the MFA device.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -137,41 +139,47 @@ public class EnableMFADeviceRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * The serial number that uniquely identifies the MFA device.
+     * The serial number that uniquely identifies the MFA device. For virtual
+     * MFA devices, the serial number is the device ARN.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Length: </b>9 - 48<br/>
-     * <b>Pattern: </b>[\w]*<br/>
+     * <b>Length: </b>9 - 256<br/>
+     * <b>Pattern: </b>[\w+=/:,.@-]*<br/>
      *
-     * @return The serial number that uniquely identifies the MFA device.
+     * @return The serial number that uniquely identifies the MFA device. For virtual
+     *         MFA devices, the serial number is the device ARN.
      */
     public String getSerialNumber() {
         return serialNumber;
     }
     
     /**
-     * The serial number that uniquely identifies the MFA device.
+     * The serial number that uniquely identifies the MFA device. For virtual
+     * MFA devices, the serial number is the device ARN.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Length: </b>9 - 48<br/>
-     * <b>Pattern: </b>[\w]*<br/>
+     * <b>Length: </b>9 - 256<br/>
+     * <b>Pattern: </b>[\w+=/:,.@-]*<br/>
      *
-     * @param serialNumber The serial number that uniquely identifies the MFA device.
+     * @param serialNumber The serial number that uniquely identifies the MFA device. For virtual
+     *         MFA devices, the serial number is the device ARN.
      */
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
     }
     
     /**
-     * The serial number that uniquely identifies the MFA device.
+     * The serial number that uniquely identifies the MFA device. For virtual
+     * MFA devices, the serial number is the device ARN.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Length: </b>9 - 48<br/>
-     * <b>Pattern: </b>[\w]*<br/>
+     * <b>Length: </b>9 - 256<br/>
+     * <b>Pattern: </b>[\w+=/:,.@-]*<br/>
      *
-     * @param serialNumber The serial number that uniquely identifies the MFA device.
+     * @param serialNumber The serial number that uniquely identifies the MFA device. For virtual
+     *         MFA devices, the serial number is the device ARN.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -286,12 +294,43 @@ public class EnableMFADeviceRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("UserName: " + userName + ", ");
-        sb.append("SerialNumber: " + serialNumber + ", ");
-        sb.append("AuthenticationCode1: " + authenticationCode1 + ", ");
-        sb.append("AuthenticationCode2: " + authenticationCode2 + ", ");
+        if (userName != null) sb.append("UserName: " + userName + ", ");
+        if (serialNumber != null) sb.append("SerialNumber: " + serialNumber + ", ");
+        if (authenticationCode1 != null) sb.append("AuthenticationCode1: " + authenticationCode1 + ", ");
+        if (authenticationCode2 != null) sb.append("AuthenticationCode2: " + authenticationCode2 + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getUserName() == null) ? 0 : getUserName().hashCode()); 
+        hashCode = prime * hashCode + ((getSerialNumber() == null) ? 0 : getSerialNumber().hashCode()); 
+        hashCode = prime * hashCode + ((getAuthenticationCode1() == null) ? 0 : getAuthenticationCode1().hashCode()); 
+        hashCode = prime * hashCode + ((getAuthenticationCode2() == null) ? 0 : getAuthenticationCode2().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof EnableMFADeviceRequest == false) return false;
+        EnableMFADeviceRequest other = (EnableMFADeviceRequest)obj;
+        
+        if (other.getUserName() == null ^ this.getUserName() == null) return false;
+        if (other.getUserName() != null && other.getUserName().equals(this.getUserName()) == false) return false; 
+        if (other.getSerialNumber() == null ^ this.getSerialNumber() == null) return false;
+        if (other.getSerialNumber() != null && other.getSerialNumber().equals(this.getSerialNumber()) == false) return false; 
+        if (other.getAuthenticationCode1() == null ^ this.getAuthenticationCode1() == null) return false;
+        if (other.getAuthenticationCode1() != null && other.getAuthenticationCode1().equals(this.getAuthenticationCode1()) == false) return false; 
+        if (other.getAuthenticationCode2() == null ^ this.getAuthenticationCode2() == null) return false;
+        if (other.getAuthenticationCode2() != null && other.getAuthenticationCode2().equals(this.getAuthenticationCode2()) == false) return false; 
+        return true;
     }
     
 }

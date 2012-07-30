@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,40 +16,40 @@ package com.amazonaws.services.autoscaling.model;
 
 /**
  * <p>
- * The InstanceMonitoring Data Type.
+ * The <code>InstanceMonitoring</code> data type.
  * </p>
  */
 public class InstanceMonitoring {
 
     /**
-     * If true, instance monitoring is enabled.
+     * If <code>True</code>, instance monitoring is enabled.
      */
     private Boolean enabled;
 
     /**
-     * If true, instance monitoring is enabled.
+     * If <code>True</code>, instance monitoring is enabled.
      *
-     * @return If true, instance monitoring is enabled.
+     * @return If <code>True</code>, instance monitoring is enabled.
      */
     public Boolean isEnabled() {
         return enabled;
     }
     
     /**
-     * If true, instance monitoring is enabled.
+     * If <code>True</code>, instance monitoring is enabled.
      *
-     * @param enabled If true, instance monitoring is enabled.
+     * @param enabled If <code>True</code>, instance monitoring is enabled.
      */
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
     
     /**
-     * If true, instance monitoring is enabled.
+     * If <code>True</code>, instance monitoring is enabled.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param enabled If true, instance monitoring is enabled.
+     * @param enabled If <code>True</code>, instance monitoring is enabled.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -61,9 +61,9 @@ public class InstanceMonitoring {
     
     
     /**
-     * If true, instance monitoring is enabled.
+     * If <code>True</code>, instance monitoring is enabled.
      *
-     * @return If true, instance monitoring is enabled.
+     * @return If <code>True</code>, instance monitoring is enabled.
      */
     public Boolean getEnabled() {
         return enabled;
@@ -81,9 +81,31 @@ public class InstanceMonitoring {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Enabled: " + enabled + ", ");
+        if (enabled != null) sb.append("Enabled: " + enabled + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((isEnabled() == null) ? 0 : isEnabled().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof InstanceMonitoring == false) return false;
+        InstanceMonitoring other = (InstanceMonitoring)obj;
+        
+        if (other.isEnabled() == null ^ this.isEnabled() == null) return false;
+        if (other.isEnabled() != null && other.isEnabled().equals(this.isEnabled()) == false) return false; 
+        return true;
     }
     
 }

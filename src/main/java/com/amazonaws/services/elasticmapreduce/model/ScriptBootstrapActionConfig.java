@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -57,6 +57,8 @@ public class ScriptBootstrapActionConfig {
         this.path = path;
         this.args = args;
     }
+
+    
     
     /**
      * Location of the script to run during a bootstrap action. Can be either
@@ -118,6 +120,7 @@ public class ScriptBootstrapActionConfig {
      *         script.
      */
     public java.util.List<String> getArgs() {
+        
         if (args == null) {
             args = new java.util.ArrayList<String>();
         }
@@ -132,10 +135,13 @@ public class ScriptBootstrapActionConfig {
      *         script.
      */
     public void setArgs(java.util.Collection<String> args) {
-        java.util.List<String> argsCopy = new java.util.ArrayList<String>();
-        if (args != null) {
-            argsCopy.addAll(args);
+        if (args == null) {
+            this.args = null;
+            return;
         }
+
+        java.util.List<String> argsCopy = new java.util.ArrayList<String>(args.size());
+        argsCopy.addAll(args);
         this.args = argsCopy;
     }
     
@@ -152,6 +158,7 @@ public class ScriptBootstrapActionConfig {
      *         together. 
      */
     public ScriptBootstrapActionConfig withArgs(String... args) {
+        if (getArgs() == null) setArgs(new java.util.ArrayList<String>(args.length));
         for (String value : args) {
             getArgs().add(value);
         }
@@ -171,11 +178,13 @@ public class ScriptBootstrapActionConfig {
      *         together. 
      */
     public ScriptBootstrapActionConfig withArgs(java.util.Collection<String> args) {
-        java.util.List<String> argsCopy = new java.util.ArrayList<String>();
-        if (args != null) {
+        if (args == null) {
+            this.args = null;
+        } else {
+            java.util.List<String> argsCopy = new java.util.ArrayList<String>(args.size());
             argsCopy.addAll(args);
+            this.args = argsCopy;
         }
-        this.args = argsCopy;
 
         return this;
     }
@@ -192,10 +201,35 @@ public class ScriptBootstrapActionConfig {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Path: " + path + ", ");
-        sb.append("Args: " + args + ", ");
+        if (path != null) sb.append("Path: " + path + ", ");
+        if (args != null) sb.append("Args: " + args + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getPath() == null) ? 0 : getPath().hashCode()); 
+        hashCode = prime * hashCode + ((getArgs() == null) ? 0 : getArgs().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof ScriptBootstrapActionConfig == false) return false;
+        ScriptBootstrapActionConfig other = (ScriptBootstrapActionConfig)obj;
+        
+        if (other.getPath() == null ^ this.getPath() == null) return false;
+        if (other.getPath() != null && other.getPath().equals(this.getPath()) == false) return false; 
+        if (other.getArgs() == null ^ this.getArgs() == null) return false;
+        if (other.getArgs() != null && other.getArgs().equals(this.getArgs()) == false) return false; 
+        return true;
     }
     
 }

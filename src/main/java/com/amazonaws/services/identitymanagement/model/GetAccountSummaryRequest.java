@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,14 +18,12 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#getAccountSummary(GetAccountSummaryRequest) GetAccountSummary operation}.
  * <p>
- * Retrieves account level information about account entity usage and IAM
- * quotas.
+ * Retrieves account level information about account entity usage and IAM quotas.
  * </p>
  * <p>
  * For information about limitations on IAM entities, see <a
- * vices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html">
- * Limitations on IAM Entities </a> in <i>Using AWS Identity and Access
- * Management</i> .
+ * href="http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html"> Limitations on IAM Entities </a> in <i>Using AWS
+ * Identity and Access Management</i> .
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#getAccountSummary(GetAccountSummaryRequest)
@@ -46,6 +44,25 @@ public class GetAccountSummaryRequest extends AmazonWebServiceRequest {
         sb.append("{");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof GetAccountSummaryRequest == false) return false;
+        GetAccountSummaryRequest other = (GetAccountSummaryRequest)obj;
+        
+        return true;
     }
     
 }

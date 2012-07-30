@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.identitymanagement.model.*;
@@ -30,18 +31,20 @@ import com.amazonaws.util.StringUtils;
 public class CreateGroupRequestMarshaller implements Marshaller<Request<CreateGroupRequest>, CreateGroupRequest> {
 
     public Request<CreateGroupRequest> marshall(CreateGroupRequest createGroupRequest) {
+
+        if (createGroupRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<CreateGroupRequest> request = new DefaultRequest<CreateGroupRequest>(createGroupRequest, "AmazonIdentityManagement");
         request.addParameter("Action", "CreateGroup");
         request.addParameter("Version", "2010-05-08");
-        if (createGroupRequest != null) {
-            if (createGroupRequest.getPath() != null) {
-                request.addParameter("Path", StringUtils.fromString(createGroupRequest.getPath()));
-            }
+
+        if (createGroupRequest.getPath() != null) {
+            request.addParameter("Path", StringUtils.fromString(createGroupRequest.getPath()));
         }
-        if (createGroupRequest != null) {
-            if (createGroupRequest.getGroupName() != null) {
-                request.addParameter("GroupName", StringUtils.fromString(createGroupRequest.getGroupName()));
-            }
+        if (createGroupRequest.getGroupName() != null) {
+            request.addParameter("GroupName", StringUtils.fromString(createGroupRequest.getGroupName()));
         }
 
 

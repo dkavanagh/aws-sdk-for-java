@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -692,6 +692,72 @@ public class TerminateEnvironmentResult {
     
     
     /**
+     * The current operational status of the environment: <ul> <li>
+     * <code>Launching</code>: Environment is in the process of initial
+     * deployment. </li> <li> <code>Updating</code>: Environment is in the
+     * process of updating its configuration settings or application version.
+     * </li> <li> <code>Ready</code>: Environment is available to have an
+     * action performed on it, such as update or terminate. </li> <li>
+     * <code>Terminating</code>: Environment is in the shut-down process.
+     * </li> <li> <code>Terminated</code>: Environment is not running. </li>
+     * </ul>
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>Launching, Updating, Ready, Terminating, Terminated
+     *
+     * @param status The current operational status of the environment: <ul> <li>
+     *         <code>Launching</code>: Environment is in the process of initial
+     *         deployment. </li> <li> <code>Updating</code>: Environment is in the
+     *         process of updating its configuration settings or application version.
+     *         </li> <li> <code>Ready</code>: Environment is available to have an
+     *         action performed on it, such as update or terminate. </li> <li>
+     *         <code>Terminating</code>: Environment is in the shut-down process.
+     *         </li> <li> <code>Terminated</code>: Environment is not running. </li>
+     *         </ul>
+     *
+     * @see EnvironmentStatus
+     */
+    public void setStatus(EnvironmentStatus status) {
+        this.status = status.toString();
+    }
+    
+    /**
+     * The current operational status of the environment: <ul> <li>
+     * <code>Launching</code>: Environment is in the process of initial
+     * deployment. </li> <li> <code>Updating</code>: Environment is in the
+     * process of updating its configuration settings or application version.
+     * </li> <li> <code>Ready</code>: Environment is available to have an
+     * action performed on it, such as update or terminate. </li> <li>
+     * <code>Terminating</code>: Environment is in the shut-down process.
+     * </li> <li> <code>Terminated</code>: Environment is not running. </li>
+     * </ul>
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>Launching, Updating, Ready, Terminating, Terminated
+     *
+     * @param status The current operational status of the environment: <ul> <li>
+     *         <code>Launching</code>: Environment is in the process of initial
+     *         deployment. </li> <li> <code>Updating</code>: Environment is in the
+     *         process of updating its configuration settings or application version.
+     *         </li> <li> <code>Ready</code>: Environment is available to have an
+     *         action performed on it, such as update or terminate. </li> <li>
+     *         <code>Terminating</code>: Environment is in the shut-down process.
+     *         </li> <li> <code>Terminated</code>: Environment is not running. </li>
+     *         </ul>
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see EnvironmentStatus
+     */
+    public TerminateEnvironmentResult withStatus(EnvironmentStatus status) {
+        this.status = status.toString();
+        return this;
+    }
+    
+    /**
      * Describes the health status of the environment. AWS Elastic Beanstalk
      * indicates the failure levels for a running environment: <enumValues>
      * <value name="Red"> <p> <code>Red</code> : Indicates the environment is
@@ -843,6 +909,108 @@ public class TerminateEnvironmentResult {
     
     
     /**
+     * Describes the health status of the environment. AWS Elastic Beanstalk
+     * indicates the failure levels for a running environment: <enumValues>
+     * <value name="Red"> <p> <code>Red</code> : Indicates the environment is
+     * not working. </value> <value name="Yellow"> <p> <code>Yellow</code>:
+     * Indicates that something is wrong, the application might not be
+     * available, but the instances appear running. </value> <value
+     * name="Green"> <p> <code>Green</code>: Indicates the environment is
+     * healthy and fully functional. </value> </enumValues> <ul> <li>
+     * <code>Red</code>: Indicates the environment is not responsive. Occurs
+     * when three or more consecutive failures occur for an environment.
+     * </li> <li> <code>Yellow</code>: Indicates that something is wrong.
+     * Occurs when two consecutive failures occur for an environment. </li>
+     * <li> <code>Green</code>: Indicates the environment is healthy and
+     * fully functional. </li> <li> <code>Grey</code>: Default health for a
+     * new environment. The environment is not fully launched and health
+     * checks have not started or health checks are suspended during an
+     * <code>UpdateEnvironment</code> or <code>RestartEnvironement</code>
+     * request. </li> </ul> <p> Default: <code>Grey</code>
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>Green, Yellow, Red, Grey
+     *
+     * @param health Describes the health status of the environment. AWS Elastic Beanstalk
+     *         indicates the failure levels for a running environment: <enumValues>
+     *         <value name="Red"> <p> <code>Red</code> : Indicates the environment is
+     *         not working. </value> <value name="Yellow"> <p> <code>Yellow</code>:
+     *         Indicates that something is wrong, the application might not be
+     *         available, but the instances appear running. </value> <value
+     *         name="Green"> <p> <code>Green</code>: Indicates the environment is
+     *         healthy and fully functional. </value> </enumValues> <ul> <li>
+     *         <code>Red</code>: Indicates the environment is not responsive. Occurs
+     *         when three or more consecutive failures occur for an environment.
+     *         </li> <li> <code>Yellow</code>: Indicates that something is wrong.
+     *         Occurs when two consecutive failures occur for an environment. </li>
+     *         <li> <code>Green</code>: Indicates the environment is healthy and
+     *         fully functional. </li> <li> <code>Grey</code>: Default health for a
+     *         new environment. The environment is not fully launched and health
+     *         checks have not started or health checks are suspended during an
+     *         <code>UpdateEnvironment</code> or <code>RestartEnvironement</code>
+     *         request. </li> </ul> <p> Default: <code>Grey</code>
+     *
+     * @see EnvironmentHealth
+     */
+    public void setHealth(EnvironmentHealth health) {
+        this.health = health.toString();
+    }
+    
+    /**
+     * Describes the health status of the environment. AWS Elastic Beanstalk
+     * indicates the failure levels for a running environment: <enumValues>
+     * <value name="Red"> <p> <code>Red</code> : Indicates the environment is
+     * not working. </value> <value name="Yellow"> <p> <code>Yellow</code>:
+     * Indicates that something is wrong, the application might not be
+     * available, but the instances appear running. </value> <value
+     * name="Green"> <p> <code>Green</code>: Indicates the environment is
+     * healthy and fully functional. </value> </enumValues> <ul> <li>
+     * <code>Red</code>: Indicates the environment is not responsive. Occurs
+     * when three or more consecutive failures occur for an environment.
+     * </li> <li> <code>Yellow</code>: Indicates that something is wrong.
+     * Occurs when two consecutive failures occur for an environment. </li>
+     * <li> <code>Green</code>: Indicates the environment is healthy and
+     * fully functional. </li> <li> <code>Grey</code>: Default health for a
+     * new environment. The environment is not fully launched and health
+     * checks have not started or health checks are suspended during an
+     * <code>UpdateEnvironment</code> or <code>RestartEnvironement</code>
+     * request. </li> </ul> <p> Default: <code>Grey</code>
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>Green, Yellow, Red, Grey
+     *
+     * @param health Describes the health status of the environment. AWS Elastic Beanstalk
+     *         indicates the failure levels for a running environment: <enumValues>
+     *         <value name="Red"> <p> <code>Red</code> : Indicates the environment is
+     *         not working. </value> <value name="Yellow"> <p> <code>Yellow</code>:
+     *         Indicates that something is wrong, the application might not be
+     *         available, but the instances appear running. </value> <value
+     *         name="Green"> <p> <code>Green</code>: Indicates the environment is
+     *         healthy and fully functional. </value> </enumValues> <ul> <li>
+     *         <code>Red</code>: Indicates the environment is not responsive. Occurs
+     *         when three or more consecutive failures occur for an environment.
+     *         </li> <li> <code>Yellow</code>: Indicates that something is wrong.
+     *         Occurs when two consecutive failures occur for an environment. </li>
+     *         <li> <code>Green</code>: Indicates the environment is healthy and
+     *         fully functional. </li> <li> <code>Grey</code>: Default health for a
+     *         new environment. The environment is not fully launched and health
+     *         checks have not started or health checks are suspended during an
+     *         <code>UpdateEnvironment</code> or <code>RestartEnvironement</code>
+     *         request. </li> </ul> <p> Default: <code>Grey</code>
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see EnvironmentHealth
+     */
+    public TerminateEnvironmentResult withHealth(EnvironmentHealth health) {
+        this.health = health.toString();
+        return this;
+    }
+    
+    /**
      * The description of the AWS resources used by this environment.
      *
      * @return The description of the AWS resources used by this environment.
@@ -888,22 +1056,83 @@ public class TerminateEnvironmentResult {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("EnvironmentName: " + environmentName + ", ");
-        sb.append("EnvironmentId: " + environmentId + ", ");
-        sb.append("ApplicationName: " + applicationName + ", ");
-        sb.append("VersionLabel: " + versionLabel + ", ");
-        sb.append("SolutionStackName: " + solutionStackName + ", ");
-        sb.append("TemplateName: " + templateName + ", ");
-        sb.append("Description: " + description + ", ");
-        sb.append("EndpointURL: " + endpointURL + ", ");
-        sb.append("CNAME: " + cNAME + ", ");
-        sb.append("DateCreated: " + dateCreated + ", ");
-        sb.append("DateUpdated: " + dateUpdated + ", ");
-        sb.append("Status: " + status + ", ");
-        sb.append("Health: " + health + ", ");
-        sb.append("Resources: " + resources + ", ");
+        if (environmentName != null) sb.append("EnvironmentName: " + environmentName + ", ");
+        if (environmentId != null) sb.append("EnvironmentId: " + environmentId + ", ");
+        if (applicationName != null) sb.append("ApplicationName: " + applicationName + ", ");
+        if (versionLabel != null) sb.append("VersionLabel: " + versionLabel + ", ");
+        if (solutionStackName != null) sb.append("SolutionStackName: " + solutionStackName + ", ");
+        if (templateName != null) sb.append("TemplateName: " + templateName + ", ");
+        if (description != null) sb.append("Description: " + description + ", ");
+        if (endpointURL != null) sb.append("EndpointURL: " + endpointURL + ", ");
+        if (cNAME != null) sb.append("CNAME: " + cNAME + ", ");
+        if (dateCreated != null) sb.append("DateCreated: " + dateCreated + ", ");
+        if (dateUpdated != null) sb.append("DateUpdated: " + dateUpdated + ", ");
+        if (status != null) sb.append("Status: " + status + ", ");
+        if (health != null) sb.append("Health: " + health + ", ");
+        if (resources != null) sb.append("Resources: " + resources + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getEnvironmentName() == null) ? 0 : getEnvironmentName().hashCode()); 
+        hashCode = prime * hashCode + ((getEnvironmentId() == null) ? 0 : getEnvironmentId().hashCode()); 
+        hashCode = prime * hashCode + ((getApplicationName() == null) ? 0 : getApplicationName().hashCode()); 
+        hashCode = prime * hashCode + ((getVersionLabel() == null) ? 0 : getVersionLabel().hashCode()); 
+        hashCode = prime * hashCode + ((getSolutionStackName() == null) ? 0 : getSolutionStackName().hashCode()); 
+        hashCode = prime * hashCode + ((getTemplateName() == null) ? 0 : getTemplateName().hashCode()); 
+        hashCode = prime * hashCode + ((getDescription() == null) ? 0 : getDescription().hashCode()); 
+        hashCode = prime * hashCode + ((getEndpointURL() == null) ? 0 : getEndpointURL().hashCode()); 
+        hashCode = prime * hashCode + ((getCNAME() == null) ? 0 : getCNAME().hashCode()); 
+        hashCode = prime * hashCode + ((getDateCreated() == null) ? 0 : getDateCreated().hashCode()); 
+        hashCode = prime * hashCode + ((getDateUpdated() == null) ? 0 : getDateUpdated().hashCode()); 
+        hashCode = prime * hashCode + ((getStatus() == null) ? 0 : getStatus().hashCode()); 
+        hashCode = prime * hashCode + ((getHealth() == null) ? 0 : getHealth().hashCode()); 
+        hashCode = prime * hashCode + ((getResources() == null) ? 0 : getResources().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof TerminateEnvironmentResult == false) return false;
+        TerminateEnvironmentResult other = (TerminateEnvironmentResult)obj;
+        
+        if (other.getEnvironmentName() == null ^ this.getEnvironmentName() == null) return false;
+        if (other.getEnvironmentName() != null && other.getEnvironmentName().equals(this.getEnvironmentName()) == false) return false; 
+        if (other.getEnvironmentId() == null ^ this.getEnvironmentId() == null) return false;
+        if (other.getEnvironmentId() != null && other.getEnvironmentId().equals(this.getEnvironmentId()) == false) return false; 
+        if (other.getApplicationName() == null ^ this.getApplicationName() == null) return false;
+        if (other.getApplicationName() != null && other.getApplicationName().equals(this.getApplicationName()) == false) return false; 
+        if (other.getVersionLabel() == null ^ this.getVersionLabel() == null) return false;
+        if (other.getVersionLabel() != null && other.getVersionLabel().equals(this.getVersionLabel()) == false) return false; 
+        if (other.getSolutionStackName() == null ^ this.getSolutionStackName() == null) return false;
+        if (other.getSolutionStackName() != null && other.getSolutionStackName().equals(this.getSolutionStackName()) == false) return false; 
+        if (other.getTemplateName() == null ^ this.getTemplateName() == null) return false;
+        if (other.getTemplateName() != null && other.getTemplateName().equals(this.getTemplateName()) == false) return false; 
+        if (other.getDescription() == null ^ this.getDescription() == null) return false;
+        if (other.getDescription() != null && other.getDescription().equals(this.getDescription()) == false) return false; 
+        if (other.getEndpointURL() == null ^ this.getEndpointURL() == null) return false;
+        if (other.getEndpointURL() != null && other.getEndpointURL().equals(this.getEndpointURL()) == false) return false; 
+        if (other.getCNAME() == null ^ this.getCNAME() == null) return false;
+        if (other.getCNAME() != null && other.getCNAME().equals(this.getCNAME()) == false) return false; 
+        if (other.getDateCreated() == null ^ this.getDateCreated() == null) return false;
+        if (other.getDateCreated() != null && other.getDateCreated().equals(this.getDateCreated()) == false) return false; 
+        if (other.getDateUpdated() == null ^ this.getDateUpdated() == null) return false;
+        if (other.getDateUpdated() != null && other.getDateUpdated().equals(this.getDateUpdated()) == false) return false; 
+        if (other.getStatus() == null ^ this.getStatus() == null) return false;
+        if (other.getStatus() != null && other.getStatus().equals(this.getStatus()) == false) return false; 
+        if (other.getHealth() == null ^ this.getHealth() == null) return false;
+        if (other.getHealth() != null && other.getHealth().equals(this.getHealth()) == false) return false; 
+        if (other.getResources() == null ^ this.getResources() == null) return false;
+        if (other.getResources() != null && other.getResources().equals(this.getResources()) == false) return false; 
+        return true;
     }
     
 }

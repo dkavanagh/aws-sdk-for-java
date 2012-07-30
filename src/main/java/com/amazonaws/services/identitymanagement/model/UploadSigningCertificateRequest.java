@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,24 +18,18 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#uploadSigningCertificate(UploadSigningCertificateRequest) UploadSigningCertificate operation}.
  * <p>
- * Uploads an X.509 signing certificate and associates it with the
- * specified User. Some AWS services use X.509 signing certificates to
- * validate requests that are signed with a corresponding private key.
- * When you upload the certificate, its default status is
- * <code>Active</code> .
+ * Uploads an X.509 signing certificate and associates it with the specified user. Some AWS services use X.509 signing certificates to validate requests
+ * that are signed with a corresponding private key. When you upload the certificate, its default status is <code>Active</code> .
  * </p>
  * <p>
- * If the <code>UserName</code> field is not specified, the User name is
- * determined implicitly based on the AWS Access Key ID used to sign the
- * request. Because this action works for access keys under the AWS
- * Account, this API can be used to manage root credentials even if the
- * AWS Account has no associated Users.
+ * If the <code>UserName</code> field is not specified, the user name is determined implicitly based on the AWS Access Key ID used to sign the request.
+ * Because this action works for access keys under the AWS account, this API can be used to manage root credentials even if the AWS account has no
+ * associated users.
  * </p>
  * <p>
- * <b>NOTE:</b>Because the body of a X.509 certificate can be large, you
- * should use POST rather than GET when calling UploadSigningCertificate.
- * For more information, see Making Query Requests in Using AWS Identity
- * and Access Management.
+ * <b>NOTE:</b>Because the body of a X.509 certificate can be large, you should use POST rather than GET when calling UploadSigningCertificate. For
+ * information about setting up signatures and authorization through the API, go to Signing AWS API Requests in the AWS General Reference. For general
+ * information about using the Query API with IAM, go to Making Query Requests in Using IAM.
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#uploadSigningCertificate(UploadSigningCertificateRequest)
@@ -43,7 +37,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class UploadSigningCertificateRequest extends AmazonWebServiceRequest {
 
     /**
-     * Name of the User the signing certificate is for.
+     * Name of the user the signing certificate is for.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
@@ -76,35 +70,37 @@ public class UploadSigningCertificateRequest extends AmazonWebServiceRequest {
     public UploadSigningCertificateRequest(String certificateBody) {
         this.certificateBody = certificateBody;
     }
+
+    
     
     /**
-     * Name of the User the signing certificate is for.
+     * Name of the user the signing certificate is for.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @return Name of the User the signing certificate is for.
+     * @return Name of the user the signing certificate is for.
      */
     public String getUserName() {
         return userName;
     }
     
     /**
-     * Name of the User the signing certificate is for.
+     * Name of the user the signing certificate is for.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User the signing certificate is for.
+     * @param userName Name of the user the signing certificate is for.
      */
     public void setUserName(String userName) {
         this.userName = userName;
     }
     
     /**
-     * Name of the User the signing certificate is for.
+     * Name of the user the signing certificate is for.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -112,7 +108,7 @@ public class UploadSigningCertificateRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User the signing certificate is for.
+     * @param userName Name of the user the signing certificate is for.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -181,10 +177,35 @@ public class UploadSigningCertificateRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("UserName: " + userName + ", ");
-        sb.append("CertificateBody: " + certificateBody + ", ");
+        if (userName != null) sb.append("UserName: " + userName + ", ");
+        if (certificateBody != null) sb.append("CertificateBody: " + certificateBody + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getUserName() == null) ? 0 : getUserName().hashCode()); 
+        hashCode = prime * hashCode + ((getCertificateBody() == null) ? 0 : getCertificateBody().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof UploadSigningCertificateRequest == false) return false;
+        UploadSigningCertificateRequest other = (UploadSigningCertificateRequest)obj;
+        
+        if (other.getUserName() == null ^ this.getUserName() == null) return false;
+        if (other.getUserName() != null && other.getUserName().equals(this.getUserName()) == false) return false; 
+        if (other.getCertificateBody() == null ^ this.getCertificateBody() == null) return false;
+        if (other.getCertificateBody() != null && other.getCertificateBody().equals(this.getCertificateBody()) == false) return false; 
+        return true;
     }
     
 }

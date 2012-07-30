@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,11 +18,9 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#createRouteTable(CreateRouteTableRequest) CreateRouteTable operation}.
  * <p>
- * Creates a new route table within a VPC. After you create a new route
- * table, you can add routes and associate the table with a subnet. For
- * more information about route tables, go to <a
- * azonwebservices.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html">
- * Route Tables </a> in the Amazon Virtual Private Cloud User Guide.
+ * Creates a new route table within a VPC. After you create a new route table, you can add routes and associate the table with a subnet. For more
+ * information about route tables, go to <a href="http://docs.amazonwebservices.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html"> Route Tables </a>
+ * in the Amazon Virtual Private Cloud User Guide.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#createRouteTable(CreateRouteTableRequest)
@@ -80,9 +78,31 @@ public class CreateRouteTableRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("VpcId: " + vpcId + ", ");
+        if (vpcId != null) sb.append("VpcId: " + vpcId + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getVpcId() == null) ? 0 : getVpcId().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof CreateRouteTableRequest == false) return false;
+        CreateRouteTableRequest other = (CreateRouteTableRequest)obj;
+        
+        if (other.getVpcId() == null ^ this.getVpcId() == null) return false;
+        if (other.getVpcId() != null && other.getVpcId().equals(this.getVpcId()) == false) return false; 
+        return true;
     }
     
 }

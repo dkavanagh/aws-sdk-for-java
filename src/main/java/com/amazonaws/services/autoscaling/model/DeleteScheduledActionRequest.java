@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.autoscaling.AmazonAutoScaling#deleteScheduledAction(DeleteScheduledActionRequest) DeleteScheduledAction operation}.
  * <p>
- * Deletes a scheduled action previously created using the
- * PutScheduledUpdateGroupAction.
+ * Deletes a scheduled action previously created using the PutScheduledUpdateGroupAction.
  * </p>
  *
  * @see com.amazonaws.services.autoscaling.AmazonAutoScaling#deleteScheduledAction(DeleteScheduledActionRequest)
@@ -27,7 +26,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class DeleteScheduledActionRequest extends AmazonWebServiceRequest {
 
     /**
-     * The name of the Auto Scaling group
+     * The name of the Auto Scaling group.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 1600<br/>
@@ -45,33 +44,33 @@ public class DeleteScheduledActionRequest extends AmazonWebServiceRequest {
     private String scheduledActionName;
 
     /**
-     * The name of the Auto Scaling group
+     * The name of the Auto Scaling group.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 1600<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @return The name of the Auto Scaling group
+     * @return The name of the Auto Scaling group.
      */
     public String getAutoScalingGroupName() {
         return autoScalingGroupName;
     }
     
     /**
-     * The name of the Auto Scaling group
+     * The name of the Auto Scaling group.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 1600<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @param autoScalingGroupName The name of the Auto Scaling group
+     * @param autoScalingGroupName The name of the Auto Scaling group.
      */
     public void setAutoScalingGroupName(String autoScalingGroupName) {
         this.autoScalingGroupName = autoScalingGroupName;
     }
     
     /**
-     * The name of the Auto Scaling group
+     * The name of the Auto Scaling group.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -79,7 +78,7 @@ public class DeleteScheduledActionRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 1600<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @param autoScalingGroupName The name of the Auto Scaling group
+     * @param autoScalingGroupName The name of the Auto Scaling group.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -148,10 +147,35 @@ public class DeleteScheduledActionRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
-        sb.append("ScheduledActionName: " + scheduledActionName + ", ");
+        if (autoScalingGroupName != null) sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
+        if (scheduledActionName != null) sb.append("ScheduledActionName: " + scheduledActionName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getAutoScalingGroupName() == null) ? 0 : getAutoScalingGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getScheduledActionName() == null) ? 0 : getScheduledActionName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DeleteScheduledActionRequest == false) return false;
+        DeleteScheduledActionRequest other = (DeleteScheduledActionRequest)obj;
+        
+        if (other.getAutoScalingGroupName() == null ^ this.getAutoScalingGroupName() == null) return false;
+        if (other.getAutoScalingGroupName() != null && other.getAutoScalingGroupName().equals(this.getAutoScalingGroupName()) == false) return false; 
+        if (other.getScheduledActionName() == null ^ this.getScheduledActionName() == null) return false;
+        if (other.getScheduledActionName() != null && other.getScheduledActionName().equals(this.getScheduledActionName()) == false) return false; 
+        return true;
     }
     
 }

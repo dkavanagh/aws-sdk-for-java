@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,32 +18,21 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduce#setTerminationProtection(SetTerminationProtectionRequest) SetTerminationProtection operation}.
  * <p>
- * SetTerminationProtection locks a job flow so the Amazon EC2 instances
- * in the cluster cannot be terminated by user intervention, an API call,
- * or in the event of a job-flow error. The cluster still terminates upon
- * successful completion of the job flow. Calling
- * SetTerminationProtection on a job flow is analogous to calling the
- * Amazon EC2 DisableAPITermination API on all of the EC2 instances in a
- * cluster.
+ * SetTerminationProtection locks a job flow so the Amazon EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in
+ * the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling SetTerminationProtection on a job flow
+ * is analogous to calling the Amazon EC2 DisableAPITermination API on all of the EC2 instances in a cluster.
  * </p>
  * <p>
- * SetTerminationProtection is used to prevent accidental termination of
- * a job flow and to ensure that in the event of an error, the instances
- * will persist so you can recover any data stored in their ephemeral
- * instance storage.
+ * SetTerminationProtection is used to prevent accidental termination of a job flow and to ensure that in the event of an error, the instances will
+ * persist so you can recover any data stored in their ephemeral instance storage.
  * </p>
  * <p>
- * To terminate a job flow that has been locked by setting
- * SetTerminationProtection to <code>true</code> ,
- * you must first unlock the job flow by a subsequent call to
- * SetTerminationProtection in which you set the value to
- * <code>false</code> .
+ * To terminate a job flow that has been locked by setting SetTerminationProtection to <code>true</code> ,
+ * you must first unlock the job flow by a subsequent call to SetTerminationProtection in which you set the value to <code>false</code> .
  * </p>
  * <p>
- * For more information, go to <a
- * cMapReduce/latest/DeveloperGuide/UsingEMR_TerminationProtection.html">
- * Protecting a Job Flow from Termination </a> in the <i>Amazon Elastic
- * MapReduce Developer's Guide.</i>
+ * For more information, go to <a href="http://docs.amazonwebservices.com/ElasticMapReduce/latest/DeveloperGuide/UsingEMR_TerminationProtection.html">
+ * Protecting a Job Flow from Termination </a> in the <i>Amazon Elastic MapReduce Developer's Guide.</i>
  * </p>
  *
  * @see com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduce#setTerminationProtection(SetTerminationProtectionRequest)
@@ -74,6 +63,7 @@ public class SetTerminationProtectionRequest extends AmazonWebServiceRequest {
      *         obtained from <a>DescribeJobFlows</a> .
      */
     public java.util.List<String> getJobFlowIds() {
+        
         if (jobFlowIds == null) {
             jobFlowIds = new java.util.ArrayList<String>();
         }
@@ -90,10 +80,13 @@ public class SetTerminationProtectionRequest extends AmazonWebServiceRequest {
      *         obtained from <a>DescribeJobFlows</a> .
      */
     public void setJobFlowIds(java.util.Collection<String> jobFlowIds) {
-        java.util.List<String> jobFlowIdsCopy = new java.util.ArrayList<String>();
-        if (jobFlowIds != null) {
-            jobFlowIdsCopy.addAll(jobFlowIds);
+        if (jobFlowIds == null) {
+            this.jobFlowIds = null;
+            return;
         }
+
+        java.util.List<String> jobFlowIdsCopy = new java.util.ArrayList<String>(jobFlowIds.size());
+        jobFlowIdsCopy.addAll(jobFlowIds);
         this.jobFlowIds = jobFlowIdsCopy;
     }
     
@@ -112,6 +105,7 @@ public class SetTerminationProtectionRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public SetTerminationProtectionRequest withJobFlowIds(String... jobFlowIds) {
+        if (getJobFlowIds() == null) setJobFlowIds(new java.util.ArrayList<String>(jobFlowIds.length));
         for (String value : jobFlowIds) {
             getJobFlowIds().add(value);
         }
@@ -133,11 +127,13 @@ public class SetTerminationProtectionRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public SetTerminationProtectionRequest withJobFlowIds(java.util.Collection<String> jobFlowIds) {
-        java.util.List<String> jobFlowIdsCopy = new java.util.ArrayList<String>();
-        if (jobFlowIds != null) {
+        if (jobFlowIds == null) {
+            this.jobFlowIds = null;
+        } else {
+            java.util.List<String> jobFlowIdsCopy = new java.util.ArrayList<String>(jobFlowIds.size());
             jobFlowIdsCopy.addAll(jobFlowIds);
+            this.jobFlowIds = jobFlowIdsCopy;
         }
-        this.jobFlowIds = jobFlowIdsCopy;
 
         return this;
     }
@@ -213,10 +209,35 @@ public class SetTerminationProtectionRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("JobFlowIds: " + jobFlowIds + ", ");
-        sb.append("TerminationProtected: " + terminationProtected + ", ");
+        if (jobFlowIds != null) sb.append("JobFlowIds: " + jobFlowIds + ", ");
+        if (terminationProtected != null) sb.append("TerminationProtected: " + terminationProtected + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getJobFlowIds() == null) ? 0 : getJobFlowIds().hashCode()); 
+        hashCode = prime * hashCode + ((isTerminationProtected() == null) ? 0 : isTerminationProtected().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof SetTerminationProtectionRequest == false) return false;
+        SetTerminationProtectionRequest other = (SetTerminationProtectionRequest)obj;
+        
+        if (other.getJobFlowIds() == null ^ this.getJobFlowIds() == null) return false;
+        if (other.getJobFlowIds() != null && other.getJobFlowIds().equals(this.getJobFlowIds()) == false) return false; 
+        if (other.isTerminationProtected() == null ^ this.isTerminationProtected() == null) return false;
+        if (other.isTerminationProtected() != null && other.isTerminationProtected().equals(this.isTerminationProtected()) == false) return false; 
+        return true;
     }
     
 }

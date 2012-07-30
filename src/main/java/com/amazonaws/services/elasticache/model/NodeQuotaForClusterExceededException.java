@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@ import com.amazonaws.AmazonServiceException;
 
 /**
  * <p>
- * Request would result in user exceeding the allowed number of Cache
- * Nodes in a single Cache Cluster.
+ * Request would result in user exceeding the allowed number of Cache Nodes in a single Cache Cluster.
  * </p>
  */        
 public class NodeQuotaForClusterExceededException extends AmazonServiceException {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,15 +18,12 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#listAccountAliases(ListAccountAliasesRequest) ListAccountAliases operation}.
  * <p>
- * Lists the account aliases associated with the account. For information
- * about using an AWS Account alias, see <a
- * ://docs.amazonwebservices.com/IAM/latest/UserGuide/AccountAlias.html">
- * Using an Alias for Your AWS Account ID </a> in <i>Using AWS Identity
+ * Lists the account aliases associated with the account. For information about using an AWS account alias, see <a
+ * href="http://docs.amazonwebservices.com/IAM/latest/UserGuide/AccountAlias.html"> Using an Alias for Your AWS Account ID </a> in <i>Using AWS Identity
  * and Access Management</i> .
  * </p>
  * <p>
- * You can paginate the results using the <code>MaxItems</code> and
- * <code>Marker</code> parameters.
+ * You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters.
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#listAccountAliases(ListAccountAliasesRequest)
@@ -199,10 +196,35 @@ public class ListAccountAliasesRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Marker: " + marker + ", ");
-        sb.append("MaxItems: " + maxItems + ", ");
+        if (marker != null) sb.append("Marker: " + marker + ", ");
+        if (maxItems != null) sb.append("MaxItems: " + maxItems + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getMarker() == null) ? 0 : getMarker().hashCode()); 
+        hashCode = prime * hashCode + ((getMaxItems() == null) ? 0 : getMaxItems().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof ListAccountAliasesRequest == false) return false;
+        ListAccountAliasesRequest other = (ListAccountAliasesRequest)obj;
+        
+        if (other.getMarker() == null ^ this.getMarker() == null) return false;
+        if (other.getMarker() != null && other.getMarker().equals(this.getMarker()) == false) return false; 
+        if (other.getMaxItems() == null ^ this.getMaxItems() == null) return false;
+        if (other.getMaxItems() != null && other.getMaxItems().equals(this.getMaxItems()) == false) return false; 
+        return true;
     }
     
 }

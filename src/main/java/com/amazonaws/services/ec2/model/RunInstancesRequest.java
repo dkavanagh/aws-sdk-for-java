@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -21,53 +21,35 @@ import com.amazonaws.AmazonWebServiceRequest;
  * The RunInstances operation launches a specified number of instances.
  * </p>
  * <p>
- * If Amazon EC2 cannot launch the minimum number AMIs you request, no
- * instances launch. If there is insufficient capacity to launch the
- * maximum number of AMIs you request, Amazon EC2 launches as many as
- * possible to satisfy the requested maximum values.
+ * If Amazon EC2 cannot launch the minimum number AMIs you request, no instances launch. If there is insufficient capacity to launch the maximum number
+ * of AMIs you request, Amazon EC2 launches as many as possible to satisfy the requested maximum values.
  * </p>
  * <p>
- * Every instance is launched in a security group. If you do not specify
- * a security group at launch, the instances start in your default
- * security group. For more information on creating security groups, see
- * CreateSecurityGroup.
+ * Every instance is launched in a security group. If you do not specify a security group at launch, the instances start in your default security group.
+ * For more information on creating security groups, see CreateSecurityGroup.
  * </p>
  * <p>
- * An optional instance type can be specified. For information about
- * instance types, see Instance Types.
+ * An optional instance type can be specified. For information about instance types, see Instance Types.
  * </p>
  * <p>
- * You can provide an optional key pair ID for each image in the launch
- * request (for more information, see CreateKeyPair). All instances that
- * are created from images that use this key pair will have access to the
- * associated public key at boot. You can use this key to provide secure
- * access to an instance of an image on a per-instance basis. Amazon EC2
- * public images use this feature to provide secure access without
- * passwords.
+ * You can provide an optional key pair ID for each image in the launch request (for more information, see CreateKeyPair). All instances that are
+ * created from images that use this key pair will have access to the associated public key at boot. You can use this key to provide secure access to an
+ * instance of an image on a per-instance basis. Amazon EC2 public images use this feature to provide secure access without passwords.
  * </p>
  * <p>
- * <b>IMPORTANT:</b> Launching public images without a key pair ID will
- * leave them inaccessible. The public key material is made available to
- * the instance at boot time by placing it in the openssh_id.pub file on
- * a logical device that is exposed to the instance as /dev/sda2 (the
- * ephemeral store). The format of this file is suitable for use as an
- * entry within ~/.ssh/authorized_keys (the OpenSSH format). This can be
- * done at boot (e.g., as part of rc.local) allowing for secure access
- * without passwords. Optional user data can be provided in the launch
- * request. All instances that collectively comprise the launch request
- * have access to this data For more information, see Instance Metadata.
+ * <b>IMPORTANT:</b> Launching public images without a key pair ID will leave them inaccessible. The public key material is made available to the
+ * instance at boot time by placing it in the openssh_id.pub file on a logical device that is exposed to the instance as /dev/sda2 (the ephemeral store).
+ * The format of this file is suitable for use as an entry within ~/.ssh/authorized_keys (the OpenSSH format). This can be done at boot (e.g., as part of
+ * rc.local) allowing for secure access without passwords. Optional user data can be provided in the launch request. All instances that collectively
+ * comprise the launch request have access to this data For more information, see Instance Metadata.
  * </p>
  * <p>
- * <b>NOTE:</b> If any of the AMIs have a product code attached for which
- * the user has not subscribed, the RunInstances call will fail.
+ * <b>NOTE:</b> If any of the AMIs have a product code attached for which the user has not subscribed, the RunInstances call will fail.
  * </p>
  * <p>
- * <b>IMPORTANT:</b> We strongly recommend using the 2.6.18 Xen stock
- * kernel with the c1.medium and c1.xlarge instances. Although the
- * default Amazon EC2 kernels will work, the new kernels provide greater
- * stability and performance for these instance types. For more
- * information about kernels, see Kernels, RAM Disks, and Block Device
- * Mappings.
+ * <b>IMPORTANT:</b> We strongly recommend using the 2.6.18 Xen stock kernel with the c1.medium and c1.xlarge instances. Although the default Amazon EC2
+ * kernels will work, the new kernels provide greater stability and performance for these instance types. For more information about kernels, see
+ * Kernels, RAM Disks, and Block Device Mappings.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#runInstances(RunInstancesRequest)
@@ -111,11 +93,13 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      */
     private String userData;
 
+    private String addressingType;
+
     /**
      * Specifies the instance type for the launched instances.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>t1.micro, m1.small, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cg1.4xlarge
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
      */
     private String instanceType;
 
@@ -191,6 +175,10 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
 
     private String additionalInfo;
 
+    private java.util.List<InstanceNetworkInterfaceSpecification> networkInterfaces;
+
+    private IamInstanceProfileSpecification iamInstanceProfile;
+
     /**
      * Default constructor for a new RunInstancesRequest object.  Callers should use the
      * setter or fluent setter (with...) methods to initialize this object after creating it.
@@ -216,6 +204,8 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
         this.minCount = minCount;
         this.maxCount = maxCount;
     }
+
+    
     
     /**
      * Unique ID of a machine image, returned by a call to DescribeImages.
@@ -385,6 +375,7 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      *         launched.
      */
     public java.util.List<String> getSecurityGroups() {
+        
         if (securityGroups == null) {
             securityGroups = new java.util.ArrayList<String>();
         }
@@ -399,10 +390,13 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      *         launched.
      */
     public void setSecurityGroups(java.util.Collection<String> securityGroups) {
-        java.util.List<String> securityGroupsCopy = new java.util.ArrayList<String>();
-        if (securityGroups != null) {
-            securityGroupsCopy.addAll(securityGroups);
+        if (securityGroups == null) {
+            this.securityGroups = null;
+            return;
         }
+
+        java.util.List<String> securityGroupsCopy = new java.util.ArrayList<String>(securityGroups.size());
+        securityGroupsCopy.addAll(securityGroups);
         this.securityGroups = securityGroupsCopy;
     }
     
@@ -419,6 +413,7 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public RunInstancesRequest withSecurityGroups(String... securityGroups) {
+        if (getSecurityGroups() == null) setSecurityGroups(new java.util.ArrayList<String>(securityGroups.length));
         for (String value : securityGroups) {
             getSecurityGroups().add(value);
         }
@@ -438,11 +433,13 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public RunInstancesRequest withSecurityGroups(java.util.Collection<String> securityGroups) {
-        java.util.List<String> securityGroupsCopy = new java.util.ArrayList<String>();
-        if (securityGroups != null) {
+        if (securityGroups == null) {
+            this.securityGroups = null;
+        } else {
+            java.util.List<String> securityGroupsCopy = new java.util.ArrayList<String>(securityGroups.size());
             securityGroupsCopy.addAll(securityGroups);
+            this.securityGroups = securityGroupsCopy;
         }
-        this.securityGroups = securityGroupsCopy;
 
         return this;
     }
@@ -453,6 +450,7 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      * @return The value of the SecurityGroupIds property for this object.
      */
     public java.util.List<String> getSecurityGroupIds() {
+        
         if (securityGroupIds == null) {
             securityGroupIds = new java.util.ArrayList<String>();
         }
@@ -465,10 +463,13 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      * @param securityGroupIds The new value for the SecurityGroupIds property for this object.
      */
     public void setSecurityGroupIds(java.util.Collection<String> securityGroupIds) {
-        java.util.List<String> securityGroupIdsCopy = new java.util.ArrayList<String>();
-        if (securityGroupIds != null) {
-            securityGroupIdsCopy.addAll(securityGroupIds);
+        if (securityGroupIds == null) {
+            this.securityGroupIds = null;
+            return;
         }
+
+        java.util.List<String> securityGroupIdsCopy = new java.util.ArrayList<String>(securityGroupIds.size());
+        securityGroupIdsCopy.addAll(securityGroupIds);
         this.securityGroupIds = securityGroupIdsCopy;
     }
     
@@ -483,6 +484,7 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public RunInstancesRequest withSecurityGroupIds(String... securityGroupIds) {
+        if (getSecurityGroupIds() == null) setSecurityGroupIds(new java.util.ArrayList<String>(securityGroupIds.length));
         for (String value : securityGroupIds) {
             getSecurityGroupIds().add(value);
         }
@@ -500,11 +502,13 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public RunInstancesRequest withSecurityGroupIds(java.util.Collection<String> securityGroupIds) {
-        java.util.List<String> securityGroupIdsCopy = new java.util.ArrayList<String>();
-        if (securityGroupIds != null) {
+        if (securityGroupIds == null) {
+            this.securityGroupIds = null;
+        } else {
+            java.util.List<String> securityGroupIdsCopy = new java.util.ArrayList<String>(securityGroupIds.size());
             securityGroupIdsCopy.addAll(securityGroupIds);
+            this.securityGroupIds = securityGroupIdsCopy;
         }
-        this.securityGroupIds = securityGroupIdsCopy;
 
         return this;
     }
@@ -544,10 +548,44 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
     
     
     /**
+     * Returns the value of the AddressingType property for this object.
+     *
+     * @return The value of the AddressingType property for this object.
+     */
+    public String getAddressingType() {
+        return addressingType;
+    }
+    
+    /**
+     * Sets the value of the AddressingType property for this object.
+     *
+     * @param addressingType The new value for the AddressingType property for this object.
+     */
+    public void setAddressingType(String addressingType) {
+        this.addressingType = addressingType;
+    }
+    
+    /**
+     * Sets the value of the AddressingType property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param addressingType The new value for the AddressingType property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public RunInstancesRequest withAddressingType(String addressingType) {
+        this.addressingType = addressingType;
+        return this;
+    }
+    
+    
+    /**
      * Specifies the instance type for the launched instances.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>t1.micro, m1.small, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cg1.4xlarge
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
      *
      * @return Specifies the instance type for the launched instances.
      *
@@ -561,7 +599,7 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      * Specifies the instance type for the launched instances.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>t1.micro, m1.small, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cg1.4xlarge
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
      *
      * @param instanceType Specifies the instance type for the launched instances.
      *
@@ -577,7 +615,7 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>t1.micro, m1.small, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cg1.4xlarge
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
      *
      * @param instanceType Specifies the instance type for the launched instances.
      *
@@ -591,6 +629,40 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
         return this;
     }
     
+    
+    /**
+     * Specifies the instance type for the launched instances.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
+     *
+     * @param instanceType Specifies the instance type for the launched instances.
+     *
+     * @see InstanceType
+     */
+    public void setInstanceType(InstanceType instanceType) {
+        this.instanceType = instanceType.toString();
+    }
+    
+    /**
+     * Specifies the instance type for the launched instances.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
+     *
+     * @param instanceType Specifies the instance type for the launched instances.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see InstanceType
+     */
+    public RunInstancesRequest withInstanceType(InstanceType instanceType) {
+        this.instanceType = instanceType.toString();
+        return this;
+    }
     
     /**
      * Specifies the placement constraints (Availability Zones) for launching
@@ -732,6 +804,7 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      *         is made up of a virtualName and a deviceName.
      */
     public java.util.List<BlockDeviceMapping> getBlockDeviceMappings() {
+        
         if (blockDeviceMappings == null) {
             blockDeviceMappings = new java.util.ArrayList<BlockDeviceMapping>();
         }
@@ -746,10 +819,13 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      *         is made up of a virtualName and a deviceName.
      */
     public void setBlockDeviceMappings(java.util.Collection<BlockDeviceMapping> blockDeviceMappings) {
-        java.util.List<BlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<BlockDeviceMapping>();
-        if (blockDeviceMappings != null) {
-            blockDeviceMappingsCopy.addAll(blockDeviceMappings);
+        if (blockDeviceMappings == null) {
+            this.blockDeviceMappings = null;
+            return;
         }
+
+        java.util.List<BlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<BlockDeviceMapping>(blockDeviceMappings.size());
+        blockDeviceMappingsCopy.addAll(blockDeviceMappings);
         this.blockDeviceMappings = blockDeviceMappingsCopy;
     }
     
@@ -766,6 +842,7 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public RunInstancesRequest withBlockDeviceMappings(BlockDeviceMapping... blockDeviceMappings) {
+        if (getBlockDeviceMappings() == null) setBlockDeviceMappings(new java.util.ArrayList<BlockDeviceMapping>(blockDeviceMappings.length));
         for (BlockDeviceMapping value : blockDeviceMappings) {
             getBlockDeviceMappings().add(value);
         }
@@ -785,11 +862,13 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public RunInstancesRequest withBlockDeviceMappings(java.util.Collection<BlockDeviceMapping> blockDeviceMappings) {
-        java.util.List<BlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<BlockDeviceMapping>();
-        if (blockDeviceMappings != null) {
+        if (blockDeviceMappings == null) {
+            this.blockDeviceMappings = null;
+        } else {
+            java.util.List<BlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<BlockDeviceMapping>(blockDeviceMappings.size());
             blockDeviceMappingsCopy.addAll(blockDeviceMappings);
+            this.blockDeviceMappings = blockDeviceMappingsCopy;
         }
-        this.blockDeviceMappings = blockDeviceMappingsCopy;
 
         return this;
     }
@@ -1143,6 +1222,109 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
     
     
     /**
+     * Returns the value of the NetworkInterfaces property for this object.
+     *
+     * @return The value of the NetworkInterfaces property for this object.
+     */
+    public java.util.List<InstanceNetworkInterfaceSpecification> getNetworkInterfaces() {
+        
+        if (networkInterfaces == null) {
+            networkInterfaces = new java.util.ArrayList<InstanceNetworkInterfaceSpecification>();
+        }
+        return networkInterfaces;
+    }
+    
+    /**
+     * Sets the value of the NetworkInterfaces property for this object.
+     *
+     * @param networkInterfaces The new value for the NetworkInterfaces property for this object.
+     */
+    public void setNetworkInterfaces(java.util.Collection<InstanceNetworkInterfaceSpecification> networkInterfaces) {
+        if (networkInterfaces == null) {
+            this.networkInterfaces = null;
+            return;
+        }
+
+        java.util.List<InstanceNetworkInterfaceSpecification> networkInterfacesCopy = new java.util.ArrayList<InstanceNetworkInterfaceSpecification>(networkInterfaces.size());
+        networkInterfacesCopy.addAll(networkInterfaces);
+        this.networkInterfaces = networkInterfacesCopy;
+    }
+    
+    /**
+     * Sets the value of the NetworkInterfaces property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param networkInterfaces The new value for the NetworkInterfaces property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public RunInstancesRequest withNetworkInterfaces(InstanceNetworkInterfaceSpecification... networkInterfaces) {
+        if (getNetworkInterfaces() == null) setNetworkInterfaces(new java.util.ArrayList<InstanceNetworkInterfaceSpecification>(networkInterfaces.length));
+        for (InstanceNetworkInterfaceSpecification value : networkInterfaces) {
+            getNetworkInterfaces().add(value);
+        }
+        return this;
+    }
+    
+    /**
+     * Sets the value of the NetworkInterfaces property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param networkInterfaces The new value for the NetworkInterfaces property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public RunInstancesRequest withNetworkInterfaces(java.util.Collection<InstanceNetworkInterfaceSpecification> networkInterfaces) {
+        if (networkInterfaces == null) {
+            this.networkInterfaces = null;
+        } else {
+            java.util.List<InstanceNetworkInterfaceSpecification> networkInterfacesCopy = new java.util.ArrayList<InstanceNetworkInterfaceSpecification>(networkInterfaces.size());
+            networkInterfacesCopy.addAll(networkInterfaces);
+            this.networkInterfaces = networkInterfacesCopy;
+        }
+
+        return this;
+    }
+    
+    /**
+     * Returns the value of the IamInstanceProfile property for this object.
+     *
+     * @return The value of the IamInstanceProfile property for this object.
+     */
+    public IamInstanceProfileSpecification getIamInstanceProfile() {
+        return iamInstanceProfile;
+    }
+    
+    /**
+     * Sets the value of the IamInstanceProfile property for this object.
+     *
+     * @param iamInstanceProfile The new value for the IamInstanceProfile property for this object.
+     */
+    public void setIamInstanceProfile(IamInstanceProfileSpecification iamInstanceProfile) {
+        this.iamInstanceProfile = iamInstanceProfile;
+    }
+    
+    /**
+     * Sets the value of the IamInstanceProfile property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param iamInstanceProfile The new value for the IamInstanceProfile property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public RunInstancesRequest withIamInstanceProfile(IamInstanceProfileSpecification iamInstanceProfile) {
+        this.iamInstanceProfile = iamInstanceProfile;
+        return this;
+    }
+    
+    
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -1154,28 +1336,119 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("ImageId: " + imageId + ", ");
-        sb.append("MinCount: " + minCount + ", ");
-        sb.append("MaxCount: " + maxCount + ", ");
-        sb.append("KeyName: " + keyName + ", ");
-        sb.append("SecurityGroups: " + securityGroups + ", ");
-        sb.append("SecurityGroupIds: " + securityGroupIds + ", ");
-        sb.append("UserData: " + userData + ", ");
-        sb.append("InstanceType: " + instanceType + ", ");
-        sb.append("Placement: " + placement + ", ");
-        sb.append("KernelId: " + kernelId + ", ");
-        sb.append("RamdiskId: " + ramdiskId + ", ");
-        sb.append("BlockDeviceMappings: " + blockDeviceMappings + ", ");
-        sb.append("Monitoring: " + monitoring + ", ");
-        sb.append("SubnetId: " + subnetId + ", ");
-        sb.append("DisableApiTermination: " + disableApiTermination + ", ");
-        sb.append("InstanceInitiatedShutdownBehavior: " + instanceInitiatedShutdownBehavior + ", ");
-        sb.append("License: " + license + ", ");
-        sb.append("PrivateIpAddress: " + privateIpAddress + ", ");
-        sb.append("ClientToken: " + clientToken + ", ");
-        sb.append("AdditionalInfo: " + additionalInfo + ", ");
+        if (imageId != null) sb.append("ImageId: " + imageId + ", ");
+        if (minCount != null) sb.append("MinCount: " + minCount + ", ");
+        if (maxCount != null) sb.append("MaxCount: " + maxCount + ", ");
+        if (keyName != null) sb.append("KeyName: " + keyName + ", ");
+        if (securityGroups != null) sb.append("SecurityGroups: " + securityGroups + ", ");
+        if (securityGroupIds != null) sb.append("SecurityGroupIds: " + securityGroupIds + ", ");
+        if (userData != null) sb.append("UserData: " + userData + ", ");
+        if (addressingType != null) sb.append("AddressingType: " + addressingType + ", ");
+        if (instanceType != null) sb.append("InstanceType: " + instanceType + ", ");
+        if (placement != null) sb.append("Placement: " + placement + ", ");
+        if (kernelId != null) sb.append("KernelId: " + kernelId + ", ");
+        if (ramdiskId != null) sb.append("RamdiskId: " + ramdiskId + ", ");
+        if (blockDeviceMappings != null) sb.append("BlockDeviceMappings: " + blockDeviceMappings + ", ");
+        if (monitoring != null) sb.append("Monitoring: " + monitoring + ", ");
+        if (subnetId != null) sb.append("SubnetId: " + subnetId + ", ");
+        if (disableApiTermination != null) sb.append("DisableApiTermination: " + disableApiTermination + ", ");
+        if (instanceInitiatedShutdownBehavior != null) sb.append("InstanceInitiatedShutdownBehavior: " + instanceInitiatedShutdownBehavior + ", ");
+        if (license != null) sb.append("License: " + license + ", ");
+        if (privateIpAddress != null) sb.append("PrivateIpAddress: " + privateIpAddress + ", ");
+        if (clientToken != null) sb.append("ClientToken: " + clientToken + ", ");
+        if (additionalInfo != null) sb.append("AdditionalInfo: " + additionalInfo + ", ");
+        if (networkInterfaces != null) sb.append("NetworkInterfaces: " + networkInterfaces + ", ");
+        if (iamInstanceProfile != null) sb.append("IamInstanceProfile: " + iamInstanceProfile + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getImageId() == null) ? 0 : getImageId().hashCode()); 
+        hashCode = prime * hashCode + ((getMinCount() == null) ? 0 : getMinCount().hashCode()); 
+        hashCode = prime * hashCode + ((getMaxCount() == null) ? 0 : getMaxCount().hashCode()); 
+        hashCode = prime * hashCode + ((getKeyName() == null) ? 0 : getKeyName().hashCode()); 
+        hashCode = prime * hashCode + ((getSecurityGroups() == null) ? 0 : getSecurityGroups().hashCode()); 
+        hashCode = prime * hashCode + ((getSecurityGroupIds() == null) ? 0 : getSecurityGroupIds().hashCode()); 
+        hashCode = prime * hashCode + ((getUserData() == null) ? 0 : getUserData().hashCode()); 
+        hashCode = prime * hashCode + ((getAddressingType() == null) ? 0 : getAddressingType().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceType() == null) ? 0 : getInstanceType().hashCode()); 
+        hashCode = prime * hashCode + ((getPlacement() == null) ? 0 : getPlacement().hashCode()); 
+        hashCode = prime * hashCode + ((getKernelId() == null) ? 0 : getKernelId().hashCode()); 
+        hashCode = prime * hashCode + ((getRamdiskId() == null) ? 0 : getRamdiskId().hashCode()); 
+        hashCode = prime * hashCode + ((getBlockDeviceMappings() == null) ? 0 : getBlockDeviceMappings().hashCode()); 
+        hashCode = prime * hashCode + ((isMonitoring() == null) ? 0 : isMonitoring().hashCode()); 
+        hashCode = prime * hashCode + ((getSubnetId() == null) ? 0 : getSubnetId().hashCode()); 
+        hashCode = prime * hashCode + ((isDisableApiTermination() == null) ? 0 : isDisableApiTermination().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceInitiatedShutdownBehavior() == null) ? 0 : getInstanceInitiatedShutdownBehavior().hashCode()); 
+        hashCode = prime * hashCode + ((getLicense() == null) ? 0 : getLicense().hashCode()); 
+        hashCode = prime * hashCode + ((getPrivateIpAddress() == null) ? 0 : getPrivateIpAddress().hashCode()); 
+        hashCode = prime * hashCode + ((getClientToken() == null) ? 0 : getClientToken().hashCode()); 
+        hashCode = prime * hashCode + ((getAdditionalInfo() == null) ? 0 : getAdditionalInfo().hashCode()); 
+        hashCode = prime * hashCode + ((getNetworkInterfaces() == null) ? 0 : getNetworkInterfaces().hashCode()); 
+        hashCode = prime * hashCode + ((getIamInstanceProfile() == null) ? 0 : getIamInstanceProfile().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof RunInstancesRequest == false) return false;
+        RunInstancesRequest other = (RunInstancesRequest)obj;
+        
+        if (other.getImageId() == null ^ this.getImageId() == null) return false;
+        if (other.getImageId() != null && other.getImageId().equals(this.getImageId()) == false) return false; 
+        if (other.getMinCount() == null ^ this.getMinCount() == null) return false;
+        if (other.getMinCount() != null && other.getMinCount().equals(this.getMinCount()) == false) return false; 
+        if (other.getMaxCount() == null ^ this.getMaxCount() == null) return false;
+        if (other.getMaxCount() != null && other.getMaxCount().equals(this.getMaxCount()) == false) return false; 
+        if (other.getKeyName() == null ^ this.getKeyName() == null) return false;
+        if (other.getKeyName() != null && other.getKeyName().equals(this.getKeyName()) == false) return false; 
+        if (other.getSecurityGroups() == null ^ this.getSecurityGroups() == null) return false;
+        if (other.getSecurityGroups() != null && other.getSecurityGroups().equals(this.getSecurityGroups()) == false) return false; 
+        if (other.getSecurityGroupIds() == null ^ this.getSecurityGroupIds() == null) return false;
+        if (other.getSecurityGroupIds() != null && other.getSecurityGroupIds().equals(this.getSecurityGroupIds()) == false) return false; 
+        if (other.getUserData() == null ^ this.getUserData() == null) return false;
+        if (other.getUserData() != null && other.getUserData().equals(this.getUserData()) == false) return false; 
+        if (other.getAddressingType() == null ^ this.getAddressingType() == null) return false;
+        if (other.getAddressingType() != null && other.getAddressingType().equals(this.getAddressingType()) == false) return false; 
+        if (other.getInstanceType() == null ^ this.getInstanceType() == null) return false;
+        if (other.getInstanceType() != null && other.getInstanceType().equals(this.getInstanceType()) == false) return false; 
+        if (other.getPlacement() == null ^ this.getPlacement() == null) return false;
+        if (other.getPlacement() != null && other.getPlacement().equals(this.getPlacement()) == false) return false; 
+        if (other.getKernelId() == null ^ this.getKernelId() == null) return false;
+        if (other.getKernelId() != null && other.getKernelId().equals(this.getKernelId()) == false) return false; 
+        if (other.getRamdiskId() == null ^ this.getRamdiskId() == null) return false;
+        if (other.getRamdiskId() != null && other.getRamdiskId().equals(this.getRamdiskId()) == false) return false; 
+        if (other.getBlockDeviceMappings() == null ^ this.getBlockDeviceMappings() == null) return false;
+        if (other.getBlockDeviceMappings() != null && other.getBlockDeviceMappings().equals(this.getBlockDeviceMappings()) == false) return false; 
+        if (other.isMonitoring() == null ^ this.isMonitoring() == null) return false;
+        if (other.isMonitoring() != null && other.isMonitoring().equals(this.isMonitoring()) == false) return false; 
+        if (other.getSubnetId() == null ^ this.getSubnetId() == null) return false;
+        if (other.getSubnetId() != null && other.getSubnetId().equals(this.getSubnetId()) == false) return false; 
+        if (other.isDisableApiTermination() == null ^ this.isDisableApiTermination() == null) return false;
+        if (other.isDisableApiTermination() != null && other.isDisableApiTermination().equals(this.isDisableApiTermination()) == false) return false; 
+        if (other.getInstanceInitiatedShutdownBehavior() == null ^ this.getInstanceInitiatedShutdownBehavior() == null) return false;
+        if (other.getInstanceInitiatedShutdownBehavior() != null && other.getInstanceInitiatedShutdownBehavior().equals(this.getInstanceInitiatedShutdownBehavior()) == false) return false; 
+        if (other.getLicense() == null ^ this.getLicense() == null) return false;
+        if (other.getLicense() != null && other.getLicense().equals(this.getLicense()) == false) return false; 
+        if (other.getPrivateIpAddress() == null ^ this.getPrivateIpAddress() == null) return false;
+        if (other.getPrivateIpAddress() != null && other.getPrivateIpAddress().equals(this.getPrivateIpAddress()) == false) return false; 
+        if (other.getClientToken() == null ^ this.getClientToken() == null) return false;
+        if (other.getClientToken() != null && other.getClientToken().equals(this.getClientToken()) == false) return false; 
+        if (other.getAdditionalInfo() == null ^ this.getAdditionalInfo() == null) return false;
+        if (other.getAdditionalInfo() != null && other.getAdditionalInfo().equals(this.getAdditionalInfo()) == false) return false; 
+        if (other.getNetworkInterfaces() == null ^ this.getNetworkInterfaces() == null) return false;
+        if (other.getNetworkInterfaces() != null && other.getNetworkInterfaces().equals(this.getNetworkInterfaces()) == false) return false; 
+        if (other.getIamInstanceProfile() == null ^ this.getIamInstanceProfile() == null) return false;
+        if (other.getIamInstanceProfile() != null && other.getIamInstanceProfile().equals(this.getIamInstanceProfile()) == false) return false; 
+        return true;
     }
     
 }

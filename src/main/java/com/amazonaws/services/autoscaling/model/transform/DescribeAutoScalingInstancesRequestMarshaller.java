@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.autoscaling.model.*;
@@ -30,29 +31,31 @@ import com.amazonaws.util.StringUtils;
 public class DescribeAutoScalingInstancesRequestMarshaller implements Marshaller<Request<DescribeAutoScalingInstancesRequest>, DescribeAutoScalingInstancesRequest> {
 
     public Request<DescribeAutoScalingInstancesRequest> marshall(DescribeAutoScalingInstancesRequest describeAutoScalingInstancesRequest) {
+
+        if (describeAutoScalingInstancesRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<DescribeAutoScalingInstancesRequest> request = new DefaultRequest<DescribeAutoScalingInstancesRequest>(describeAutoScalingInstancesRequest, "AmazonAutoScaling");
         request.addParameter("Action", "DescribeAutoScalingInstances");
         request.addParameter("Version", "2011-01-01");
-        if (describeAutoScalingInstancesRequest != null) {
-            java.util.List<String> instanceIdsList = describeAutoScalingInstancesRequest.getInstanceIds();
-            int instanceIdsListIndex = 1;
 
-            for (String instanceIdsListValue : instanceIdsList) {
-                if (instanceIdsListValue != null) {
-                    request.addParameter("InstanceIds.member." + instanceIdsListIndex, StringUtils.fromString(instanceIdsListValue));
-                }
-                instanceIdsListIndex++;
+
+        java.util.List<String> instanceIdsList = describeAutoScalingInstancesRequest.getInstanceIds();
+        int instanceIdsListIndex = 1;
+
+        for (String instanceIdsListValue : instanceIdsList) {
+            if (instanceIdsListValue != null) {
+                request.addParameter("InstanceIds.member." + instanceIdsListIndex, StringUtils.fromString(instanceIdsListValue));
             }
+
+            instanceIdsListIndex++;
         }
-        if (describeAutoScalingInstancesRequest != null) {
-            if (describeAutoScalingInstancesRequest.getMaxRecords() != null) {
-                request.addParameter("MaxRecords", StringUtils.fromInteger(describeAutoScalingInstancesRequest.getMaxRecords()));
-            }
+        if (describeAutoScalingInstancesRequest.getMaxRecords() != null) {
+            request.addParameter("MaxRecords", StringUtils.fromInteger(describeAutoScalingInstancesRequest.getMaxRecords()));
         }
-        if (describeAutoScalingInstancesRequest != null) {
-            if (describeAutoScalingInstancesRequest.getNextToken() != null) {
-                request.addParameter("NextToken", StringUtils.fromString(describeAutoScalingInstancesRequest.getNextToken()));
-            }
+        if (describeAutoScalingInstancesRequest.getNextToken() != null) {
+            request.addParameter("NextToken", StringUtils.fromString(describeAutoScalingInstancesRequest.getNextToken()));
         }
 
 

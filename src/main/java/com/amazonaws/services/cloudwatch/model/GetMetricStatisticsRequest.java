@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -21,30 +21,21 @@ import com.amazonaws.AmazonWebServiceRequest;
  * Gets statistics for the specified metric.
  * </p>
  * <p>
- * <b>NOTE:</b> The maximum number of data points returned from a single
- * GetMetricStatistics request is 1,440. If a request is made that
- * generates more than 1,440 data points, Amazon CloudWatch returns an
- * error. In such a case, alter the request by narrowing the specified
- * time range or increasing the specified period. Alternatively, make
- * multiple requests across adjacent time ranges.
+ * <b>NOTE:</b> The maximum number of data points returned from a single GetMetricStatistics request is 1,440. If a request is made that generates more
+ * than 1,440 data points, Amazon CloudWatch returns an error. In such a case, alter the request by narrowing the specified time range or increasing the
+ * specified period. Alternatively, make multiple requests across adjacent time ranges.
  * </p>
  * <p>
- * Amazon CloudWatch aggregates data points based on the length of the
- * <code>period</code> that you specify. For example, if you request
- * statistics with a one-minute granularity, Amazon CloudWatch aggregates
- * data points with time stamps that fall within the same one-minute
- * period. In such a case, the data points queried can greatly outnumber
- * the data points returned.
+ * Amazon CloudWatch aggregates data points based on the length of the <code>period</code> that you specify. For example, if you request statistics with
+ * a one-minute granularity, Amazon CloudWatch aggregates data points with time stamps that fall within the same one-minute period. In such a case, the
+ * data points queried can greatly outnumber the data points returned.
  * </p>
  * <p>
- * <b>NOTE:</b> The maximum number of data points that can be queried is
- * 50,850; whereas the maximum number of data points returned is 1,440.
+ * <b>NOTE:</b> The maximum number of data points that can be queried is 50,850; whereas the maximum number of data points returned is 1,440.
  * </p>
  * <p>
- * The following examples show various statistics allowed by the data
- * point query maximum of 50,850 when you call
- * <code>GetMetricStatistics</code> on Amazon EC2 instances with detailed
- * (one-minute) monitoring enabled:
+ * The following examples show various statistics allowed by the data point query maximum of 50,850 when you call <code>GetMetricStatistics</code> on
+ * Amazon EC2 instances with detailed (one-minute) monitoring enabled:
  * </p>
  * 
  * <ul>
@@ -225,6 +216,7 @@ public class GetMetricStatisticsRequest extends AmazonWebServiceRequest {
      * @return A list of dimensions describing qualities of the metric.
      */
     public java.util.List<Dimension> getDimensions() {
+        
         if (dimensions == null) {
             dimensions = new java.util.ArrayList<Dimension>();
         }
@@ -240,10 +232,13 @@ public class GetMetricStatisticsRequest extends AmazonWebServiceRequest {
      * @param dimensions A list of dimensions describing qualities of the metric.
      */
     public void setDimensions(java.util.Collection<Dimension> dimensions) {
-        java.util.List<Dimension> dimensionsCopy = new java.util.ArrayList<Dimension>();
-        if (dimensions != null) {
-            dimensionsCopy.addAll(dimensions);
+        if (dimensions == null) {
+            this.dimensions = null;
+            return;
         }
+
+        java.util.List<Dimension> dimensionsCopy = new java.util.ArrayList<Dimension>(dimensions.size());
+        dimensionsCopy.addAll(dimensions);
         this.dimensions = dimensionsCopy;
     }
     
@@ -261,6 +256,7 @@ public class GetMetricStatisticsRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public GetMetricStatisticsRequest withDimensions(Dimension... dimensions) {
+        if (getDimensions() == null) setDimensions(new java.util.ArrayList<Dimension>(dimensions.length));
         for (Dimension value : dimensions) {
             getDimensions().add(value);
         }
@@ -281,11 +277,13 @@ public class GetMetricStatisticsRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public GetMetricStatisticsRequest withDimensions(java.util.Collection<Dimension> dimensions) {
-        java.util.List<Dimension> dimensionsCopy = new java.util.ArrayList<Dimension>();
-        if (dimensions != null) {
+        if (dimensions == null) {
+            this.dimensions = null;
+        } else {
+            java.util.List<Dimension> dimensionsCopy = new java.util.ArrayList<Dimension>(dimensions.size());
             dimensionsCopy.addAll(dimensions);
+            this.dimensions = dimensionsCopy;
         }
-        this.dimensions = dimensionsCopy;
 
         return this;
     }
@@ -470,6 +468,7 @@ public class GetMetricStatisticsRequest extends AmazonWebServiceRequest {
      * @return The metric statistics to return.
      */
     public java.util.List<String> getStatistics() {
+        
         if (statistics == null) {
             statistics = new java.util.ArrayList<String>();
         }
@@ -485,10 +484,13 @@ public class GetMetricStatisticsRequest extends AmazonWebServiceRequest {
      * @param statistics The metric statistics to return.
      */
     public void setStatistics(java.util.Collection<String> statistics) {
-        java.util.List<String> statisticsCopy = new java.util.ArrayList<String>();
-        if (statistics != null) {
-            statisticsCopy.addAll(statistics);
+        if (statistics == null) {
+            this.statistics = null;
+            return;
         }
+
+        java.util.List<String> statisticsCopy = new java.util.ArrayList<String>(statistics.size());
+        statisticsCopy.addAll(statistics);
         this.statistics = statisticsCopy;
     }
     
@@ -506,6 +508,7 @@ public class GetMetricStatisticsRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public GetMetricStatisticsRequest withStatistics(String... statistics) {
+        if (getStatistics() == null) setStatistics(new java.util.ArrayList<String>(statistics.length));
         for (String value : statistics) {
             getStatistics().add(value);
         }
@@ -526,11 +529,13 @@ public class GetMetricStatisticsRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public GetMetricStatisticsRequest withStatistics(java.util.Collection<String> statistics) {
-        java.util.List<String> statisticsCopy = new java.util.ArrayList<String>();
-        if (statistics != null) {
+        if (statistics == null) {
+            this.statistics = null;
+        } else {
+            java.util.List<String> statisticsCopy = new java.util.ArrayList<String>(statistics.size());
             statisticsCopy.addAll(statistics);
+            this.statistics = statisticsCopy;
         }
-        this.statistics = statisticsCopy;
 
         return this;
     }
@@ -585,6 +590,40 @@ public class GetMetricStatisticsRequest extends AmazonWebServiceRequest {
     
     
     /**
+     * The unit for the metric.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+     *
+     * @param unit The unit for the metric.
+     *
+     * @see StandardUnit
+     */
+    public void setUnit(StandardUnit unit) {
+        this.unit = unit.toString();
+    }
+    
+    /**
+     * The unit for the metric.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+     *
+     * @param unit The unit for the metric.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see StandardUnit
+     */
+    public GetMetricStatisticsRequest withUnit(StandardUnit unit) {
+        this.unit = unit.toString();
+        return this;
+    }
+    
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -596,16 +635,59 @@ public class GetMetricStatisticsRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Namespace: " + namespace + ", ");
-        sb.append("MetricName: " + metricName + ", ");
-        sb.append("Dimensions: " + dimensions + ", ");
-        sb.append("StartTime: " + startTime + ", ");
-        sb.append("EndTime: " + endTime + ", ");
-        sb.append("Period: " + period + ", ");
-        sb.append("Statistics: " + statistics + ", ");
-        sb.append("Unit: " + unit + ", ");
+        if (namespace != null) sb.append("Namespace: " + namespace + ", ");
+        if (metricName != null) sb.append("MetricName: " + metricName + ", ");
+        if (dimensions != null) sb.append("Dimensions: " + dimensions + ", ");
+        if (startTime != null) sb.append("StartTime: " + startTime + ", ");
+        if (endTime != null) sb.append("EndTime: " + endTime + ", ");
+        if (period != null) sb.append("Period: " + period + ", ");
+        if (statistics != null) sb.append("Statistics: " + statistics + ", ");
+        if (unit != null) sb.append("Unit: " + unit + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getNamespace() == null) ? 0 : getNamespace().hashCode()); 
+        hashCode = prime * hashCode + ((getMetricName() == null) ? 0 : getMetricName().hashCode()); 
+        hashCode = prime * hashCode + ((getDimensions() == null) ? 0 : getDimensions().hashCode()); 
+        hashCode = prime * hashCode + ((getStartTime() == null) ? 0 : getStartTime().hashCode()); 
+        hashCode = prime * hashCode + ((getEndTime() == null) ? 0 : getEndTime().hashCode()); 
+        hashCode = prime * hashCode + ((getPeriod() == null) ? 0 : getPeriod().hashCode()); 
+        hashCode = prime * hashCode + ((getStatistics() == null) ? 0 : getStatistics().hashCode()); 
+        hashCode = prime * hashCode + ((getUnit() == null) ? 0 : getUnit().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof GetMetricStatisticsRequest == false) return false;
+        GetMetricStatisticsRequest other = (GetMetricStatisticsRequest)obj;
+        
+        if (other.getNamespace() == null ^ this.getNamespace() == null) return false;
+        if (other.getNamespace() != null && other.getNamespace().equals(this.getNamespace()) == false) return false; 
+        if (other.getMetricName() == null ^ this.getMetricName() == null) return false;
+        if (other.getMetricName() != null && other.getMetricName().equals(this.getMetricName()) == false) return false; 
+        if (other.getDimensions() == null ^ this.getDimensions() == null) return false;
+        if (other.getDimensions() != null && other.getDimensions().equals(this.getDimensions()) == false) return false; 
+        if (other.getStartTime() == null ^ this.getStartTime() == null) return false;
+        if (other.getStartTime() != null && other.getStartTime().equals(this.getStartTime()) == false) return false; 
+        if (other.getEndTime() == null ^ this.getEndTime() == null) return false;
+        if (other.getEndTime() != null && other.getEndTime().equals(this.getEndTime()) == false) return false; 
+        if (other.getPeriod() == null ^ this.getPeriod() == null) return false;
+        if (other.getPeriod() != null && other.getPeriod().equals(this.getPeriod()) == false) return false; 
+        if (other.getStatistics() == null ^ this.getStatistics() == null) return false;
+        if (other.getStatistics() != null && other.getStatistics().equals(this.getStatistics()) == false) return false; 
+        if (other.getUnit() == null ^ this.getUnit() == null) return false;
+        if (other.getUnit() != null && other.getUnit().equals(this.getUnit()) == false) return false; 
+        return true;
     }
     
 }

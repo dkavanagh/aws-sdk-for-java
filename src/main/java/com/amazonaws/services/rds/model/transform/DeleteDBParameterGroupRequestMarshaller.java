@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.rds.model.*;
@@ -30,13 +31,17 @@ import com.amazonaws.util.StringUtils;
 public class DeleteDBParameterGroupRequestMarshaller implements Marshaller<Request<DeleteDBParameterGroupRequest>, DeleteDBParameterGroupRequest> {
 
     public Request<DeleteDBParameterGroupRequest> marshall(DeleteDBParameterGroupRequest deleteDBParameterGroupRequest) {
+
+        if (deleteDBParameterGroupRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<DeleteDBParameterGroupRequest> request = new DefaultRequest<DeleteDBParameterGroupRequest>(deleteDBParameterGroupRequest, "AmazonRDS");
         request.addParameter("Action", "DeleteDBParameterGroup");
-        request.addParameter("Version", "2011-04-01");
-        if (deleteDBParameterGroupRequest != null) {
-            if (deleteDBParameterGroupRequest.getDBParameterGroupName() != null) {
-                request.addParameter("DBParameterGroupName", StringUtils.fromString(deleteDBParameterGroupRequest.getDBParameterGroupName()));
-            }
+        request.addParameter("Version", "2012-04-23");
+
+        if (deleteDBParameterGroupRequest.getDBParameterGroupName() != null) {
+            request.addParameter("DBParameterGroupName", StringUtils.fromString(deleteDBParameterGroupRequest.getDBParameterGroupName()));
         }
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -77,6 +77,21 @@ public class JobFlowExecutionStatusDetail {
         this.state = state;
         this.creationDateTime = creationDateTime;
     }
+
+    
+    
+    /**
+     * Constructs a new JobFlowExecutionStatusDetail object.
+     * Callers should use the setter or fluent setter (with...) methods to
+     * initialize any additional object members.
+     * 
+     * @param state The state of the job flow.
+     * @param creationDateTime The creation date and time of the job flow.
+     */
+    public JobFlowExecutionStatusDetail(JobFlowExecutionState state, java.util.Date creationDateTime) {
+        this.state = state.toString();
+        this.creationDateTime = creationDateTime;
+    }
     
     /**
      * The state of the job flow.
@@ -126,6 +141,40 @@ public class JobFlowExecutionStatusDetail {
         return this;
     }
     
+    
+    /**
+     * The state of the job flow.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>COMPLETED, FAILED, TERMINATED, RUNNING, SHUTTING_DOWN, STARTING, WAITING, BOOTSTRAPPING
+     *
+     * @param state The state of the job flow.
+     *
+     * @see JobFlowExecutionState
+     */
+    public void setState(JobFlowExecutionState state) {
+        this.state = state.toString();
+    }
+    
+    /**
+     * The state of the job flow.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>COMPLETED, FAILED, TERMINATED, RUNNING, SHUTTING_DOWN, STARTING, WAITING, BOOTSTRAPPING
+     *
+     * @param state The state of the job flow.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see JobFlowExecutionState
+     */
+    public JobFlowExecutionStatusDetail withState(JobFlowExecutionState state) {
+        this.state = state.toString();
+        return this;
+    }
     
     /**
      * The creation date and time of the job flow.
@@ -327,14 +376,51 @@ public class JobFlowExecutionStatusDetail {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("State: " + state + ", ");
-        sb.append("CreationDateTime: " + creationDateTime + ", ");
-        sb.append("StartDateTime: " + startDateTime + ", ");
-        sb.append("ReadyDateTime: " + readyDateTime + ", ");
-        sb.append("EndDateTime: " + endDateTime + ", ");
-        sb.append("LastStateChangeReason: " + lastStateChangeReason + ", ");
+        if (state != null) sb.append("State: " + state + ", ");
+        if (creationDateTime != null) sb.append("CreationDateTime: " + creationDateTime + ", ");
+        if (startDateTime != null) sb.append("StartDateTime: " + startDateTime + ", ");
+        if (readyDateTime != null) sb.append("ReadyDateTime: " + readyDateTime + ", ");
+        if (endDateTime != null) sb.append("EndDateTime: " + endDateTime + ", ");
+        if (lastStateChangeReason != null) sb.append("LastStateChangeReason: " + lastStateChangeReason + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getState() == null) ? 0 : getState().hashCode()); 
+        hashCode = prime * hashCode + ((getCreationDateTime() == null) ? 0 : getCreationDateTime().hashCode()); 
+        hashCode = prime * hashCode + ((getStartDateTime() == null) ? 0 : getStartDateTime().hashCode()); 
+        hashCode = prime * hashCode + ((getReadyDateTime() == null) ? 0 : getReadyDateTime().hashCode()); 
+        hashCode = prime * hashCode + ((getEndDateTime() == null) ? 0 : getEndDateTime().hashCode()); 
+        hashCode = prime * hashCode + ((getLastStateChangeReason() == null) ? 0 : getLastStateChangeReason().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof JobFlowExecutionStatusDetail == false) return false;
+        JobFlowExecutionStatusDetail other = (JobFlowExecutionStatusDetail)obj;
+        
+        if (other.getState() == null ^ this.getState() == null) return false;
+        if (other.getState() != null && other.getState().equals(this.getState()) == false) return false; 
+        if (other.getCreationDateTime() == null ^ this.getCreationDateTime() == null) return false;
+        if (other.getCreationDateTime() != null && other.getCreationDateTime().equals(this.getCreationDateTime()) == false) return false; 
+        if (other.getStartDateTime() == null ^ this.getStartDateTime() == null) return false;
+        if (other.getStartDateTime() != null && other.getStartDateTime().equals(this.getStartDateTime()) == false) return false; 
+        if (other.getReadyDateTime() == null ^ this.getReadyDateTime() == null) return false;
+        if (other.getReadyDateTime() != null && other.getReadyDateTime().equals(this.getReadyDateTime()) == false) return false; 
+        if (other.getEndDateTime() == null ^ this.getEndDateTime() == null) return false;
+        if (other.getEndDateTime() != null && other.getEndDateTime().equals(this.getEndDateTime()) == false) return false; 
+        if (other.getLastStateChangeReason() == null ^ this.getLastStateChangeReason() == null) return false;
+        if (other.getLastStateChangeReason() != null && other.getLastStateChangeReason().equals(this.getLastStateChangeReason()) == false) return false; 
+        return true;
     }
     
 }

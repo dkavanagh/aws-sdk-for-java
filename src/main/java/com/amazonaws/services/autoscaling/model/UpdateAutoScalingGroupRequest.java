@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -21,23 +21,20 @@ import com.amazonaws.AmazonWebServiceRequest;
  * Updates the configuration for the specified AutoScalingGroup.
  * </p>
  * <p>
- * <b>NOTE:</b> To update an Auto Scaling group with a launch
- * configuration that has the InstanceMonitoring.enabled flag set to
- * false, you must first ensure that collection of group metrics is
- * disabled. Otherwise, calls to UpdateAutoScalingGroup will fail. If you
- * have previously enabled group metrics collection, you can disable
- * collection of all group metrics by calling DisableMetricsCollection.
+ * <b>NOTE:</b> To update an Auto Scaling group with a launch configuration that has the InstanceMonitoring flag set to False, you must first ensure that
+ * collection of group metrics is disabled. Otherwise, calls to UpdateAutoScalingGroup will fail. If you have previously enabled group metrics
+ * collection, you can disable collection of all group metrics by calling DisableMetricsCollection.
  * </p>
  * <p>
- * The new settings are registered upon the completion of this call. Any
- * launch configuration settings take effect on any triggers after this
- * call returns. Triggers that are currently in progress aren't affected.
+ * The new settings are registered upon the completion of this call. Any launch configuration settings take effect on any triggers after this call
+ * returns. Triggers that are currently in progress aren't affected.
  * </p>
  * <p>
- * <b>NOTE:</b> If the new values are specified for the MinSize or
- * MaxSize parameters, then there will be an implicit call to
- * SetDesiredCapacity to set the group to the new MaxSize. All optional
- * parameters are left unchanged if not passed in the request.
+ * <b>NOTE:</b> If a new value is specified for MinSize without specifying the value for DesiredCapacity, and if the new MinSize is larger than the
+ * current size of the Auto Scaling Group, there will be an implicit call to SetDesiredCapacity to set the group to the new MinSize. If a new value is
+ * specified for MaxSize without specifying the value for DesiredCapacity, and the new MaxSize is smaller than the current size of the Auto Scaling
+ * Group, there will be an implicit call to SetDesiredCapacity to set the group to the new MaxSize. All other optional parameters are left unchanged if
+ * not passed in the request.
  * </p>
  *
  * @see com.amazonaws.services.autoscaling.AmazonAutoScaling#updateAutoScalingGroup(UpdateAutoScalingGroupRequest)
@@ -84,7 +81,7 @@ public class UpdateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     private Integer defaultCooldown;
 
     /**
-     * Availability zones for the group.
+     * Availability Zones for the group.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - <br/>
@@ -121,7 +118,11 @@ public class UpdateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     private String placementGroup;
 
     /**
-     * The identifier for the VPC connection, if applicable.
+     * The subnet identifier for the Amazon VPC connection, if applicable.
+     * You can specify several subnets in a comma-separated list. <p> When
+     * you specify <code>VPCZoneIdentifier</code> with
+     * <code>AvailabilityZones</code>, ensure that the subnets' Availability
+     * Zones match the values you specify for <code>AvailabilityZones</code>.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 255<br/>
@@ -364,14 +365,15 @@ public class UpdateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * Availability zones for the group.
+     * Availability Zones for the group.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - <br/>
      *
-     * @return Availability zones for the group.
+     * @return Availability Zones for the group.
      */
     public java.util.List<String> getAvailabilityZones() {
+        
         if (availabilityZones == null) {
             availabilityZones = new java.util.ArrayList<String>();
         }
@@ -379,35 +381,39 @@ public class UpdateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * Availability zones for the group.
+     * Availability Zones for the group.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - <br/>
      *
-     * @param availabilityZones Availability zones for the group.
+     * @param availabilityZones Availability Zones for the group.
      */
     public void setAvailabilityZones(java.util.Collection<String> availabilityZones) {
-        java.util.List<String> availabilityZonesCopy = new java.util.ArrayList<String>();
-        if (availabilityZones != null) {
-            availabilityZonesCopy.addAll(availabilityZones);
+        if (availabilityZones == null) {
+            this.availabilityZones = null;
+            return;
         }
+
+        java.util.List<String> availabilityZonesCopy = new java.util.ArrayList<String>(availabilityZones.size());
+        availabilityZonesCopy.addAll(availabilityZones);
         this.availabilityZones = availabilityZonesCopy;
     }
     
     /**
-     * Availability zones for the group.
+     * Availability Zones for the group.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - <br/>
      *
-     * @param availabilityZones Availability zones for the group.
+     * @param availabilityZones Availability Zones for the group.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
      */
     public UpdateAutoScalingGroupRequest withAvailabilityZones(String... availabilityZones) {
+        if (getAvailabilityZones() == null) setAvailabilityZones(new java.util.ArrayList<String>(availabilityZones.length));
         for (String value : availabilityZones) {
             getAvailabilityZones().add(value);
         }
@@ -415,24 +421,26 @@ public class UpdateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * Availability zones for the group.
+     * Availability Zones for the group.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - <br/>
      *
-     * @param availabilityZones Availability zones for the group.
+     * @param availabilityZones Availability Zones for the group.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
      */
     public UpdateAutoScalingGroupRequest withAvailabilityZones(java.util.Collection<String> availabilityZones) {
-        java.util.List<String> availabilityZonesCopy = new java.util.ArrayList<String>();
-        if (availabilityZones != null) {
+        if (availabilityZones == null) {
+            this.availabilityZones = null;
+        } else {
+            java.util.List<String> availabilityZonesCopy = new java.util.ArrayList<String>(availabilityZones.size());
             availabilityZonesCopy.addAll(availabilityZones);
+            this.availabilityZones = availabilityZonesCopy;
         }
-        this.availabilityZones = availabilityZonesCopy;
 
         return this;
     }
@@ -600,33 +608,53 @@ public class UpdateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * The identifier for the VPC connection, if applicable.
+     * The subnet identifier for the Amazon VPC connection, if applicable.
+     * You can specify several subnets in a comma-separated list. <p> When
+     * you specify <code>VPCZoneIdentifier</code> with
+     * <code>AvailabilityZones</code>, ensure that the subnets' Availability
+     * Zones match the values you specify for <code>AvailabilityZones</code>.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 255<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @return The identifier for the VPC connection, if applicable.
+     * @return The subnet identifier for the Amazon VPC connection, if applicable.
+     *         You can specify several subnets in a comma-separated list. <p> When
+     *         you specify <code>VPCZoneIdentifier</code> with
+     *         <code>AvailabilityZones</code>, ensure that the subnets' Availability
+     *         Zones match the values you specify for <code>AvailabilityZones</code>.
      */
     public String getVPCZoneIdentifier() {
         return vPCZoneIdentifier;
     }
     
     /**
-     * The identifier for the VPC connection, if applicable.
+     * The subnet identifier for the Amazon VPC connection, if applicable.
+     * You can specify several subnets in a comma-separated list. <p> When
+     * you specify <code>VPCZoneIdentifier</code> with
+     * <code>AvailabilityZones</code>, ensure that the subnets' Availability
+     * Zones match the values you specify for <code>AvailabilityZones</code>.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 255<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @param vPCZoneIdentifier The identifier for the VPC connection, if applicable.
+     * @param vPCZoneIdentifier The subnet identifier for the Amazon VPC connection, if applicable.
+     *         You can specify several subnets in a comma-separated list. <p> When
+     *         you specify <code>VPCZoneIdentifier</code> with
+     *         <code>AvailabilityZones</code>, ensure that the subnets' Availability
+     *         Zones match the values you specify for <code>AvailabilityZones</code>.
      */
     public void setVPCZoneIdentifier(String vPCZoneIdentifier) {
         this.vPCZoneIdentifier = vPCZoneIdentifier;
     }
     
     /**
-     * The identifier for the VPC connection, if applicable.
+     * The subnet identifier for the Amazon VPC connection, if applicable.
+     * You can specify several subnets in a comma-separated list. <p> When
+     * you specify <code>VPCZoneIdentifier</code> with
+     * <code>AvailabilityZones</code>, ensure that the subnets' Availability
+     * Zones match the values you specify for <code>AvailabilityZones</code>.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -634,7 +662,11 @@ public class UpdateAutoScalingGroupRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 255<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @param vPCZoneIdentifier The identifier for the VPC connection, if applicable.
+     * @param vPCZoneIdentifier The subnet identifier for the Amazon VPC connection, if applicable.
+     *         You can specify several subnets in a comma-separated list. <p> When
+     *         you specify <code>VPCZoneIdentifier</code> with
+     *         <code>AvailabilityZones</code>, ensure that the subnets' Availability
+     *         Zones match the values you specify for <code>AvailabilityZones</code>.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -657,19 +689,71 @@ public class UpdateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
-        sb.append("LaunchConfigurationName: " + launchConfigurationName + ", ");
-        sb.append("MinSize: " + minSize + ", ");
-        sb.append("MaxSize: " + maxSize + ", ");
-        sb.append("DesiredCapacity: " + desiredCapacity + ", ");
-        sb.append("DefaultCooldown: " + defaultCooldown + ", ");
-        sb.append("AvailabilityZones: " + availabilityZones + ", ");
-        sb.append("HealthCheckType: " + healthCheckType + ", ");
-        sb.append("HealthCheckGracePeriod: " + healthCheckGracePeriod + ", ");
-        sb.append("PlacementGroup: " + placementGroup + ", ");
-        sb.append("VPCZoneIdentifier: " + vPCZoneIdentifier + ", ");
+        if (autoScalingGroupName != null) sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
+        if (launchConfigurationName != null) sb.append("LaunchConfigurationName: " + launchConfigurationName + ", ");
+        if (minSize != null) sb.append("MinSize: " + minSize + ", ");
+        if (maxSize != null) sb.append("MaxSize: " + maxSize + ", ");
+        if (desiredCapacity != null) sb.append("DesiredCapacity: " + desiredCapacity + ", ");
+        if (defaultCooldown != null) sb.append("DefaultCooldown: " + defaultCooldown + ", ");
+        if (availabilityZones != null) sb.append("AvailabilityZones: " + availabilityZones + ", ");
+        if (healthCheckType != null) sb.append("HealthCheckType: " + healthCheckType + ", ");
+        if (healthCheckGracePeriod != null) sb.append("HealthCheckGracePeriod: " + healthCheckGracePeriod + ", ");
+        if (placementGroup != null) sb.append("PlacementGroup: " + placementGroup + ", ");
+        if (vPCZoneIdentifier != null) sb.append("VPCZoneIdentifier: " + vPCZoneIdentifier + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getAutoScalingGroupName() == null) ? 0 : getAutoScalingGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getLaunchConfigurationName() == null) ? 0 : getLaunchConfigurationName().hashCode()); 
+        hashCode = prime * hashCode + ((getMinSize() == null) ? 0 : getMinSize().hashCode()); 
+        hashCode = prime * hashCode + ((getMaxSize() == null) ? 0 : getMaxSize().hashCode()); 
+        hashCode = prime * hashCode + ((getDesiredCapacity() == null) ? 0 : getDesiredCapacity().hashCode()); 
+        hashCode = prime * hashCode + ((getDefaultCooldown() == null) ? 0 : getDefaultCooldown().hashCode()); 
+        hashCode = prime * hashCode + ((getAvailabilityZones() == null) ? 0 : getAvailabilityZones().hashCode()); 
+        hashCode = prime * hashCode + ((getHealthCheckType() == null) ? 0 : getHealthCheckType().hashCode()); 
+        hashCode = prime * hashCode + ((getHealthCheckGracePeriod() == null) ? 0 : getHealthCheckGracePeriod().hashCode()); 
+        hashCode = prime * hashCode + ((getPlacementGroup() == null) ? 0 : getPlacementGroup().hashCode()); 
+        hashCode = prime * hashCode + ((getVPCZoneIdentifier() == null) ? 0 : getVPCZoneIdentifier().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof UpdateAutoScalingGroupRequest == false) return false;
+        UpdateAutoScalingGroupRequest other = (UpdateAutoScalingGroupRequest)obj;
+        
+        if (other.getAutoScalingGroupName() == null ^ this.getAutoScalingGroupName() == null) return false;
+        if (other.getAutoScalingGroupName() != null && other.getAutoScalingGroupName().equals(this.getAutoScalingGroupName()) == false) return false; 
+        if (other.getLaunchConfigurationName() == null ^ this.getLaunchConfigurationName() == null) return false;
+        if (other.getLaunchConfigurationName() != null && other.getLaunchConfigurationName().equals(this.getLaunchConfigurationName()) == false) return false; 
+        if (other.getMinSize() == null ^ this.getMinSize() == null) return false;
+        if (other.getMinSize() != null && other.getMinSize().equals(this.getMinSize()) == false) return false; 
+        if (other.getMaxSize() == null ^ this.getMaxSize() == null) return false;
+        if (other.getMaxSize() != null && other.getMaxSize().equals(this.getMaxSize()) == false) return false; 
+        if (other.getDesiredCapacity() == null ^ this.getDesiredCapacity() == null) return false;
+        if (other.getDesiredCapacity() != null && other.getDesiredCapacity().equals(this.getDesiredCapacity()) == false) return false; 
+        if (other.getDefaultCooldown() == null ^ this.getDefaultCooldown() == null) return false;
+        if (other.getDefaultCooldown() != null && other.getDefaultCooldown().equals(this.getDefaultCooldown()) == false) return false; 
+        if (other.getAvailabilityZones() == null ^ this.getAvailabilityZones() == null) return false;
+        if (other.getAvailabilityZones() != null && other.getAvailabilityZones().equals(this.getAvailabilityZones()) == false) return false; 
+        if (other.getHealthCheckType() == null ^ this.getHealthCheckType() == null) return false;
+        if (other.getHealthCheckType() != null && other.getHealthCheckType().equals(this.getHealthCheckType()) == false) return false; 
+        if (other.getHealthCheckGracePeriod() == null ^ this.getHealthCheckGracePeriod() == null) return false;
+        if (other.getHealthCheckGracePeriod() != null && other.getHealthCheckGracePeriod().equals(this.getHealthCheckGracePeriod()) == false) return false; 
+        if (other.getPlacementGroup() == null ^ this.getPlacementGroup() == null) return false;
+        if (other.getPlacementGroup() != null && other.getPlacementGroup().equals(this.getPlacementGroup()) == false) return false; 
+        if (other.getVPCZoneIdentifier() == null ^ this.getVPCZoneIdentifier() == null) return false;
+        if (other.getVPCZoneIdentifier() != null && other.getVPCZoneIdentifier().equals(this.getVPCZoneIdentifier()) == false) return false; 
+        return true;
     }
     
 }

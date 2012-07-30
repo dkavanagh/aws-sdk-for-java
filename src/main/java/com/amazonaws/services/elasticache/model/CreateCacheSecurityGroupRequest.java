@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.elasticache.AmazonElastiCache#createCacheSecurityGroup(CreateCacheSecurityGroupRequest) CreateCacheSecurityGroup operation}.
  * <p>
- * Creates a new Cache Security Group. Cache Security groups control
- * access to one or more Cache Clusters.
+ * Creates a new Cache Security Group. Cache Security groups control access to one or more Cache Clusters.
  * </p>
  *
  * @see com.amazonaws.services.elasticache.AmazonElastiCache#createCacheSecurityGroup(CreateCacheSecurityGroupRequest)
@@ -60,6 +59,8 @@ public class CreateCacheSecurityGroupRequest extends AmazonWebServiceRequest {
         this.cacheSecurityGroupName = cacheSecurityGroupName;
         this.description = description;
     }
+
+    
     
     /**
      * The name for the Cache Security Group. This value is stored as a
@@ -159,10 +160,35 @@ public class CreateCacheSecurityGroupRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("CacheSecurityGroupName: " + cacheSecurityGroupName + ", ");
-        sb.append("Description: " + description + ", ");
+        if (cacheSecurityGroupName != null) sb.append("CacheSecurityGroupName: " + cacheSecurityGroupName + ", ");
+        if (description != null) sb.append("Description: " + description + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getCacheSecurityGroupName() == null) ? 0 : getCacheSecurityGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getDescription() == null) ? 0 : getDescription().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof CreateCacheSecurityGroupRequest == false) return false;
+        CreateCacheSecurityGroupRequest other = (CreateCacheSecurityGroupRequest)obj;
+        
+        if (other.getCacheSecurityGroupName() == null ^ this.getCacheSecurityGroupName() == null) return false;
+        if (other.getCacheSecurityGroupName() != null && other.getCacheSecurityGroupName().equals(this.getCacheSecurityGroupName()) == false) return false; 
+        if (other.getDescription() == null ^ this.getDescription() == null) return false;
+        if (other.getDescription() != null && other.getDescription().equals(this.getDescription()) == false) return false; 
+        return true;
     }
     
 }

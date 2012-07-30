@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.autoscaling.AmazonAutoScaling#resumeProcesses(ResumeProcessesRequest) ResumeProcesses operation}.
  * <p>
- * Resumes Auto Scaling processes for an Auto Scaling group. For more
- * information, see SuspendProcesses and ProcessType.
+ * Resumes Auto Scaling processes for an Auto Scaling group. For more information, see SuspendProcesses and ProcessType.
  * </p>
  *
  * @see com.amazonaws.services.autoscaling.AmazonAutoScaling#resumeProcesses(ResumeProcessesRequest)
@@ -39,7 +38,7 @@ public class ResumeProcessesRequest extends AmazonWebServiceRequest {
      * The processes that you want to suspend or resume, which can include
      * one or more of the following: <ul> <li>Launch</li> <li>Terminate</li>
      * <li>HealthCheck</li> <li>ReplaceUnhealthy</li> <li>AZRebalance</li>
-     * <li>AlarmNotifications</li> <li>ScheduledActions</li>
+     * <li>AlarmNotification</li> <li>ScheduledActions</li>
      * <li>AddToLoadBalancer</li> </ul> <p> To suspend all process types,
      * omit this parameter.
      */
@@ -95,18 +94,19 @@ public class ResumeProcessesRequest extends AmazonWebServiceRequest {
      * The processes that you want to suspend or resume, which can include
      * one or more of the following: <ul> <li>Launch</li> <li>Terminate</li>
      * <li>HealthCheck</li> <li>ReplaceUnhealthy</li> <li>AZRebalance</li>
-     * <li>AlarmNotifications</li> <li>ScheduledActions</li>
+     * <li>AlarmNotification</li> <li>ScheduledActions</li>
      * <li>AddToLoadBalancer</li> </ul> <p> To suspend all process types,
      * omit this parameter.
      *
      * @return The processes that you want to suspend or resume, which can include
      *         one or more of the following: <ul> <li>Launch</li> <li>Terminate</li>
      *         <li>HealthCheck</li> <li>ReplaceUnhealthy</li> <li>AZRebalance</li>
-     *         <li>AlarmNotifications</li> <li>ScheduledActions</li>
+     *         <li>AlarmNotification</li> <li>ScheduledActions</li>
      *         <li>AddToLoadBalancer</li> </ul> <p> To suspend all process types,
      *         omit this parameter.
      */
     public java.util.List<String> getScalingProcesses() {
+        
         if (scalingProcesses == null) {
             scalingProcesses = new java.util.ArrayList<String>();
         }
@@ -117,22 +117,25 @@ public class ResumeProcessesRequest extends AmazonWebServiceRequest {
      * The processes that you want to suspend or resume, which can include
      * one or more of the following: <ul> <li>Launch</li> <li>Terminate</li>
      * <li>HealthCheck</li> <li>ReplaceUnhealthy</li> <li>AZRebalance</li>
-     * <li>AlarmNotifications</li> <li>ScheduledActions</li>
+     * <li>AlarmNotification</li> <li>ScheduledActions</li>
      * <li>AddToLoadBalancer</li> </ul> <p> To suspend all process types,
      * omit this parameter.
      *
      * @param scalingProcesses The processes that you want to suspend or resume, which can include
      *         one or more of the following: <ul> <li>Launch</li> <li>Terminate</li>
      *         <li>HealthCheck</li> <li>ReplaceUnhealthy</li> <li>AZRebalance</li>
-     *         <li>AlarmNotifications</li> <li>ScheduledActions</li>
+     *         <li>AlarmNotification</li> <li>ScheduledActions</li>
      *         <li>AddToLoadBalancer</li> </ul> <p> To suspend all process types,
      *         omit this parameter.
      */
     public void setScalingProcesses(java.util.Collection<String> scalingProcesses) {
-        java.util.List<String> scalingProcessesCopy = new java.util.ArrayList<String>();
-        if (scalingProcesses != null) {
-            scalingProcessesCopy.addAll(scalingProcesses);
+        if (scalingProcesses == null) {
+            this.scalingProcesses = null;
+            return;
         }
+
+        java.util.List<String> scalingProcessesCopy = new java.util.ArrayList<String>(scalingProcesses.size());
+        scalingProcessesCopy.addAll(scalingProcesses);
         this.scalingProcesses = scalingProcessesCopy;
     }
     
@@ -140,7 +143,7 @@ public class ResumeProcessesRequest extends AmazonWebServiceRequest {
      * The processes that you want to suspend or resume, which can include
      * one or more of the following: <ul> <li>Launch</li> <li>Terminate</li>
      * <li>HealthCheck</li> <li>ReplaceUnhealthy</li> <li>AZRebalance</li>
-     * <li>AlarmNotifications</li> <li>ScheduledActions</li>
+     * <li>AlarmNotification</li> <li>ScheduledActions</li>
      * <li>AddToLoadBalancer</li> </ul> <p> To suspend all process types,
      * omit this parameter.
      * <p>
@@ -149,7 +152,7 @@ public class ResumeProcessesRequest extends AmazonWebServiceRequest {
      * @param scalingProcesses The processes that you want to suspend or resume, which can include
      *         one or more of the following: <ul> <li>Launch</li> <li>Terminate</li>
      *         <li>HealthCheck</li> <li>ReplaceUnhealthy</li> <li>AZRebalance</li>
-     *         <li>AlarmNotifications</li> <li>ScheduledActions</li>
+     *         <li>AlarmNotification</li> <li>ScheduledActions</li>
      *         <li>AddToLoadBalancer</li> </ul> <p> To suspend all process types,
      *         omit this parameter.
      *
@@ -157,6 +160,7 @@ public class ResumeProcessesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public ResumeProcessesRequest withScalingProcesses(String... scalingProcesses) {
+        if (getScalingProcesses() == null) setScalingProcesses(new java.util.ArrayList<String>(scalingProcesses.length));
         for (String value : scalingProcesses) {
             getScalingProcesses().add(value);
         }
@@ -167,7 +171,7 @@ public class ResumeProcessesRequest extends AmazonWebServiceRequest {
      * The processes that you want to suspend or resume, which can include
      * one or more of the following: <ul> <li>Launch</li> <li>Terminate</li>
      * <li>HealthCheck</li> <li>ReplaceUnhealthy</li> <li>AZRebalance</li>
-     * <li>AlarmNotifications</li> <li>ScheduledActions</li>
+     * <li>AlarmNotification</li> <li>ScheduledActions</li>
      * <li>AddToLoadBalancer</li> </ul> <p> To suspend all process types,
      * omit this parameter.
      * <p>
@@ -176,7 +180,7 @@ public class ResumeProcessesRequest extends AmazonWebServiceRequest {
      * @param scalingProcesses The processes that you want to suspend or resume, which can include
      *         one or more of the following: <ul> <li>Launch</li> <li>Terminate</li>
      *         <li>HealthCheck</li> <li>ReplaceUnhealthy</li> <li>AZRebalance</li>
-     *         <li>AlarmNotifications</li> <li>ScheduledActions</li>
+     *         <li>AlarmNotification</li> <li>ScheduledActions</li>
      *         <li>AddToLoadBalancer</li> </ul> <p> To suspend all process types,
      *         omit this parameter.
      *
@@ -184,11 +188,13 @@ public class ResumeProcessesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public ResumeProcessesRequest withScalingProcesses(java.util.Collection<String> scalingProcesses) {
-        java.util.List<String> scalingProcessesCopy = new java.util.ArrayList<String>();
-        if (scalingProcesses != null) {
+        if (scalingProcesses == null) {
+            this.scalingProcesses = null;
+        } else {
+            java.util.List<String> scalingProcessesCopy = new java.util.ArrayList<String>(scalingProcesses.size());
             scalingProcessesCopy.addAll(scalingProcesses);
+            this.scalingProcesses = scalingProcessesCopy;
         }
-        this.scalingProcesses = scalingProcessesCopy;
 
         return this;
     }
@@ -205,10 +211,35 @@ public class ResumeProcessesRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
-        sb.append("ScalingProcesses: " + scalingProcesses + ", ");
+        if (autoScalingGroupName != null) sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
+        if (scalingProcesses != null) sb.append("ScalingProcesses: " + scalingProcesses + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getAutoScalingGroupName() == null) ? 0 : getAutoScalingGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getScalingProcesses() == null) ? 0 : getScalingProcesses().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof ResumeProcessesRequest == false) return false;
+        ResumeProcessesRequest other = (ResumeProcessesRequest)obj;
+        
+        if (other.getAutoScalingGroupName() == null ^ this.getAutoScalingGroupName() == null) return false;
+        if (other.getAutoScalingGroupName() != null && other.getAutoScalingGroupName().equals(this.getAutoScalingGroupName()) == false) return false; 
+        if (other.getScalingProcesses() == null ^ this.getScalingProcesses() == null) return false;
+        if (other.getScalingProcesses() != null && other.getScalingProcesses().equals(this.getScalingProcesses()) == false) return false; 
+        return true;
     }
     
 }

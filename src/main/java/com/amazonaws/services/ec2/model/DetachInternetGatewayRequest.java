@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,15 +18,11 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#detachInternetGateway(DetachInternetGatewayRequest) DetachInternetGateway operation}.
  * <p>
- * Detaches an Internet gateway from a VPC, disabling connectivity
- * between the Internet and the VPC. The VPC must not contain any running
- * instances with elastic IP addresses. For more information about your
- * VPC and Internet gateway, go to Amazon Virtual Private Cloud User
- * Guide.
+ * Detaches an Internet gateway from a VPC, disabling connectivity between the Internet and the VPC. The VPC must not contain any running instances with
+ * elastic IP addresses. For more information about your VPC and Internet gateway, go to Amazon Virtual Private Cloud User Guide.
  * </p>
  * <p>
- * For more information about Amazon Virtual Private Cloud and Internet
- * gateways, go to the Amazon Virtual Private Cloud User Guide.
+ * For more information about Amazon Virtual Private Cloud and Internet gateways, go to the Amazon Virtual Private Cloud User Guide.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#detachInternetGateway(DetachInternetGatewayRequest)
@@ -123,10 +119,35 @@ public class DetachInternetGatewayRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("InternetGatewayId: " + internetGatewayId + ", ");
-        sb.append("VpcId: " + vpcId + ", ");
+        if (internetGatewayId != null) sb.append("InternetGatewayId: " + internetGatewayId + ", ");
+        if (vpcId != null) sb.append("VpcId: " + vpcId + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getInternetGatewayId() == null) ? 0 : getInternetGatewayId().hashCode()); 
+        hashCode = prime * hashCode + ((getVpcId() == null) ? 0 : getVpcId().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DetachInternetGatewayRequest == false) return false;
+        DetachInternetGatewayRequest other = (DetachInternetGatewayRequest)obj;
+        
+        if (other.getInternetGatewayId() == null ^ this.getInternetGatewayId() == null) return false;
+        if (other.getInternetGatewayId() != null && other.getInternetGatewayId().equals(this.getInternetGatewayId()) == false) return false; 
+        if (other.getVpcId() == null ^ this.getVpcId() == null) return false;
+        if (other.getVpcId() != null && other.getVpcId().equals(this.getVpcId()) == false) return false; 
+        return true;
     }
     
 }

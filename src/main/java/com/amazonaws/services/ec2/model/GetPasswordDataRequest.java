@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,14 +18,11 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#getPasswordData(GetPasswordDataRequest) GetPasswordData operation}.
  * <p>
- * Retrieves the encrypted administrator password for the instances
- * running Windows.
+ * Retrieves the encrypted administrator password for the instances running Windows.
  * </p>
  * <p>
- * <b>NOTE:</b> The Windows password is only generated the first time an
- * AMI is launched. It is not generated for rebundled AMIs or after the
- * password is changed on an instance. The password is encrypted using
- * the key pair that you provided.
+ * <b>NOTE:</b> The Windows password is only generated the first time an AMI is launched. It is not generated for rebundled AMIs or after the password is
+ * changed on an instance. The password is encrypted using the key pair that you provided.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#getPasswordData(GetPasswordDataRequest)
@@ -55,6 +52,8 @@ public class GetPasswordDataRequest extends AmazonWebServiceRequest {
     public GetPasswordDataRequest(String instanceId) {
         this.instanceId = instanceId;
     }
+
+    
     
     /**
      * The ID of the instance for which you want the Windows administrator
@@ -108,9 +107,31 @@ public class GetPasswordDataRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("InstanceId: " + instanceId + ", ");
+        if (instanceId != null) sb.append("InstanceId: " + instanceId + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getInstanceId() == null) ? 0 : getInstanceId().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof GetPasswordDataRequest == false) return false;
+        GetPasswordDataRequest other = (GetPasswordDataRequest)obj;
+        
+        if (other.getInstanceId() == null ^ this.getInstanceId() == null) return false;
+        if (other.getInstanceId() != null && other.getInstanceId().equals(this.getInstanceId()) == false) return false; 
+        return true;
     }
     
 }

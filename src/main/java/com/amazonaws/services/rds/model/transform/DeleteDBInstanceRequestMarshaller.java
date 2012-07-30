@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.rds.model.*;
@@ -30,23 +31,23 @@ import com.amazonaws.util.StringUtils;
 public class DeleteDBInstanceRequestMarshaller implements Marshaller<Request<DeleteDBInstanceRequest>, DeleteDBInstanceRequest> {
 
     public Request<DeleteDBInstanceRequest> marshall(DeleteDBInstanceRequest deleteDBInstanceRequest) {
+
+        if (deleteDBInstanceRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<DeleteDBInstanceRequest> request = new DefaultRequest<DeleteDBInstanceRequest>(deleteDBInstanceRequest, "AmazonRDS");
         request.addParameter("Action", "DeleteDBInstance");
-        request.addParameter("Version", "2011-04-01");
-        if (deleteDBInstanceRequest != null) {
-            if (deleteDBInstanceRequest.getDBInstanceIdentifier() != null) {
-                request.addParameter("DBInstanceIdentifier", StringUtils.fromString(deleteDBInstanceRequest.getDBInstanceIdentifier()));
-            }
+        request.addParameter("Version", "2012-04-23");
+
+        if (deleteDBInstanceRequest.getDBInstanceIdentifier() != null) {
+            request.addParameter("DBInstanceIdentifier", StringUtils.fromString(deleteDBInstanceRequest.getDBInstanceIdentifier()));
         }
-        if (deleteDBInstanceRequest != null) {
-            if (deleteDBInstanceRequest.isSkipFinalSnapshot() != null) {
-                request.addParameter("SkipFinalSnapshot", StringUtils.fromBoolean(deleteDBInstanceRequest.isSkipFinalSnapshot()));
-            }
+        if (deleteDBInstanceRequest.isSkipFinalSnapshot() != null) {
+            request.addParameter("SkipFinalSnapshot", StringUtils.fromBoolean(deleteDBInstanceRequest.isSkipFinalSnapshot()));
         }
-        if (deleteDBInstanceRequest != null) {
-            if (deleteDBInstanceRequest.getFinalDBSnapshotIdentifier() != null) {
-                request.addParameter("FinalDBSnapshotIdentifier", StringUtils.fromString(deleteDBInstanceRequest.getFinalDBSnapshotIdentifier()));
-            }
+        if (deleteDBInstanceRequest.getFinalDBSnapshotIdentifier() != null) {
+            request.addParameter("FinalDBSnapshotIdentifier", StringUtils.fromString(deleteDBInstanceRequest.getFinalDBSnapshotIdentifier()));
         }
 
 

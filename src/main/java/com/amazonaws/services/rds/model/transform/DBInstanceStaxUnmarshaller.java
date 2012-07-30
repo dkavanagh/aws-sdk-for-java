@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,15 +32,15 @@ import com.amazonaws.transform.SimpleTypeStaxUnmarshallers.*;
  */
 public class DBInstanceStaxUnmarshaller implements Unmarshaller<DBInstance, StaxUnmarshallerContext> {
 
-    
-
     public DBInstance unmarshall(StaxUnmarshallerContext context) throws Exception {
         DBInstance dBInstance = new DBInstance();
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
+
         
         if (context.isStartOfDocument()) targetDepth += 2;
         
+
         if (context.isStartOfDocument()) targetDepth++;
         
 
@@ -105,6 +105,10 @@ public class DBInstanceStaxUnmarshaller implements Unmarshaller<DBInstance, Stax
                     dBInstance.setAvailabilityZone(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
+                if (context.testExpression("DBSubnetGroup", targetDepth)) {
+                    dBInstance.setDBSubnetGroup(DBSubnetGroupStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
                 if (context.testExpression("PreferredMaintenanceWindow", targetDepth)) {
                     dBInstance.setPreferredMaintenanceWindow(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
@@ -139,6 +143,14 @@ public class DBInstanceStaxUnmarshaller implements Unmarshaller<DBInstance, Stax
                 }
                 if (context.testExpression("LicenseModel", targetDepth)) {
                     dBInstance.setLicenseModel(StringStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("OptionGroupMembership", targetDepth)) {
+                    dBInstance.setOptionGroupMembership(OptionGroupMembershipStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("CharacterSetName", targetDepth)) {
+                    dBInstance.setCharacterSetName(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
             } else if (xmlEvent.isEndElement()) {

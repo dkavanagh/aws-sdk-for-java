@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@ package com.amazonaws.services.elasticbeanstalk.model;
 
 /**
  * <p>
- * Result message containing a description of the requested environment
- * info.
+ * Result message containing a description of the requested environment info.
  * </p>
  */
 public class RetrieveEnvironmentInfoResult {
@@ -33,6 +32,7 @@ public class RetrieveEnvironmentInfoResult {
      * @return The <a>EnvironmentInfoDescription</a> of the environment.
      */
     public java.util.List<EnvironmentInfoDescription> getEnvironmentInfo() {
+        
         if (environmentInfo == null) {
             environmentInfo = new java.util.ArrayList<EnvironmentInfoDescription>();
         }
@@ -45,10 +45,13 @@ public class RetrieveEnvironmentInfoResult {
      * @param environmentInfo The <a>EnvironmentInfoDescription</a> of the environment.
      */
     public void setEnvironmentInfo(java.util.Collection<EnvironmentInfoDescription> environmentInfo) {
-        java.util.List<EnvironmentInfoDescription> environmentInfoCopy = new java.util.ArrayList<EnvironmentInfoDescription>();
-        if (environmentInfo != null) {
-            environmentInfoCopy.addAll(environmentInfo);
+        if (environmentInfo == null) {
+            this.environmentInfo = null;
+            return;
         }
+
+        java.util.List<EnvironmentInfoDescription> environmentInfoCopy = new java.util.ArrayList<EnvironmentInfoDescription>(environmentInfo.size());
+        environmentInfoCopy.addAll(environmentInfo);
         this.environmentInfo = environmentInfoCopy;
     }
     
@@ -63,6 +66,7 @@ public class RetrieveEnvironmentInfoResult {
      *         together. 
      */
     public RetrieveEnvironmentInfoResult withEnvironmentInfo(EnvironmentInfoDescription... environmentInfo) {
+        if (getEnvironmentInfo() == null) setEnvironmentInfo(new java.util.ArrayList<EnvironmentInfoDescription>(environmentInfo.length));
         for (EnvironmentInfoDescription value : environmentInfo) {
             getEnvironmentInfo().add(value);
         }
@@ -80,11 +84,13 @@ public class RetrieveEnvironmentInfoResult {
      *         together. 
      */
     public RetrieveEnvironmentInfoResult withEnvironmentInfo(java.util.Collection<EnvironmentInfoDescription> environmentInfo) {
-        java.util.List<EnvironmentInfoDescription> environmentInfoCopy = new java.util.ArrayList<EnvironmentInfoDescription>();
-        if (environmentInfo != null) {
+        if (environmentInfo == null) {
+            this.environmentInfo = null;
+        } else {
+            java.util.List<EnvironmentInfoDescription> environmentInfoCopy = new java.util.ArrayList<EnvironmentInfoDescription>(environmentInfo.size());
             environmentInfoCopy.addAll(environmentInfo);
+            this.environmentInfo = environmentInfoCopy;
         }
-        this.environmentInfo = environmentInfoCopy;
 
         return this;
     }
@@ -101,9 +107,31 @@ public class RetrieveEnvironmentInfoResult {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("EnvironmentInfo: " + environmentInfo + ", ");
+        if (environmentInfo != null) sb.append("EnvironmentInfo: " + environmentInfo + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getEnvironmentInfo() == null) ? 0 : getEnvironmentInfo().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof RetrieveEnvironmentInfoResult == false) return false;
+        RetrieveEnvironmentInfoResult other = (RetrieveEnvironmentInfoResult)obj;
+        
+        if (other.getEnvironmentInfo() == null ^ this.getEnvironmentInfo() == null) return false;
+        if (other.getEnvironmentInfo() != null && other.getEnvironmentInfo().equals(this.getEnvironmentInfo()) == false) return false; 
+        return true;
     }
     
 }

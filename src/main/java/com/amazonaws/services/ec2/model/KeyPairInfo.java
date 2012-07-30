@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,12 +16,10 @@ package com.amazonaws.services.ec2.model;
 
 /**
  * <p>
- * Describes an Amazon EC2 key pair. This is a summary of the key pair
- * data, and will not contain the actual private key material.
+ * Describes an Amazon EC2 key pair. This is a summary of the key pair data, and will not contain the actual private key material.
  * </p>
  * <p>
- * The private key material is only available when initially creating
- * the key pair.
+ * The private key material is only available when initially creating the key pair.
  * </p>
  */
 public class KeyPairInfo {
@@ -116,10 +114,35 @@ public class KeyPairInfo {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("KeyName: " + keyName + ", ");
-        sb.append("KeyFingerprint: " + keyFingerprint + ", ");
+        if (keyName != null) sb.append("KeyName: " + keyName + ", ");
+        if (keyFingerprint != null) sb.append("KeyFingerprint: " + keyFingerprint + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getKeyName() == null) ? 0 : getKeyName().hashCode()); 
+        hashCode = prime * hashCode + ((getKeyFingerprint() == null) ? 0 : getKeyFingerprint().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof KeyPairInfo == false) return false;
+        KeyPairInfo other = (KeyPairInfo)obj;
+        
+        if (other.getKeyName() == null ^ this.getKeyName() == null) return false;
+        if (other.getKeyName() != null && other.getKeyName().equals(this.getKeyName()) == false) return false; 
+        if (other.getKeyFingerprint() == null ^ this.getKeyFingerprint() == null) return false;
+        if (other.getKeyFingerprint() != null && other.getKeyFingerprint().equals(this.getKeyFingerprint()) == false) return false; 
+        return true;
     }
     
 }

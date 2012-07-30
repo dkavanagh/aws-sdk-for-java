@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -24,55 +24,37 @@ import com.amazonaws.services.cloudformation.model.*;
  * Interface for accessing AmazonCloudFormation asynchronously,
  * using Java Futures.
  * AWS CloudFormation <p>
- * This is the AWS CloudFormation API Reference. The major sections of
- * this guide are described in the following table.
+ * This is the AWS CloudFormation API Reference. The major sections of this guide are described in the following table.
  * </p>
  * 
  * <ul>
- * <li> <a
- * rvices.com/AWSCloudFormation/latest/APIReference/API_Operations.html">
- * Actions </a> : Alphabetical list of CloudFormation actions</li>
- * <li> <a
- * webservices.com/AWSCloudFormation/latest/APIReference/API_Types.html">
- * Data Types </a> : Alphabetical list of CloudFormation data types</li>
- * <li> <a
- * ices.com/AWSCloudFormation/latest/APIReference/CommonParameters.html">
- * Common Parameters </a> : Parameters that all Query actions can
- * use</li>
- * <li> <a
- * services.com/AWSCloudFormation/latest/APIReference/CommonErrors.html">
- * Common Errors </a> : Client and server errors that all actions can
- * return</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AWSCloudFormation/latest/APIReference/API_Operations.html"> Actions </a> : Alphabetical list of
+ * CloudFormation actions</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AWSCloudFormation/latest/APIReference/API_Types.html"> Data Types </a> : Alphabetical list of
+ * CloudFormation data types</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AWSCloudFormation/latest/APIReference/CommonParameters.html"> Common Parameters </a> : Parameters
+ * that all Query actions can use</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AWSCloudFormation/latest/APIReference/CommonErrors.html"> Common Errors </a> : Client and server
+ * errors that all actions can return</li>
  * 
  * </ul>
  * <p>
- * This guide is for programmers who need detailed information about the
- * CloudFormation APIs. You use AWS CloudFormation to create and manage
- * AWS infrastructure deployments predictably and repeatedly.
- * CloudFormation helps you leverage AWS products such as Amazon EC2,
- * EBS, Amazon SNS, ELB, and Auto Scaling to build highly-reliable,
- * highly scalable, cost effective applications without worrying about
- * creating and configuring the underlying the AWS infrastructure.
+ * This guide is for programmers who need detailed information about the CloudFormation APIs. You use AWS CloudFormation to create and manage AWS
+ * infrastructure deployments predictably and repeatedly. CloudFormation helps you leverage AWS products such as Amazon EC2, EBS, Amazon SNS, ELB, and
+ * Auto Scaling to build highly-reliable, highly scalable, cost effective applications without worrying about creating and configuring the underlying the
+ * AWS infrastructure.
  * </p>
  * <p>
- * Through the use of a template file you write, and a few AWS
- * CloudFormation commands or API actions, AWS CloudFormation enables you
- * to manage a collection of resources together as a single unit called a
- * stack. AWS CloudFormation creates and deletes all member resources of
- * the stack together and manages all dependencies between the resources
- * for you.
+ * Through the use of a template file you write, and a few AWS CloudFormation commands or API actions, AWS CloudFormation enables you to manage a
+ * collection of resources together as a single unit called a stack. AWS CloudFormation creates and deletes all member resources of the stack together
+ * and manages all dependencies between the resources for you.
  * </p>
  * <p>
- * For more information about this product, go to the <a
- * href="http://aws.amazon.com/documentation/cloudformation">
- * CloudFormation Product Page </a> .
+ * For more information about this product, go to the <a href="http://aws.amazon.com/cloudformation/"> CloudFormation Product Page </a> .
  * </p>
  * <p>
- * Amazon CloudFormation makes use of other AWS products. If you need
- * additional technical information about a specific AWS product, you can
- * find the product's technical documentation at <a
- * href="http://aws.amazon.com/documentation/">
- * http://aws.amazon.com/documentation/ </a> .
+ * Amazon CloudFormation makes use of other AWS products. If you need additional technical information about a specific AWS product, you can find the
+ * product's technical documentation at <a href="http://aws.amazon.com/documentation/"> http://aws.amazon.com/documentation/ </a> .
  * </p> 
  */       
 public interface AmazonCloudFormationAsync extends AmazonCloudFormation {
@@ -151,6 +133,32 @@ public interface AmazonCloudFormationAsync extends AmazonCloudFormation {
      *             either a problem with the data in the request, or a server side issue.
      */
     public Future<ValidateTemplateResult> validateTemplateAsync(ValidateTemplateRequest validateTemplateRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Returns the estimated monthly cost of a template. The return value is
+     * an AWS Simply Monthly Calculator URL with a query string that
+     * describes the resources required to run the template.
+     * </p>
+     *
+     * @param estimateTemplateCostRequest Container for the necessary
+     *           parameters to execute the EstimateTemplateCost operation on
+     *           AmazonCloudFormation.
+     * 
+     * @return A Java Future object containing the response from the
+     *         EstimateTemplateCost service method, as returned by
+     *         AmazonCloudFormation.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonCloudFormation indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<EstimateTemplateCostResult> estimateTemplateCostAsync(EstimateTemplateCostRequest estimateTemplateCostRequest) 
             throws AmazonServiceException, AmazonClientException;
 
     /**
@@ -243,17 +251,12 @@ public interface AmazonCloudFormationAsync extends AmazonCloudFormation {
 
     /**
      * <p>
-     * Returns the description for the specified resource in the specified
+     * Returns a description of the specified resource in the specified
      * stack.
      * </p>
      * <p>
      * For deleted stacks, DescribeStackResource returns resource information
      * for up to 90 days after the stack has been deleted.
-     * </p>
-     * <p>
-     * You must specify <code>StackName</code> and
-     * <code>LogicalResourceId</code> .
-     * 
      * </p>
      *
      * @param describeStackResourceRequest Container for the necessary
@@ -301,7 +304,7 @@ public interface AmazonCloudFormationAsync extends AmazonCloudFormation {
 
     /**
      * <p>
-     * Returns descriptions for all resources of the specified stack.
+     * Returns descriptions of all resources of the specified stack.
      * </p>
      * <p>
      * For deleted stacks, ListStackResources returns resource information
@@ -370,6 +373,40 @@ public interface AmazonCloudFormationAsync extends AmazonCloudFormation {
      *             either a problem with the data in the request, or a server side issue.
      */
     public Future<DescribeStackResourcesResult> describeStackResourcesAsync(DescribeStackResourcesRequest describeStackResourcesRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Updates a stack as specified in the template. After the call
+     * completes successfully, the stack update starts. You can check the
+     * status of the stack via the DescribeStacks action.
+     * </p>
+     * <p>
+     * To get a copy of the template for an existing stack, you can use the
+     * GetTemplate action.
+     * </p>
+     * <p>
+     * For more information about creating an update template, updating a
+     * stack, and monitoring the progress of the update, see <a
+     * om/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">
+     * Updating a Stack </a> .
+     * </p>
+     *
+     * @param updateStackRequest Container for the necessary parameters to
+     *           execute the UpdateStack operation on AmazonCloudFormation.
+     * 
+     * @return A Java Future object containing the response from the
+     *         UpdateStack service method, as returned by AmazonCloudFormation.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonCloudFormation indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<UpdateStackResult> updateStackAsync(UpdateStackRequest updateStackRequest) 
             throws AmazonServiceException, AmazonClientException;
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,12 +18,10 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.rds.AmazonRDS#deleteDBParameterGroup(DeleteDBParameterGroupRequest) DeleteDBParameterGroup operation}.
  * <p>
- * Deletes a specified DBParameterGroup. The DBParameterGroup cannot be
- * associated with any RDS instances to be deleted.
+ * Deletes a specified DBParameterGroup. The DBParameterGroup cannot be associated with any RDS instances to be deleted.
  * </p>
  * <p>
- * <b>NOTE:</b> The specified database parameter group cannot be
- * associated with any DB Instances.
+ * <b>NOTE:</b> The specified DB Parameter Group cannot be associated with any DB Instances.
  * </p>
  *
  * @see com.amazonaws.services.rds.AmazonRDS#deleteDBParameterGroup(DeleteDBParameterGroupRequest)
@@ -33,7 +31,8 @@ public class DeleteDBParameterGroupRequest extends AmazonWebServiceRequest {
     /**
      * The name of the DB Parameter Group. <p>Constraints: <ul> <li>Must be
      * the name of an existing DB Parameter Group</li> <li>You cannot delete
-     * a default DB Parameter Group</li> </ul>
+     * a default DB Parameter Group</li> <li>Cannot be associated with any DB
+     * Instances</li> </ul>
      */
     private String dBParameterGroupName;
 
@@ -51,20 +50,24 @@ public class DeleteDBParameterGroupRequest extends AmazonWebServiceRequest {
      * @param dBParameterGroupName The name of the DB Parameter Group.
      * <p>Constraints: <ul> <li>Must be the name of an existing DB Parameter
      * Group</li> <li>You cannot delete a default DB Parameter Group</li>
-     * </ul>
+     * <li>Cannot be associated with any DB Instances</li> </ul>
      */
     public DeleteDBParameterGroupRequest(String dBParameterGroupName) {
         this.dBParameterGroupName = dBParameterGroupName;
     }
+
+    
     
     /**
      * The name of the DB Parameter Group. <p>Constraints: <ul> <li>Must be
      * the name of an existing DB Parameter Group</li> <li>You cannot delete
-     * a default DB Parameter Group</li> </ul>
+     * a default DB Parameter Group</li> <li>Cannot be associated with any DB
+     * Instances</li> </ul>
      *
      * @return The name of the DB Parameter Group. <p>Constraints: <ul> <li>Must be
      *         the name of an existing DB Parameter Group</li> <li>You cannot delete
-     *         a default DB Parameter Group</li> </ul>
+     *         a default DB Parameter Group</li> <li>Cannot be associated with any DB
+     *         Instances</li> </ul>
      */
     public String getDBParameterGroupName() {
         return dBParameterGroupName;
@@ -73,11 +76,13 @@ public class DeleteDBParameterGroupRequest extends AmazonWebServiceRequest {
     /**
      * The name of the DB Parameter Group. <p>Constraints: <ul> <li>Must be
      * the name of an existing DB Parameter Group</li> <li>You cannot delete
-     * a default DB Parameter Group</li> </ul>
+     * a default DB Parameter Group</li> <li>Cannot be associated with any DB
+     * Instances</li> </ul>
      *
      * @param dBParameterGroupName The name of the DB Parameter Group. <p>Constraints: <ul> <li>Must be
      *         the name of an existing DB Parameter Group</li> <li>You cannot delete
-     *         a default DB Parameter Group</li> </ul>
+     *         a default DB Parameter Group</li> <li>Cannot be associated with any DB
+     *         Instances</li> </ul>
      */
     public void setDBParameterGroupName(String dBParameterGroupName) {
         this.dBParameterGroupName = dBParameterGroupName;
@@ -86,13 +91,15 @@ public class DeleteDBParameterGroupRequest extends AmazonWebServiceRequest {
     /**
      * The name of the DB Parameter Group. <p>Constraints: <ul> <li>Must be
      * the name of an existing DB Parameter Group</li> <li>You cannot delete
-     * a default DB Parameter Group</li> </ul>
+     * a default DB Parameter Group</li> <li>Cannot be associated with any DB
+     * Instances</li> </ul>
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
      * @param dBParameterGroupName The name of the DB Parameter Group. <p>Constraints: <ul> <li>Must be
      *         the name of an existing DB Parameter Group</li> <li>You cannot delete
-     *         a default DB Parameter Group</li> </ul>
+     *         a default DB Parameter Group</li> <li>Cannot be associated with any DB
+     *         Instances</li> </ul>
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -115,9 +122,31 @@ public class DeleteDBParameterGroupRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("DBParameterGroupName: " + dBParameterGroupName + ", ");
+        if (dBParameterGroupName != null) sb.append("DBParameterGroupName: " + dBParameterGroupName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getDBParameterGroupName() == null) ? 0 : getDBParameterGroupName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DeleteDBParameterGroupRequest == false) return false;
+        DeleteDBParameterGroupRequest other = (DeleteDBParameterGroupRequest)obj;
+        
+        if (other.getDBParameterGroupName() == null ^ this.getDBParameterGroupName() == null) return false;
+        if (other.getDBParameterGroupName() != null && other.getDBParameterGroupName().equals(this.getDBParameterGroupName()) == false) return false; 
+        return true;
     }
     
 }

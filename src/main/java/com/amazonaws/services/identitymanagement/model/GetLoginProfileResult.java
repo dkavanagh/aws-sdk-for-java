@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,41 +16,40 @@ package com.amazonaws.services.identitymanagement.model;
 
 /**
  * <p>
- * Contains the result of a successful invocation of the GetLoginProfile
- * action.
+ * Contains the result of a successful invocation of the GetLoginProfile action.
  * </p>
  */
 public class GetLoginProfileResult {
 
     /**
-     * Login profile for the User name.
+     * User name and password create date for the user.
      */
     private LoginProfile loginProfile;
 
     /**
-     * Login profile for the User name.
+     * User name and password create date for the user.
      *
-     * @return Login profile for the User name.
+     * @return User name and password create date for the user.
      */
     public LoginProfile getLoginProfile() {
         return loginProfile;
     }
     
     /**
-     * Login profile for the User name.
+     * User name and password create date for the user.
      *
-     * @param loginProfile Login profile for the User name.
+     * @param loginProfile User name and password create date for the user.
      */
     public void setLoginProfile(LoginProfile loginProfile) {
         this.loginProfile = loginProfile;
     }
     
     /**
-     * Login profile for the User name.
+     * User name and password create date for the user.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param loginProfile Login profile for the User name.
+     * @param loginProfile User name and password create date for the user.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -73,9 +72,31 @@ public class GetLoginProfileResult {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("LoginProfile: " + loginProfile + ", ");
+        if (loginProfile != null) sb.append("LoginProfile: " + loginProfile + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getLoginProfile() == null) ? 0 : getLoginProfile().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof GetLoginProfileResult == false) return false;
+        GetLoginProfileResult other = (GetLoginProfileResult)obj;
+        
+        if (other.getLoginProfile() == null ^ this.getLoginProfile() == null) return false;
+        if (other.getLoginProfile() != null && other.getLoginProfile().equals(this.getLoginProfile()) == false) return false; 
+        return true;
     }
     
 }

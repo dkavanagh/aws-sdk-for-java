@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -148,6 +148,30 @@ public class InstanceGroupDetail {
         this.state = state;
         this.creationDateTime = creationDateTime;
     }
+
+    
+    
+    /**
+     * Constructs a new InstanceGroupDetail object.
+     * Callers should use the setter or fluent setter (with...) methods to
+     * initialize any additional object members.
+     * 
+     * @param instanceRole Instance group role in the cluster
+     * @param instanceType Amazon EC2 Instance type.
+     * @param instanceRequestCount Target number of instances to run in the
+     * instance group.
+     * @param instanceRunningCount Actual count of running instances.
+     * @param state State of instance group.
+     * @param creationDateTime The date/time the instance group was created.
+     */
+    public InstanceGroupDetail(InstanceRoleType instanceRole, String instanceType, Integer instanceRequestCount, Integer instanceRunningCount, InstanceGroupState state, java.util.Date creationDateTime) {
+        this.instanceRole = instanceRole.toString();
+        this.instanceType = instanceType;
+        this.instanceRequestCount = instanceRequestCount;
+        this.instanceRunningCount = instanceRunningCount;
+        this.state = state.toString();
+        this.creationDateTime = creationDateTime;
+    }
     
     /**
      * Unique identifier for the instance group.
@@ -291,6 +315,40 @@ public class InstanceGroupDetail {
     
     
     /**
+     * Market type of the Amazon EC2 instances used to create a cluster node.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>ON_DEMAND, SPOT
+     *
+     * @param market Market type of the Amazon EC2 instances used to create a cluster node.
+     *
+     * @see MarketType
+     */
+    public void setMarket(MarketType market) {
+        this.market = market.toString();
+    }
+    
+    /**
+     * Market type of the Amazon EC2 instances used to create a cluster node.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>ON_DEMAND, SPOT
+     *
+     * @param market Market type of the Amazon EC2 instances used to create a cluster node.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see MarketType
+     */
+    public InstanceGroupDetail withMarket(MarketType market) {
+        this.market = market.toString();
+        return this;
+    }
+    
+    /**
      * Instance group role in the cluster
      * <p>
      * <b>Constraints:</b><br/>
@@ -338,6 +396,40 @@ public class InstanceGroupDetail {
         return this;
     }
     
+    
+    /**
+     * Instance group role in the cluster
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>MASTER, CORE, TASK
+     *
+     * @param instanceRole Instance group role in the cluster
+     *
+     * @see InstanceRoleType
+     */
+    public void setInstanceRole(InstanceRoleType instanceRole) {
+        this.instanceRole = instanceRole.toString();
+    }
+    
+    /**
+     * Instance group role in the cluster
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>MASTER, CORE, TASK
+     *
+     * @param instanceRole Instance group role in the cluster
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see InstanceRoleType
+     */
+    public InstanceGroupDetail withInstanceRole(InstanceRoleType instanceRole) {
+        this.instanceRole = instanceRole.toString();
+        return this;
+    }
     
     /**
      * Bid price for EC2 Instances when launching nodes as Spot Instances,
@@ -555,6 +647,40 @@ public class InstanceGroupDetail {
     
     
     /**
+     * State of instance group.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>PROVISIONING, STARTING, BOOTSTRAPPING, RUNNING, RESIZING, ARRESTED, SHUTTING_DOWN, TERMINATED, FAILED, ENDED
+     *
+     * @param state State of instance group.
+     *
+     * @see InstanceGroupState
+     */
+    public void setState(InstanceGroupState state) {
+        this.state = state.toString();
+    }
+    
+    /**
+     * State of instance group.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>PROVISIONING, STARTING, BOOTSTRAPPING, RUNNING, RESIZING, ARRESTED, SHUTTING_DOWN, TERMINATED, FAILED, ENDED
+     *
+     * @param state State of instance group.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see InstanceGroupState
+     */
+    public InstanceGroupDetail withState(InstanceGroupState state) {
+        this.state = state.toString();
+        return this;
+    }
+    
+    /**
      * Details regarding the state of the instance group.
      * <p>
      * <b>Constraints:</b><br/>
@@ -748,22 +874,83 @@ public class InstanceGroupDetail {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("InstanceGroupId: " + instanceGroupId + ", ");
-        sb.append("Name: " + name + ", ");
-        sb.append("Market: " + market + ", ");
-        sb.append("InstanceRole: " + instanceRole + ", ");
-        sb.append("BidPrice: " + bidPrice + ", ");
-        sb.append("InstanceType: " + instanceType + ", ");
-        sb.append("InstanceRequestCount: " + instanceRequestCount + ", ");
-        sb.append("InstanceRunningCount: " + instanceRunningCount + ", ");
-        sb.append("State: " + state + ", ");
-        sb.append("LastStateChangeReason: " + lastStateChangeReason + ", ");
-        sb.append("CreationDateTime: " + creationDateTime + ", ");
-        sb.append("StartDateTime: " + startDateTime + ", ");
-        sb.append("ReadyDateTime: " + readyDateTime + ", ");
-        sb.append("EndDateTime: " + endDateTime + ", ");
+        if (instanceGroupId != null) sb.append("InstanceGroupId: " + instanceGroupId + ", ");
+        if (name != null) sb.append("Name: " + name + ", ");
+        if (market != null) sb.append("Market: " + market + ", ");
+        if (instanceRole != null) sb.append("InstanceRole: " + instanceRole + ", ");
+        if (bidPrice != null) sb.append("BidPrice: " + bidPrice + ", ");
+        if (instanceType != null) sb.append("InstanceType: " + instanceType + ", ");
+        if (instanceRequestCount != null) sb.append("InstanceRequestCount: " + instanceRequestCount + ", ");
+        if (instanceRunningCount != null) sb.append("InstanceRunningCount: " + instanceRunningCount + ", ");
+        if (state != null) sb.append("State: " + state + ", ");
+        if (lastStateChangeReason != null) sb.append("LastStateChangeReason: " + lastStateChangeReason + ", ");
+        if (creationDateTime != null) sb.append("CreationDateTime: " + creationDateTime + ", ");
+        if (startDateTime != null) sb.append("StartDateTime: " + startDateTime + ", ");
+        if (readyDateTime != null) sb.append("ReadyDateTime: " + readyDateTime + ", ");
+        if (endDateTime != null) sb.append("EndDateTime: " + endDateTime + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getInstanceGroupId() == null) ? 0 : getInstanceGroupId().hashCode()); 
+        hashCode = prime * hashCode + ((getName() == null) ? 0 : getName().hashCode()); 
+        hashCode = prime * hashCode + ((getMarket() == null) ? 0 : getMarket().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceRole() == null) ? 0 : getInstanceRole().hashCode()); 
+        hashCode = prime * hashCode + ((getBidPrice() == null) ? 0 : getBidPrice().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceType() == null) ? 0 : getInstanceType().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceRequestCount() == null) ? 0 : getInstanceRequestCount().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceRunningCount() == null) ? 0 : getInstanceRunningCount().hashCode()); 
+        hashCode = prime * hashCode + ((getState() == null) ? 0 : getState().hashCode()); 
+        hashCode = prime * hashCode + ((getLastStateChangeReason() == null) ? 0 : getLastStateChangeReason().hashCode()); 
+        hashCode = prime * hashCode + ((getCreationDateTime() == null) ? 0 : getCreationDateTime().hashCode()); 
+        hashCode = prime * hashCode + ((getStartDateTime() == null) ? 0 : getStartDateTime().hashCode()); 
+        hashCode = prime * hashCode + ((getReadyDateTime() == null) ? 0 : getReadyDateTime().hashCode()); 
+        hashCode = prime * hashCode + ((getEndDateTime() == null) ? 0 : getEndDateTime().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof InstanceGroupDetail == false) return false;
+        InstanceGroupDetail other = (InstanceGroupDetail)obj;
+        
+        if (other.getInstanceGroupId() == null ^ this.getInstanceGroupId() == null) return false;
+        if (other.getInstanceGroupId() != null && other.getInstanceGroupId().equals(this.getInstanceGroupId()) == false) return false; 
+        if (other.getName() == null ^ this.getName() == null) return false;
+        if (other.getName() != null && other.getName().equals(this.getName()) == false) return false; 
+        if (other.getMarket() == null ^ this.getMarket() == null) return false;
+        if (other.getMarket() != null && other.getMarket().equals(this.getMarket()) == false) return false; 
+        if (other.getInstanceRole() == null ^ this.getInstanceRole() == null) return false;
+        if (other.getInstanceRole() != null && other.getInstanceRole().equals(this.getInstanceRole()) == false) return false; 
+        if (other.getBidPrice() == null ^ this.getBidPrice() == null) return false;
+        if (other.getBidPrice() != null && other.getBidPrice().equals(this.getBidPrice()) == false) return false; 
+        if (other.getInstanceType() == null ^ this.getInstanceType() == null) return false;
+        if (other.getInstanceType() != null && other.getInstanceType().equals(this.getInstanceType()) == false) return false; 
+        if (other.getInstanceRequestCount() == null ^ this.getInstanceRequestCount() == null) return false;
+        if (other.getInstanceRequestCount() != null && other.getInstanceRequestCount().equals(this.getInstanceRequestCount()) == false) return false; 
+        if (other.getInstanceRunningCount() == null ^ this.getInstanceRunningCount() == null) return false;
+        if (other.getInstanceRunningCount() != null && other.getInstanceRunningCount().equals(this.getInstanceRunningCount()) == false) return false; 
+        if (other.getState() == null ^ this.getState() == null) return false;
+        if (other.getState() != null && other.getState().equals(this.getState()) == false) return false; 
+        if (other.getLastStateChangeReason() == null ^ this.getLastStateChangeReason() == null) return false;
+        if (other.getLastStateChangeReason() != null && other.getLastStateChangeReason().equals(this.getLastStateChangeReason()) == false) return false; 
+        if (other.getCreationDateTime() == null ^ this.getCreationDateTime() == null) return false;
+        if (other.getCreationDateTime() != null && other.getCreationDateTime().equals(this.getCreationDateTime()) == false) return false; 
+        if (other.getStartDateTime() == null ^ this.getStartDateTime() == null) return false;
+        if (other.getStartDateTime() != null && other.getStartDateTime().equals(this.getStartDateTime()) == false) return false; 
+        if (other.getReadyDateTime() == null ^ this.getReadyDateTime() == null) return false;
+        if (other.getReadyDateTime() != null && other.getReadyDateTime().equals(this.getReadyDateTime()) == false) return false; 
+        if (other.getEndDateTime() == null ^ this.getEndDateTime() == null) return false;
+        if (other.getEndDateTime() != null && other.getEndDateTime().equals(this.getEndDateTime()) == false) return false; 
+        return true;
     }
     
 }

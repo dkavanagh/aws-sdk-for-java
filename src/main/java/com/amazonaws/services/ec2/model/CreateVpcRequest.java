@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,16 +18,13 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#createVpc(CreateVpcRequest) CreateVpc operation}.
  * <p>
- * Creates a VPC with the CIDR block you specify. The smallest VPC you
- * can create uses a <code>/28</code> netmask (16 IP addresses), and the
- * largest uses a <code>/18</code> netmask (16,384 IP addresses). To help
- * you decide how big to make your VPC, go to the topic about creating
- * VPCs in the Amazon Virtual Private Cloud Developer Guide.
+ * Creates a VPC with the CIDR block you specify. The smallest VPC you can create uses a <code>/28</code> netmask (16 IP addresses), and the largest
+ * uses a <code>/18</code> netmask (16,384 IP addresses). To help you decide how big to make your VPC, go to the topic about creating VPCs in the Amazon
+ * Virtual Private Cloud Developer Guide.
  * </p>
  * <p>
- * By default, each instance you launch in the VPC has the default DHCP
- * options (the standard EC2 host name, no domain name, no DNS server, no
- * NTP server, and no NetBIOS server or node type).
+ * By default, each instance you launch in the VPC has the default DHCP options (the standard EC2 host name, no domain name, no DNS server, no NTP
+ * server, and no NetBIOS server or node type).
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#createVpc(CreateVpcRequest)
@@ -62,6 +59,8 @@ public class CreateVpcRequest extends AmazonWebServiceRequest {
     public CreateVpcRequest(String cidrBlock) {
         this.cidrBlock = cidrBlock;
     }
+
+    
     
     /**
      * A valid CIDR block.
@@ -155,10 +154,35 @@ public class CreateVpcRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("CidrBlock: " + cidrBlock + ", ");
-        sb.append("InstanceTenancy: " + instanceTenancy + ", ");
+        if (cidrBlock != null) sb.append("CidrBlock: " + cidrBlock + ", ");
+        if (instanceTenancy != null) sb.append("InstanceTenancy: " + instanceTenancy + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getCidrBlock() == null) ? 0 : getCidrBlock().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceTenancy() == null) ? 0 : getInstanceTenancy().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof CreateVpcRequest == false) return false;
+        CreateVpcRequest other = (CreateVpcRequest)obj;
+        
+        if (other.getCidrBlock() == null ^ this.getCidrBlock() == null) return false;
+        if (other.getCidrBlock() != null && other.getCidrBlock().equals(this.getCidrBlock()) == false) return false; 
+        if (other.getInstanceTenancy() == null ^ this.getInstanceTenancy() == null) return false;
+        if (other.getInstanceTenancy() != null && other.getInstanceTenancy().equals(this.getInstanceTenancy()) == false) return false; 
+        return true;
     }
     
 }

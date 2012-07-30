@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,9 +18,8 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.rds.AmazonRDS#describeDBParameterGroups(DescribeDBParameterGroupsRequest) DescribeDBParameterGroups operation}.
  * <p>
- * Returns a list of DBParameterGroup descriptions. If a
- * DBParameterGroupName is specified, the list will contain only the
- * descriptions of the specified DBParameterGroup.
+ * Returns a list of DBParameterGroup descriptions. If a DBParameterGroupName is specified, the list will contain only the description of the specified
+ * DBParameterGroup.
  * </p>
  *
  * @see com.amazonaws.services.rds.AmazonRDS#describeDBParameterGroups(DescribeDBParameterGroupsRequest)
@@ -28,7 +27,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class DescribeDBParameterGroupsRequest extends AmazonWebServiceRequest {
 
     /**
-     * The name of a specific database parameter group to return details for.
+     * The name of a specific DB Parameter Group to return details for.
      * <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric characters</li>
      * <li>First character must be a letter</li> <li>Cannot end with a hyphen
      * or contain two consecutive hyphens</li> </ul>
@@ -44,7 +43,7 @@ public class DescribeDBParameterGroupsRequest extends AmazonWebServiceRequest {
     private Integer maxRecords;
 
     /**
-     * An optional marker provided in the previous DescribeDBInstances
+     * An optional marker provided in the previous DescribeDBParameterGroups
      * request. If this parameter is specified, the response includes only
      * records beyond the marker, up to the value specified by
      * <code>MaxRecords</code>.
@@ -58,12 +57,12 @@ public class DescribeDBParameterGroupsRequest extends AmazonWebServiceRequest {
     public DescribeDBParameterGroupsRequest() {}
     
     /**
-     * The name of a specific database parameter group to return details for.
+     * The name of a specific DB Parameter Group to return details for.
      * <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric characters</li>
      * <li>First character must be a letter</li> <li>Cannot end with a hyphen
      * or contain two consecutive hyphens</li> </ul>
      *
-     * @return The name of a specific database parameter group to return details for.
+     * @return The name of a specific DB Parameter Group to return details for.
      *         <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric characters</li>
      *         <li>First character must be a letter</li> <li>Cannot end with a hyphen
      *         or contain two consecutive hyphens</li> </ul>
@@ -73,12 +72,12 @@ public class DescribeDBParameterGroupsRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * The name of a specific database parameter group to return details for.
+     * The name of a specific DB Parameter Group to return details for.
      * <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric characters</li>
      * <li>First character must be a letter</li> <li>Cannot end with a hyphen
      * or contain two consecutive hyphens</li> </ul>
      *
-     * @param dBParameterGroupName The name of a specific database parameter group to return details for.
+     * @param dBParameterGroupName The name of a specific DB Parameter Group to return details for.
      *         <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric characters</li>
      *         <li>First character must be a letter</li> <li>Cannot end with a hyphen
      *         or contain two consecutive hyphens</li> </ul>
@@ -88,14 +87,14 @@ public class DescribeDBParameterGroupsRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * The name of a specific database parameter group to return details for.
+     * The name of a specific DB Parameter Group to return details for.
      * <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric characters</li>
      * <li>First character must be a letter</li> <li>Cannot end with a hyphen
      * or contain two consecutive hyphens</li> </ul>
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param dBParameterGroupName The name of a specific database parameter group to return details for.
+     * @param dBParameterGroupName The name of a specific DB Parameter Group to return details for.
      *         <p>Constraints: <ul> <li>Must be 1 to 255 alphanumeric characters</li>
      *         <li>First character must be a letter</li> <li>Cannot end with a hyphen
      *         or contain two consecutive hyphens</li> </ul>
@@ -162,12 +161,12 @@ public class DescribeDBParameterGroupsRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * An optional marker provided in the previous DescribeDBInstances
+     * An optional marker provided in the previous DescribeDBParameterGroups
      * request. If this parameter is specified, the response includes only
      * records beyond the marker, up to the value specified by
      * <code>MaxRecords</code>.
      *
-     * @return An optional marker provided in the previous DescribeDBInstances
+     * @return An optional marker provided in the previous DescribeDBParameterGroups
      *         request. If this parameter is specified, the response includes only
      *         records beyond the marker, up to the value specified by
      *         <code>MaxRecords</code>.
@@ -177,12 +176,12 @@ public class DescribeDBParameterGroupsRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * An optional marker provided in the previous DescribeDBInstances
+     * An optional marker provided in the previous DescribeDBParameterGroups
      * request. If this parameter is specified, the response includes only
      * records beyond the marker, up to the value specified by
      * <code>MaxRecords</code>.
      *
-     * @param marker An optional marker provided in the previous DescribeDBInstances
+     * @param marker An optional marker provided in the previous DescribeDBParameterGroups
      *         request. If this parameter is specified, the response includes only
      *         records beyond the marker, up to the value specified by
      *         <code>MaxRecords</code>.
@@ -192,14 +191,14 @@ public class DescribeDBParameterGroupsRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * An optional marker provided in the previous DescribeDBInstances
+     * An optional marker provided in the previous DescribeDBParameterGroups
      * request. If this parameter is specified, the response includes only
      * records beyond the marker, up to the value specified by
      * <code>MaxRecords</code>.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param marker An optional marker provided in the previous DescribeDBInstances
+     * @param marker An optional marker provided in the previous DescribeDBParameterGroups
      *         request. If this parameter is specified, the response includes only
      *         records beyond the marker, up to the value specified by
      *         <code>MaxRecords</code>.
@@ -225,11 +224,39 @@ public class DescribeDBParameterGroupsRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("DBParameterGroupName: " + dBParameterGroupName + ", ");
-        sb.append("MaxRecords: " + maxRecords + ", ");
-        sb.append("Marker: " + marker + ", ");
+        if (dBParameterGroupName != null) sb.append("DBParameterGroupName: " + dBParameterGroupName + ", ");
+        if (maxRecords != null) sb.append("MaxRecords: " + maxRecords + ", ");
+        if (marker != null) sb.append("Marker: " + marker + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getDBParameterGroupName() == null) ? 0 : getDBParameterGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getMaxRecords() == null) ? 0 : getMaxRecords().hashCode()); 
+        hashCode = prime * hashCode + ((getMarker() == null) ? 0 : getMarker().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeDBParameterGroupsRequest == false) return false;
+        DescribeDBParameterGroupsRequest other = (DescribeDBParameterGroupsRequest)obj;
+        
+        if (other.getDBParameterGroupName() == null ^ this.getDBParameterGroupName() == null) return false;
+        if (other.getDBParameterGroupName() != null && other.getDBParameterGroupName().equals(this.getDBParameterGroupName()) == false) return false; 
+        if (other.getMaxRecords() == null ^ this.getMaxRecords() == null) return false;
+        if (other.getMaxRecords() != null && other.getMaxRecords().equals(this.getMaxRecords()) == false) return false; 
+        if (other.getMarker() == null ^ this.getMarker() == null) return false;
+        if (other.getMarker() != null && other.getMarker().equals(this.getMarker()) == false) return false; 
+        return true;
     }
     
 }

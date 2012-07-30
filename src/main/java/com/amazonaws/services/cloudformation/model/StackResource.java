@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -58,7 +58,7 @@ public class StackResource {
      * Current status of the resource.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE
+     * <b>Allowed Values: </b>CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_FAILED, UPDATE_COMPLETE
      */
     private String resourceStatus;
 
@@ -298,7 +298,7 @@ public class StackResource {
      * Current status of the resource.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE
+     * <b>Allowed Values: </b>CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_FAILED, UPDATE_COMPLETE
      *
      * @return Current status of the resource.
      *
@@ -312,7 +312,7 @@ public class StackResource {
      * Current status of the resource.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE
+     * <b>Allowed Values: </b>CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_FAILED, UPDATE_COMPLETE
      *
      * @param resourceStatus Current status of the resource.
      *
@@ -328,7 +328,7 @@ public class StackResource {
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE
+     * <b>Allowed Values: </b>CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_FAILED, UPDATE_COMPLETE
      *
      * @param resourceStatus Current status of the resource.
      *
@@ -342,6 +342,40 @@ public class StackResource {
         return this;
     }
     
+    
+    /**
+     * Current status of the resource.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_FAILED, UPDATE_COMPLETE
+     *
+     * @param resourceStatus Current status of the resource.
+     *
+     * @see ResourceStatus
+     */
+    public void setResourceStatus(ResourceStatus resourceStatus) {
+        this.resourceStatus = resourceStatus.toString();
+    }
+    
+    /**
+     * Current status of the resource.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_FAILED, UPDATE_COMPLETE
+     *
+     * @param resourceStatus Current status of the resource.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see ResourceStatus
+     */
+    public StackResource withResourceStatus(ResourceStatus resourceStatus) {
+        this.resourceStatus = resourceStatus.toString();
+        return this;
+    }
     
     /**
      * Success/failure message associated with the resource.
@@ -423,17 +457,63 @@ public class StackResource {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("StackName: " + stackName + ", ");
-        sb.append("StackId: " + stackId + ", ");
-        sb.append("LogicalResourceId: " + logicalResourceId + ", ");
-        sb.append("PhysicalResourceId: " + physicalResourceId + ", ");
-        sb.append("ResourceType: " + resourceType + ", ");
-        sb.append("Timestamp: " + timestamp + ", ");
-        sb.append("ResourceStatus: " + resourceStatus + ", ");
-        sb.append("ResourceStatusReason: " + resourceStatusReason + ", ");
-        sb.append("Description: " + description + ", ");
+        if (stackName != null) sb.append("StackName: " + stackName + ", ");
+        if (stackId != null) sb.append("StackId: " + stackId + ", ");
+        if (logicalResourceId != null) sb.append("LogicalResourceId: " + logicalResourceId + ", ");
+        if (physicalResourceId != null) sb.append("PhysicalResourceId: " + physicalResourceId + ", ");
+        if (resourceType != null) sb.append("ResourceType: " + resourceType + ", ");
+        if (timestamp != null) sb.append("Timestamp: " + timestamp + ", ");
+        if (resourceStatus != null) sb.append("ResourceStatus: " + resourceStatus + ", ");
+        if (resourceStatusReason != null) sb.append("ResourceStatusReason: " + resourceStatusReason + ", ");
+        if (description != null) sb.append("Description: " + description + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getStackName() == null) ? 0 : getStackName().hashCode()); 
+        hashCode = prime * hashCode + ((getStackId() == null) ? 0 : getStackId().hashCode()); 
+        hashCode = prime * hashCode + ((getLogicalResourceId() == null) ? 0 : getLogicalResourceId().hashCode()); 
+        hashCode = prime * hashCode + ((getPhysicalResourceId() == null) ? 0 : getPhysicalResourceId().hashCode()); 
+        hashCode = prime * hashCode + ((getResourceType() == null) ? 0 : getResourceType().hashCode()); 
+        hashCode = prime * hashCode + ((getTimestamp() == null) ? 0 : getTimestamp().hashCode()); 
+        hashCode = prime * hashCode + ((getResourceStatus() == null) ? 0 : getResourceStatus().hashCode()); 
+        hashCode = prime * hashCode + ((getResourceStatusReason() == null) ? 0 : getResourceStatusReason().hashCode()); 
+        hashCode = prime * hashCode + ((getDescription() == null) ? 0 : getDescription().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof StackResource == false) return false;
+        StackResource other = (StackResource)obj;
+        
+        if (other.getStackName() == null ^ this.getStackName() == null) return false;
+        if (other.getStackName() != null && other.getStackName().equals(this.getStackName()) == false) return false; 
+        if (other.getStackId() == null ^ this.getStackId() == null) return false;
+        if (other.getStackId() != null && other.getStackId().equals(this.getStackId()) == false) return false; 
+        if (other.getLogicalResourceId() == null ^ this.getLogicalResourceId() == null) return false;
+        if (other.getLogicalResourceId() != null && other.getLogicalResourceId().equals(this.getLogicalResourceId()) == false) return false; 
+        if (other.getPhysicalResourceId() == null ^ this.getPhysicalResourceId() == null) return false;
+        if (other.getPhysicalResourceId() != null && other.getPhysicalResourceId().equals(this.getPhysicalResourceId()) == false) return false; 
+        if (other.getResourceType() == null ^ this.getResourceType() == null) return false;
+        if (other.getResourceType() != null && other.getResourceType().equals(this.getResourceType()) == false) return false; 
+        if (other.getTimestamp() == null ^ this.getTimestamp() == null) return false;
+        if (other.getTimestamp() != null && other.getTimestamp().equals(this.getTimestamp()) == false) return false; 
+        if (other.getResourceStatus() == null ^ this.getResourceStatus() == null) return false;
+        if (other.getResourceStatus() != null && other.getResourceStatus().equals(this.getResourceStatus()) == false) return false; 
+        if (other.getResourceStatusReason() == null ^ this.getResourceStatusReason() == null) return false;
+        if (other.getResourceStatusReason() != null && other.getResourceStatusReason().equals(this.getResourceStatusReason()) == false) return false; 
+        if (other.getDescription() == null ^ this.getDescription() == null) return false;
+        if (other.getDescription() != null && other.getDescription().equals(this.getDescription()) == false) return false; 
+        return true;
     }
     
 }

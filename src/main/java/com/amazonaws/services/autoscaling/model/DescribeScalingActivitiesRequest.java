@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -21,15 +21,12 @@ import com.amazonaws.AmazonWebServiceRequest;
  * Returns the scaling activities for the specified Auto Scaling group.
  * </p>
  * <p>
- * If the specified <i>ActivityIds</i> list is empty, all the activities
- * from the past six weeks are returned. Activities are sorted by
- * completion time. Activities still in progress appear first on the
- * list.
+ * If the specified <code>ActivityIds</code> list is empty, all the activities from the past six weeks are returned. Activities are sorted by completion
+ * time. Activities still in progress appear first on the list.
  * </p>
  * <p>
- * This action supports pagination. If the response includes a token,
- * there are more records available. To get the additional records,
- * repeat the request with the response token as the NextToken parameter.
+ * This action supports pagination. If the response includes a token, there are more records available. To get the additional records, repeat the
+ * request with the response token as the <code>NextToken</code> parameter.
  * </p>
  *
  * @see com.amazonaws.services.autoscaling.AmazonAutoScaling#describeScalingActivities(DescribeScalingActivitiesRequest)
@@ -39,10 +36,10 @@ public class DescribeScalingActivitiesRequest extends AmazonWebServiceRequest {
     /**
      * A list containing the activity IDs of the desired scaling activities.
      * If this list is omitted, all activities are described. If an
-     * AutoScalingGroupName is provided, the results are limited to that
-     * group. The list of requested activities cannot contain more than 50
-     * items. If unknown activities are requested, they are ignored with no
-     * error.
+     * <code>AutoScalingGroupName</code> is provided, the results are limited
+     * to that group. The list of requested activities cannot contain more
+     * than 50 items. If unknown activities are requested, they are ignored
+     * with no error.
      */
     private java.util.List<String> activityIds;
 
@@ -75,19 +72,20 @@ public class DescribeScalingActivitiesRequest extends AmazonWebServiceRequest {
     /**
      * A list containing the activity IDs of the desired scaling activities.
      * If this list is omitted, all activities are described. If an
-     * AutoScalingGroupName is provided, the results are limited to that
-     * group. The list of requested activities cannot contain more than 50
-     * items. If unknown activities are requested, they are ignored with no
-     * error.
+     * <code>AutoScalingGroupName</code> is provided, the results are limited
+     * to that group. The list of requested activities cannot contain more
+     * than 50 items. If unknown activities are requested, they are ignored
+     * with no error.
      *
      * @return A list containing the activity IDs of the desired scaling activities.
      *         If this list is omitted, all activities are described. If an
-     *         AutoScalingGroupName is provided, the results are limited to that
-     *         group. The list of requested activities cannot contain more than 50
-     *         items. If unknown activities are requested, they are ignored with no
-     *         error.
+     *         <code>AutoScalingGroupName</code> is provided, the results are limited
+     *         to that group. The list of requested activities cannot contain more
+     *         than 50 items. If unknown activities are requested, they are ignored
+     *         with no error.
      */
     public java.util.List<String> getActivityIds() {
+        
         if (activityIds == null) {
             activityIds = new java.util.ArrayList<String>();
         }
@@ -97,47 +95,51 @@ public class DescribeScalingActivitiesRequest extends AmazonWebServiceRequest {
     /**
      * A list containing the activity IDs of the desired scaling activities.
      * If this list is omitted, all activities are described. If an
-     * AutoScalingGroupName is provided, the results are limited to that
-     * group. The list of requested activities cannot contain more than 50
-     * items. If unknown activities are requested, they are ignored with no
-     * error.
+     * <code>AutoScalingGroupName</code> is provided, the results are limited
+     * to that group. The list of requested activities cannot contain more
+     * than 50 items. If unknown activities are requested, they are ignored
+     * with no error.
      *
      * @param activityIds A list containing the activity IDs of the desired scaling activities.
      *         If this list is omitted, all activities are described. If an
-     *         AutoScalingGroupName is provided, the results are limited to that
-     *         group. The list of requested activities cannot contain more than 50
-     *         items. If unknown activities are requested, they are ignored with no
-     *         error.
+     *         <code>AutoScalingGroupName</code> is provided, the results are limited
+     *         to that group. The list of requested activities cannot contain more
+     *         than 50 items. If unknown activities are requested, they are ignored
+     *         with no error.
      */
     public void setActivityIds(java.util.Collection<String> activityIds) {
-        java.util.List<String> activityIdsCopy = new java.util.ArrayList<String>();
-        if (activityIds != null) {
-            activityIdsCopy.addAll(activityIds);
+        if (activityIds == null) {
+            this.activityIds = null;
+            return;
         }
+
+        java.util.List<String> activityIdsCopy = new java.util.ArrayList<String>(activityIds.size());
+        activityIdsCopy.addAll(activityIds);
         this.activityIds = activityIdsCopy;
     }
     
     /**
      * A list containing the activity IDs of the desired scaling activities.
      * If this list is omitted, all activities are described. If an
-     * AutoScalingGroupName is provided, the results are limited to that
-     * group. The list of requested activities cannot contain more than 50
-     * items. If unknown activities are requested, they are ignored with no
-     * error.
+     * <code>AutoScalingGroupName</code> is provided, the results are limited
+     * to that group. The list of requested activities cannot contain more
+     * than 50 items. If unknown activities are requested, they are ignored
+     * with no error.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
      * @param activityIds A list containing the activity IDs of the desired scaling activities.
      *         If this list is omitted, all activities are described. If an
-     *         AutoScalingGroupName is provided, the results are limited to that
-     *         group. The list of requested activities cannot contain more than 50
-     *         items. If unknown activities are requested, they are ignored with no
-     *         error.
+     *         <code>AutoScalingGroupName</code> is provided, the results are limited
+     *         to that group. The list of requested activities cannot contain more
+     *         than 50 items. If unknown activities are requested, they are ignored
+     *         with no error.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
      */
     public DescribeScalingActivitiesRequest withActivityIds(String... activityIds) {
+        if (getActivityIds() == null) setActivityIds(new java.util.ArrayList<String>(activityIds.length));
         for (String value : activityIds) {
             getActivityIds().add(value);
         }
@@ -147,29 +149,31 @@ public class DescribeScalingActivitiesRequest extends AmazonWebServiceRequest {
     /**
      * A list containing the activity IDs of the desired scaling activities.
      * If this list is omitted, all activities are described. If an
-     * AutoScalingGroupName is provided, the results are limited to that
-     * group. The list of requested activities cannot contain more than 50
-     * items. If unknown activities are requested, they are ignored with no
-     * error.
+     * <code>AutoScalingGroupName</code> is provided, the results are limited
+     * to that group. The list of requested activities cannot contain more
+     * than 50 items. If unknown activities are requested, they are ignored
+     * with no error.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
      * @param activityIds A list containing the activity IDs of the desired scaling activities.
      *         If this list is omitted, all activities are described. If an
-     *         AutoScalingGroupName is provided, the results are limited to that
-     *         group. The list of requested activities cannot contain more than 50
-     *         items. If unknown activities are requested, they are ignored with no
-     *         error.
+     *         <code>AutoScalingGroupName</code> is provided, the results are limited
+     *         to that group. The list of requested activities cannot contain more
+     *         than 50 items. If unknown activities are requested, they are ignored
+     *         with no error.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
      */
     public DescribeScalingActivitiesRequest withActivityIds(java.util.Collection<String> activityIds) {
-        java.util.List<String> activityIdsCopy = new java.util.ArrayList<String>();
-        if (activityIds != null) {
+        if (activityIds == null) {
+            this.activityIds = null;
+        } else {
+            java.util.List<String> activityIdsCopy = new java.util.ArrayList<String>(activityIds.size());
             activityIdsCopy.addAll(activityIds);
+            this.activityIds = activityIdsCopy;
         }
-        this.activityIds = activityIdsCopy;
 
         return this;
     }
@@ -324,12 +328,43 @@ public class DescribeScalingActivitiesRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("ActivityIds: " + activityIds + ", ");
-        sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
-        sb.append("MaxRecords: " + maxRecords + ", ");
-        sb.append("NextToken: " + nextToken + ", ");
+        if (activityIds != null) sb.append("ActivityIds: " + activityIds + ", ");
+        if (autoScalingGroupName != null) sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
+        if (maxRecords != null) sb.append("MaxRecords: " + maxRecords + ", ");
+        if (nextToken != null) sb.append("NextToken: " + nextToken + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getActivityIds() == null) ? 0 : getActivityIds().hashCode()); 
+        hashCode = prime * hashCode + ((getAutoScalingGroupName() == null) ? 0 : getAutoScalingGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getMaxRecords() == null) ? 0 : getMaxRecords().hashCode()); 
+        hashCode = prime * hashCode + ((getNextToken() == null) ? 0 : getNextToken().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeScalingActivitiesRequest == false) return false;
+        DescribeScalingActivitiesRequest other = (DescribeScalingActivitiesRequest)obj;
+        
+        if (other.getActivityIds() == null ^ this.getActivityIds() == null) return false;
+        if (other.getActivityIds() != null && other.getActivityIds().equals(this.getActivityIds()) == false) return false; 
+        if (other.getAutoScalingGroupName() == null ^ this.getAutoScalingGroupName() == null) return false;
+        if (other.getAutoScalingGroupName() != null && other.getAutoScalingGroupName().equals(this.getAutoScalingGroupName()) == false) return false; 
+        if (other.getMaxRecords() == null ^ this.getMaxRecords() == null) return false;
+        if (other.getMaxRecords() != null && other.getMaxRecords().equals(this.getMaxRecords()) == false) return false; 
+        if (other.getNextToken() == null ^ this.getNextToken() == null) return false;
+        if (other.getNextToken() != null && other.getNextToken().equals(this.getNextToken()) == false) return false; 
+        return true;
     }
     
 }

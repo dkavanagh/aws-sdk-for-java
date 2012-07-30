@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -35,10 +35,10 @@ public class CreateCacheClusterRequestMarshaller implements Marshaller<Request<C
         if (createCacheClusterRequest == null) {
 		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
 		}
-		
+
         Request<CreateCacheClusterRequest> request = new DefaultRequest<CreateCacheClusterRequest>(createCacheClusterRequest, "AmazonElastiCache");
         request.addParameter("Action", "CreateCacheCluster");
-        request.addParameter("Version", "2011-07-15");
+        request.addParameter("Version", "2012-03-09");
 
         if (createCacheClusterRequest.getCacheClusterId() != null) {
             request.addParameter("CacheClusterId", StringUtils.fromString(createCacheClusterRequest.getCacheClusterId()));
@@ -61,6 +61,7 @@ public class CreateCacheClusterRequestMarshaller implements Marshaller<Request<C
 
         java.util.List<String> cacheSecurityGroupNamesList = createCacheClusterRequest.getCacheSecurityGroupNames();
         int cacheSecurityGroupNamesListIndex = 1;
+
         for (String cacheSecurityGroupNamesListValue : cacheSecurityGroupNamesList) {
             if (cacheSecurityGroupNamesListValue != null) {
                 request.addParameter("CacheSecurityGroupNames.CacheSecurityGroupName." + cacheSecurityGroupNamesListIndex, StringUtils.fromString(cacheSecurityGroupNamesListValue));

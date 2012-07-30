@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.identitymanagement.AmazonIdentityManagement#addUserToGroup(AddUserToGroupRequest) AddUserToGroup operation}.
  * <p>
- * Adds the specified User to the specified group.
+ * Adds the specified user to the specified group.
  * </p>
  *
  * @see com.amazonaws.services.identitymanagement.AmazonIdentityManagement#addUserToGroup(AddUserToGroupRequest)
@@ -35,7 +35,7 @@ public class AddUserToGroupRequest extends AmazonWebServiceRequest {
     private String groupName;
 
     /**
-     * Name of the User to add.
+     * Name of the user to add.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
@@ -55,12 +55,14 @@ public class AddUserToGroupRequest extends AmazonWebServiceRequest {
      * initialize any additional object members.
      * 
      * @param groupName Name of the group to update.
-     * @param userName Name of the User to add.
+     * @param userName Name of the user to add.
      */
     public AddUserToGroupRequest(String groupName, String userName) {
         this.groupName = groupName;
         this.userName = userName;
     }
+
+    
     
     /**
      * Name of the group to update.
@@ -109,33 +111,33 @@ public class AddUserToGroupRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * Name of the User to add.
+     * Name of the user to add.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @return Name of the User to add.
+     * @return Name of the user to add.
      */
     public String getUserName() {
         return userName;
     }
     
     /**
-     * Name of the User to add.
+     * Name of the user to add.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User to add.
+     * @param userName Name of the user to add.
      */
     public void setUserName(String userName) {
         this.userName = userName;
     }
     
     /**
-     * Name of the User to add.
+     * Name of the user to add.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -143,7 +145,7 @@ public class AddUserToGroupRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 128<br/>
      * <b>Pattern: </b>[\w+=,.@-]*<br/>
      *
-     * @param userName Name of the User to add.
+     * @param userName Name of the user to add.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -166,10 +168,35 @@ public class AddUserToGroupRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("GroupName: " + groupName + ", ");
-        sb.append("UserName: " + userName + ", ");
+        if (groupName != null) sb.append("GroupName: " + groupName + ", ");
+        if (userName != null) sb.append("UserName: " + userName + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getGroupName() == null) ? 0 : getGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getUserName() == null) ? 0 : getUserName().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof AddUserToGroupRequest == false) return false;
+        AddUserToGroupRequest other = (AddUserToGroupRequest)obj;
+        
+        if (other.getGroupName() == null ^ this.getGroupName() == null) return false;
+        if (other.getGroupName() != null && other.getGroupName().equals(this.getGroupName()) == false) return false; 
+        if (other.getUserName() == null ^ this.getUserName() == null) return false;
+        if (other.getUserName() != null && other.getUserName().equals(this.getUserName()) == false) return false; 
+        return true;
     }
     
 }

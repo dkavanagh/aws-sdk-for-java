@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.ec2.model.*;
@@ -30,23 +31,32 @@ import com.amazonaws.util.StringUtils;
 public class AssociateAddressRequestMarshaller implements Marshaller<Request<AssociateAddressRequest>, AssociateAddressRequest> {
 
     public Request<AssociateAddressRequest> marshall(AssociateAddressRequest associateAddressRequest) {
+
+        if (associateAddressRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<AssociateAddressRequest> request = new DefaultRequest<AssociateAddressRequest>(associateAddressRequest, "AmazonEC2");
         request.addParameter("Action", "AssociateAddress");
-        request.addParameter("Version", "2011-05-15");
-        if (associateAddressRequest != null) {
-            if (associateAddressRequest.getInstanceId() != null) {
-                request.addParameter("InstanceId", StringUtils.fromString(associateAddressRequest.getInstanceId()));
-            }
+        request.addParameter("Version", "2012-06-15");
+
+        if (associateAddressRequest.getInstanceId() != null) {
+            request.addParameter("InstanceId", StringUtils.fromString(associateAddressRequest.getInstanceId()));
         }
-        if (associateAddressRequest != null) {
-            if (associateAddressRequest.getPublicIp() != null) {
-                request.addParameter("PublicIp", StringUtils.fromString(associateAddressRequest.getPublicIp()));
-            }
+        if (associateAddressRequest.getPublicIp() != null) {
+            request.addParameter("PublicIp", StringUtils.fromString(associateAddressRequest.getPublicIp()));
         }
-        if (associateAddressRequest != null) {
-            if (associateAddressRequest.getAllocationId() != null) {
-                request.addParameter("AllocationId", StringUtils.fromString(associateAddressRequest.getAllocationId()));
-            }
+        if (associateAddressRequest.getAllocationId() != null) {
+            request.addParameter("AllocationId", StringUtils.fromString(associateAddressRequest.getAllocationId()));
+        }
+        if (associateAddressRequest.getNetworkInterfaceId() != null) {
+            request.addParameter("NetworkInterfaceId", StringUtils.fromString(associateAddressRequest.getNetworkInterfaceId()));
+        }
+        if (associateAddressRequest.getPrivateIpAddress() != null) {
+            request.addParameter("PrivateIpAddress", StringUtils.fromString(associateAddressRequest.getPrivateIpAddress()));
+        }
+        if (associateAddressRequest.isAllowReassociation() != null) {
+            request.addParameter("AllowReassociation", StringUtils.fromBoolean(associateAddressRequest.isAllowReassociation()));
         }
 
 

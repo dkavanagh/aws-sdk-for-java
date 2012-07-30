@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -24,38 +24,50 @@ import com.amazonaws.services.identitymanagement.model.*;
  * Interface for accessing AmazonIdentityManagement asynchronously,
  * using Java Futures.
  * AWS Identity and Access Management <p>
- * This is the AWS Identity and Access Management (IAM) API Reference.
- * This guide provides descriptions of the IAM API as well as links to
- * related content in the guide, <a
- * href="http://docs.amazonwebservices.com/IAM/latest/UserGuide/"> Using
- * IAM </a> .
+ * This guide provides descriptions of the Identity and Access Management (IAM) API as well as links to related content in the guide, <a
+ * href="http://docs.amazonwebservices.com/IAM/latest/UserGuide/"> Using IAM </a> .
  * </p>
  * <p>
- * AWS Identity and Access Management (IAM) is a web service that enables
- * Amazon Web Services (AWS) customers to manage Users and User
- * permissions under their AWS Account.
+ * IAM is a web service that enables AWS customers to manage users and user permissions under their AWS account. For more information about this product
+ * go to <a href="http://aws.amazon.com/iam/"> AWS Identity and Access Management (IAM) </a> . For information about setting up signatures and
+ * authorization through the API, go to <a href="http://docs.amazonwebservices.com/general/latest/gr/signing_aws_api_requests.html"> Signing AWS API
+ * Requests </a> in the <i>AWS General Reference</i> . For general information about using the Query API with IAM, go to <a
+ * href="http://docs.amazonwebservices.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html"> Making Query Requests </a> in <i>Using IAM</i> .
  * </p>
  * <p>
- * For more information about this product go to <a
- * href="http://aws.amazon.com/iam/"> AWS Identity and Access Management
- * (IAM) </a> . For specific information about setting up signatures and
- * authorization through the API, go to <a
- * cs.amazonwebservices.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html">
- * Making Query Requests </a> in the Using IAM guide.
- * </p>
- * <p>
- * If you're new to AWS and need additional technical information about a
- * specific AWS product, you can find the product's technical
- * documentation at <a href="http://aws.amazon.com/documentation/">
- * http://aws.amazon.com/documentation/ </a> .
- * </p>
- * <p>
- * We will refer to Amazon AWS Identity and Access Management using the
- * abbreviated form IAM. All copyrights and legal protections still
- * apply.
+ * If you're new to AWS and need additional technical information about a specific AWS product, you can find the product's technical documentation at <a
+ * href="http://aws.amazon.com/documentation/"> http://aws.amazon.com/documentation/ </a> .
  * </p> 
  */       
 public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement {
+    /**
+     * <p>
+     * Deletes the specified AWS account alias. For information about using
+     * an AWS account alias, see <a
+     * ://docs.amazonwebservices.com/IAM/latest/UserGuide/AccountAlias.html">
+     * Using an Alias for Your AWS Account ID </a> in <i>Using AWS Identity
+     * and Access Management</i> .
+     * </p>
+     *
+     * @param deleteAccountAliasRequest Container for the necessary
+     *           parameters to execute the DeleteAccountAlias operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         DeleteAccountAlias service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<Void> deleteAccountAliasAsync(DeleteAccountAliasRequest deleteAccountAliasRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
     /**
      * <p>
      * Lists the groups that have the specified path prefix.
@@ -84,14 +96,14 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Deletes the access key associated with the specified User.
+     * Deletes the access key associated with the specified user.
      * </p>
      * <p>
-     * If you do not specify a User name, IAM determines the User name
+     * If you do not specify a user name, IAM determines the user name
      * implicitly based on the AWS Access Key ID signing the request. Because
-     * this action works for access keys under the AWS Account, you can use
-     * this API to manage root credentials even if the AWS Account has no
-     * associated Users.
+     * this action works for access keys under the AWS account, you can use
+     * this API to manage root credentials even if the AWS account has no
+     * associated users.
      * </p>
      *
      * @param deleteAccessKeyRequest Container for the necessary parameters
@@ -114,19 +126,20 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Deletes the specified AWS Account alias. For information about using
-     * an AWS Account alias, see <a
-     * ://docs.amazonwebservices.com/IAM/latest/UserGuide/AccountAlias.html">
-     * Using an Alias for Your AWS Account ID </a> in <i>Using AWS Identity
-     * and Access Management</i> .
+     * Deletes a virtual MFA device.
+     * </p>
+     * <p>
+     * <b>NOTE:</b>You must deactivate a user's virtual MFA device before you
+     * can delete it. For information about deactivating MFA devices, see
+     * DeactivateMFADevice.
      * </p>
      *
-     * @param deleteAccountAliasRequest Container for the necessary
-     *           parameters to execute the DeleteAccountAlias operation on
+     * @param deleteVirtualMFADeviceRequest Container for the necessary
+     *           parameters to execute the DeleteVirtualMFADevice operation on
      *           AmazonIdentityManagement.
      * 
      * @return A Java Future object containing the response from the
-     *         DeleteAccountAlias service method, as returned by
+     *         DeleteVirtualMFADevice service method, as returned by
      *         AmazonIdentityManagement.
      *
      * @throws AmazonClientException
@@ -137,90 +150,12 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
      *             If an error response is returned by AmazonIdentityManagement indicating
      *             either a problem with the data in the request, or a server side issue.
      */
-    public Future<Void> deleteAccountAliasAsync(DeleteAccountAliasRequest deleteAccountAliasRequest) 
+    public Future<Void> deleteVirtualMFADeviceAsync(DeleteVirtualMFADeviceRequest deleteVirtualMFADeviceRequest) 
             throws AmazonServiceException, AmazonClientException;
 
     /**
      * <p>
-     * Returns information about the signing certificates associated with the
-     * specified User. If there are none, the action returns an empty list.
-     * </p>
-     * <p>
-     * Although each User is limited to a small number of signing
-     * certificates, you can still paginate the results using the
-     * <code>MaxItems</code> and <code>Marker</code> parameters.
-     * </p>
-     * <p>
-     * If the <code>UserName</code> field is not specified, the UserName is
-     * determined implicitly based on the AWS Access Key ID used to sign the
-     * request. Because this action works for access keys under the AWS
-     * Account, this API can be used to manage root credentials even if the
-     * AWS Account has no associated Users.
-     * </p>
-     *
-     * @param listSigningCertificatesRequest Container for the necessary
-     *           parameters to execute the ListSigningCertificates operation on
-     *           AmazonIdentityManagement.
-     * 
-     * @return A Java Future object containing the response from the
-     *         ListSigningCertificates service method, as returned by
-     *         AmazonIdentityManagement.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonIdentityManagement indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<ListSigningCertificatesResult> listSigningCertificatesAsync(ListSigningCertificatesRequest listSigningCertificatesRequest) 
-            throws AmazonServiceException, AmazonClientException;
-
-    /**
-     * <p>
-     * Uploads an X.509 signing certificate and associates it with the
-     * specified User. Some AWS services use X.509 signing certificates to
-     * validate requests that are signed with a corresponding private key.
-     * When you upload the certificate, its default status is
-     * <code>Active</code> .
-     * </p>
-     * <p>
-     * If the <code>UserName</code> field is not specified, the User name is
-     * determined implicitly based on the AWS Access Key ID used to sign the
-     * request. Because this action works for access keys under the AWS
-     * Account, this API can be used to manage root credentials even if the
-     * AWS Account has no associated Users.
-     * </p>
-     * <p>
-     * <b>NOTE:</b>Because the body of a X.509 certificate can be large, you
-     * should use POST rather than GET when calling UploadSigningCertificate.
-     * For more information, see Making Query Requests in Using AWS Identity
-     * and Access Management.
-     * </p>
-     *
-     * @param uploadSigningCertificateRequest Container for the necessary
-     *           parameters to execute the UploadSigningCertificate operation on
-     *           AmazonIdentityManagement.
-     * 
-     * @return A Java Future object containing the response from the
-     *         UploadSigningCertificate service method, as returned by
-     *         AmazonIdentityManagement.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonIdentityManagement indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<UploadSigningCertificateResult> uploadSigningCertificateAsync(UploadSigningCertificateRequest uploadSigningCertificateRequest) 
-            throws AmazonServiceException, AmazonClientException;
-
-    /**
-     * <p>
-     * Deletes the specified policy associated with the specified User.
+     * Deletes the specified policy associated with the specified user.
      * </p>
      *
      * @param deleteUserPolicyRequest Container for the necessary parameters
@@ -244,22 +179,25 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
     /**
      * <p>
      * Adds (or updates) a policy document associated with the specified
-     * User. For information about policies, refer to <a
+     * user. For information about policies, refer to <a
      * ebservices.com/IAM/latest/UserGuide/index.html?PoliciesOverview.html">
      * Overview of Policies </a> in <i>Using AWS Identity and Access
      * Management</i> .
      * </p>
      * <p>
      * For information about limits on the number of policies you can
-     * associate with a User, see <a
-     * s.com/IAM/2010-05-08/UserGuide/index.html?LimitationsOnEntities.html">
+     * associate with a user, see <a
+     * vices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html">
      * Limitations on IAM Entities </a> in <i>Using AWS Identity and Access
      * Management</i> .
      * </p>
      * <p>
      * <b>NOTE:</b>Because policy documents can be large, you should use POST
-     * rather than GET when calling PutUserPolicy. For more information, see
-     * Making Query Requests in Using AWS Identity and Access Management.
+     * rather than GET when calling PutUserPolicy. For information about
+     * setting up signatures and authorization through the API, go to Signing
+     * AWS API Requests in the AWS General Reference. For general information
+     * about using the Query API with IAM, go to Making Query Requests in
+     * Using IAM.
      * </p>
      *
      * @param putUserPolicyRequest Container for the necessary parameters to
@@ -310,7 +248,7 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Retrieves the specified policy document for the specified User. The
+     * Retrieves the specified policy document for the specified user. The
      * returned policy is URL-encoded according to RFC 3986. For more
      * information about RFC 3986, go to <a
      * href="http://www.faqs.org/rfcs/rfc3986.html">
@@ -332,31 +270,6 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
      *             either a problem with the data in the request, or a server side issue.
      */
     public Future<GetUserPolicyResult> getUserPolicyAsync(GetUserPolicyRequest getUserPolicyRequest) 
-            throws AmazonServiceException, AmazonClientException;
-
-    /**
-     * <p>
-     * Updates the login profile for the specified User. Use this API to
-     * change the User's password.
-     * </p>
-     *
-     * @param updateLoginProfileRequest Container for the necessary
-     *           parameters to execute the UpdateLoginProfile operation on
-     *           AmazonIdentityManagement.
-     * 
-     * @return A Java Future object containing the response from the
-     *         UpdateLoginProfile service method, as returned by
-     *         AmazonIdentityManagement.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonIdentityManagement indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<Void> updateLoginProfileAsync(UpdateLoginProfileRequest updateLoginProfileRequest) 
             throws AmazonServiceException, AmazonClientException;
 
     /**
@@ -398,15 +311,15 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Updates the name and/or the path of the specified User.
+     * Updates the name and/or the path of the specified user.
      * </p>
      * <p>
      * <b>IMPORTANT:</b> You should understand the implications of changing a
-     * User's path or name. For more information, see Renaming Users and
+     * user's path or name. For more information, see Renaming Users and
      * Groups in Using AWS Identity and Access Management.
      * </p>
      * <p>
-     * <b>NOTE:</b>To change a User name the requester must have appropriate
+     * <b>NOTE:</b>To change a user name the requester must have appropriate
      * permissions on both the source object and the target object. For
      * example, to change Bob to Robert, the entity making the request must
      * have permission on Bob and Robert, or must have permission on all (*).
@@ -432,24 +345,33 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Deletes the login profile for the specified User, which terminates the
-     * User's ability to access AWS services through the IAM login page.
+     * Adds (or updates) a policy document associated with the specified
+     * role. For information about policies, go to <a
+     * ebservices.com/IAM/latest/UserGuide/index.html?PoliciesOverview.html">
+     * Overview of Policies </a> in <i>Using AWS Identity and Access
+     * Management</i> .
      * </p>
      * <p>
-     * <b>IMPORTANT:</b>Deleting a User's login profile does not prevent a
-     * User from accessing IAM through the command line interface or the API.
-     * To prevent all User access you must also either make the access key
-     * inactive or delete it. For more information about making keys
-     * inactive or deleting them, see UpdateAccessKey and DeleteAccessKey.
+     * For information about limits on the policies you can associate with a
+     * role, see <a
+     * vices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html">
+     * Limitations on IAM Entities </a> in <i>Using AWS Identity and Access
+     * Management</i> .
+     * </p>
+     * <p>
+     * <b>NOTE:</b>Because policy documents can be large, you should use POST
+     * rather than GET when calling PutRolePolicy. For information about
+     * setting up signatures and authorization through the API, go to Signing
+     * AWS API Requests in the AWS General Reference. For general information
+     * about using the Query API with IAM, go to Making Query Requests in
+     * Using IAM.
      * </p>
      *
-     * @param deleteLoginProfileRequest Container for the necessary
-     *           parameters to execute the DeleteLoginProfile operation on
-     *           AmazonIdentityManagement.
+     * @param putRolePolicyRequest Container for the necessary parameters to
+     *           execute the PutRolePolicy operation on AmazonIdentityManagement.
      * 
      * @return A Java Future object containing the response from the
-     *         DeleteLoginProfile service method, as returned by
-     *         AmazonIdentityManagement.
+     *         PutRolePolicy service method, as returned by AmazonIdentityManagement.
      *
      * @throws AmazonClientException
      *             If any internal errors are encountered inside the client while
@@ -459,21 +381,21 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
      *             If an error response is returned by AmazonIdentityManagement indicating
      *             either a problem with the data in the request, or a server side issue.
      */
-    public Future<Void> deleteLoginProfileAsync(DeleteLoginProfileRequest deleteLoginProfileRequest) 
+    public Future<Void> putRolePolicyAsync(PutRolePolicyRequest putRolePolicyRequest) 
             throws AmazonServiceException, AmazonClientException;
 
     /**
      * <p>
      * Changes the status of the specified signing certificate from active to
-     * disabled, or vice versa. This action can be used to disable a User's
-     * signing certificate as part of a certificate rotation workflow.
+     * disabled, or vice versa. This action can be used to disable a user's
+     * signing certificate as part of a certificate rotation work flow.
      * </p>
      * <p>
      * If the <code>UserName</code> field is not specified, the UserName is
      * determined implicitly based on the AWS Access Key ID used to sign the
      * request. Because this action works for access keys under the AWS
-     * Account, this API can be used to manage root credentials even if the
-     * AWS Account has no associated Users.
+     * account, this API can be used to manage root credentials even if the
+     * AWS account has no associated users.
      * </p>
      * <p>
      * For information about rotating certificates, see <a
@@ -528,7 +450,7 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Lists the Users that have the specified path prefix. If there are
+     * Lists the users that have the specified path prefix. If there are
      * none, the action returns an empty list.
      * </p>
      * <p>
@@ -590,73 +512,10 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Retrieves information about the specified server certificate.
-     * </p>
-     *
-     * @param getServerCertificateRequest Container for the necessary
-     *           parameters to execute the GetServerCertificate operation on
-     *           AmazonIdentityManagement.
-     * 
-     * @return A Java Future object containing the response from the
-     *         GetServerCertificate service method, as returned by
-     *         AmazonIdentityManagement.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonIdentityManagement indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<GetServerCertificateResult> getServerCertificateAsync(GetServerCertificateRequest getServerCertificateRequest) 
-            throws AmazonServiceException, AmazonClientException;
-
-    /**
-     * <p>
-     * Adds (or updates) a policy document associated with the specified
-     * group. For information about policies, refer to <a
-     * ebservices.com/IAM/latest/UserGuide/index.html?PoliciesOverview.html">
-     * Overview of Policies </a> in <i>Using AWS Identity and Access
-     * Management</i> .
+     * Creates a new user for your AWS account.
      * </p>
      * <p>
-     * For information about limits on the number of policies you can
-     * associate with a group, see <a
-     * s.com/IAM/2010-05-08/UserGuide/index.html?LimitationsOnEntities.html">
-     * Limitations on IAM Entities </a> in <i>Using AWS Identity and Access
-     * Management</i> .
-     * </p>
-     * <p>
-     * <b>NOTE:</b>Because policy documents can be large, you should use POST
-     * rather than GET when calling PutGroupPolicy. For more information, see
-     * Making Query Requests in Using AWS Identity and Access Management.
-     * </p>
-     *
-     * @param putGroupPolicyRequest Container for the necessary parameters to
-     *           execute the PutGroupPolicy operation on AmazonIdentityManagement.
-     * 
-     * @return A Java Future object containing the response from the
-     *         PutGroupPolicy service method, as returned by
-     *         AmazonIdentityManagement.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonIdentityManagement indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<Void> putGroupPolicyAsync(PutGroupPolicyRequest putGroupPolicyRequest) 
-            throws AmazonServiceException, AmazonClientException;
-
-    /**
-     * <p>
-     * Creates a new User for your AWS Account.
-     * </p>
-     * <p>
-     * For information about limitations on the number of Users you can
+     * For information about limitations on the number of users you can
      * create, see <a
      * vices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html">
      * Limitations on IAM Entities </a> in <i>Using AWS Identity and Access
@@ -682,41 +541,9 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Deletes the specified signing certificate associated with the
-     * specified User.
-     * </p>
-     * <p>
-     * If you do not specify a User name, IAM determines the User name
-     * implicitly based on the AWS Access Key ID signing the request. Because
-     * this action works for access keys under the AWS Account, you can use
-     * this API to manage root credentials even if the AWS Account has no
-     * associated Users.
-     * </p>
-     *
-     * @param deleteSigningCertificateRequest Container for the necessary
-     *           parameters to execute the DeleteSigningCertificate operation on
-     *           AmazonIdentityManagement.
-     * 
-     * @return A Java Future object containing the response from the
-     *         DeleteSigningCertificate service method, as returned by
-     *         AmazonIdentityManagement.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonIdentityManagement indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<Void> deleteSigningCertificateAsync(DeleteSigningCertificateRequest deleteSigningCertificateRequest) 
-            throws AmazonServiceException, AmazonClientException;
-
-    /**
-     * <p>
      * Enables the specified MFA device and associates it with the specified
-     * User name. When enabled, the MFA device is required for every
-     * subsequent login by the User name associated with the device.
+     * user name. When enabled, the MFA device is required for every
+     * subsequent login by the user name associated with the device.
      * </p>
      *
      * @param enableMFADeviceRequest Container for the necessary parameters
@@ -739,19 +566,15 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Lists the names of the policies associated with the specified User. If
-     * there are none, the action returns an empty list.
-     * </p>
-     * <p>
-     * You can paginate the results using the <code>MaxItems</code> and
-     * <code>Marker</code> parameters.
+     * Deletes the password policy for the AWS account.
      * </p>
      *
-     * @param listUserPoliciesRequest Container for the necessary parameters
-     *           to execute the ListUserPolicies operation on AmazonIdentityManagement.
+     * @param deleteAccountPasswordPolicyRequest Container for the necessary
+     *           parameters to execute the DeleteAccountPasswordPolicy operation on
+     *           AmazonIdentityManagement.
      * 
      * @return A Java Future object containing the response from the
-     *         ListUserPolicies service method, as returned by
+     *         DeleteAccountPasswordPolicy service method, as returned by
      *         AmazonIdentityManagement.
      *
      * @throws AmazonClientException
@@ -762,52 +585,13 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
      *             If an error response is returned by AmazonIdentityManagement indicating
      *             either a problem with the data in the request, or a server side issue.
      */
-    public Future<ListUserPoliciesResult> listUserPoliciesAsync(ListUserPoliciesRequest listUserPoliciesRequest) 
+    public Future<Void> deleteAccountPasswordPolicyAsync(DeleteAccountPasswordPolicyRequest deleteAccountPasswordPolicyRequest) 
             throws AmazonServiceException, AmazonClientException;
 
     /**
      * <p>
-     * Returns information about the Access Key IDs associated with the
-     * specified User. If there are none, the action returns an empty list.
-     * </p>
-     * <p>
-     * Although each User is limited to a small number of keys, you can still
-     * paginate the results using the <code>MaxItems</code> and
-     * <code>Marker</code> parameters.
-     * </p>
-     * <p>
-     * If the <code>UserName</code> field is not specified, the UserName is
-     * determined implicitly based on the AWS Access Key ID used to sign the
-     * request. Because this action works for access keys under the AWS
-     * Account, this API can be used to manage root credentials even if the
-     * AWS Account has no associated Users.
-     * </p>
-     * <p>
-     * <b>NOTE:</b>To ensure the security of your AWS Account, the secret
-     * access key is accessible only during key and User creation.
-     * </p>
-     *
-     * @param listAccessKeysRequest Container for the necessary parameters to
-     *           execute the ListAccessKeys operation on AmazonIdentityManagement.
-     * 
-     * @return A Java Future object containing the response from the
-     *         ListAccessKeys service method, as returned by
-     *         AmazonIdentityManagement.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonIdentityManagement indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<ListAccessKeysResult> listAccessKeysAsync(ListAccessKeysRequest listAccessKeysRequest) 
-            throws AmazonServiceException, AmazonClientException;
-
-    /**
-     * <p>
-     * Retrieves the login profile for the specified User.
+     * Retrieves the user name and password create date for the specified
+     * user.
      * </p>
      *
      * @param getLoginProfileRequest Container for the necessary parameters
@@ -830,19 +614,33 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Lists the groups the specified User belongs to.
+     * Uploads a server certificate entity for the AWS account. The server
+     * certificate entity includes a public key certificate, a private key,
+     * and an optional certificate chain, which should all be PEM-encoded.
      * </p>
      * <p>
-     * You can paginate the results using the <code>MaxItems</code> and
-     * <code>Marker</code> parameters.
+     * For information about the number of server certificates you can
+     * upload, see <a
+     * vices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html">
+     * Limitations on IAM Entities </a> in <i>Using AWS Identity and Access
+     * Management</i> .
+     * </p>
+     * <p>
+     * <b>NOTE:</b>Because the body of the public key certificate, private
+     * key, and the certificate chain can be large, you should use POST
+     * rather than GET when calling UploadServerCertificate. For information
+     * about setting up signatures and authorization through the API, go to
+     * Signing AWS API Requests in the AWS General Reference. For general
+     * information about using the Query API with IAM, go to Making Query
+     * Requests in Using IAM.
      * </p>
      *
-     * @param listGroupsForUserRequest Container for the necessary parameters
-     *           to execute the ListGroupsForUser operation on
+     * @param uploadServerCertificateRequest Container for the necessary
+     *           parameters to execute the UploadServerCertificate operation on
      *           AmazonIdentityManagement.
      * 
      * @return A Java Future object containing the response from the
-     *         ListGroupsForUser service method, as returned by
+     *         UploadServerCertificate service method, as returned by
      *         AmazonIdentityManagement.
      *
      * @throws AmazonClientException
@@ -853,7 +651,7 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
      *             If an error response is returned by AmazonIdentityManagement indicating
      *             either a problem with the data in the request, or a server side issue.
      */
-    public Future<ListGroupsForUserResult> listGroupsForUserAsync(ListGroupsForUserRequest listGroupsForUserRequest) 
+    public Future<UploadServerCertificateResult> uploadServerCertificateAsync(UploadServerCertificateRequest uploadServerCertificateRequest) 
             throws AmazonServiceException, AmazonClientException;
 
     /**
@@ -886,48 +684,8 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Uploads a server certificate entity for the AWS Account. The server
-     * certificate entity includes a public key certificate, a private key,
-     * and an optional certificate chain, which should all be PEM-encoded.
-     * </p>
-     * <p>
-     * For information about the number of server certificates you can
-     * upload, see <a
-     * vices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html">
-     * Limitations on IAM Entities </a> in <i>Using AWS Identity and Access
-     * Management</i> .
-     * </p>
-     * <p>
-     * <b>NOTE:</b>Because the body of the public key certificate, private
-     * key, and the certificate chain can be large, you should use POST
-     * rather than GET when calling UploadServerCertificate. For more
-     * information, see Making Query Requests in Using AWS Identity and
-     * Access Management.
-     * </p>
-     *
-     * @param uploadServerCertificateRequest Container for the necessary
-     *           parameters to execute the UploadServerCertificate operation on
-     *           AmazonIdentityManagement.
-     * 
-     * @return A Java Future object containing the response from the
-     *         UploadServerCertificate service method, as returned by
-     *         AmazonIdentityManagement.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonIdentityManagement indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<UploadServerCertificateResult> uploadServerCertificateAsync(UploadServerCertificateRequest uploadServerCertificateRequest) 
-            throws AmazonServiceException, AmazonClientException;
-
-    /**
-     * <p>
-     * This action creates an alias for your AWS Account. For information
-     * about using an AWS Account alias, see <a
+     * This action creates an alias for your AWS account. For information
+     * about using an AWS account alias, see <a
      * ://docs.amazonwebservices.com/IAM/latest/UserGuide/AccountAlias.html">
      * Using an Alias for Your AWS Account ID </a> in <i>Using AWS Identity
      * and Access Management</i> .
@@ -954,34 +712,7 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Retrieves the specified policy document for the specified group. The
-     * returned policy is URL-encoded according to RFC 3986. For more
-     * information about RFC 3986, go to <a
-     * href="http://www.faqs.org/rfcs/rfc3986.html">
-     * http://www.faqs.org/rfcs/rfc3986.html </a> .
-     * </p>
-     *
-     * @param getGroupPolicyRequest Container for the necessary parameters to
-     *           execute the GetGroupPolicy operation on AmazonIdentityManagement.
-     * 
-     * @return A Java Future object containing the response from the
-     *         GetGroupPolicy service method, as returned by
-     *         AmazonIdentityManagement.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonIdentityManagement indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<GetGroupPolicyResult> getGroupPolicyAsync(GetGroupPolicyRequest getGroupPolicyRequest) 
-            throws AmazonServiceException, AmazonClientException;
-
-    /**
-     * <p>
-     * Deletes the specified User. The User must not belong to any groups,
+     * Deletes the specified user. The user must not belong to any groups,
      * have any keys or signing certificates, or have any attached policies.
      * </p>
      *
@@ -1005,7 +736,7 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
     /**
      * <p>
      * Deactivates the specified MFA device and removes it from association
-     * with the User name for which it was originally enabled.
+     * with the user name for which it was originally enabled.
      * </p>
      *
      * @param deactivateMFADeviceRequest Container for the necessary
@@ -1029,7 +760,7 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Removes the specified User from the specified group.
+     * Removes the specified user from the specified group.
      * </p>
      *
      * @param removeUserFromGroupRequest Container for the necessary
@@ -1053,17 +784,50 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
+     * Deletes the specified role. The role must not have any policies
+     * attached. For more information about roles, go to <a
+     * ocs.amazonwebservices.com/IAM/latest/UserGuide/WorkingWithRoles.html">
+     * Working with Roles </a> .
+     * </p>
+     * <p>
+     * <b>IMPORTANT:</b>Make sure you do not have any Amazon EC2 instances
+     * running with the role you are about to delete. Deleting a role or
+     * instance profile that is associated with a running instance will break
+     * any applications running on the instance.
+     * </p>
+     *
+     * @param deleteRoleRequest Container for the necessary parameters to
+     *           execute the DeleteRole operation on AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         DeleteRole service method, as returned by AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<Void> deleteRoleAsync(DeleteRoleRequest deleteRoleRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
      * Deletes the specified server certificate.
      * </p>
      * <p>
-     * <b>IMPORTANT:</b>If your Elastic Load Balancing instances are using a
-     * server certificate, deleting the certificate could have implications
-     * for your application. If your Elastic Load Balancing instances do not
-     * detect the deletion of bound certificates, they may continue to use
-     * the certificates. This could cause them to stop accepting traffic.
-     * We recommend that you remove the reference to the certificate from
-     * your Elastic Load Balancing instances before using this command to
-     * delete the certificate.
+     * <b>IMPORTANT:</b>If you are using a server certificate with Elastic
+     * Load Balancing, deleting the certificate could have implications for
+     * your application. If Elastic Load Balancing doesn't detect the
+     * deletion of bound certificates, it may continue to use the
+     * certificates. This could cause Elastic Load Balancing to stop
+     * accepting traffic. We recommend that you remove the reference to the
+     * certificate from Elastic Load Balancing before using this command to
+     * delete the certificate. For more information, go to
+     * DeleteLoadBalancerListeners in the Elastic Load Balancing API
+     * Reference.
      * </p>
      *
      * @param deleteServerCertificateRequest Container for the necessary
@@ -1087,88 +851,30 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Lists the names of the policies associated with the specified group.
-     * If there are none, the action returns an empty list.
-     * </p>
-     * <p>
-     * You can paginate the results using the <code>MaxItems</code> and
-     * <code>Marker</code> parameters.
-     * </p>
-     *
-     * @param listGroupPoliciesRequest Container for the necessary parameters
-     *           to execute the ListGroupPolicies operation on
-     *           AmazonIdentityManagement.
-     * 
-     * @return A Java Future object containing the response from the
-     *         ListGroupPolicies service method, as returned by
-     *         AmazonIdentityManagement.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonIdentityManagement indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<ListGroupPoliciesResult> listGroupPoliciesAsync(ListGroupPoliciesRequest listGroupPoliciesRequest) 
-            throws AmazonServiceException, AmazonClientException;
-
-    /**
-     * <p>
-     * Creates a login profile for the specified User, giving the User the
-     * ability to access AWS services such as the AWS Management Console.
-     * For more information about login profiles, see <a
-     * .com/IAM/latest/UserGuide/index.html?Using_ManagingLoginsAndMFA.html">
-     * Managing Login Profiles and MFA Devices </a> in <i>Using AWS Identity
-     * and Access Management</i> .
-     * </p>
-     *
-     * @param createLoginProfileRequest Container for the necessary
-     *           parameters to execute the CreateLoginProfile operation on
-     *           AmazonIdentityManagement.
-     * 
-     * @return A Java Future object containing the response from the
-     *         CreateLoginProfile service method, as returned by
-     *         AmazonIdentityManagement.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonIdentityManagement indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<CreateLoginProfileResult> createLoginProfileAsync(CreateLoginProfileRequest createLoginProfileRequest) 
-            throws AmazonServiceException, AmazonClientException;
-
-    /**
-     * <p>
      * Creates a new AWS Secret Access Key and corresponding AWS Access Key
-     * ID for the specified User. The default status for new keys is
+     * ID for the specified user. The default status for new keys is
      * <code>Active</code> .
      * </p>
      * <p>
-     * If you do not specify a User name, IAM determines the User name
+     * If you do not specify a user name, IAM determines the user name
      * implicitly based on the AWS Access Key ID signing the request. Because
-     * this action works for access keys under the AWS Account, you can use
-     * this API to manage root credentials even if the AWS Account has no
-     * associated Users.
+     * this action works for access keys under the AWS account, you can use
+     * this API to manage root credentials even if the AWS account has no
+     * associated users.
      * </p>
      * <p>
      * For information about limits on the number of keys you can create, see
      * <a
-     * s.com/IAM/2010-05-08/UserGuide/index.html?LimitationsOnEntities.html">
+     * vices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html">
      * Limitations on IAM Entities </a> in <i>Using AWS Identity and Access
      * Management</i> .
      * </p>
      * <p>
-     * <b>IMPORTANT:</b>To ensure the security of your AWS Account, the
-     * Secret Access Key is accessible only during key and User creation.
+     * <b>IMPORTANT:</b>To ensure the security of your AWS account, the
+     * Secret Access Key is accessible only during key and user creation.
      * You must save the key (for example, in a text file) if you want to be
      * able to access it again. If a secret key is lost, you can delete the
-     * access keys for the associated User and then create new keys.
+     * access keys for the associated user and then create new keys.
      * </p>
      *
      * @param createAccessKeyRequest Container for the necessary parameters
@@ -1191,11 +897,11 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Retrieves information about the specified User, including the User's
+     * Retrieves information about the specified user, including the user's
      * path, GUID, and ARN.
      * </p>
      * <p>
-     * If you do not specify a User name, IAM determines the User name
+     * If you do not specify a user name, IAM determines the user name
      * implicitly based on the AWS Access Key ID signing the request.
      * </p>
      *
@@ -1241,7 +947,10 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Lists the MFA devices associated with the specified User name.
+     * Lists the MFA devices. If the request includes the user name, then
+     * this action lists all the MFA devices associated with the specified
+     * user name. If you do not specify a user name, IAM determines the user
+     * name implicitly based on the AWS Access Key ID signing the request.
      * </p>
      * <p>
      * You can paginate the results using the <code>MaxItems</code> and
@@ -1268,16 +977,94 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
+     * Creates a new virtual MFA device for the AWS account. After creating
+     * the virtual MFA, use <a
+     * azonwebservices.com/IAM/latest/APIReference/API_EnableMFADevice.html">
+     * EnableMFADevice </a> to attach the MFA device to an IAM user. For more
+     * information about creating and working with virtual MFA devices, go to
+     * <a
+     * ebservices.com/IAM/latest/UserGuide/index.html?Using_VirtualMFA.html">
+     * Using a Virtual MFA Device </a> in <i>Using AWS Identity and Access
+     * Management</i> .
+     * </p>
+     * <p>
+     * For information about limits on the number of MFA devices you can
+     * create, see <a
+     * vices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html">
+     * Limitations on Entities </a> in <i>Using AWS Identity and Access
+     * Management</i> .
+     * </p>
+     * <p>
+     * <b>IMPORTANT:</b>The seed information contained in the QR code and the
+     * Base32 string should be treated like any other secret access
+     * information, such as your AWS access keys or your passwords. After you
+     * provision your virtual device, you should ensure that the information
+     * is destroyed following secure procedures.
+     * </p>
+     *
+     * @param createVirtualMFADeviceRequest Container for the necessary
+     *           parameters to execute the CreateVirtualMFADevice operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         CreateVirtualMFADevice service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<CreateVirtualMFADeviceResult> createVirtualMFADeviceAsync(CreateVirtualMFADeviceRequest createVirtualMFADeviceRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Lists the instance profiles that have the specified path prefix. If
+     * there are none, the action returns an empty list. For more information
+     * about instance profiles, go to <a
+     * mazonwebservices.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">
+     * About Instance Profiles </a> .
+     * </p>
+     * <p>
+     * You can paginate the results using the <code>MaxItems</code> and
+     * <code>Marker</code> parameters.
+     * </p>
+     *
+     * @param listInstanceProfilesRequest Container for the necessary
+     *           parameters to execute the ListInstanceProfiles operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         ListInstanceProfiles service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<ListInstanceProfilesResult> listInstanceProfilesAsync(ListInstanceProfilesRequest listInstanceProfilesRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
      * Changes the status of the specified access key from Active to
-     * Inactive, or vice versa. This action can be used to disable a User's
-     * key as part of a key rotation workflow.
+     * Inactive, or vice versa. This action can be used to disable a user's
+     * key as part of a key rotation work flow.
      * </p>
      * <p>
      * If the <code>UserName</code> field is not specified, the UserName is
      * determined implicitly based on the AWS Access Key ID used to sign the
      * request. Because this action works for access keys under the AWS
-     * Account, this API can be used to manage root credentials even if the
-     * AWS Account has no associated Users.
+     * account, this API can be used to manage root credentials even if the
+     * AWS account has no associated users.
      * </p>
      * <p>
      * For information about rotating keys, see <a
@@ -1302,6 +1089,1029 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
      *             either a problem with the data in the request, or a server side issue.
      */
     public Future<Void> updateAccessKeyAsync(UpdateAccessKeyRequest updateAccessKeyRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Adds the specified user to the specified group.
+     * </p>
+     *
+     * @param addUserToGroupRequest Container for the necessary parameters to
+     *           execute the AddUserToGroup operation on AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         AddUserToGroup service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<Void> addUserToGroupAsync(AddUserToGroupRequest addUserToGroupRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Returns a list of users that are in the specified group. You can
+     * paginate the results using the <code>MaxItems</code> and
+     * <code>Marker</code> parameters.
+     * </p>
+     *
+     * @param getGroupRequest Container for the necessary parameters to
+     *           execute the GetGroup operation on AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the GetGroup
+     *         service method, as returned by AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<GetGroupResult> getGroupAsync(GetGroupRequest getGroupRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Lists the account aliases associated with the account. For information
+     * about using an AWS account alias, see <a
+     * ://docs.amazonwebservices.com/IAM/latest/UserGuide/AccountAlias.html">
+     * Using an Alias for Your AWS Account ID </a> in <i>Using AWS Identity
+     * and Access Management</i> .
+     * </p>
+     * <p>
+     * You can paginate the results using the <code>MaxItems</code> and
+     * <code>Marker</code> parameters.
+     * </p>
+     *
+     * @param listAccountAliasesRequest Container for the necessary
+     *           parameters to execute the ListAccountAliases operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         ListAccountAliases service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<ListAccountAliasesResult> listAccountAliasesAsync(ListAccountAliasesRequest listAccountAliasesRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Deletes the specified group. The group must not contain any users or
+     * have any attached policies.
+     * </p>
+     *
+     * @param deleteGroupRequest Container for the necessary parameters to
+     *           execute the DeleteGroup operation on AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         DeleteGroup service method, as returned by AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<Void> deleteGroupAsync(DeleteGroupRequest deleteGroupRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Retrieves information about the specified role, including the role's
+     * path, GUID, ARN, and the policy granting permission to EC2 to assume
+     * the role. For more information about ARNs, go to ARNs. For more
+     * information about roles, go to <a
+     * ocs.amazonwebservices.com/IAM/latest/UserGuide/WorkingWithRoles.html">
+     * Working with Roles </a> .
+     * </p>
+     * <p>
+     * The returned policy is URL-encoded according to RFC 3986. For more
+     * information about RFC 3986, go to <a
+     * href="http://www.faqs.org/rfcs/rfc3986.html">
+     * http://www.faqs.org/rfcs/rfc3986.html </a> .
+     * </p>
+     *
+     * @param getRoleRequest Container for the necessary parameters to
+     *           execute the GetRole operation on AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the GetRole
+     *         service method, as returned by AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<GetRoleResult> getRoleAsync(GetRoleRequest getRoleRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Lists the names of the policies associated with the specified role. If
+     * there are none, the action returns an empty list.
+     * </p>
+     * <p>
+     * You can paginate the results using the <code>MaxItems</code> and
+     * <code>Marker</code> parameters.
+     * </p>
+     *
+     * @param listRolePoliciesRequest Container for the necessary parameters
+     *           to execute the ListRolePolicies operation on AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         ListRolePolicies service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<ListRolePoliciesResult> listRolePoliciesAsync(ListRolePoliciesRequest listRolePoliciesRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Returns information about the signing certificates associated with the
+     * specified user. If there are none, the action returns an empty list.
+     * </p>
+     * <p>
+     * Although each user is limited to a small number of signing
+     * certificates, you can still paginate the results using the
+     * <code>MaxItems</code> and <code>Marker</code> parameters.
+     * </p>
+     * <p>
+     * If the <code>UserName</code> field is not specified, the user name is
+     * determined implicitly based on the AWS Access Key ID used to sign the
+     * request. Because this action works for access keys under the AWS
+     * account, this API can be used to manage root credentials even if the
+     * AWS account has no associated users.
+     * </p>
+     *
+     * @param listSigningCertificatesRequest Container for the necessary
+     *           parameters to execute the ListSigningCertificates operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         ListSigningCertificates service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<ListSigningCertificatesResult> listSigningCertificatesAsync(ListSigningCertificatesRequest listSigningCertificatesRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Uploads an X.509 signing certificate and associates it with the
+     * specified user. Some AWS services use X.509 signing certificates to
+     * validate requests that are signed with a corresponding private key.
+     * When you upload the certificate, its default status is
+     * <code>Active</code> .
+     * </p>
+     * <p>
+     * If the <code>UserName</code> field is not specified, the user name is
+     * determined implicitly based on the AWS Access Key ID used to sign the
+     * request. Because this action works for access keys under the AWS
+     * account, this API can be used to manage root credentials even if the
+     * AWS account has no associated users.
+     * </p>
+     * <p>
+     * <b>NOTE:</b>Because the body of a X.509 certificate can be large, you
+     * should use POST rather than GET when calling UploadSigningCertificate.
+     * For information about setting up signatures and authorization through
+     * the API, go to Signing AWS API Requests in the AWS General Reference.
+     * For general information about using the Query API with IAM, go to
+     * Making Query Requests in Using IAM.
+     * </p>
+     *
+     * @param uploadSigningCertificateRequest Container for the necessary
+     *           parameters to execute the UploadSigningCertificate operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         UploadSigningCertificate service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<UploadSigningCertificateResult> uploadSigningCertificateAsync(UploadSigningCertificateRequest uploadSigningCertificateRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Deletes the specified instance profile. The instance profile must not
+     * have an associated role.
+     * </p>
+     * <p>
+     * <b>IMPORTANT:</b>Make sure you do not have any Amazon EC2 instances
+     * running with the instance profile you are about to delete. Deleting a
+     * role or instance profile that is associated with a running instance
+     * will break any applications running on the instance.
+     * </p>
+     * <p>
+     * For more information about instance profiles, go to <a
+     * mazonwebservices.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">
+     * About Instance Profiles </a> .
+     * </p>
+     *
+     * @param deleteInstanceProfileRequest Container for the necessary
+     *           parameters to execute the DeleteInstanceProfile operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         DeleteInstanceProfile service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<Void> deleteInstanceProfileAsync(DeleteInstanceProfileRequest deleteInstanceProfileRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Creates a new role for your AWS account. For more information about
+     * roles, go to <a
+     * ocs.amazonwebservices.com/IAM/latest/UserGuide/WorkingWithRoles.html">
+     * Working with Roles </a> . For information about limitations on role
+     * names and the number of roles you can create, go to <a
+     * vices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html">
+     * Limitations on IAM Entities </a> in <i>Using AWS Identity and Access
+     * Management</i> .
+     * </p>
+     * <p>
+     * The policy grants permission to an EC2 instance to assume the role.
+     * The policy is URL-encoded according to RFC 3986. For more information
+     * about RFC 3986, go to <a href="http://www.faqs.org/rfcs/rfc3986.html">
+     * http://www.faqs.org/rfcs/rfc3986.html </a> . Currently, only EC2
+     * instances can assume roles.
+     * </p>
+     *
+     * @param createRoleRequest Container for the necessary parameters to
+     *           execute the CreateRole operation on AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         CreateRole service method, as returned by AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<CreateRoleResult> createRoleAsync(CreateRoleRequest createRoleRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Changes the password for the specified user.
+     * </p>
+     *
+     * @param updateLoginProfileRequest Container for the necessary
+     *           parameters to execute the UpdateLoginProfile operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         UpdateLoginProfile service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<Void> updateLoginProfileAsync(UpdateLoginProfileRequest updateLoginProfileRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Deletes the password for the specified user, which terminates the
+     * user's ability to access AWS services through the AWS Management
+     * Console.
+     * </p>
+     * <p>
+     * <b>IMPORTANT:</b>Deleting a user's password does not prevent a user
+     * from accessing IAM through the command line interface or the API. To
+     * prevent all user access you must also either make the access key
+     * inactive or delete it. For more information about making keys
+     * inactive or deleting them, see UpdateAccessKey and DeleteAccessKey.
+     * </p>
+     *
+     * @param deleteLoginProfileRequest Container for the necessary
+     *           parameters to execute the DeleteLoginProfile operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         DeleteLoginProfile service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<Void> deleteLoginProfileAsync(DeleteLoginProfileRequest deleteLoginProfileRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Changes the password of the IAM user calling
+     * <code>ChangePassword</code> . The root account password is not
+     * affected by this action. For information about modifying passwords,
+     * see <a
+     * amazonwebservices.com/IAM/latest/UserGuide/Using_ManagingLogins.html">
+     * Managing Passwords </a> .
+     * </p>
+     *
+     * @param changePasswordRequest Container for the necessary parameters to
+     *           execute the ChangePassword operation on AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         ChangePassword service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<Void> changePasswordAsync(ChangePasswordRequest changePasswordRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Retrieves information about the specified server certificate.
+     * </p>
+     *
+     * @param getServerCertificateRequest Container for the necessary
+     *           parameters to execute the GetServerCertificate operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         GetServerCertificate service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<GetServerCertificateResult> getServerCertificateAsync(GetServerCertificateRequest getServerCertificateRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Adds (or updates) a policy document associated with the specified
+     * group. For information about policies, refer to <a
+     * ebservices.com/IAM/latest/UserGuide/index.html?PoliciesOverview.html">
+     * Overview of Policies </a> in <i>Using AWS Identity and Access
+     * Management</i> .
+     * </p>
+     * <p>
+     * For information about limits on the number of policies you can
+     * associate with a group, see <a
+     * vices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html">
+     * Limitations on IAM Entities </a> in <i>Using AWS Identity and Access
+     * Management</i> .
+     * </p>
+     * <p>
+     * <b>NOTE:</b>Because policy documents can be large, you should use POST
+     * rather than GET when calling PutGroupPolicy. For information about
+     * setting up signatures and authorization through the API, go to Signing
+     * AWS API Requests in the AWS General Reference. For general information
+     * about using the Query API with IAM, go to Making Query Requests in
+     * Using IAM.
+     * </p>
+     *
+     * @param putGroupPolicyRequest Container for the necessary parameters to
+     *           execute the PutGroupPolicy operation on AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         PutGroupPolicy service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<Void> putGroupPolicyAsync(PutGroupPolicyRequest putGroupPolicyRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Deletes the specified signing certificate associated with the
+     * specified user.
+     * </p>
+     * <p>
+     * If you do not specify a user name, IAM determines the user name
+     * implicitly based on the AWS Access Key ID signing the request. Because
+     * this action works for access keys under the AWS account, you can use
+     * this API to manage root credentials even if the AWS account has no
+     * associated users.
+     * </p>
+     *
+     * @param deleteSigningCertificateRequest Container for the necessary
+     *           parameters to execute the DeleteSigningCertificate operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         DeleteSigningCertificate service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<Void> deleteSigningCertificateAsync(DeleteSigningCertificateRequest deleteSigningCertificateRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Lists the names of the policies associated with the specified user. If
+     * there are none, the action returns an empty list.
+     * </p>
+     * <p>
+     * You can paginate the results using the <code>MaxItems</code> and
+     * <code>Marker</code> parameters.
+     * </p>
+     *
+     * @param listUserPoliciesRequest Container for the necessary parameters
+     *           to execute the ListUserPolicies operation on AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         ListUserPolicies service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<ListUserPoliciesResult> listUserPoliciesAsync(ListUserPoliciesRequest listUserPoliciesRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Returns information about the Access Key IDs associated with the
+     * specified user. If there are none, the action returns an empty list.
+     * </p>
+     * <p>
+     * Although each user is limited to a small number of keys, you can still
+     * paginate the results using the <code>MaxItems</code> and
+     * <code>Marker</code> parameters.
+     * </p>
+     * <p>
+     * If the <code>UserName</code> field is not specified, the UserName is
+     * determined implicitly based on the AWS Access Key ID used to sign the
+     * request. Because this action works for access keys under the AWS
+     * account, this API can be used to manage root credentials even if the
+     * AWS account has no associated users.
+     * </p>
+     * <p>
+     * <b>NOTE:</b>To ensure the security of your AWS account, the secret
+     * access key is accessible only during key and user creation.
+     * </p>
+     *
+     * @param listAccessKeysRequest Container for the necessary parameters to
+     *           execute the ListAccessKeys operation on AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         ListAccessKeys service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<ListAccessKeysResult> listAccessKeysAsync(ListAccessKeysRequest listAccessKeysRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Lists the groups the specified user belongs to.
+     * </p>
+     * <p>
+     * You can paginate the results using the <code>MaxItems</code> and
+     * <code>Marker</code> parameters.
+     * </p>
+     *
+     * @param listGroupsForUserRequest Container for the necessary parameters
+     *           to execute the ListGroupsForUser operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         ListGroupsForUser service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<ListGroupsForUserResult> listGroupsForUserAsync(ListGroupsForUserRequest listGroupsForUserRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Adds the specified role to the specified instance profile. For more
+     * information about roles, go to <a
+     * ocs.amazonwebservices.com/IAM/latest/UserGuide/WorkingWithRoles.html">
+     * Working with Roles </a> . For more information about instance
+     * profiles, go to <a
+     * mazonwebservices.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">
+     * About Instance Profiles </a> .
+     * </p>
+     *
+     * @param addRoleToInstanceProfileRequest Container for the necessary
+     *           parameters to execute the AddRoleToInstanceProfile operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         AddRoleToInstanceProfile service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<Void> addRoleToInstanceProfileAsync(AddRoleToInstanceProfileRequest addRoleToInstanceProfileRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Retrieves the specified policy document for the specified group. The
+     * returned policy is URL-encoded according to RFC 3986. For more
+     * information about RFC 3986, go to <a
+     * href="http://www.faqs.org/rfcs/rfc3986.html">
+     * http://www.faqs.org/rfcs/rfc3986.html </a> .
+     * </p>
+     *
+     * @param getGroupPolicyRequest Container for the necessary parameters to
+     *           execute the GetGroupPolicy operation on AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         GetGroupPolicy service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<GetGroupPolicyResult> getGroupPolicyAsync(GetGroupPolicyRequest getGroupPolicyRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Retrieves the specified policy document for the specified role. For
+     * more information about roles, go to <a
+     * ocs.amazonwebservices.com/IAM/latest/UserGuide/WorkingWithRoles.html">
+     * Working with Roles </a> .
+     * </p>
+     * <p>
+     * The returned policy is URL-encoded according to RFC 3986. For more
+     * information about RFC 3986, go to <a
+     * href="http://www.faqs.org/rfcs/rfc3986.html">
+     * http://www.faqs.org/rfcs/rfc3986.html </a> .
+     * </p>
+     *
+     * @param getRolePolicyRequest Container for the necessary parameters to
+     *           execute the GetRolePolicy operation on AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         GetRolePolicy service method, as returned by AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<GetRolePolicyResult> getRolePolicyAsync(GetRolePolicyRequest getRolePolicyRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Lists the instance profiles that have the specified associated role.
+     * If there are none, the action returns an empty list. For more
+     * information about instance profiles, go to <a
+     * mazonwebservices.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">
+     * About Instance Profiles </a> .
+     * </p>
+     * <p>
+     * You can paginate the results using the <code>MaxItems</code> and
+     * <code>Marker</code> parameters.
+     * </p>
+     *
+     * @param listInstanceProfilesForRoleRequest Container for the necessary
+     *           parameters to execute the ListInstanceProfilesForRole operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         ListInstanceProfilesForRole service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<ListInstanceProfilesForRoleResult> listInstanceProfilesForRoleAsync(ListInstanceProfilesForRoleRequest listInstanceProfilesForRoleRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Lists the virtual MFA devices under the AWS account by assignment
+     * status. If you do not specify an assignment status, the action returns
+     * a list of all virtual MFA devices. Assignment status can be
+     * <code>Assigned</code> ,
+     * 
+     * <code>Unassigned</code> , or <code>Any</code> .
+     * 
+     * </p>
+     * <p>
+     * You can paginate the results using the <code>MaxItems</code> and
+     * <code>Marker</code> parameters.
+     * </p>
+     *
+     * @param listVirtualMFADevicesRequest Container for the necessary
+     *           parameters to execute the ListVirtualMFADevices operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         ListVirtualMFADevices service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<ListVirtualMFADevicesResult> listVirtualMFADevicesAsync(ListVirtualMFADevicesRequest listVirtualMFADevicesRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Deletes the specified policy associated with the specified role.
+     * </p>
+     *
+     * @param deleteRolePolicyRequest Container for the necessary parameters
+     *           to execute the DeleteRolePolicy operation on AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         DeleteRolePolicy service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<Void> deleteRolePolicyAsync(DeleteRolePolicyRequest deleteRolePolicyRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Creates a new instance profile. For information about instance
+     * profiles, go to <a
+     * mazonwebservices.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">
+     * About Instance Profiles </a> .
+     * </p>
+     * <p>
+     * For information about the number of instance profiles you can create,
+     * see <a
+     * vices.com/IAM/latest/UserGuide/index.html?LimitationsOnEntities.html">
+     * Limitations on IAM Entities </a> in <i>Using AWS Identity and Access
+     * Management</i> .
+     * </p>
+     *
+     * @param createInstanceProfileRequest Container for the necessary
+     *           parameters to execute the CreateInstanceProfile operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         CreateInstanceProfile service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<CreateInstanceProfileResult> createInstanceProfileAsync(CreateInstanceProfileRequest createInstanceProfileRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Lists the names of the policies associated with the specified group.
+     * If there are none, the action returns an empty list.
+     * </p>
+     * <p>
+     * You can paginate the results using the <code>MaxItems</code> and
+     * <code>Marker</code> parameters.
+     * </p>
+     *
+     * @param listGroupPoliciesRequest Container for the necessary parameters
+     *           to execute the ListGroupPolicies operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         ListGroupPolicies service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<ListGroupPoliciesResult> listGroupPoliciesAsync(ListGroupPoliciesRequest listGroupPoliciesRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Creates a password for the specified user, giving the user the ability
+     * to access AWS services through the AWS Management Console. For more
+     * information about managing passwords, see <a
+     * rvices.com/IAM/latest/UserGuide/index.html?Using_ManagingLogins.html">
+     * Managing Passwords </a> in <i>Using IAM</i> .
+     * </p>
+     *
+     * @param createLoginProfileRequest Container for the necessary
+     *           parameters to execute the CreateLoginProfile operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         CreateLoginProfile service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<CreateLoginProfileResult> createLoginProfileAsync(CreateLoginProfileRequest createLoginProfileRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Removes the specified role from the specified instance profile.
+     * </p>
+     * <p>
+     * <b>IMPORTANT:</b>Make sure you do not have any Amazon EC2 instances
+     * running with the role you are about to remove from the instance
+     * profile. Removing a role from an instance profile that is associated
+     * with a running instance will break any applications running on the
+     * instance.
+     * </p>
+     * <p>
+     * For more information about roles, go to <a
+     * ocs.amazonwebservices.com/IAM/latest/UserGuide/WorkingWithRoles.html">
+     * Working with Roles </a> . For more information about instance
+     * profiles, go to <a
+     * mazonwebservices.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">
+     * About Instance Profiles </a> .
+     * </p>
+     *
+     * @param removeRoleFromInstanceProfileRequest Container for the
+     *           necessary parameters to execute the RemoveRoleFromInstanceProfile
+     *           operation on AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         RemoveRoleFromInstanceProfile service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<Void> removeRoleFromInstanceProfileAsync(RemoveRoleFromInstanceProfileRequest removeRoleFromInstanceProfileRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Updates the password policy settings for the account. For more
+     * information about using a password policy, go to <a
+     * ervices.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html">
+     * Managing an IAM Password Policy </a> .
+     * </p>
+     *
+     * @param updateAccountPasswordPolicyRequest Container for the necessary
+     *           parameters to execute the UpdateAccountPasswordPolicy operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         UpdateAccountPasswordPolicy service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<Void> updateAccountPasswordPolicyAsync(UpdateAccountPasswordPolicyRequest updateAccountPasswordPolicyRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Updates the policy that grants an entity permission to assume a role.
+     * Currently, only an Amazon EC2 instance can assume a role. For more
+     * information about roles, go to <a
+     * ocs.amazonwebservices.com/IAM/latest/UserGuide/WorkingWithRoles.html">
+     * Working with Roles </a> .
+     * </p>
+     *
+     * @param updateAssumeRolePolicyRequest Container for the necessary
+     *           parameters to execute the UpdateAssumeRolePolicy operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         UpdateAssumeRolePolicy service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<Void> updateAssumeRolePolicyAsync(UpdateAssumeRolePolicyRequest updateAssumeRolePolicyRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Retrieves information about the specified instance profile, including
+     * the instance profile's path, GUID, ARN, and role. For more information
+     * about instance profiles, go to <a
+     * mazonwebservices.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">
+     * About Instance Profiles </a> . For more information about ARNs, go to
+     * <a
+     * ces.com/IAM/latest/UserGuide/Using_Identifiers.html#Identifiers_ARNs">
+     * ARNs </a> .
+     * </p>
+     *
+     * @param getInstanceProfileRequest Container for the necessary
+     *           parameters to execute the GetInstanceProfile operation on
+     *           AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         GetInstanceProfile service method, as returned by
+     *         AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<GetInstanceProfileResult> getInstanceProfileAsync(GetInstanceProfileRequest getInstanceProfileRequest) 
+            throws AmazonServiceException, AmazonClientException;
+
+    /**
+     * <p>
+     * Lists the roles that have the specified path prefix. If there are
+     * none, the action returns an empty list. For more information about
+     * roles, go to <a
+     * ocs.amazonwebservices.com/IAM/latest/UserGuide/WorkingWithRoles.html">
+     * Working with Roles </a> .
+     * </p>
+     * <p>
+     * You can paginate the results using the <code>MaxItems</code> and
+     * <code>Marker</code> parameters.
+     * </p>
+     * <p>
+     * The returned policy is URL-encoded according to RFC 3986. For more
+     * information about RFC 3986, go to <a
+     * href="http://www.faqs.org/rfcs/rfc3986.html">
+     * http://www.faqs.org/rfcs/rfc3986.html </a> .
+     * </p>
+     *
+     * @param listRolesRequest Container for the necessary parameters to
+     *           execute the ListRoles operation on AmazonIdentityManagement.
+     * 
+     * @return A Java Future object containing the response from the
+     *         ListRoles service method, as returned by AmazonIdentityManagement.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonIdentityManagement indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<ListRolesResult> listRolesAsync(ListRolesRequest listRolesRequest) 
             throws AmazonServiceException, AmazonClientException;
 
     /**
@@ -1337,70 +2147,18 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
 
     /**
      * <p>
-     * Adds the specified User to the specified group.
+     * Retrieves the password policy for the AWS account. For more
+     * information about using a password policy, go to <a
+     * ervices.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html">
+     * Managing an IAM Password Policy </a> .
      * </p>
      *
-     * @param addUserToGroupRequest Container for the necessary parameters to
-     *           execute the AddUserToGroup operation on AmazonIdentityManagement.
-     * 
-     * @return A Java Future object containing the response from the
-     *         AddUserToGroup service method, as returned by
-     *         AmazonIdentityManagement.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonIdentityManagement indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<Void> addUserToGroupAsync(AddUserToGroupRequest addUserToGroupRequest) 
-            throws AmazonServiceException, AmazonClientException;
-
-    /**
-     * <p>
-     * Returns a list of Users that are in the specified group. You can
-     * paginate the results using the <code>MaxItems</code> and
-     * <code>Marker</code> parameters.
-     * </p>
-     *
-     * @param getGroupRequest Container for the necessary parameters to
-     *           execute the GetGroup operation on AmazonIdentityManagement.
-     * 
-     * @return A Java Future object containing the response from the GetGroup
-     *         service method, as returned by AmazonIdentityManagement.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonIdentityManagement indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<GetGroupResult> getGroupAsync(GetGroupRequest getGroupRequest) 
-            throws AmazonServiceException, AmazonClientException;
-
-    /**
-     * <p>
-     * Lists the account aliases associated with the account. For information
-     * about using an AWS Account alias, see <a
-     * ://docs.amazonwebservices.com/IAM/latest/UserGuide/AccountAlias.html">
-     * Using an Alias for Your AWS Account ID </a> in <i>Using AWS Identity
-     * and Access Management</i> .
-     * </p>
-     * <p>
-     * You can paginate the results using the <code>MaxItems</code> and
-     * <code>Marker</code> parameters.
-     * </p>
-     *
-     * @param listAccountAliasesRequest Container for the necessary
-     *           parameters to execute the ListAccountAliases operation on
+     * @param getAccountPasswordPolicyRequest Container for the necessary
+     *           parameters to execute the GetAccountPasswordPolicy operation on
      *           AmazonIdentityManagement.
      * 
      * @return A Java Future object containing the response from the
-     *         ListAccountAliases service method, as returned by
+     *         GetAccountPasswordPolicy service method, as returned by
      *         AmazonIdentityManagement.
      *
      * @throws AmazonClientException
@@ -1411,30 +2169,7 @@ public interface AmazonIdentityManagementAsync extends AmazonIdentityManagement 
      *             If an error response is returned by AmazonIdentityManagement indicating
      *             either a problem with the data in the request, or a server side issue.
      */
-    public Future<ListAccountAliasesResult> listAccountAliasesAsync(ListAccountAliasesRequest listAccountAliasesRequest) 
-            throws AmazonServiceException, AmazonClientException;
-
-    /**
-     * <p>
-     * Deletes the specified group. The group must not contain any Users or
-     * have any attached policies.
-     * </p>
-     *
-     * @param deleteGroupRequest Container for the necessary parameters to
-     *           execute the DeleteGroup operation on AmazonIdentityManagement.
-     * 
-     * @return A Java Future object containing the response from the
-     *         DeleteGroup service method, as returned by AmazonIdentityManagement.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonIdentityManagement indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<Void> deleteGroupAsync(DeleteGroupRequest deleteGroupRequest) 
+    public Future<GetAccountPasswordPolicyResult> getAccountPasswordPolicyAsync(GetAccountPasswordPolicyRequest getAccountPasswordPolicyRequest) 
             throws AmazonServiceException, AmazonClientException;
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,8 +18,11 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.simpleemail.AmazonSimpleEmailService#listVerifiedEmailAddresses(ListVerifiedEmailAddressesRequest) ListVerifiedEmailAddresses operation}.
  * <p>
- * Returns a list containing all of the email addresses that have been
- * verified.
+ * Returns a list containing all of the email addresses that have been verified.
+ * </p>
+ * <p>
+ * <b>IMPORTANT:</b>The ListVerifiedEmailAddresses action is deprecated as of the May 15, 2012 release of Domain Verification. The ListIdentities action
+ * is now preferred.
  * </p>
  *
  * @see com.amazonaws.services.simpleemail.AmazonSimpleEmailService#listVerifiedEmailAddresses(ListVerifiedEmailAddressesRequest)
@@ -40,6 +43,25 @@ public class ListVerifiedEmailAddressesRequest extends AmazonWebServiceRequest {
         sb.append("{");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof ListVerifiedEmailAddressesRequest == false) return false;
+        ListVerifiedEmailAddressesRequest other = (ListVerifiedEmailAddressesRequest)obj;
+        
+        return true;
     }
     
 }

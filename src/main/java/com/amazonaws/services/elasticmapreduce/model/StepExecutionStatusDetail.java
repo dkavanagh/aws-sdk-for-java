@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -71,6 +71,21 @@ public class StepExecutionStatusDetail {
         this.state = state;
         this.creationDateTime = creationDateTime;
     }
+
+    
+    
+    /**
+     * Constructs a new StepExecutionStatusDetail object.
+     * Callers should use the setter or fluent setter (with...) methods to
+     * initialize any additional object members.
+     * 
+     * @param state The state of the job flow step.
+     * @param creationDateTime The creation date and time of the step.
+     */
+    public StepExecutionStatusDetail(StepExecutionState state, java.util.Date creationDateTime) {
+        this.state = state.toString();
+        this.creationDateTime = creationDateTime;
+    }
     
     /**
      * The state of the job flow step.
@@ -120,6 +135,40 @@ public class StepExecutionStatusDetail {
         return this;
     }
     
+    
+    /**
+     * The state of the job flow step.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>PENDING, RUNNING, CONTINUE, COMPLETED, CANCELLED, FAILED, INTERRUPTED
+     *
+     * @param state The state of the job flow step.
+     *
+     * @see StepExecutionState
+     */
+    public void setState(StepExecutionState state) {
+        this.state = state.toString();
+    }
+    
+    /**
+     * The state of the job flow step.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>PENDING, RUNNING, CONTINUE, COMPLETED, CANCELLED, FAILED, INTERRUPTED
+     *
+     * @param state The state of the job flow step.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see StepExecutionState
+     */
+    public StepExecutionStatusDetail withState(StepExecutionState state) {
+        this.state = state.toString();
+        return this;
+    }
     
     /**
      * The creation date and time of the step.
@@ -281,13 +330,47 @@ public class StepExecutionStatusDetail {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("State: " + state + ", ");
-        sb.append("CreationDateTime: " + creationDateTime + ", ");
-        sb.append("StartDateTime: " + startDateTime + ", ");
-        sb.append("EndDateTime: " + endDateTime + ", ");
-        sb.append("LastStateChangeReason: " + lastStateChangeReason + ", ");
+        if (state != null) sb.append("State: " + state + ", ");
+        if (creationDateTime != null) sb.append("CreationDateTime: " + creationDateTime + ", ");
+        if (startDateTime != null) sb.append("StartDateTime: " + startDateTime + ", ");
+        if (endDateTime != null) sb.append("EndDateTime: " + endDateTime + ", ");
+        if (lastStateChangeReason != null) sb.append("LastStateChangeReason: " + lastStateChangeReason + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getState() == null) ? 0 : getState().hashCode()); 
+        hashCode = prime * hashCode + ((getCreationDateTime() == null) ? 0 : getCreationDateTime().hashCode()); 
+        hashCode = prime * hashCode + ((getStartDateTime() == null) ? 0 : getStartDateTime().hashCode()); 
+        hashCode = prime * hashCode + ((getEndDateTime() == null) ? 0 : getEndDateTime().hashCode()); 
+        hashCode = prime * hashCode + ((getLastStateChangeReason() == null) ? 0 : getLastStateChangeReason().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof StepExecutionStatusDetail == false) return false;
+        StepExecutionStatusDetail other = (StepExecutionStatusDetail)obj;
+        
+        if (other.getState() == null ^ this.getState() == null) return false;
+        if (other.getState() != null && other.getState().equals(this.getState()) == false) return false; 
+        if (other.getCreationDateTime() == null ^ this.getCreationDateTime() == null) return false;
+        if (other.getCreationDateTime() != null && other.getCreationDateTime().equals(this.getCreationDateTime()) == false) return false; 
+        if (other.getStartDateTime() == null ^ this.getStartDateTime() == null) return false;
+        if (other.getStartDateTime() != null && other.getStartDateTime().equals(this.getStartDateTime()) == false) return false; 
+        if (other.getEndDateTime() == null ^ this.getEndDateTime() == null) return false;
+        if (other.getEndDateTime() != null && other.getEndDateTime().equals(this.getEndDateTime()) == false) return false; 
+        if (other.getLastStateChangeReason() == null ^ this.getLastStateChangeReason() == null) return false;
+        if (other.getLastStateChangeReason() != null && other.getLastStateChangeReason().equals(this.getLastStateChangeReason()) == false) return false; 
+        return true;
     }
     
 }

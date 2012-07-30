@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,14 +18,12 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.autoscaling.AmazonAutoScaling#createAutoScalingGroup(CreateAutoScalingGroupRequest) CreateAutoScalingGroup operation}.
  * <p>
- * Creates a new Auto Scaling group with the specified name. When the
- * creation request is completed, the Auto Scaling group is ready to be
- * used in other calls.
+ * Creates a new Auto Scaling group with the specified name and other attributes. When the creation request is completed, the Auto Scaling group is
+ * ready to be used in other calls.
  * </p>
  * <p>
- * <b>NOTE:</b> The Auto Scaling group name must be unique within the
- * scope of your AWS account, and under the quota of Auto Scaling groups
- * allowed for your account.
+ * <b>NOTE:</b> The Auto Scaling group name must be unique within the scope of your AWS account, and under the quota of Auto Scaling groups allowed for
+ * your account.
  * </p>
  *
  * @see com.amazonaws.services.autoscaling.AmazonAutoScaling#createAutoScalingGroup(CreateAutoScalingGroupRequest)
@@ -62,7 +60,8 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     private Integer maxSize;
 
     /**
-     * The number of EC2 instances that should be running in the group.
+     * The number of Amazon EC2 instances that should be running in the
+     * group.
      */
     private Integer desiredCapacity;
 
@@ -73,7 +72,7 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     private Integer defaultCooldown;
 
     /**
-     * A list of availability zones for the Auto Scaling group.
+     * A list of Availability Zones for the Auto Scaling group.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - <br/>
@@ -81,13 +80,13 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     private java.util.List<String> availabilityZones;
 
     /**
-     * A list of LoadBalancers to use.
+     * A list of load balancers to use.
      */
     private java.util.List<String> loadBalancerNames;
 
     /**
      * The service you want the health status from, Amazon EC2 or Elastic
-     * Load Balancer. Valid values are "EC2" or "ELB."
+     * Load Balancer. Valid values are <code>EC2</code> or <code>ELB</code>.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 32<br/>
@@ -96,14 +95,16 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     private String healthCheckType;
 
     /**
-     * Length of time in seconds after a new EC2 instance comes into service
-     * that Auto Scaling starts checking its health.
+     * Length of time in seconds after a new Amazon EC2 instance comes into
+     * service that Auto Scaling starts checking its health.
      */
     private Integer healthCheckGracePeriod;
 
     /**
      * Physical location of your cluster placement group created in Amazon
-     * EC2.
+     * EC2. For more information about cluster placement group, see <a
+     * rvices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html">Using
+     * Cluster Instances</a>
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 255<br/>
@@ -112,13 +113,25 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     private String placementGroup;
 
     /**
-     * The subnet identifier of the Virtual Private Cloud.
+     * A comma-separated list of subnet identifiers of Amazon Virtual Private
+     * Clouds (Amazon VPCs). <p>When you specify subnets and Availability
+     * Zones with this call, ensure that the subnets' Availability Zones
+     * match the Availability Zones specified.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 255<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      */
     private String vPCZoneIdentifier;
+
+    /**
+     * The tag to be created or updated. Each tag should be defined by its
+     * resource type, resource ID, key, value, and a propagate flag. Valid
+     * values are: key=<i>value</i>, value=<i>value</i>,
+     * propagate=<i>true</i> or <i>false</i>. Value and propagate are
+     * optional parameters.
+     */
+    private java.util.List<Tag> tags;
 
     /**
      * The name of the Auto Scaling group.
@@ -287,29 +300,35 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * The number of EC2 instances that should be running in the group.
+     * The number of Amazon EC2 instances that should be running in the
+     * group.
      *
-     * @return The number of EC2 instances that should be running in the group.
+     * @return The number of Amazon EC2 instances that should be running in the
+     *         group.
      */
     public Integer getDesiredCapacity() {
         return desiredCapacity;
     }
     
     /**
-     * The number of EC2 instances that should be running in the group.
+     * The number of Amazon EC2 instances that should be running in the
+     * group.
      *
-     * @param desiredCapacity The number of EC2 instances that should be running in the group.
+     * @param desiredCapacity The number of Amazon EC2 instances that should be running in the
+     *         group.
      */
     public void setDesiredCapacity(Integer desiredCapacity) {
         this.desiredCapacity = desiredCapacity;
     }
     
     /**
-     * The number of EC2 instances that should be running in the group.
+     * The number of Amazon EC2 instances that should be running in the
+     * group.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param desiredCapacity The number of EC2 instances that should be running in the group.
+     * @param desiredCapacity The number of Amazon EC2 instances that should be running in the
+     *         group.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -361,14 +380,15 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * A list of availability zones for the Auto Scaling group.
+     * A list of Availability Zones for the Auto Scaling group.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - <br/>
      *
-     * @return A list of availability zones for the Auto Scaling group.
+     * @return A list of Availability Zones for the Auto Scaling group.
      */
     public java.util.List<String> getAvailabilityZones() {
+        
         if (availabilityZones == null) {
             availabilityZones = new java.util.ArrayList<String>();
         }
@@ -376,35 +396,39 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * A list of availability zones for the Auto Scaling group.
+     * A list of Availability Zones for the Auto Scaling group.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - <br/>
      *
-     * @param availabilityZones A list of availability zones for the Auto Scaling group.
+     * @param availabilityZones A list of Availability Zones for the Auto Scaling group.
      */
     public void setAvailabilityZones(java.util.Collection<String> availabilityZones) {
-        java.util.List<String> availabilityZonesCopy = new java.util.ArrayList<String>();
-        if (availabilityZones != null) {
-            availabilityZonesCopy.addAll(availabilityZones);
+        if (availabilityZones == null) {
+            this.availabilityZones = null;
+            return;
         }
+
+        java.util.List<String> availabilityZonesCopy = new java.util.ArrayList<String>(availabilityZones.size());
+        availabilityZonesCopy.addAll(availabilityZones);
         this.availabilityZones = availabilityZonesCopy;
     }
     
     /**
-     * A list of availability zones for the Auto Scaling group.
+     * A list of Availability Zones for the Auto Scaling group.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - <br/>
      *
-     * @param availabilityZones A list of availability zones for the Auto Scaling group.
+     * @param availabilityZones A list of Availability Zones for the Auto Scaling group.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
      */
     public CreateAutoScalingGroupRequest withAvailabilityZones(String... availabilityZones) {
+        if (getAvailabilityZones() == null) setAvailabilityZones(new java.util.ArrayList<String>(availabilityZones.length));
         for (String value : availabilityZones) {
             getAvailabilityZones().add(value);
         }
@@ -412,34 +436,37 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * A list of availability zones for the Auto Scaling group.
+     * A list of Availability Zones for the Auto Scaling group.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - <br/>
      *
-     * @param availabilityZones A list of availability zones for the Auto Scaling group.
+     * @param availabilityZones A list of Availability Zones for the Auto Scaling group.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
      */
     public CreateAutoScalingGroupRequest withAvailabilityZones(java.util.Collection<String> availabilityZones) {
-        java.util.List<String> availabilityZonesCopy = new java.util.ArrayList<String>();
-        if (availabilityZones != null) {
+        if (availabilityZones == null) {
+            this.availabilityZones = null;
+        } else {
+            java.util.List<String> availabilityZonesCopy = new java.util.ArrayList<String>(availabilityZones.size());
             availabilityZonesCopy.addAll(availabilityZones);
+            this.availabilityZones = availabilityZonesCopy;
         }
-        this.availabilityZones = availabilityZonesCopy;
 
         return this;
     }
     
     /**
-     * A list of LoadBalancers to use.
+     * A list of load balancers to use.
      *
-     * @return A list of LoadBalancers to use.
+     * @return A list of load balancers to use.
      */
     public java.util.List<String> getLoadBalancerNames() {
+        
         if (loadBalancerNames == null) {
             loadBalancerNames = new java.util.ArrayList<String>();
         }
@@ -447,29 +474,33 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * A list of LoadBalancers to use.
+     * A list of load balancers to use.
      *
-     * @param loadBalancerNames A list of LoadBalancers to use.
+     * @param loadBalancerNames A list of load balancers to use.
      */
     public void setLoadBalancerNames(java.util.Collection<String> loadBalancerNames) {
-        java.util.List<String> loadBalancerNamesCopy = new java.util.ArrayList<String>();
-        if (loadBalancerNames != null) {
-            loadBalancerNamesCopy.addAll(loadBalancerNames);
+        if (loadBalancerNames == null) {
+            this.loadBalancerNames = null;
+            return;
         }
+
+        java.util.List<String> loadBalancerNamesCopy = new java.util.ArrayList<String>(loadBalancerNames.size());
+        loadBalancerNamesCopy.addAll(loadBalancerNames);
         this.loadBalancerNames = loadBalancerNamesCopy;
     }
     
     /**
-     * A list of LoadBalancers to use.
+     * A list of load balancers to use.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param loadBalancerNames A list of LoadBalancers to use.
+     * @param loadBalancerNames A list of load balancers to use.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
      */
     public CreateAutoScalingGroupRequest withLoadBalancerNames(String... loadBalancerNames) {
+        if (getLoadBalancerNames() == null) setLoadBalancerNames(new java.util.ArrayList<String>(loadBalancerNames.length));
         for (String value : loadBalancerNames) {
             getLoadBalancerNames().add(value);
         }
@@ -477,35 +508,37 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     }
     
     /**
-     * A list of LoadBalancers to use.
+     * A list of load balancers to use.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param loadBalancerNames A list of LoadBalancers to use.
+     * @param loadBalancerNames A list of load balancers to use.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
      */
     public CreateAutoScalingGroupRequest withLoadBalancerNames(java.util.Collection<String> loadBalancerNames) {
-        java.util.List<String> loadBalancerNamesCopy = new java.util.ArrayList<String>();
-        if (loadBalancerNames != null) {
+        if (loadBalancerNames == null) {
+            this.loadBalancerNames = null;
+        } else {
+            java.util.List<String> loadBalancerNamesCopy = new java.util.ArrayList<String>(loadBalancerNames.size());
             loadBalancerNamesCopy.addAll(loadBalancerNames);
+            this.loadBalancerNames = loadBalancerNamesCopy;
         }
-        this.loadBalancerNames = loadBalancerNamesCopy;
 
         return this;
     }
     
     /**
      * The service you want the health status from, Amazon EC2 or Elastic
-     * Load Balancer. Valid values are "EC2" or "ELB."
+     * Load Balancer. Valid values are <code>EC2</code> or <code>ELB</code>.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 32<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
      * @return The service you want the health status from, Amazon EC2 or Elastic
-     *         Load Balancer. Valid values are "EC2" or "ELB."
+     *         Load Balancer. Valid values are <code>EC2</code> or <code>ELB</code>.
      */
     public String getHealthCheckType() {
         return healthCheckType;
@@ -513,14 +546,14 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     
     /**
      * The service you want the health status from, Amazon EC2 or Elastic
-     * Load Balancer. Valid values are "EC2" or "ELB."
+     * Load Balancer. Valid values are <code>EC2</code> or <code>ELB</code>.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 32<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
      * @param healthCheckType The service you want the health status from, Amazon EC2 or Elastic
-     *         Load Balancer. Valid values are "EC2" or "ELB."
+     *         Load Balancer. Valid values are <code>EC2</code> or <code>ELB</code>.
      */
     public void setHealthCheckType(String healthCheckType) {
         this.healthCheckType = healthCheckType;
@@ -528,7 +561,7 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     
     /**
      * The service you want the health status from, Amazon EC2 or Elastic
-     * Load Balancer. Valid values are "EC2" or "ELB."
+     * Load Balancer. Valid values are <code>EC2</code> or <code>ELB</code>.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -537,7 +570,7 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
      * @param healthCheckType The service you want the health status from, Amazon EC2 or Elastic
-     *         Load Balancer. Valid values are "EC2" or "ELB."
+     *         Load Balancer. Valid values are <code>EC2</code> or <code>ELB</code>.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -549,35 +582,35 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * Length of time in seconds after a new EC2 instance comes into service
-     * that Auto Scaling starts checking its health.
+     * Length of time in seconds after a new Amazon EC2 instance comes into
+     * service that Auto Scaling starts checking its health.
      *
-     * @return Length of time in seconds after a new EC2 instance comes into service
-     *         that Auto Scaling starts checking its health.
+     * @return Length of time in seconds after a new Amazon EC2 instance comes into
+     *         service that Auto Scaling starts checking its health.
      */
     public Integer getHealthCheckGracePeriod() {
         return healthCheckGracePeriod;
     }
     
     /**
-     * Length of time in seconds after a new EC2 instance comes into service
-     * that Auto Scaling starts checking its health.
+     * Length of time in seconds after a new Amazon EC2 instance comes into
+     * service that Auto Scaling starts checking its health.
      *
-     * @param healthCheckGracePeriod Length of time in seconds after a new EC2 instance comes into service
-     *         that Auto Scaling starts checking its health.
+     * @param healthCheckGracePeriod Length of time in seconds after a new Amazon EC2 instance comes into
+     *         service that Auto Scaling starts checking its health.
      */
     public void setHealthCheckGracePeriod(Integer healthCheckGracePeriod) {
         this.healthCheckGracePeriod = healthCheckGracePeriod;
     }
     
     /**
-     * Length of time in seconds after a new EC2 instance comes into service
-     * that Auto Scaling starts checking its health.
+     * Length of time in seconds after a new Amazon EC2 instance comes into
+     * service that Auto Scaling starts checking its health.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param healthCheckGracePeriod Length of time in seconds after a new EC2 instance comes into service
-     *         that Auto Scaling starts checking its health.
+     * @param healthCheckGracePeriod Length of time in seconds after a new Amazon EC2 instance comes into
+     *         service that Auto Scaling starts checking its health.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -590,14 +623,18 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     
     /**
      * Physical location of your cluster placement group created in Amazon
-     * EC2.
+     * EC2. For more information about cluster placement group, see <a
+     * rvices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html">Using
+     * Cluster Instances</a>
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 255<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
      * @return Physical location of your cluster placement group created in Amazon
-     *         EC2.
+     *         EC2. For more information about cluster placement group, see <a
+     *         rvices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html">Using
+     *         Cluster Instances</a>
      */
     public String getPlacementGroup() {
         return placementGroup;
@@ -605,14 +642,18 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     
     /**
      * Physical location of your cluster placement group created in Amazon
-     * EC2.
+     * EC2. For more information about cluster placement group, see <a
+     * rvices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html">Using
+     * Cluster Instances</a>
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 255<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
      * @param placementGroup Physical location of your cluster placement group created in Amazon
-     *         EC2.
+     *         EC2. For more information about cluster placement group, see <a
+     *         rvices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html">Using
+     *         Cluster Instances</a>
      */
     public void setPlacementGroup(String placementGroup) {
         this.placementGroup = placementGroup;
@@ -620,7 +661,9 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     
     /**
      * Physical location of your cluster placement group created in Amazon
-     * EC2.
+     * EC2. For more information about cluster placement group, see <a
+     * rvices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html">Using
+     * Cluster Instances</a>
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -629,7 +672,9 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
      * @param placementGroup Physical location of your cluster placement group created in Amazon
-     *         EC2.
+     *         EC2. For more information about cluster placement group, see <a
+     *         rvices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html">Using
+     *         Cluster Instances</a>
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -641,33 +686,48 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * The subnet identifier of the Virtual Private Cloud.
+     * A comma-separated list of subnet identifiers of Amazon Virtual Private
+     * Clouds (Amazon VPCs). <p>When you specify subnets and Availability
+     * Zones with this call, ensure that the subnets' Availability Zones
+     * match the Availability Zones specified.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 255<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @return The subnet identifier of the Virtual Private Cloud.
+     * @return A comma-separated list of subnet identifiers of Amazon Virtual Private
+     *         Clouds (Amazon VPCs). <p>When you specify subnets and Availability
+     *         Zones with this call, ensure that the subnets' Availability Zones
+     *         match the Availability Zones specified.
      */
     public String getVPCZoneIdentifier() {
         return vPCZoneIdentifier;
     }
     
     /**
-     * The subnet identifier of the Virtual Private Cloud.
+     * A comma-separated list of subnet identifiers of Amazon Virtual Private
+     * Clouds (Amazon VPCs). <p>When you specify subnets and Availability
+     * Zones with this call, ensure that the subnets' Availability Zones
+     * match the Availability Zones specified.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 255<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @param vPCZoneIdentifier The subnet identifier of the Virtual Private Cloud.
+     * @param vPCZoneIdentifier A comma-separated list of subnet identifiers of Amazon Virtual Private
+     *         Clouds (Amazon VPCs). <p>When you specify subnets and Availability
+     *         Zones with this call, ensure that the subnets' Availability Zones
+     *         match the Availability Zones specified.
      */
     public void setVPCZoneIdentifier(String vPCZoneIdentifier) {
         this.vPCZoneIdentifier = vPCZoneIdentifier;
     }
     
     /**
-     * The subnet identifier of the Virtual Private Cloud.
+     * A comma-separated list of subnet identifiers of Amazon Virtual Private
+     * Clouds (Amazon VPCs). <p>When you specify subnets and Availability
+     * Zones with this call, ensure that the subnets' Availability Zones
+     * match the Availability Zones specified.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -675,7 +735,10 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 255<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @param vPCZoneIdentifier The subnet identifier of the Virtual Private Cloud.
+     * @param vPCZoneIdentifier A comma-separated list of subnet identifiers of Amazon Virtual Private
+     *         Clouds (Amazon VPCs). <p>When you specify subnets and Availability
+     *         Zones with this call, ensure that the subnets' Availability Zones
+     *         match the Availability Zones specified.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -685,6 +748,107 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
         return this;
     }
     
+    
+    /**
+     * The tag to be created or updated. Each tag should be defined by its
+     * resource type, resource ID, key, value, and a propagate flag. Valid
+     * values are: key=<i>value</i>, value=<i>value</i>,
+     * propagate=<i>true</i> or <i>false</i>. Value and propagate are
+     * optional parameters.
+     *
+     * @return The tag to be created or updated. Each tag should be defined by its
+     *         resource type, resource ID, key, value, and a propagate flag. Valid
+     *         values are: key=<i>value</i>, value=<i>value</i>,
+     *         propagate=<i>true</i> or <i>false</i>. Value and propagate are
+     *         optional parameters.
+     */
+    public java.util.List<Tag> getTags() {
+        
+        if (tags == null) {
+            tags = new java.util.ArrayList<Tag>();
+        }
+        return tags;
+    }
+    
+    /**
+     * The tag to be created or updated. Each tag should be defined by its
+     * resource type, resource ID, key, value, and a propagate flag. Valid
+     * values are: key=<i>value</i>, value=<i>value</i>,
+     * propagate=<i>true</i> or <i>false</i>. Value and propagate are
+     * optional parameters.
+     *
+     * @param tags The tag to be created or updated. Each tag should be defined by its
+     *         resource type, resource ID, key, value, and a propagate flag. Valid
+     *         values are: key=<i>value</i>, value=<i>value</i>,
+     *         propagate=<i>true</i> or <i>false</i>. Value and propagate are
+     *         optional parameters.
+     */
+    public void setTags(java.util.Collection<Tag> tags) {
+        if (tags == null) {
+            this.tags = null;
+            return;
+        }
+
+        java.util.List<Tag> tagsCopy = new java.util.ArrayList<Tag>(tags.size());
+        tagsCopy.addAll(tags);
+        this.tags = tagsCopy;
+    }
+    
+    /**
+     * The tag to be created or updated. Each tag should be defined by its
+     * resource type, resource ID, key, value, and a propagate flag. Valid
+     * values are: key=<i>value</i>, value=<i>value</i>,
+     * propagate=<i>true</i> or <i>false</i>. Value and propagate are
+     * optional parameters.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param tags The tag to be created or updated. Each tag should be defined by its
+     *         resource type, resource ID, key, value, and a propagate flag. Valid
+     *         values are: key=<i>value</i>, value=<i>value</i>,
+     *         propagate=<i>true</i> or <i>false</i>. Value and propagate are
+     *         optional parameters.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public CreateAutoScalingGroupRequest withTags(Tag... tags) {
+        if (getTags() == null) setTags(new java.util.ArrayList<Tag>(tags.length));
+        for (Tag value : tags) {
+            getTags().add(value);
+        }
+        return this;
+    }
+    
+    /**
+     * The tag to be created or updated. Each tag should be defined by its
+     * resource type, resource ID, key, value, and a propagate flag. Valid
+     * values are: key=<i>value</i>, value=<i>value</i>,
+     * propagate=<i>true</i> or <i>false</i>. Value and propagate are
+     * optional parameters.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param tags The tag to be created or updated. Each tag should be defined by its
+     *         resource type, resource ID, key, value, and a propagate flag. Valid
+     *         values are: key=<i>value</i>, value=<i>value</i>,
+     *         propagate=<i>true</i> or <i>false</i>. Value and propagate are
+     *         optional parameters.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public CreateAutoScalingGroupRequest withTags(java.util.Collection<Tag> tags) {
+        if (tags == null) {
+            this.tags = null;
+        } else {
+            java.util.List<Tag> tagsCopy = new java.util.ArrayList<Tag>(tags.size());
+            tagsCopy.addAll(tags);
+            this.tags = tagsCopy;
+        }
+
+        return this;
+    }
     
     /**
      * Returns a string representation of this object; useful for testing and
@@ -698,20 +862,79 @@ public class CreateAutoScalingGroupRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
-        sb.append("LaunchConfigurationName: " + launchConfigurationName + ", ");
-        sb.append("MinSize: " + minSize + ", ");
-        sb.append("MaxSize: " + maxSize + ", ");
-        sb.append("DesiredCapacity: " + desiredCapacity + ", ");
-        sb.append("DefaultCooldown: " + defaultCooldown + ", ");
-        sb.append("AvailabilityZones: " + availabilityZones + ", ");
-        sb.append("LoadBalancerNames: " + loadBalancerNames + ", ");
-        sb.append("HealthCheckType: " + healthCheckType + ", ");
-        sb.append("HealthCheckGracePeriod: " + healthCheckGracePeriod + ", ");
-        sb.append("PlacementGroup: " + placementGroup + ", ");
-        sb.append("VPCZoneIdentifier: " + vPCZoneIdentifier + ", ");
+        if (autoScalingGroupName != null) sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
+        if (launchConfigurationName != null) sb.append("LaunchConfigurationName: " + launchConfigurationName + ", ");
+        if (minSize != null) sb.append("MinSize: " + minSize + ", ");
+        if (maxSize != null) sb.append("MaxSize: " + maxSize + ", ");
+        if (desiredCapacity != null) sb.append("DesiredCapacity: " + desiredCapacity + ", ");
+        if (defaultCooldown != null) sb.append("DefaultCooldown: " + defaultCooldown + ", ");
+        if (availabilityZones != null) sb.append("AvailabilityZones: " + availabilityZones + ", ");
+        if (loadBalancerNames != null) sb.append("LoadBalancerNames: " + loadBalancerNames + ", ");
+        if (healthCheckType != null) sb.append("HealthCheckType: " + healthCheckType + ", ");
+        if (healthCheckGracePeriod != null) sb.append("HealthCheckGracePeriod: " + healthCheckGracePeriod + ", ");
+        if (placementGroup != null) sb.append("PlacementGroup: " + placementGroup + ", ");
+        if (vPCZoneIdentifier != null) sb.append("VPCZoneIdentifier: " + vPCZoneIdentifier + ", ");
+        if (tags != null) sb.append("Tags: " + tags + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getAutoScalingGroupName() == null) ? 0 : getAutoScalingGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getLaunchConfigurationName() == null) ? 0 : getLaunchConfigurationName().hashCode()); 
+        hashCode = prime * hashCode + ((getMinSize() == null) ? 0 : getMinSize().hashCode()); 
+        hashCode = prime * hashCode + ((getMaxSize() == null) ? 0 : getMaxSize().hashCode()); 
+        hashCode = prime * hashCode + ((getDesiredCapacity() == null) ? 0 : getDesiredCapacity().hashCode()); 
+        hashCode = prime * hashCode + ((getDefaultCooldown() == null) ? 0 : getDefaultCooldown().hashCode()); 
+        hashCode = prime * hashCode + ((getAvailabilityZones() == null) ? 0 : getAvailabilityZones().hashCode()); 
+        hashCode = prime * hashCode + ((getLoadBalancerNames() == null) ? 0 : getLoadBalancerNames().hashCode()); 
+        hashCode = prime * hashCode + ((getHealthCheckType() == null) ? 0 : getHealthCheckType().hashCode()); 
+        hashCode = prime * hashCode + ((getHealthCheckGracePeriod() == null) ? 0 : getHealthCheckGracePeriod().hashCode()); 
+        hashCode = prime * hashCode + ((getPlacementGroup() == null) ? 0 : getPlacementGroup().hashCode()); 
+        hashCode = prime * hashCode + ((getVPCZoneIdentifier() == null) ? 0 : getVPCZoneIdentifier().hashCode()); 
+        hashCode = prime * hashCode + ((getTags() == null) ? 0 : getTags().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof CreateAutoScalingGroupRequest == false) return false;
+        CreateAutoScalingGroupRequest other = (CreateAutoScalingGroupRequest)obj;
+        
+        if (other.getAutoScalingGroupName() == null ^ this.getAutoScalingGroupName() == null) return false;
+        if (other.getAutoScalingGroupName() != null && other.getAutoScalingGroupName().equals(this.getAutoScalingGroupName()) == false) return false; 
+        if (other.getLaunchConfigurationName() == null ^ this.getLaunchConfigurationName() == null) return false;
+        if (other.getLaunchConfigurationName() != null && other.getLaunchConfigurationName().equals(this.getLaunchConfigurationName()) == false) return false; 
+        if (other.getMinSize() == null ^ this.getMinSize() == null) return false;
+        if (other.getMinSize() != null && other.getMinSize().equals(this.getMinSize()) == false) return false; 
+        if (other.getMaxSize() == null ^ this.getMaxSize() == null) return false;
+        if (other.getMaxSize() != null && other.getMaxSize().equals(this.getMaxSize()) == false) return false; 
+        if (other.getDesiredCapacity() == null ^ this.getDesiredCapacity() == null) return false;
+        if (other.getDesiredCapacity() != null && other.getDesiredCapacity().equals(this.getDesiredCapacity()) == false) return false; 
+        if (other.getDefaultCooldown() == null ^ this.getDefaultCooldown() == null) return false;
+        if (other.getDefaultCooldown() != null && other.getDefaultCooldown().equals(this.getDefaultCooldown()) == false) return false; 
+        if (other.getAvailabilityZones() == null ^ this.getAvailabilityZones() == null) return false;
+        if (other.getAvailabilityZones() != null && other.getAvailabilityZones().equals(this.getAvailabilityZones()) == false) return false; 
+        if (other.getLoadBalancerNames() == null ^ this.getLoadBalancerNames() == null) return false;
+        if (other.getLoadBalancerNames() != null && other.getLoadBalancerNames().equals(this.getLoadBalancerNames()) == false) return false; 
+        if (other.getHealthCheckType() == null ^ this.getHealthCheckType() == null) return false;
+        if (other.getHealthCheckType() != null && other.getHealthCheckType().equals(this.getHealthCheckType()) == false) return false; 
+        if (other.getHealthCheckGracePeriod() == null ^ this.getHealthCheckGracePeriod() == null) return false;
+        if (other.getHealthCheckGracePeriod() != null && other.getHealthCheckGracePeriod().equals(this.getHealthCheckGracePeriod()) == false) return false; 
+        if (other.getPlacementGroup() == null ^ this.getPlacementGroup() == null) return false;
+        if (other.getPlacementGroup() != null && other.getPlacementGroup().equals(this.getPlacementGroup()) == false) return false; 
+        if (other.getVPCZoneIdentifier() == null ^ this.getVPCZoneIdentifier() == null) return false;
+        if (other.getVPCZoneIdentifier() != null && other.getVPCZoneIdentifier().equals(this.getVPCZoneIdentifier()) == false) return false; 
+        if (other.getTags() == null ^ this.getTags() == null) return false;
+        if (other.getTags() != null && other.getTags().equals(this.getTags()) == false) return false; 
+        return true;
     }
     
 }

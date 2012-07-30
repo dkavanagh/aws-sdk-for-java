@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -22,14 +22,13 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import com.amazonaws.*;
-import com.amazonaws.auth.AWS3Signer;
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.QueryStringSigner;
+import com.amazonaws.auth.*;
 import com.amazonaws.handlers.HandlerChainFactory;
 import com.amazonaws.handlers.RequestHandler;
 import com.amazonaws.http.StaxResponseHandler;
 import com.amazonaws.http.DefaultErrorResponseHandler;
 import com.amazonaws.http.ExecutionContext;
+import com.amazonaws.internal.StaticCredentialsProvider;
 import com.amazonaws.transform.Unmarshaller;
 import com.amazonaws.transform.StaxUnmarshallerContext;
 import com.amazonaws.transform.LegacyErrorUnmarshaller;
@@ -44,45 +43,79 @@ import com.amazonaws.services.simpledb.model.transform.*;
  * completes.
  * <p>
  * Amazon SimpleDB <p>
- * Amazon SimpleDB is a web service providing the core database
- * functions of data indexing and querying in the cloud. By offloading
- * the time and effort associated with building and operating a web-scale
- * database, SimpleDB provides developers the freedom to focus on
- * application development.
+ * Amazon SimpleDB is a web service providing the core database functions of data indexing and querying in the cloud. By offloading the time and effort
+ * associated with building and operating a web-scale database, SimpleDB provides developers the freedom to focus on application development.
  * </p>
  * <p>
- * A traditional, clustered relational database requires a sizable
- * upfront capital outlay, is complex to design, and often requires
- * extensive and repetitive database administration. Amazon SimpleDB is
- * dramatically simpler, requiring no schema, automatically indexing your
- * data and providing a simple API for storage and access. This approach
- * eliminates the administrative burden of data modeling, index
- * maintenance, and performance tuning. Developers gain access to this
- * functionality within Amazon's proven computing environment, are able
- * to scale instantly, and pay only for what they use.
+ * A traditional, clustered relational database requires a sizable upfront capital outlay, is complex to design, and often requires extensive and
+ * repetitive database administration. Amazon SimpleDB is dramatically simpler, requiring no schema, automatically indexing your data and providing a
+ * simple API for storage and access. This approach eliminates the administrative burden of data modeling, index maintenance, and performance tuning.
+ * Developers gain access to this functionality within Amazon's proven computing environment, are able to scale instantly, and pay only for what they
+ * use.
  * </p>
  * <p>
- * Visit <a href="http://aws.amazon.com/simpledb/">
- * http://aws.amazon.com/simpledb/ </a> for more information.
+ * Visit <a href="http://aws.amazon.com/simpledb/"> http://aws.amazon.com/simpledb/ </a> for more information.
  * </p>
  */
 public class AmazonSimpleDBClient extends AmazonWebServiceClient implements AmazonSimpleDB {
 
-    /**
-     * The AWS credentials (access key ID and secret key) to use when
-     * authenticating with AWS services.
-     */
-    private AWSCredentials awsCredentials;
+    /** Provider for AWS credentials. */
+    private AWSCredentialsProvider awsCredentialsProvider;
 
     /**
      * List of exception unmarshallers for all AmazonSimpleDB exceptions.
      */
-    protected final List<Unmarshaller<AmazonServiceException, Node>> exceptionUnmarshallers;
+    protected final List<Unmarshaller<AmazonServiceException, Node>> exceptionUnmarshallers
+            = new ArrayList<Unmarshaller<AmazonServiceException, Node>>();
 
     
     /** AWS signer for authenticating requests. */
     private QueryStringSigner signer;
 
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonSimpleDB.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonSimpleDBClient() {
+        this(new DefaultAWSCredentialsProviderChain(), new ClientConfiguration());
+    }
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonSimpleDB.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param clientConfiguration The client configuration options controlling how this
+     *                       client connects to AmazonSimpleDB
+     *                       (ex: proxy settings, retry counts, etc.).
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonSimpleDBClient(ClientConfiguration clientConfiguration) {
+        this(new DefaultAWSCredentialsProviderChain(), clientConfiguration);
+    }
 
     /**
      * Constructs a new client to invoke service methods on
@@ -116,9 +149,49 @@ public class AmazonSimpleDBClient extends AmazonWebServiceClient implements Amaz
      */
     public AmazonSimpleDBClient(AWSCredentials awsCredentials, ClientConfiguration clientConfiguration) {
         super(clientConfiguration);
-        this.awsCredentials = awsCredentials;
+        this.awsCredentialsProvider = new StaticCredentialsProvider(awsCredentials);
+        init();
+    }
 
-        exceptionUnmarshallers = new ArrayList<Unmarshaller<AmazonServiceException, Node>>();
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonSimpleDB using the specified AWS account credentials provider.
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param awsCredentialsProvider
+     *            The AWS credentials provider which will provide credentials
+     *            to authenticate requests with AWS services.
+     */
+    public AmazonSimpleDBClient(AWSCredentialsProvider awsCredentialsProvider) {
+        this(awsCredentialsProvider, new ClientConfiguration());
+    }
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonSimpleDB using the specified AWS account credentials
+     * provider and client configuration options.
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param awsCredentialsProvider
+     *            The AWS credentials provider which will provide credentials
+     *            to authenticate requests with AWS services.
+     * @param clientConfiguration The client configuration options controlling how this
+     *                       client connects to AmazonSimpleDB
+     *                       (ex: proxy settings, retry counts, etc.).
+     */
+    public AmazonSimpleDBClient(AWSCredentialsProvider awsCredentialsProvider, ClientConfiguration clientConfiguration) {
+        super(clientConfiguration);
+        this.awsCredentialsProvider = awsCredentialsProvider;
+        init();
+    }
+
+    private void init() {
         exceptionUnmarshallers.add(new InvalidParameterValueExceptionUnmarshaller());
         exceptionUnmarshallers.add(new NumberDomainBytesExceededExceptionUnmarshaller());
         exceptionUnmarshallers.add(new NoSuchDomainExceptionUnmarshaller());
@@ -141,6 +214,7 @@ public class AmazonSimpleDBClient extends AmazonWebServiceClient implements Amaz
         setEndpoint("sdb.amazonaws.com");
 
         signer = new QueryStringSigner();
+        
 
         HandlerChainFactory chainFactory = new HandlerChainFactory();
 		requestHandlers.addAll(chainFactory.newRequestHandlerChain(
@@ -687,7 +761,6 @@ public class AmazonSimpleDBClient extends AmazonWebServiceClient implements Amaz
     }
     
 
-
     /**
      * Returns additional metadata for a previously executed successful, request, typically used for
      * debugging issues where a service isn't acting as expected.  This data isn't considered part
@@ -718,24 +791,19 @@ public class AmazonSimpleDBClient extends AmazonWebServiceClient implements Amaz
             request.addParameter(entry.getKey(), entry.getValue());
         }
 
-        // Apply any additional service specific request handlers that need to be run
-        if (requestHandlers != null) {
-            for (RequestHandler requestHandler : requestHandlers) {
-                requestHandler.beforeRequest(request);
-            }
+        AWSCredentials credentials = awsCredentialsProvider.getCredentials();
+        AmazonWebServiceRequest originalRequest = request.getOriginalRequest();
+        if (originalRequest != null && originalRequest.getRequestCredentials() != null) {
+        	credentials = originalRequest.getRequestCredentials();
         }
 
-        if (request.getOriginalRequest().getRequestCredentials() != null) {
-	        signer.sign(request, request.getOriginalRequest().getRequestCredentials());
-        } else {
-    	    signer.sign(request, awsCredentials);
-        }
-
+        ExecutionContext executionContext = createExecutionContext();
+        executionContext.setSigner(signer);
+        executionContext.setCredentials(credentials);
         
         StaxResponseHandler<X> responseHandler = new com.amazonaws.services.simpledb.internal.SimpleDBStaxResponseHandler<X>(unmarshaller);
         DefaultErrorResponseHandler errorResponseHandler = new DefaultErrorResponseHandler(exceptionUnmarshallers);
 
-        ExecutionContext executionContext = createExecutionContext();
         return (X)client.execute(request, responseHandler, errorResponseHandler, executionContext);
     }
 }

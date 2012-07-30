@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,15 +32,15 @@ import com.amazonaws.transform.SimpleTypeStaxUnmarshallers.*;
  */
 public class ReservedDBInstanceStaxUnmarshaller implements Unmarshaller<ReservedDBInstance, StaxUnmarshallerContext> {
 
-    
-
     public ReservedDBInstance unmarshall(StaxUnmarshallerContext context) throws Exception {
         ReservedDBInstance reservedDBInstance = new ReservedDBInstance();
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
+
         
         if (context.isStartOfDocument()) targetDepth += 2;
         
+
         if (context.isStartOfDocument()) targetDepth++;
         
 
@@ -89,12 +89,20 @@ public class ReservedDBInstanceStaxUnmarshaller implements Unmarshaller<Reserved
                     reservedDBInstance.setProductDescription(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
+                if (context.testExpression("OfferingType", targetDepth)) {
+                    reservedDBInstance.setOfferingType(StringStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
                 if (context.testExpression("MultiAZ", targetDepth)) {
                     reservedDBInstance.setMultiAZ(BooleanStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
                 if (context.testExpression("State", targetDepth)) {
                     reservedDBInstance.setState(StringStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("RecurringCharges/RecurringCharge", targetDepth)) {
+                    reservedDBInstance.getRecurringCharges().add(RecurringChargeStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
             } else if (xmlEvent.isEndElement()) {

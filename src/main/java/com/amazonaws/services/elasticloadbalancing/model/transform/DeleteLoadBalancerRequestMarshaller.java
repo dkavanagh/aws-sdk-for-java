@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.elasticloadbalancing.model.*;
@@ -30,13 +31,17 @@ import com.amazonaws.util.StringUtils;
 public class DeleteLoadBalancerRequestMarshaller implements Marshaller<Request<DeleteLoadBalancerRequest>, DeleteLoadBalancerRequest> {
 
     public Request<DeleteLoadBalancerRequest> marshall(DeleteLoadBalancerRequest deleteLoadBalancerRequest) {
+
+        if (deleteLoadBalancerRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<DeleteLoadBalancerRequest> request = new DefaultRequest<DeleteLoadBalancerRequest>(deleteLoadBalancerRequest, "AmazonElasticLoadBalancing");
         request.addParameter("Action", "DeleteLoadBalancer");
-        request.addParameter("Version", "2011-04-05");
-        if (deleteLoadBalancerRequest != null) {
-            if (deleteLoadBalancerRequest.getLoadBalancerName() != null) {
-                request.addParameter("LoadBalancerName", StringUtils.fromString(deleteLoadBalancerRequest.getLoadBalancerName()));
-            }
+        request.addParameter("Version", "2012-06-01");
+
+        if (deleteLoadBalancerRequest.getLoadBalancerName() != null) {
+            request.addParameter("LoadBalancerName", StringUtils.fromString(deleteLoadBalancerRequest.getLoadBalancerName()));
         }
 
 

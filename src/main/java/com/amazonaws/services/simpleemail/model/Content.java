@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -19,10 +19,8 @@ package com.amazonaws.services.simpleemail.model;
  * Represents textual data, plus an optional character set specification.
  * </p>
  * <p>
- * By default, the text must be 7-bit ASCII, due to the constraints of
- * the SMTP protocol. If the text must contain any other characters, then
- * you must also specify a character set. Examples include UTF-8,
- * ISO-8859-1, and Shift_JIS.
+ * By default, the text must be 7-bit ASCII, due to the constraints of the SMTP protocol. If the text must contain any other characters, then you must
+ * also specify a character set. Examples include UTF-8, ISO-8859-1, and Shift_JIS.
  * </p>
  */
 public class Content {
@@ -53,6 +51,8 @@ public class Content {
     public Content(String data) {
         this.data = data;
     }
+
+    
     
     /**
      * The textual data of the content.
@@ -134,10 +134,35 @@ public class Content {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("Data: " + data + ", ");
-        sb.append("Charset: " + charset + ", ");
+        if (data != null) sb.append("Data: " + data + ", ");
+        if (charset != null) sb.append("Charset: " + charset + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getData() == null) ? 0 : getData().hashCode()); 
+        hashCode = prime * hashCode + ((getCharset() == null) ? 0 : getCharset().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof Content == false) return false;
+        Content other = (Content)obj;
+        
+        if (other.getData() == null ^ this.getData() == null) return false;
+        if (other.getData() != null && other.getData().equals(this.getData()) == false) return false; 
+        if (other.getCharset() == null ^ this.getCharset() == null) return false;
+        if (other.getCharset() != null && other.getCharset().equals(this.getCharset()) == false) return false; 
+        return true;
     }
     
 }

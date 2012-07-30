@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,9 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancing#setLoadBalancerPoliciesOfListener(SetLoadBalancerPoliciesOfListenerRequest) SetLoadBalancerPoliciesOfListener operation}.
  * <p>
- * Associates, updates, or disables a policy with a listener on the load
- * balancer. Currently only zero (0) or one (1) policy can be associated
- * with a listener.
+ * Associates, updates, or disables a policy with a listener on the LoadBalancer. You can associate multiple policies with a listener.
  * </p>
  *
  * @see com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancing#setLoadBalancerPoliciesOfListener(SetLoadBalancerPoliciesOfListenerRequest)
@@ -34,8 +32,8 @@ public class SetLoadBalancerPoliciesOfListenerRequest extends AmazonWebServiceRe
     private String loadBalancerName;
 
     /**
-     * The external port of the LoadBalancer with which this policy has to be
-     * associated.
+     * The external port of the LoadBalancer with which this policy applies
+     * to.
      */
     private Integer loadBalancerPort;
 
@@ -60,7 +58,7 @@ public class SetLoadBalancerPoliciesOfListenerRequest extends AmazonWebServiceRe
      * @param loadBalancerName The name associated with the LoadBalancer. The
      * name must be unique within the client AWS account.
      * @param loadBalancerPort The external port of the LoadBalancer with
-     * which this policy has to be associated.
+     * which this policy applies to.
      * @param policyNames List of policies to be associated with the
      * listener. Currently this list can have at most one policy. If the list
      * is empty, the current policy is removed from the listener.
@@ -70,6 +68,8 @@ public class SetLoadBalancerPoliciesOfListenerRequest extends AmazonWebServiceRe
         this.loadBalancerPort = loadBalancerPort;
         this.policyNames = policyNames;
     }
+
+    
     
     /**
      * The name associated with the LoadBalancer. The name must be unique
@@ -112,35 +112,35 @@ public class SetLoadBalancerPoliciesOfListenerRequest extends AmazonWebServiceRe
     
     
     /**
-     * The external port of the LoadBalancer with which this policy has to be
-     * associated.
+     * The external port of the LoadBalancer with which this policy applies
+     * to.
      *
-     * @return The external port of the LoadBalancer with which this policy has to be
-     *         associated.
+     * @return The external port of the LoadBalancer with which this policy applies
+     *         to.
      */
     public Integer getLoadBalancerPort() {
         return loadBalancerPort;
     }
     
     /**
-     * The external port of the LoadBalancer with which this policy has to be
-     * associated.
+     * The external port of the LoadBalancer with which this policy applies
+     * to.
      *
-     * @param loadBalancerPort The external port of the LoadBalancer with which this policy has to be
-     *         associated.
+     * @param loadBalancerPort The external port of the LoadBalancer with which this policy applies
+     *         to.
      */
     public void setLoadBalancerPort(Integer loadBalancerPort) {
         this.loadBalancerPort = loadBalancerPort;
     }
     
     /**
-     * The external port of the LoadBalancer with which this policy has to be
-     * associated.
+     * The external port of the LoadBalancer with which this policy applies
+     * to.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param loadBalancerPort The external port of the LoadBalancer with which this policy has to be
-     *         associated.
+     * @param loadBalancerPort The external port of the LoadBalancer with which this policy applies
+     *         to.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -161,6 +161,7 @@ public class SetLoadBalancerPoliciesOfListenerRequest extends AmazonWebServiceRe
      *         policy is removed from the listener.
      */
     public java.util.List<String> getPolicyNames() {
+        
         if (policyNames == null) {
             policyNames = new java.util.ArrayList<String>();
         }
@@ -177,10 +178,13 @@ public class SetLoadBalancerPoliciesOfListenerRequest extends AmazonWebServiceRe
      *         policy is removed from the listener.
      */
     public void setPolicyNames(java.util.Collection<String> policyNames) {
-        java.util.List<String> policyNamesCopy = new java.util.ArrayList<String>();
-        if (policyNames != null) {
-            policyNamesCopy.addAll(policyNames);
+        if (policyNames == null) {
+            this.policyNames = null;
+            return;
         }
+
+        java.util.List<String> policyNamesCopy = new java.util.ArrayList<String>(policyNames.size());
+        policyNamesCopy.addAll(policyNames);
         this.policyNames = policyNamesCopy;
     }
     
@@ -199,6 +203,7 @@ public class SetLoadBalancerPoliciesOfListenerRequest extends AmazonWebServiceRe
      *         together. 
      */
     public SetLoadBalancerPoliciesOfListenerRequest withPolicyNames(String... policyNames) {
+        if (getPolicyNames() == null) setPolicyNames(new java.util.ArrayList<String>(policyNames.length));
         for (String value : policyNames) {
             getPolicyNames().add(value);
         }
@@ -220,11 +225,13 @@ public class SetLoadBalancerPoliciesOfListenerRequest extends AmazonWebServiceRe
      *         together. 
      */
     public SetLoadBalancerPoliciesOfListenerRequest withPolicyNames(java.util.Collection<String> policyNames) {
-        java.util.List<String> policyNamesCopy = new java.util.ArrayList<String>();
-        if (policyNames != null) {
+        if (policyNames == null) {
+            this.policyNames = null;
+        } else {
+            java.util.List<String> policyNamesCopy = new java.util.ArrayList<String>(policyNames.size());
             policyNamesCopy.addAll(policyNames);
+            this.policyNames = policyNamesCopy;
         }
-        this.policyNames = policyNamesCopy;
 
         return this;
     }
@@ -241,11 +248,39 @@ public class SetLoadBalancerPoliciesOfListenerRequest extends AmazonWebServiceRe
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("LoadBalancerName: " + loadBalancerName + ", ");
-        sb.append("LoadBalancerPort: " + loadBalancerPort + ", ");
-        sb.append("PolicyNames: " + policyNames + ", ");
+        if (loadBalancerName != null) sb.append("LoadBalancerName: " + loadBalancerName + ", ");
+        if (loadBalancerPort != null) sb.append("LoadBalancerPort: " + loadBalancerPort + ", ");
+        if (policyNames != null) sb.append("PolicyNames: " + policyNames + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getLoadBalancerName() == null) ? 0 : getLoadBalancerName().hashCode()); 
+        hashCode = prime * hashCode + ((getLoadBalancerPort() == null) ? 0 : getLoadBalancerPort().hashCode()); 
+        hashCode = prime * hashCode + ((getPolicyNames() == null) ? 0 : getPolicyNames().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof SetLoadBalancerPoliciesOfListenerRequest == false) return false;
+        SetLoadBalancerPoliciesOfListenerRequest other = (SetLoadBalancerPoliciesOfListenerRequest)obj;
+        
+        if (other.getLoadBalancerName() == null ^ this.getLoadBalancerName() == null) return false;
+        if (other.getLoadBalancerName() != null && other.getLoadBalancerName().equals(this.getLoadBalancerName()) == false) return false; 
+        if (other.getLoadBalancerPort() == null ^ this.getLoadBalancerPort() == null) return false;
+        if (other.getLoadBalancerPort() != null && other.getLoadBalancerPort().equals(this.getLoadBalancerPort()) == false) return false; 
+        if (other.getPolicyNames() == null ^ this.getPolicyNames() == null) return false;
+        if (other.getPolicyNames() != null && other.getPolicyNames().equals(this.getPolicyNames()) == false) return false; 
+        return true;
     }
     
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@ package com.amazonaws.services.autoscaling.model;
 
 /**
  * <p>
- * The AutoScalingInstancesType data type.
+ * The <code>AutoScalingInstancesType</code> data type.
  * </p>
  */
 public class DescribeAutoScalingInstancesResult {
@@ -40,6 +40,7 @@ public class DescribeAutoScalingInstancesResult {
      * @return A list of Auto Scaling instances.
      */
     public java.util.List<AutoScalingInstanceDetails> getAutoScalingInstances() {
+        
         if (autoScalingInstances == null) {
             autoScalingInstances = new java.util.ArrayList<AutoScalingInstanceDetails>();
         }
@@ -52,10 +53,13 @@ public class DescribeAutoScalingInstancesResult {
      * @param autoScalingInstances A list of Auto Scaling instances.
      */
     public void setAutoScalingInstances(java.util.Collection<AutoScalingInstanceDetails> autoScalingInstances) {
-        java.util.List<AutoScalingInstanceDetails> autoScalingInstancesCopy = new java.util.ArrayList<AutoScalingInstanceDetails>();
-        if (autoScalingInstances != null) {
-            autoScalingInstancesCopy.addAll(autoScalingInstances);
+        if (autoScalingInstances == null) {
+            this.autoScalingInstances = null;
+            return;
         }
+
+        java.util.List<AutoScalingInstanceDetails> autoScalingInstancesCopy = new java.util.ArrayList<AutoScalingInstanceDetails>(autoScalingInstances.size());
+        autoScalingInstancesCopy.addAll(autoScalingInstances);
         this.autoScalingInstances = autoScalingInstancesCopy;
     }
     
@@ -70,6 +74,7 @@ public class DescribeAutoScalingInstancesResult {
      *         together. 
      */
     public DescribeAutoScalingInstancesResult withAutoScalingInstances(AutoScalingInstanceDetails... autoScalingInstances) {
+        if (getAutoScalingInstances() == null) setAutoScalingInstances(new java.util.ArrayList<AutoScalingInstanceDetails>(autoScalingInstances.length));
         for (AutoScalingInstanceDetails value : autoScalingInstances) {
             getAutoScalingInstances().add(value);
         }
@@ -87,11 +92,13 @@ public class DescribeAutoScalingInstancesResult {
      *         together. 
      */
     public DescribeAutoScalingInstancesResult withAutoScalingInstances(java.util.Collection<AutoScalingInstanceDetails> autoScalingInstances) {
-        java.util.List<AutoScalingInstanceDetails> autoScalingInstancesCopy = new java.util.ArrayList<AutoScalingInstanceDetails>();
-        if (autoScalingInstances != null) {
+        if (autoScalingInstances == null) {
+            this.autoScalingInstances = null;
+        } else {
+            java.util.List<AutoScalingInstanceDetails> autoScalingInstancesCopy = new java.util.ArrayList<AutoScalingInstanceDetails>(autoScalingInstances.size());
             autoScalingInstancesCopy.addAll(autoScalingInstances);
+            this.autoScalingInstances = autoScalingInstancesCopy;
         }
-        this.autoScalingInstances = autoScalingInstancesCopy;
 
         return this;
     }
@@ -151,10 +158,35 @@ public class DescribeAutoScalingInstancesResult {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("AutoScalingInstances: " + autoScalingInstances + ", ");
-        sb.append("NextToken: " + nextToken + ", ");
+        if (autoScalingInstances != null) sb.append("AutoScalingInstances: " + autoScalingInstances + ", ");
+        if (nextToken != null) sb.append("NextToken: " + nextToken + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getAutoScalingInstances() == null) ? 0 : getAutoScalingInstances().hashCode()); 
+        hashCode = prime * hashCode + ((getNextToken() == null) ? 0 : getNextToken().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeAutoScalingInstancesResult == false) return false;
+        DescribeAutoScalingInstancesResult other = (DescribeAutoScalingInstancesResult)obj;
+        
+        if (other.getAutoScalingInstances() == null ^ this.getAutoScalingInstances() == null) return false;
+        if (other.getAutoScalingInstances() != null && other.getAutoScalingInstances().equals(this.getAutoScalingInstances()) == false) return false; 
+        if (other.getNextToken() == null ^ this.getNextToken() == null) return false;
+        if (other.getNextToken() != null && other.getNextToken().equals(this.getNextToken()) == false) return false; 
+        return true;
     }
     
 }

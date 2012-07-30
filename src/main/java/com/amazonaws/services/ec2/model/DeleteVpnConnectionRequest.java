@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,19 +18,14 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#deleteVpnConnection(DeleteVpnConnectionRequest) DeleteVpnConnection operation}.
  * <p>
- * Deletes a VPN connection. Use this if you want to delete a VPC and
- * all its associated components. Another reason to use this operation is
- * if you believe the tunnel credentials for your VPN connection have
- * been compromised. In that situation, you can delete the VPN connection
- * and create a new one that has new keys, without needing to delete the
- * VPC or VPN gateway. If you create a new VPN connection, you must
- * reconfigure the customer gateway using the new configuration
- * information returned with the new VPN connection ID.
+ * Deletes a VPN connection. Use this if you want to delete a VPC and all its associated components. Another reason to use this operation is if you
+ * believe the tunnel credentials for your VPN connection have been compromised. In that situation, you can delete the VPN connection and create a new
+ * one that has new keys, without needing to delete the VPC or VPN gateway. If you create a new VPN connection, you must reconfigure the customer gateway
+ * using the new configuration information returned with the new VPN connection ID.
  * </p>
  * <p>
- * If you're deleting the VPC and all its associated parts, we recommend
- * you detach the VPN gateway from the VPC and delete the VPC before
- * deleting the VPN connection.
+ * If you're deleting the VPC and all its associated parts, we recommend you detach the VPN gateway from the VPC and delete the VPC before deleting the
+ * VPN connection.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#deleteVpnConnection(DeleteVpnConnectionRequest)
@@ -58,6 +53,8 @@ public class DeleteVpnConnectionRequest extends AmazonWebServiceRequest {
     public DeleteVpnConnectionRequest(String vpnConnectionId) {
         this.vpnConnectionId = vpnConnectionId;
     }
+
+    
     
     /**
      * The ID of the VPN connection to delete
@@ -105,9 +102,31 @@ public class DeleteVpnConnectionRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("VpnConnectionId: " + vpnConnectionId + ", ");
+        if (vpnConnectionId != null) sb.append("VpnConnectionId: " + vpnConnectionId + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getVpnConnectionId() == null) ? 0 : getVpnConnectionId().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DeleteVpnConnectionRequest == false) return false;
+        DeleteVpnConnectionRequest other = (DeleteVpnConnectionRequest)obj;
+        
+        if (other.getVpnConnectionId() == null ^ this.getVpnConnectionId() == null) return false;
+        if (other.getVpnConnectionId() != null && other.getVpnConnectionId().equals(this.getVpnConnectionId()) == false) return false; 
+        return true;
     }
     
 }

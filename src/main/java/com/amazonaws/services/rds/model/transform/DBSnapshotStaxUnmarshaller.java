@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,15 +32,15 @@ import com.amazonaws.transform.SimpleTypeStaxUnmarshallers.*;
  */
 public class DBSnapshotStaxUnmarshaller implements Unmarshaller<DBSnapshot, StaxUnmarshallerContext> {
 
-    
-
     public DBSnapshot unmarshall(StaxUnmarshallerContext context) throws Exception {
         DBSnapshot dBSnapshot = new DBSnapshot();
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
+
         
         if (context.isStartOfDocument()) targetDepth += 2;
         
+
         if (context.isStartOfDocument()) targetDepth++;
         
 
@@ -81,6 +81,10 @@ public class DBSnapshotStaxUnmarshaller implements Unmarshaller<DBSnapshot, Stax
                     dBSnapshot.setAvailabilityZone(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
+                if (context.testExpression("VpcId", targetDepth)) {
+                    dBSnapshot.setVpcId(StringStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
                 if (context.testExpression("InstanceCreateTime", targetDepth)) {
                     dBSnapshot.setInstanceCreateTime(DateStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
@@ -95,6 +99,10 @@ public class DBSnapshotStaxUnmarshaller implements Unmarshaller<DBSnapshot, Stax
                 }
                 if (context.testExpression("LicenseModel", targetDepth)) {
                     dBSnapshot.setLicenseModel(StringStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("SnapshotType", targetDepth)) {
+                    dBSnapshot.setSnapshotType(StringStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
             } else if (xmlEvent.isEndElement()) {

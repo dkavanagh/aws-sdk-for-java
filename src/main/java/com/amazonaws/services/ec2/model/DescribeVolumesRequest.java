@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,9 +18,8 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#describeVolumes(DescribeVolumesRequest) DescribeVolumes operation}.
  * <p>
- * Describes the status of the indicated volume or, in lieu of any
- * specified, all volumes belonging to the caller. Volumes that have been
- * deleted are not described.
+ * Describes the status of the indicated volume or, in lieu of any specified, all volumes belonging to the caller. Volumes that have been deleted are
+ * not described.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#describeVolumes(DescribeVolumesRequest)
@@ -56,6 +55,8 @@ public class DescribeVolumesRequest extends AmazonWebServiceRequest {
     public DescribeVolumesRequest(java.util.List<String> volumeIds) {
         this.volumeIds = volumeIds;
     }
+
+    
     
     /**
      * The optional list of EBS volumes to describe.
@@ -63,6 +64,7 @@ public class DescribeVolumesRequest extends AmazonWebServiceRequest {
      * @return The optional list of EBS volumes to describe.
      */
     public java.util.List<String> getVolumeIds() {
+        
         if (volumeIds == null) {
             volumeIds = new java.util.ArrayList<String>();
         }
@@ -75,10 +77,13 @@ public class DescribeVolumesRequest extends AmazonWebServiceRequest {
      * @param volumeIds The optional list of EBS volumes to describe.
      */
     public void setVolumeIds(java.util.Collection<String> volumeIds) {
-        java.util.List<String> volumeIdsCopy = new java.util.ArrayList<String>();
-        if (volumeIds != null) {
-            volumeIdsCopy.addAll(volumeIds);
+        if (volumeIds == null) {
+            this.volumeIds = null;
+            return;
         }
+
+        java.util.List<String> volumeIdsCopy = new java.util.ArrayList<String>(volumeIds.size());
+        volumeIdsCopy.addAll(volumeIds);
         this.volumeIds = volumeIdsCopy;
     }
     
@@ -93,6 +98,7 @@ public class DescribeVolumesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeVolumesRequest withVolumeIds(String... volumeIds) {
+        if (getVolumeIds() == null) setVolumeIds(new java.util.ArrayList<String>(volumeIds.length));
         for (String value : volumeIds) {
             getVolumeIds().add(value);
         }
@@ -110,11 +116,13 @@ public class DescribeVolumesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeVolumesRequest withVolumeIds(java.util.Collection<String> volumeIds) {
-        java.util.List<String> volumeIdsCopy = new java.util.ArrayList<String>();
-        if (volumeIds != null) {
+        if (volumeIds == null) {
+            this.volumeIds = null;
+        } else {
+            java.util.List<String> volumeIdsCopy = new java.util.ArrayList<String>(volumeIds.size());
             volumeIdsCopy.addAll(volumeIds);
+            this.volumeIds = volumeIdsCopy;
         }
-        this.volumeIds = volumeIdsCopy;
 
         return this;
     }
@@ -131,6 +139,7 @@ public class DescribeVolumesRequest extends AmazonWebServiceRequest {
      *         EC2 API reference</a>.
      */
     public java.util.List<Filter> getFilters() {
+        
         if (filters == null) {
             filters = new java.util.ArrayList<Filter>();
         }
@@ -149,10 +158,13 @@ public class DescribeVolumesRequest extends AmazonWebServiceRequest {
      *         EC2 API reference</a>.
      */
     public void setFilters(java.util.Collection<Filter> filters) {
-        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>();
-        if (filters != null) {
-            filtersCopy.addAll(filters);
+        if (filters == null) {
+            this.filters = null;
+            return;
         }
+
+        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>(filters.size());
+        filtersCopy.addAll(filters);
         this.filters = filtersCopy;
     }
     
@@ -173,6 +185,7 @@ public class DescribeVolumesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeVolumesRequest withFilters(Filter... filters) {
+        if (getFilters() == null) setFilters(new java.util.ArrayList<Filter>(filters.length));
         for (Filter value : filters) {
             getFilters().add(value);
         }
@@ -196,11 +209,13 @@ public class DescribeVolumesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeVolumesRequest withFilters(java.util.Collection<Filter> filters) {
-        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>();
-        if (filters != null) {
+        if (filters == null) {
+            this.filters = null;
+        } else {
+            java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>(filters.size());
             filtersCopy.addAll(filters);
+            this.filters = filtersCopy;
         }
-        this.filters = filtersCopy;
 
         return this;
     }
@@ -217,10 +232,35 @@ public class DescribeVolumesRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("VolumeIds: " + volumeIds + ", ");
-        sb.append("Filters: " + filters + ", ");
+        if (volumeIds != null) sb.append("VolumeIds: " + volumeIds + ", ");
+        if (filters != null) sb.append("Filters: " + filters + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getVolumeIds() == null) ? 0 : getVolumeIds().hashCode()); 
+        hashCode = prime * hashCode + ((getFilters() == null) ? 0 : getFilters().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeVolumesRequest == false) return false;
+        DescribeVolumesRequest other = (DescribeVolumesRequest)obj;
+        
+        if (other.getVolumeIds() == null ^ this.getVolumeIds() == null) return false;
+        if (other.getVolumeIds() != null && other.getVolumeIds().equals(this.getVolumeIds()) == false) return false; 
+        if (other.getFilters() == null ^ this.getFilters() == null) return false;
+        if (other.getFilters() != null && other.getFilters().equals(this.getFilters()) == false) return false; 
+        return true;
     }
     
 }

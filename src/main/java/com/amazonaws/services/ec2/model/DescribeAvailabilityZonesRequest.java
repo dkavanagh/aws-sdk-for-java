@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,14 +18,11 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#describeAvailabilityZones(DescribeAvailabilityZonesRequest) DescribeAvailabilityZones operation}.
  * <p>
- * The DescribeAvailabilityZones operation describes availability zones
- * that are currently available to the account and their states.
+ * The DescribeAvailabilityZones operation describes availability zones that are currently available to the account and their states.
  * </p>
  * <p>
- * Availability zones are not the same across accounts. The availability
- * zone <code>us-east-1a</code> for account A is not necessarily the same
- * as <code>us-east-1a</code> for account B. Zone assignments are mapped
- * independently for each account.
+ * Availability zones are not the same across accounts. The availability zone <code>us-east-1a</code> for account A is not necessarily the same as
+ * <code>us-east-1a</code> for account B. Zone assignments are mapped independently for each account.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#describeAvailabilityZones(DescribeAvailabilityZonesRequest)
@@ -52,6 +49,7 @@ public class DescribeAvailabilityZonesRequest extends AmazonWebServiceRequest {
      * @return A list of the availability zone names to describe.
      */
     public java.util.List<String> getZoneNames() {
+        
         if (zoneNames == null) {
             zoneNames = new java.util.ArrayList<String>();
         }
@@ -64,10 +62,13 @@ public class DescribeAvailabilityZonesRequest extends AmazonWebServiceRequest {
      * @param zoneNames A list of the availability zone names to describe.
      */
     public void setZoneNames(java.util.Collection<String> zoneNames) {
-        java.util.List<String> zoneNamesCopy = new java.util.ArrayList<String>();
-        if (zoneNames != null) {
-            zoneNamesCopy.addAll(zoneNames);
+        if (zoneNames == null) {
+            this.zoneNames = null;
+            return;
         }
+
+        java.util.List<String> zoneNamesCopy = new java.util.ArrayList<String>(zoneNames.size());
+        zoneNamesCopy.addAll(zoneNames);
         this.zoneNames = zoneNamesCopy;
     }
     
@@ -82,6 +83,7 @@ public class DescribeAvailabilityZonesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeAvailabilityZonesRequest withZoneNames(String... zoneNames) {
+        if (getZoneNames() == null) setZoneNames(new java.util.ArrayList<String>(zoneNames.length));
         for (String value : zoneNames) {
             getZoneNames().add(value);
         }
@@ -99,11 +101,13 @@ public class DescribeAvailabilityZonesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeAvailabilityZonesRequest withZoneNames(java.util.Collection<String> zoneNames) {
-        java.util.List<String> zoneNamesCopy = new java.util.ArrayList<String>();
-        if (zoneNames != null) {
+        if (zoneNames == null) {
+            this.zoneNames = null;
+        } else {
+            java.util.List<String> zoneNamesCopy = new java.util.ArrayList<String>(zoneNames.size());
             zoneNamesCopy.addAll(zoneNames);
+            this.zoneNames = zoneNamesCopy;
         }
-        this.zoneNames = zoneNamesCopy;
 
         return this;
     }
@@ -122,6 +126,7 @@ public class DescribeAvailabilityZonesRequest extends AmazonWebServiceRequest {
      *         EC2 API reference</a>.
      */
     public java.util.List<Filter> getFilters() {
+        
         if (filters == null) {
             filters = new java.util.ArrayList<Filter>();
         }
@@ -142,10 +147,13 @@ public class DescribeAvailabilityZonesRequest extends AmazonWebServiceRequest {
      *         EC2 API reference</a>.
      */
     public void setFilters(java.util.Collection<Filter> filters) {
-        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>();
-        if (filters != null) {
-            filtersCopy.addAll(filters);
+        if (filters == null) {
+            this.filters = null;
+            return;
         }
+
+        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>(filters.size());
+        filtersCopy.addAll(filters);
         this.filters = filtersCopy;
     }
     
@@ -168,6 +176,7 @@ public class DescribeAvailabilityZonesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeAvailabilityZonesRequest withFilters(Filter... filters) {
+        if (getFilters() == null) setFilters(new java.util.ArrayList<Filter>(filters.length));
         for (Filter value : filters) {
             getFilters().add(value);
         }
@@ -193,11 +202,13 @@ public class DescribeAvailabilityZonesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribeAvailabilityZonesRequest withFilters(java.util.Collection<Filter> filters) {
-        java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>();
-        if (filters != null) {
+        if (filters == null) {
+            this.filters = null;
+        } else {
+            java.util.List<Filter> filtersCopy = new java.util.ArrayList<Filter>(filters.size());
             filtersCopy.addAll(filters);
+            this.filters = filtersCopy;
         }
-        this.filters = filtersCopy;
 
         return this;
     }
@@ -214,10 +225,35 @@ public class DescribeAvailabilityZonesRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("ZoneNames: " + zoneNames + ", ");
-        sb.append("Filters: " + filters + ", ");
+        if (zoneNames != null) sb.append("ZoneNames: " + zoneNames + ", ");
+        if (filters != null) sb.append("Filters: " + filters + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getZoneNames() == null) ? 0 : getZoneNames().hashCode()); 
+        hashCode = prime * hashCode + ((getFilters() == null) ? 0 : getFilters().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribeAvailabilityZonesRequest == false) return false;
+        DescribeAvailabilityZonesRequest other = (DescribeAvailabilityZonesRequest)obj;
+        
+        if (other.getZoneNames() == null ^ this.getZoneNames() == null) return false;
+        if (other.getZoneNames() != null && other.getZoneNames().equals(this.getZoneNames()) == false) return false; 
+        if (other.getFilters() == null ^ this.getFilters() == null) return false;
+        if (other.getFilters() != null && other.getFilters().equals(this.getFilters()) == false) return false; 
+        return true;
     }
     
 }

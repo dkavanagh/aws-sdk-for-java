@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,10 +18,8 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.autoscaling.AmazonAutoScaling#describePolicies(DescribePoliciesRequest) DescribePolicies operation}.
  * <p>
- * Returns descriptions of what each policy does. This action supports
- * pagination. If the response includes a token, there are more records
- * available. To get the additional records, repeat the request with the
- * response token as the NextToken parameter.
+ * Returns descriptions of what each policy does. This action supports pagination. If the response includes a token, there are more records available.
+ * To get the additional records, repeat the request with the response token as the <code>NextToken</code> parameter.
  * </p>
  *
  * @see com.amazonaws.services.autoscaling.AmazonAutoScaling#describePolicies(DescribePoliciesRequest)
@@ -40,7 +38,7 @@ public class DescribePoliciesRequest extends AmazonWebServiceRequest {
     /**
      * A list of policy names or policy ARNs to be described. If this list is
      * omitted, all policy names are described. If an auto scaling group name
-     * is provided, the results are limited to that group.The list of
+     * is provided, the results are limited to that group. The list of
      * requested policy names cannot contain more than 50 items. If unknown
      * policy names are requested, they are ignored with no error.
      */
@@ -112,17 +110,18 @@ public class DescribePoliciesRequest extends AmazonWebServiceRequest {
     /**
      * A list of policy names or policy ARNs to be described. If this list is
      * omitted, all policy names are described. If an auto scaling group name
-     * is provided, the results are limited to that group.The list of
+     * is provided, the results are limited to that group. The list of
      * requested policy names cannot contain more than 50 items. If unknown
      * policy names are requested, they are ignored with no error.
      *
      * @return A list of policy names or policy ARNs to be described. If this list is
      *         omitted, all policy names are described. If an auto scaling group name
-     *         is provided, the results are limited to that group.The list of
+     *         is provided, the results are limited to that group. The list of
      *         requested policy names cannot contain more than 50 items. If unknown
      *         policy names are requested, they are ignored with no error.
      */
     public java.util.List<String> getPolicyNames() {
+        
         if (policyNames == null) {
             policyNames = new java.util.ArrayList<String>();
         }
@@ -132,28 +131,31 @@ public class DescribePoliciesRequest extends AmazonWebServiceRequest {
     /**
      * A list of policy names or policy ARNs to be described. If this list is
      * omitted, all policy names are described. If an auto scaling group name
-     * is provided, the results are limited to that group.The list of
+     * is provided, the results are limited to that group. The list of
      * requested policy names cannot contain more than 50 items. If unknown
      * policy names are requested, they are ignored with no error.
      *
      * @param policyNames A list of policy names or policy ARNs to be described. If this list is
      *         omitted, all policy names are described. If an auto scaling group name
-     *         is provided, the results are limited to that group.The list of
+     *         is provided, the results are limited to that group. The list of
      *         requested policy names cannot contain more than 50 items. If unknown
      *         policy names are requested, they are ignored with no error.
      */
     public void setPolicyNames(java.util.Collection<String> policyNames) {
-        java.util.List<String> policyNamesCopy = new java.util.ArrayList<String>();
-        if (policyNames != null) {
-            policyNamesCopy.addAll(policyNames);
+        if (policyNames == null) {
+            this.policyNames = null;
+            return;
         }
+
+        java.util.List<String> policyNamesCopy = new java.util.ArrayList<String>(policyNames.size());
+        policyNamesCopy.addAll(policyNames);
         this.policyNames = policyNamesCopy;
     }
     
     /**
      * A list of policy names or policy ARNs to be described. If this list is
      * omitted, all policy names are described. If an auto scaling group name
-     * is provided, the results are limited to that group.The list of
+     * is provided, the results are limited to that group. The list of
      * requested policy names cannot contain more than 50 items. If unknown
      * policy names are requested, they are ignored with no error.
      * <p>
@@ -161,7 +163,7 @@ public class DescribePoliciesRequest extends AmazonWebServiceRequest {
      *
      * @param policyNames A list of policy names or policy ARNs to be described. If this list is
      *         omitted, all policy names are described. If an auto scaling group name
-     *         is provided, the results are limited to that group.The list of
+     *         is provided, the results are limited to that group. The list of
      *         requested policy names cannot contain more than 50 items. If unknown
      *         policy names are requested, they are ignored with no error.
      *
@@ -169,6 +171,7 @@ public class DescribePoliciesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribePoliciesRequest withPolicyNames(String... policyNames) {
+        if (getPolicyNames() == null) setPolicyNames(new java.util.ArrayList<String>(policyNames.length));
         for (String value : policyNames) {
             getPolicyNames().add(value);
         }
@@ -178,7 +181,7 @@ public class DescribePoliciesRequest extends AmazonWebServiceRequest {
     /**
      * A list of policy names or policy ARNs to be described. If this list is
      * omitted, all policy names are described. If an auto scaling group name
-     * is provided, the results are limited to that group.The list of
+     * is provided, the results are limited to that group. The list of
      * requested policy names cannot contain more than 50 items. If unknown
      * policy names are requested, they are ignored with no error.
      * <p>
@@ -186,7 +189,7 @@ public class DescribePoliciesRequest extends AmazonWebServiceRequest {
      *
      * @param policyNames A list of policy names or policy ARNs to be described. If this list is
      *         omitted, all policy names are described. If an auto scaling group name
-     *         is provided, the results are limited to that group.The list of
+     *         is provided, the results are limited to that group. The list of
      *         requested policy names cannot contain more than 50 items. If unknown
      *         policy names are requested, they are ignored with no error.
      *
@@ -194,11 +197,13 @@ public class DescribePoliciesRequest extends AmazonWebServiceRequest {
      *         together. 
      */
     public DescribePoliciesRequest withPolicyNames(java.util.Collection<String> policyNames) {
-        java.util.List<String> policyNamesCopy = new java.util.ArrayList<String>();
-        if (policyNames != null) {
+        if (policyNames == null) {
+            this.policyNames = null;
+        } else {
+            java.util.List<String> policyNamesCopy = new java.util.ArrayList<String>(policyNames.size());
             policyNamesCopy.addAll(policyNames);
+            this.policyNames = policyNamesCopy;
         }
-        this.policyNames = policyNamesCopy;
 
         return this;
     }
@@ -307,12 +312,43 @@ public class DescribePoliciesRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
-        sb.append("PolicyNames: " + policyNames + ", ");
-        sb.append("NextToken: " + nextToken + ", ");
-        sb.append("MaxRecords: " + maxRecords + ", ");
+        if (autoScalingGroupName != null) sb.append("AutoScalingGroupName: " + autoScalingGroupName + ", ");
+        if (policyNames != null) sb.append("PolicyNames: " + policyNames + ", ");
+        if (nextToken != null) sb.append("NextToken: " + nextToken + ", ");
+        if (maxRecords != null) sb.append("MaxRecords: " + maxRecords + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getAutoScalingGroupName() == null) ? 0 : getAutoScalingGroupName().hashCode()); 
+        hashCode = prime * hashCode + ((getPolicyNames() == null) ? 0 : getPolicyNames().hashCode()); 
+        hashCode = prime * hashCode + ((getNextToken() == null) ? 0 : getNextToken().hashCode()); 
+        hashCode = prime * hashCode + ((getMaxRecords() == null) ? 0 : getMaxRecords().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof DescribePoliciesRequest == false) return false;
+        DescribePoliciesRequest other = (DescribePoliciesRequest)obj;
+        
+        if (other.getAutoScalingGroupName() == null ^ this.getAutoScalingGroupName() == null) return false;
+        if (other.getAutoScalingGroupName() != null && other.getAutoScalingGroupName().equals(this.getAutoScalingGroupName()) == false) return false; 
+        if (other.getPolicyNames() == null ^ this.getPolicyNames() == null) return false;
+        if (other.getPolicyNames() != null && other.getPolicyNames().equals(this.getPolicyNames()) == false) return false; 
+        if (other.getNextToken() == null ^ this.getNextToken() == null) return false;
+        if (other.getNextToken() != null && other.getNextToken().equals(this.getNextToken()) == false) return false; 
+        if (other.getMaxRecords() == null ^ this.getMaxRecords() == null) return false;
+        if (other.getMaxRecords() != null && other.getMaxRecords().equals(this.getMaxRecords()) == false) return false; 
+        return true;
     }
     
 }

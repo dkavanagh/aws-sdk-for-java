@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.services.rds.model.*;
@@ -30,58 +31,50 @@ import com.amazonaws.util.StringUtils;
 public class RestoreDBInstanceFromDBSnapshotRequestMarshaller implements Marshaller<Request<RestoreDBInstanceFromDBSnapshotRequest>, RestoreDBInstanceFromDBSnapshotRequest> {
 
     public Request<RestoreDBInstanceFromDBSnapshotRequest> marshall(RestoreDBInstanceFromDBSnapshotRequest restoreDBInstanceFromDBSnapshotRequest) {
+
+        if (restoreDBInstanceFromDBSnapshotRequest == null) {
+		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
+		}
+
         Request<RestoreDBInstanceFromDBSnapshotRequest> request = new DefaultRequest<RestoreDBInstanceFromDBSnapshotRequest>(restoreDBInstanceFromDBSnapshotRequest, "AmazonRDS");
         request.addParameter("Action", "RestoreDBInstanceFromDBSnapshot");
-        request.addParameter("Version", "2011-04-01");
-        if (restoreDBInstanceFromDBSnapshotRequest != null) {
-            if (restoreDBInstanceFromDBSnapshotRequest.getDBInstanceIdentifier() != null) {
-                request.addParameter("DBInstanceIdentifier", StringUtils.fromString(restoreDBInstanceFromDBSnapshotRequest.getDBInstanceIdentifier()));
-            }
+        request.addParameter("Version", "2012-04-23");
+
+        if (restoreDBInstanceFromDBSnapshotRequest.getDBInstanceIdentifier() != null) {
+            request.addParameter("DBInstanceIdentifier", StringUtils.fromString(restoreDBInstanceFromDBSnapshotRequest.getDBInstanceIdentifier()));
         }
-        if (restoreDBInstanceFromDBSnapshotRequest != null) {
-            if (restoreDBInstanceFromDBSnapshotRequest.getDBSnapshotIdentifier() != null) {
-                request.addParameter("DBSnapshotIdentifier", StringUtils.fromString(restoreDBInstanceFromDBSnapshotRequest.getDBSnapshotIdentifier()));
-            }
+        if (restoreDBInstanceFromDBSnapshotRequest.getDBSnapshotIdentifier() != null) {
+            request.addParameter("DBSnapshotIdentifier", StringUtils.fromString(restoreDBInstanceFromDBSnapshotRequest.getDBSnapshotIdentifier()));
         }
-        if (restoreDBInstanceFromDBSnapshotRequest != null) {
-            if (restoreDBInstanceFromDBSnapshotRequest.getDBInstanceClass() != null) {
-                request.addParameter("DBInstanceClass", StringUtils.fromString(restoreDBInstanceFromDBSnapshotRequest.getDBInstanceClass()));
-            }
+        if (restoreDBInstanceFromDBSnapshotRequest.getDBInstanceClass() != null) {
+            request.addParameter("DBInstanceClass", StringUtils.fromString(restoreDBInstanceFromDBSnapshotRequest.getDBInstanceClass()));
         }
-        if (restoreDBInstanceFromDBSnapshotRequest != null) {
-            if (restoreDBInstanceFromDBSnapshotRequest.getPort() != null) {
-                request.addParameter("Port", StringUtils.fromInteger(restoreDBInstanceFromDBSnapshotRequest.getPort()));
-            }
+        if (restoreDBInstanceFromDBSnapshotRequest.getPort() != null) {
+            request.addParameter("Port", StringUtils.fromInteger(restoreDBInstanceFromDBSnapshotRequest.getPort()));
         }
-        if (restoreDBInstanceFromDBSnapshotRequest != null) {
-            if (restoreDBInstanceFromDBSnapshotRequest.getAvailabilityZone() != null) {
-                request.addParameter("AvailabilityZone", StringUtils.fromString(restoreDBInstanceFromDBSnapshotRequest.getAvailabilityZone()));
-            }
+        if (restoreDBInstanceFromDBSnapshotRequest.getAvailabilityZone() != null) {
+            request.addParameter("AvailabilityZone", StringUtils.fromString(restoreDBInstanceFromDBSnapshotRequest.getAvailabilityZone()));
         }
-        if (restoreDBInstanceFromDBSnapshotRequest != null) {
-            if (restoreDBInstanceFromDBSnapshotRequest.isMultiAZ() != null) {
-                request.addParameter("MultiAZ", StringUtils.fromBoolean(restoreDBInstanceFromDBSnapshotRequest.isMultiAZ()));
-            }
+        if (restoreDBInstanceFromDBSnapshotRequest.getDBSubnetGroupName() != null) {
+            request.addParameter("DBSubnetGroupName", StringUtils.fromString(restoreDBInstanceFromDBSnapshotRequest.getDBSubnetGroupName()));
         }
-        if (restoreDBInstanceFromDBSnapshotRequest != null) {
-            if (restoreDBInstanceFromDBSnapshotRequest.isAutoMinorVersionUpgrade() != null) {
-                request.addParameter("AutoMinorVersionUpgrade", StringUtils.fromBoolean(restoreDBInstanceFromDBSnapshotRequest.isAutoMinorVersionUpgrade()));
-            }
+        if (restoreDBInstanceFromDBSnapshotRequest.isMultiAZ() != null) {
+            request.addParameter("MultiAZ", StringUtils.fromBoolean(restoreDBInstanceFromDBSnapshotRequest.isMultiAZ()));
         }
-        if (restoreDBInstanceFromDBSnapshotRequest != null) {
-            if (restoreDBInstanceFromDBSnapshotRequest.getLicenseModel() != null) {
-                request.addParameter("LicenseModel", StringUtils.fromString(restoreDBInstanceFromDBSnapshotRequest.getLicenseModel()));
-            }
+        if (restoreDBInstanceFromDBSnapshotRequest.isAutoMinorVersionUpgrade() != null) {
+            request.addParameter("AutoMinorVersionUpgrade", StringUtils.fromBoolean(restoreDBInstanceFromDBSnapshotRequest.isAutoMinorVersionUpgrade()));
         }
-        if (restoreDBInstanceFromDBSnapshotRequest != null) {
-            if (restoreDBInstanceFromDBSnapshotRequest.getDBName() != null) {
-                request.addParameter("DBName", StringUtils.fromString(restoreDBInstanceFromDBSnapshotRequest.getDBName()));
-            }
+        if (restoreDBInstanceFromDBSnapshotRequest.getLicenseModel() != null) {
+            request.addParameter("LicenseModel", StringUtils.fromString(restoreDBInstanceFromDBSnapshotRequest.getLicenseModel()));
         }
-        if (restoreDBInstanceFromDBSnapshotRequest != null) {
-            if (restoreDBInstanceFromDBSnapshotRequest.getEngine() != null) {
-                request.addParameter("Engine", StringUtils.fromString(restoreDBInstanceFromDBSnapshotRequest.getEngine()));
-            }
+        if (restoreDBInstanceFromDBSnapshotRequest.getDBName() != null) {
+            request.addParameter("DBName", StringUtils.fromString(restoreDBInstanceFromDBSnapshotRequest.getDBName()));
+        }
+        if (restoreDBInstanceFromDBSnapshotRequest.getEngine() != null) {
+            request.addParameter("Engine", StringUtils.fromString(restoreDBInstanceFromDBSnapshotRequest.getEngine()));
+        }
+        if (restoreDBInstanceFromDBSnapshotRequest.getOptionGroupName() != null) {
+            request.addParameter("OptionGroupName", StringUtils.fromString(restoreDBInstanceFromDBSnapshotRequest.getOptionGroupName()));
         }
 
 

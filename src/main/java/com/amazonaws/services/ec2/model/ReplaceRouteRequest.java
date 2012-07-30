@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -18,10 +18,9 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#replaceRoute(ReplaceRouteRequest) ReplaceRoute operation}.
  * <p>
- * Replaces an existing route within a route table in a VPC. For more
- * information about route tables, go to <a
- * azonwebservices.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html">
- * Route Tables </a> in the Amazon Virtual Private Cloud User Guide.
+ * Replaces an existing route within a route table in a VPC. For more information about route tables, go to <a
+ * href="http://docs.amazonwebservices.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html"> Route Tables </a> in the Amazon Virtual Private Cloud User
+ * Guide.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#replaceRoute(ReplaceRouteRequest)
@@ -49,6 +48,8 @@ public class ReplaceRouteRequest extends AmazonWebServiceRequest {
      * The ID of a NAT instance in your VPC.
      */
     private String instanceId;
+
+    private String networkInterfaceId;
 
     /**
      * The ID of the route table where the route will be replaced.
@@ -199,6 +200,40 @@ public class ReplaceRouteRequest extends AmazonWebServiceRequest {
     
     
     /**
+     * Returns the value of the NetworkInterfaceId property for this object.
+     *
+     * @return The value of the NetworkInterfaceId property for this object.
+     */
+    public String getNetworkInterfaceId() {
+        return networkInterfaceId;
+    }
+    
+    /**
+     * Sets the value of the NetworkInterfaceId property for this object.
+     *
+     * @param networkInterfaceId The new value for the NetworkInterfaceId property for this object.
+     */
+    public void setNetworkInterfaceId(String networkInterfaceId) {
+        this.networkInterfaceId = networkInterfaceId;
+    }
+    
+    /**
+     * Sets the value of the NetworkInterfaceId property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param networkInterfaceId The new value for the NetworkInterfaceId property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public ReplaceRouteRequest withNetworkInterfaceId(String networkInterfaceId) {
+        this.networkInterfaceId = networkInterfaceId;
+        return this;
+    }
+    
+    
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -210,12 +245,47 @@ public class ReplaceRouteRequest extends AmazonWebServiceRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("RouteTableId: " + routeTableId + ", ");
-        sb.append("DestinationCidrBlock: " + destinationCidrBlock + ", ");
-        sb.append("GatewayId: " + gatewayId + ", ");
-        sb.append("InstanceId: " + instanceId + ", ");
+        if (routeTableId != null) sb.append("RouteTableId: " + routeTableId + ", ");
+        if (destinationCidrBlock != null) sb.append("DestinationCidrBlock: " + destinationCidrBlock + ", ");
+        if (gatewayId != null) sb.append("GatewayId: " + gatewayId + ", ");
+        if (instanceId != null) sb.append("InstanceId: " + instanceId + ", ");
+        if (networkInterfaceId != null) sb.append("NetworkInterfaceId: " + networkInterfaceId + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getRouteTableId() == null) ? 0 : getRouteTableId().hashCode()); 
+        hashCode = prime * hashCode + ((getDestinationCidrBlock() == null) ? 0 : getDestinationCidrBlock().hashCode()); 
+        hashCode = prime * hashCode + ((getGatewayId() == null) ? 0 : getGatewayId().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceId() == null) ? 0 : getInstanceId().hashCode()); 
+        hashCode = prime * hashCode + ((getNetworkInterfaceId() == null) ? 0 : getNetworkInterfaceId().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof ReplaceRouteRequest == false) return false;
+        ReplaceRouteRequest other = (ReplaceRouteRequest)obj;
+        
+        if (other.getRouteTableId() == null ^ this.getRouteTableId() == null) return false;
+        if (other.getRouteTableId() != null && other.getRouteTableId().equals(this.getRouteTableId()) == false) return false; 
+        if (other.getDestinationCidrBlock() == null ^ this.getDestinationCidrBlock() == null) return false;
+        if (other.getDestinationCidrBlock() != null && other.getDestinationCidrBlock().equals(this.getDestinationCidrBlock()) == false) return false; 
+        if (other.getGatewayId() == null ^ this.getGatewayId() == null) return false;
+        if (other.getGatewayId() != null && other.getGatewayId().equals(this.getGatewayId()) == false) return false; 
+        if (other.getInstanceId() == null ^ this.getInstanceId() == null) return false;
+        if (other.getInstanceId() != null && other.getInstanceId().equals(this.getInstanceId()) == false) return false; 
+        if (other.getNetworkInterfaceId() == null ^ this.getNetworkInterfaceId() == null) return false;
+        if (other.getNetworkInterfaceId() != null && other.getNetworkInterfaceId().equals(this.getNetworkInterfaceId()) == false) return false; 
+        return true;
     }
     
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -32,12 +32,11 @@ import com.amazonaws.transform.SimpleTypeStaxUnmarshallers.*;
  */
 public class VpnConnectionStaxUnmarshaller implements Unmarshaller<VpnConnection, StaxUnmarshallerContext> {
 
-    
-
     public VpnConnection unmarshall(StaxUnmarshallerContext context) throws Exception {
         VpnConnection vpnConnection = new VpnConnection();
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
+
         
         if (context.isStartOfDocument()) targetDepth += 1;
         
@@ -73,6 +72,10 @@ public class VpnConnectionStaxUnmarshaller implements Unmarshaller<VpnConnection
                 }
                 if (context.testExpression("tagSet/item", targetDepth)) {
                     vpnConnection.getTags().add(TagStaxUnmarshaller.getInstance().unmarshall(context));
+                    continue;
+                }
+                if (context.testExpression("vgwTelemetry/item", targetDepth)) {
+                    vpnConnection.getVgwTelemetry().add(VgwTelemetryStaxUnmarshaller.getInstance().unmarshall(context));
                     continue;
                 }
             } else if (xmlEvent.isEndElement()) {

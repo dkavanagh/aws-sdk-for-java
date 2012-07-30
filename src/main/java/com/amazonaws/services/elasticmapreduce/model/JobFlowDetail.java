@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -48,6 +48,18 @@ public class JobFlowDetail {
      */
     private String logUri;
 
+    /**
+     * The verison of the AMI used to initialize Amazon EC2 instances in the
+     * job flow. For a list of AMI versions currently supported by Amazon
+     * ElasticMapReduce, go to <a
+     * perGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported">AMI
+     * Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic
+     * MapReduce Developer's Guide.</i>
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Length: </b>0 - 256<br/>
+     * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
+     */
     private String amiVersion;
 
     /**
@@ -69,6 +81,13 @@ public class JobFlowDetail {
      * A list of the bootstrap actions run by the job flow.
      */
     private java.util.List<BootstrapActionDetail> bootstrapActions;
+
+    /**
+     * A list of strings set by third party software when the job flow is
+     * launched. If you are not using third party software to manage the job
+     * flow this value is empty.
+     */
+    private java.util.List<String> supportedProducts;
 
     /**
      * Default constructor for a new JobFlowDetail object.  Callers should use the
@@ -93,6 +112,8 @@ public class JobFlowDetail {
         this.executionStatusDetail = executionStatusDetail;
         this.instances = instances;
     }
+
+    
     
     /**
      * The job flow identifier.
@@ -233,33 +254,58 @@ public class JobFlowDetail {
     
     
     /**
-     * Returns the value of the AmiVersion property for this object.
+     * The verison of the AMI used to initialize Amazon EC2 instances in the
+     * job flow. For a list of AMI versions currently supported by Amazon
+     * ElasticMapReduce, go to <a
+     * perGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported">AMI
+     * Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic
+     * MapReduce Developer's Guide.</i>
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>0 - 256<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @return The value of the AmiVersion property for this object.
+     * @return The verison of the AMI used to initialize Amazon EC2 instances in the
+     *         job flow. For a list of AMI versions currently supported by Amazon
+     *         ElasticMapReduce, go to <a
+     *         perGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported">AMI
+     *         Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic
+     *         MapReduce Developer's Guide.</i>
      */
     public String getAmiVersion() {
         return amiVersion;
     }
     
     /**
-     * Sets the value of the AmiVersion property for this object.
+     * The verison of the AMI used to initialize Amazon EC2 instances in the
+     * job flow. For a list of AMI versions currently supported by Amazon
+     * ElasticMapReduce, go to <a
+     * perGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported">AMI
+     * Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic
+     * MapReduce Developer's Guide.</i>
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>0 - 256<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @param amiVersion The new value for the AmiVersion property for this object.
+     * @param amiVersion The verison of the AMI used to initialize Amazon EC2 instances in the
+     *         job flow. For a list of AMI versions currently supported by Amazon
+     *         ElasticMapReduce, go to <a
+     *         perGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported">AMI
+     *         Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic
+     *         MapReduce Developer's Guide.</i>
      */
     public void setAmiVersion(String amiVersion) {
         this.amiVersion = amiVersion;
     }
     
     /**
-     * Sets the value of the AmiVersion property for this object.
+     * The verison of the AMI used to initialize Amazon EC2 instances in the
+     * job flow. For a list of AMI versions currently supported by Amazon
+     * ElasticMapReduce, go to <a
+     * perGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported">AMI
+     * Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic
+     * MapReduce Developer's Guide.</i>
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -267,7 +313,12 @@ public class JobFlowDetail {
      * <b>Length: </b>0 - 256<br/>
      * <b>Pattern: </b>[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*<br/>
      *
-     * @param amiVersion The new value for the AmiVersion property for this object.
+     * @param amiVersion The verison of the AMI used to initialize Amazon EC2 instances in the
+     *         job flow. For a list of AMI versions currently supported by Amazon
+     *         ElasticMapReduce, go to <a
+     *         perGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported">AMI
+     *         Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic
+     *         MapReduce Developer's Guide.</i>
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -352,6 +403,7 @@ public class JobFlowDetail {
      * @return A list of steps run by the job flow.
      */
     public java.util.List<StepDetail> getSteps() {
+        
         if (steps == null) {
             steps = new java.util.ArrayList<StepDetail>();
         }
@@ -364,10 +416,13 @@ public class JobFlowDetail {
      * @param steps A list of steps run by the job flow.
      */
     public void setSteps(java.util.Collection<StepDetail> steps) {
-        java.util.List<StepDetail> stepsCopy = new java.util.ArrayList<StepDetail>();
-        if (steps != null) {
-            stepsCopy.addAll(steps);
+        if (steps == null) {
+            this.steps = null;
+            return;
         }
+
+        java.util.List<StepDetail> stepsCopy = new java.util.ArrayList<StepDetail>(steps.size());
+        stepsCopy.addAll(steps);
         this.steps = stepsCopy;
     }
     
@@ -382,6 +437,7 @@ public class JobFlowDetail {
      *         together. 
      */
     public JobFlowDetail withSteps(StepDetail... steps) {
+        if (getSteps() == null) setSteps(new java.util.ArrayList<StepDetail>(steps.length));
         for (StepDetail value : steps) {
             getSteps().add(value);
         }
@@ -399,11 +455,13 @@ public class JobFlowDetail {
      *         together. 
      */
     public JobFlowDetail withSteps(java.util.Collection<StepDetail> steps) {
-        java.util.List<StepDetail> stepsCopy = new java.util.ArrayList<StepDetail>();
-        if (steps != null) {
+        if (steps == null) {
+            this.steps = null;
+        } else {
+            java.util.List<StepDetail> stepsCopy = new java.util.ArrayList<StepDetail>(steps.size());
             stepsCopy.addAll(steps);
+            this.steps = stepsCopy;
         }
-        this.steps = stepsCopy;
 
         return this;
     }
@@ -414,6 +472,7 @@ public class JobFlowDetail {
      * @return A list of the bootstrap actions run by the job flow.
      */
     public java.util.List<BootstrapActionDetail> getBootstrapActions() {
+        
         if (bootstrapActions == null) {
             bootstrapActions = new java.util.ArrayList<BootstrapActionDetail>();
         }
@@ -426,10 +485,13 @@ public class JobFlowDetail {
      * @param bootstrapActions A list of the bootstrap actions run by the job flow.
      */
     public void setBootstrapActions(java.util.Collection<BootstrapActionDetail> bootstrapActions) {
-        java.util.List<BootstrapActionDetail> bootstrapActionsCopy = new java.util.ArrayList<BootstrapActionDetail>();
-        if (bootstrapActions != null) {
-            bootstrapActionsCopy.addAll(bootstrapActions);
+        if (bootstrapActions == null) {
+            this.bootstrapActions = null;
+            return;
         }
+
+        java.util.List<BootstrapActionDetail> bootstrapActionsCopy = new java.util.ArrayList<BootstrapActionDetail>(bootstrapActions.size());
+        bootstrapActionsCopy.addAll(bootstrapActions);
         this.bootstrapActions = bootstrapActionsCopy;
     }
     
@@ -444,6 +506,7 @@ public class JobFlowDetail {
      *         together. 
      */
     public JobFlowDetail withBootstrapActions(BootstrapActionDetail... bootstrapActions) {
+        if (getBootstrapActions() == null) setBootstrapActions(new java.util.ArrayList<BootstrapActionDetail>(bootstrapActions.length));
         for (BootstrapActionDetail value : bootstrapActions) {
             getBootstrapActions().add(value);
         }
@@ -461,11 +524,98 @@ public class JobFlowDetail {
      *         together. 
      */
     public JobFlowDetail withBootstrapActions(java.util.Collection<BootstrapActionDetail> bootstrapActions) {
-        java.util.List<BootstrapActionDetail> bootstrapActionsCopy = new java.util.ArrayList<BootstrapActionDetail>();
-        if (bootstrapActions != null) {
+        if (bootstrapActions == null) {
+            this.bootstrapActions = null;
+        } else {
+            java.util.List<BootstrapActionDetail> bootstrapActionsCopy = new java.util.ArrayList<BootstrapActionDetail>(bootstrapActions.size());
             bootstrapActionsCopy.addAll(bootstrapActions);
+            this.bootstrapActions = bootstrapActionsCopy;
         }
-        this.bootstrapActions = bootstrapActionsCopy;
+
+        return this;
+    }
+    
+    /**
+     * A list of strings set by third party software when the job flow is
+     * launched. If you are not using third party software to manage the job
+     * flow this value is empty.
+     *
+     * @return A list of strings set by third party software when the job flow is
+     *         launched. If you are not using third party software to manage the job
+     *         flow this value is empty.
+     */
+    public java.util.List<String> getSupportedProducts() {
+        
+        if (supportedProducts == null) {
+            supportedProducts = new java.util.ArrayList<String>();
+        }
+        return supportedProducts;
+    }
+    
+    /**
+     * A list of strings set by third party software when the job flow is
+     * launched. If you are not using third party software to manage the job
+     * flow this value is empty.
+     *
+     * @param supportedProducts A list of strings set by third party software when the job flow is
+     *         launched. If you are not using third party software to manage the job
+     *         flow this value is empty.
+     */
+    public void setSupportedProducts(java.util.Collection<String> supportedProducts) {
+        if (supportedProducts == null) {
+            this.supportedProducts = null;
+            return;
+        }
+
+        java.util.List<String> supportedProductsCopy = new java.util.ArrayList<String>(supportedProducts.size());
+        supportedProductsCopy.addAll(supportedProducts);
+        this.supportedProducts = supportedProductsCopy;
+    }
+    
+    /**
+     * A list of strings set by third party software when the job flow is
+     * launched. If you are not using third party software to manage the job
+     * flow this value is empty.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param supportedProducts A list of strings set by third party software when the job flow is
+     *         launched. If you are not using third party software to manage the job
+     *         flow this value is empty.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public JobFlowDetail withSupportedProducts(String... supportedProducts) {
+        if (getSupportedProducts() == null) setSupportedProducts(new java.util.ArrayList<String>(supportedProducts.length));
+        for (String value : supportedProducts) {
+            getSupportedProducts().add(value);
+        }
+        return this;
+    }
+    
+    /**
+     * A list of strings set by third party software when the job flow is
+     * launched. If you are not using third party software to manage the job
+     * flow this value is empty.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param supportedProducts A list of strings set by third party software when the job flow is
+     *         launched. If you are not using third party software to manage the job
+     *         flow this value is empty.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public JobFlowDetail withSupportedProducts(java.util.Collection<String> supportedProducts) {
+        if (supportedProducts == null) {
+            this.supportedProducts = null;
+        } else {
+            java.util.List<String> supportedProductsCopy = new java.util.ArrayList<String>(supportedProducts.size());
+            supportedProductsCopy.addAll(supportedProducts);
+            this.supportedProducts = supportedProductsCopy;
+        }
 
         return this;
     }
@@ -482,16 +632,63 @@ public class JobFlowDetail {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("JobFlowId: " + jobFlowId + ", ");
-        sb.append("Name: " + name + ", ");
-        sb.append("LogUri: " + logUri + ", ");
-        sb.append("AmiVersion: " + amiVersion + ", ");
-        sb.append("ExecutionStatusDetail: " + executionStatusDetail + ", ");
-        sb.append("Instances: " + instances + ", ");
-        sb.append("Steps: " + steps + ", ");
-        sb.append("BootstrapActions: " + bootstrapActions + ", ");
+        if (jobFlowId != null) sb.append("JobFlowId: " + jobFlowId + ", ");
+        if (name != null) sb.append("Name: " + name + ", ");
+        if (logUri != null) sb.append("LogUri: " + logUri + ", ");
+        if (amiVersion != null) sb.append("AmiVersion: " + amiVersion + ", ");
+        if (executionStatusDetail != null) sb.append("ExecutionStatusDetail: " + executionStatusDetail + ", ");
+        if (instances != null) sb.append("Instances: " + instances + ", ");
+        if (steps != null) sb.append("Steps: " + steps + ", ");
+        if (bootstrapActions != null) sb.append("BootstrapActions: " + bootstrapActions + ", ");
+        if (supportedProducts != null) sb.append("SupportedProducts: " + supportedProducts + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getJobFlowId() == null) ? 0 : getJobFlowId().hashCode()); 
+        hashCode = prime * hashCode + ((getName() == null) ? 0 : getName().hashCode()); 
+        hashCode = prime * hashCode + ((getLogUri() == null) ? 0 : getLogUri().hashCode()); 
+        hashCode = prime * hashCode + ((getAmiVersion() == null) ? 0 : getAmiVersion().hashCode()); 
+        hashCode = prime * hashCode + ((getExecutionStatusDetail() == null) ? 0 : getExecutionStatusDetail().hashCode()); 
+        hashCode = prime * hashCode + ((getInstances() == null) ? 0 : getInstances().hashCode()); 
+        hashCode = prime * hashCode + ((getSteps() == null) ? 0 : getSteps().hashCode()); 
+        hashCode = prime * hashCode + ((getBootstrapActions() == null) ? 0 : getBootstrapActions().hashCode()); 
+        hashCode = prime * hashCode + ((getSupportedProducts() == null) ? 0 : getSupportedProducts().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof JobFlowDetail == false) return false;
+        JobFlowDetail other = (JobFlowDetail)obj;
+        
+        if (other.getJobFlowId() == null ^ this.getJobFlowId() == null) return false;
+        if (other.getJobFlowId() != null && other.getJobFlowId().equals(this.getJobFlowId()) == false) return false; 
+        if (other.getName() == null ^ this.getName() == null) return false;
+        if (other.getName() != null && other.getName().equals(this.getName()) == false) return false; 
+        if (other.getLogUri() == null ^ this.getLogUri() == null) return false;
+        if (other.getLogUri() != null && other.getLogUri().equals(this.getLogUri()) == false) return false; 
+        if (other.getAmiVersion() == null ^ this.getAmiVersion() == null) return false;
+        if (other.getAmiVersion() != null && other.getAmiVersion().equals(this.getAmiVersion()) == false) return false; 
+        if (other.getExecutionStatusDetail() == null ^ this.getExecutionStatusDetail() == null) return false;
+        if (other.getExecutionStatusDetail() != null && other.getExecutionStatusDetail().equals(this.getExecutionStatusDetail()) == false) return false; 
+        if (other.getInstances() == null ^ this.getInstances() == null) return false;
+        if (other.getInstances() != null && other.getInstances().equals(this.getInstances()) == false) return false; 
+        if (other.getSteps() == null ^ this.getSteps() == null) return false;
+        if (other.getSteps() != null && other.getSteps().equals(this.getSteps()) == false) return false; 
+        if (other.getBootstrapActions() == null ^ this.getBootstrapActions() == null) return false;
+        if (other.getBootstrapActions() != null && other.getBootstrapActions().equals(this.getBootstrapActions()) == false) return false; 
+        if (other.getSupportedProducts() == null ^ this.getSupportedProducts() == null) return false;
+        if (other.getSupportedProducts() != null && other.getSupportedProducts().equals(this.getSupportedProducts()) == false) return false; 
+        return true;
     }
     
 }

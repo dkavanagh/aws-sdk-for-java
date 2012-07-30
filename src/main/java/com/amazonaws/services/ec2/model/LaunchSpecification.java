@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ public class LaunchSpecification {
      * Specifies the instance type.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>t1.micro, m1.small, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cg1.4xlarge
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
      */
     private String instanceType;
 
@@ -90,6 +90,10 @@ public class LaunchSpecification {
      * instance(s) for Amazon Virtual Private Cloud.
      */
     private String subnetId;
+
+    private java.util.List<InstanceNetworkInterfaceSpecification> networkInterfaces;
+
+    private IamInstanceProfileSpecification iamInstanceProfile;
 
     /**
      * The AMI ID.
@@ -165,6 +169,7 @@ public class LaunchSpecification {
      * @return The value of the AllSecurityGroups property for this object.
      */
     public java.util.List<GroupIdentifier> getAllSecurityGroups() {
+        
         if (allSecurityGroups == null) {
             allSecurityGroups = new java.util.ArrayList<GroupIdentifier>();
         }
@@ -177,10 +182,13 @@ public class LaunchSpecification {
      * @param allSecurityGroups The new value for the AllSecurityGroups property for this object.
      */
     public void setAllSecurityGroups(java.util.Collection<GroupIdentifier> allSecurityGroups) {
-        java.util.List<GroupIdentifier> allSecurityGroupsCopy = new java.util.ArrayList<GroupIdentifier>();
-        if (allSecurityGroups != null) {
-            allSecurityGroupsCopy.addAll(allSecurityGroups);
+        if (allSecurityGroups == null) {
+            this.allSecurityGroups = null;
+            return;
         }
+
+        java.util.List<GroupIdentifier> allSecurityGroupsCopy = new java.util.ArrayList<GroupIdentifier>(allSecurityGroups.size());
+        allSecurityGroupsCopy.addAll(allSecurityGroups);
         this.allSecurityGroups = allSecurityGroupsCopy;
     }
     
@@ -195,6 +203,7 @@ public class LaunchSpecification {
      *         together. 
      */
     public LaunchSpecification withAllSecurityGroups(GroupIdentifier... allSecurityGroups) {
+        if (getAllSecurityGroups() == null) setAllSecurityGroups(new java.util.ArrayList<GroupIdentifier>(allSecurityGroups.length));
         for (GroupIdentifier value : allSecurityGroups) {
             getAllSecurityGroups().add(value);
         }
@@ -212,11 +221,13 @@ public class LaunchSpecification {
      *         together. 
      */
     public LaunchSpecification withAllSecurityGroups(java.util.Collection<GroupIdentifier> allSecurityGroups) {
-        java.util.List<GroupIdentifier> allSecurityGroupsCopy = new java.util.ArrayList<GroupIdentifier>();
-        if (allSecurityGroups != null) {
+        if (allSecurityGroups == null) {
+            this.allSecurityGroups = null;
+        } else {
+            java.util.List<GroupIdentifier> allSecurityGroupsCopy = new java.util.ArrayList<GroupIdentifier>(allSecurityGroups.size());
             allSecurityGroupsCopy.addAll(allSecurityGroups);
+            this.allSecurityGroups = allSecurityGroupsCopy;
         }
-        this.allSecurityGroups = allSecurityGroupsCopy;
 
         return this;
     }
@@ -227,6 +238,7 @@ public class LaunchSpecification {
      * @return The value of the SecurityGroups property for this object.
      */
     public java.util.List<String> getSecurityGroups() {
+        
         if (securityGroups == null) {
             securityGroups = new java.util.ArrayList<String>();
         }
@@ -239,10 +251,13 @@ public class LaunchSpecification {
      * @param securityGroups The new value for the SecurityGroups property for this object.
      */
     public void setSecurityGroups(java.util.Collection<String> securityGroups) {
-        java.util.List<String> securityGroupsCopy = new java.util.ArrayList<String>();
-        if (securityGroups != null) {
-            securityGroupsCopy.addAll(securityGroups);
+        if (securityGroups == null) {
+            this.securityGroups = null;
+            return;
         }
+
+        java.util.List<String> securityGroupsCopy = new java.util.ArrayList<String>(securityGroups.size());
+        securityGroupsCopy.addAll(securityGroups);
         this.securityGroups = securityGroupsCopy;
     }
     
@@ -257,6 +272,7 @@ public class LaunchSpecification {
      *         together. 
      */
     public LaunchSpecification withSecurityGroups(String... securityGroups) {
+        if (getSecurityGroups() == null) setSecurityGroups(new java.util.ArrayList<String>(securityGroups.length));
         for (String value : securityGroups) {
             getSecurityGroups().add(value);
         }
@@ -274,11 +290,13 @@ public class LaunchSpecification {
      *         together. 
      */
     public LaunchSpecification withSecurityGroups(java.util.Collection<String> securityGroups) {
-        java.util.List<String> securityGroupsCopy = new java.util.ArrayList<String>();
-        if (securityGroups != null) {
+        if (securityGroups == null) {
+            this.securityGroups = null;
+        } else {
+            java.util.List<String> securityGroupsCopy = new java.util.ArrayList<String>(securityGroups.size());
             securityGroupsCopy.addAll(securityGroups);
+            this.securityGroups = securityGroupsCopy;
         }
-        this.securityGroups = securityGroupsCopy;
 
         return this;
     }
@@ -373,7 +391,7 @@ public class LaunchSpecification {
      * Specifies the instance type.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>t1.micro, m1.small, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cg1.4xlarge
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
      *
      * @return Specifies the instance type.
      *
@@ -387,7 +405,7 @@ public class LaunchSpecification {
      * Specifies the instance type.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>t1.micro, m1.small, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cg1.4xlarge
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
      *
      * @param instanceType Specifies the instance type.
      *
@@ -403,7 +421,7 @@ public class LaunchSpecification {
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>t1.micro, m1.small, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cg1.4xlarge
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
      *
      * @param instanceType Specifies the instance type.
      *
@@ -417,6 +435,40 @@ public class LaunchSpecification {
         return this;
     }
     
+    
+    /**
+     * Specifies the instance type.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
+     *
+     * @param instanceType Specifies the instance type.
+     *
+     * @see InstanceType
+     */
+    public void setInstanceType(InstanceType instanceType) {
+        this.instanceType = instanceType.toString();
+    }
+    
+    /**
+     * Specifies the instance type.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
+     *
+     * @param instanceType Specifies the instance type.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     *
+     * @see InstanceType
+     */
+    public LaunchSpecification withInstanceType(InstanceType instanceType) {
+        this.instanceType = instanceType.toString();
+        return this;
+    }
     
     /**
      * Defines a placement item.
@@ -546,6 +598,7 @@ public class LaunchSpecification {
      *         is made up of a virtualName and a deviceName.
      */
     public java.util.List<BlockDeviceMapping> getBlockDeviceMappings() {
+        
         if (blockDeviceMappings == null) {
             blockDeviceMappings = new java.util.ArrayList<BlockDeviceMapping>();
         }
@@ -560,10 +613,13 @@ public class LaunchSpecification {
      *         is made up of a virtualName and a deviceName.
      */
     public void setBlockDeviceMappings(java.util.Collection<BlockDeviceMapping> blockDeviceMappings) {
-        java.util.List<BlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<BlockDeviceMapping>();
-        if (blockDeviceMappings != null) {
-            blockDeviceMappingsCopy.addAll(blockDeviceMappings);
+        if (blockDeviceMappings == null) {
+            this.blockDeviceMappings = null;
+            return;
         }
+
+        java.util.List<BlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<BlockDeviceMapping>(blockDeviceMappings.size());
+        blockDeviceMappingsCopy.addAll(blockDeviceMappings);
         this.blockDeviceMappings = blockDeviceMappingsCopy;
     }
     
@@ -580,6 +636,7 @@ public class LaunchSpecification {
      *         together. 
      */
     public LaunchSpecification withBlockDeviceMappings(BlockDeviceMapping... blockDeviceMappings) {
+        if (getBlockDeviceMappings() == null) setBlockDeviceMappings(new java.util.ArrayList<BlockDeviceMapping>(blockDeviceMappings.length));
         for (BlockDeviceMapping value : blockDeviceMappings) {
             getBlockDeviceMappings().add(value);
         }
@@ -599,11 +656,13 @@ public class LaunchSpecification {
      *         together. 
      */
     public LaunchSpecification withBlockDeviceMappings(java.util.Collection<BlockDeviceMapping> blockDeviceMappings) {
-        java.util.List<BlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<BlockDeviceMapping>();
-        if (blockDeviceMappings != null) {
+        if (blockDeviceMappings == null) {
+            this.blockDeviceMappings = null;
+        } else {
+            java.util.List<BlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<BlockDeviceMapping>(blockDeviceMappings.size());
             blockDeviceMappingsCopy.addAll(blockDeviceMappings);
+            this.blockDeviceMappings = blockDeviceMappingsCopy;
         }
-        this.blockDeviceMappings = blockDeviceMappingsCopy;
 
         return this;
     }
@@ -692,6 +751,109 @@ public class LaunchSpecification {
     
     
     /**
+     * Returns the value of the NetworkInterfaces property for this object.
+     *
+     * @return The value of the NetworkInterfaces property for this object.
+     */
+    public java.util.List<InstanceNetworkInterfaceSpecification> getNetworkInterfaces() {
+        
+        if (networkInterfaces == null) {
+            networkInterfaces = new java.util.ArrayList<InstanceNetworkInterfaceSpecification>();
+        }
+        return networkInterfaces;
+    }
+    
+    /**
+     * Sets the value of the NetworkInterfaces property for this object.
+     *
+     * @param networkInterfaces The new value for the NetworkInterfaces property for this object.
+     */
+    public void setNetworkInterfaces(java.util.Collection<InstanceNetworkInterfaceSpecification> networkInterfaces) {
+        if (networkInterfaces == null) {
+            this.networkInterfaces = null;
+            return;
+        }
+
+        java.util.List<InstanceNetworkInterfaceSpecification> networkInterfacesCopy = new java.util.ArrayList<InstanceNetworkInterfaceSpecification>(networkInterfaces.size());
+        networkInterfacesCopy.addAll(networkInterfaces);
+        this.networkInterfaces = networkInterfacesCopy;
+    }
+    
+    /**
+     * Sets the value of the NetworkInterfaces property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param networkInterfaces The new value for the NetworkInterfaces property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public LaunchSpecification withNetworkInterfaces(InstanceNetworkInterfaceSpecification... networkInterfaces) {
+        if (getNetworkInterfaces() == null) setNetworkInterfaces(new java.util.ArrayList<InstanceNetworkInterfaceSpecification>(networkInterfaces.length));
+        for (InstanceNetworkInterfaceSpecification value : networkInterfaces) {
+            getNetworkInterfaces().add(value);
+        }
+        return this;
+    }
+    
+    /**
+     * Sets the value of the NetworkInterfaces property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param networkInterfaces The new value for the NetworkInterfaces property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public LaunchSpecification withNetworkInterfaces(java.util.Collection<InstanceNetworkInterfaceSpecification> networkInterfaces) {
+        if (networkInterfaces == null) {
+            this.networkInterfaces = null;
+        } else {
+            java.util.List<InstanceNetworkInterfaceSpecification> networkInterfacesCopy = new java.util.ArrayList<InstanceNetworkInterfaceSpecification>(networkInterfaces.size());
+            networkInterfacesCopy.addAll(networkInterfaces);
+            this.networkInterfaces = networkInterfacesCopy;
+        }
+
+        return this;
+    }
+    
+    /**
+     * Returns the value of the IamInstanceProfile property for this object.
+     *
+     * @return The value of the IamInstanceProfile property for this object.
+     */
+    public IamInstanceProfileSpecification getIamInstanceProfile() {
+        return iamInstanceProfile;
+    }
+    
+    /**
+     * Sets the value of the IamInstanceProfile property for this object.
+     *
+     * @param iamInstanceProfile The new value for the IamInstanceProfile property for this object.
+     */
+    public void setIamInstanceProfile(IamInstanceProfileSpecification iamInstanceProfile) {
+        this.iamInstanceProfile = iamInstanceProfile;
+    }
+    
+    /**
+     * Sets the value of the IamInstanceProfile property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param iamInstanceProfile The new value for the IamInstanceProfile property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public LaunchSpecification withIamInstanceProfile(IamInstanceProfileSpecification iamInstanceProfile) {
+        this.iamInstanceProfile = iamInstanceProfile;
+        return this;
+    }
+    
+    
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -703,21 +865,87 @@ public class LaunchSpecification {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("ImageId: " + imageId + ", ");
-        sb.append("KeyName: " + keyName + ", ");
-        sb.append("AllSecurityGroups: " + allSecurityGroups + ", ");
-        sb.append("SecurityGroups: " + securityGroups + ", ");
-        sb.append("UserData: " + userData + ", ");
-        sb.append("AddressingType: " + addressingType + ", ");
-        sb.append("InstanceType: " + instanceType + ", ");
-        sb.append("Placement: " + placement + ", ");
-        sb.append("KernelId: " + kernelId + ", ");
-        sb.append("RamdiskId: " + ramdiskId + ", ");
-        sb.append("BlockDeviceMappings: " + blockDeviceMappings + ", ");
-        sb.append("MonitoringEnabled: " + monitoringEnabled + ", ");
-        sb.append("SubnetId: " + subnetId + ", ");
+        if (imageId != null) sb.append("ImageId: " + imageId + ", ");
+        if (keyName != null) sb.append("KeyName: " + keyName + ", ");
+        if (allSecurityGroups != null) sb.append("AllSecurityGroups: " + allSecurityGroups + ", ");
+        if (securityGroups != null) sb.append("SecurityGroups: " + securityGroups + ", ");
+        if (userData != null) sb.append("UserData: " + userData + ", ");
+        if (addressingType != null) sb.append("AddressingType: " + addressingType + ", ");
+        if (instanceType != null) sb.append("InstanceType: " + instanceType + ", ");
+        if (placement != null) sb.append("Placement: " + placement + ", ");
+        if (kernelId != null) sb.append("KernelId: " + kernelId + ", ");
+        if (ramdiskId != null) sb.append("RamdiskId: " + ramdiskId + ", ");
+        if (blockDeviceMappings != null) sb.append("BlockDeviceMappings: " + blockDeviceMappings + ", ");
+        if (monitoringEnabled != null) sb.append("MonitoringEnabled: " + monitoringEnabled + ", ");
+        if (subnetId != null) sb.append("SubnetId: " + subnetId + ", ");
+        if (networkInterfaces != null) sb.append("NetworkInterfaces: " + networkInterfaces + ", ");
+        if (iamInstanceProfile != null) sb.append("IamInstanceProfile: " + iamInstanceProfile + ", ");
         sb.append("}");
         return sb.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hashCode = 1;
+        
+        hashCode = prime * hashCode + ((getImageId() == null) ? 0 : getImageId().hashCode()); 
+        hashCode = prime * hashCode + ((getKeyName() == null) ? 0 : getKeyName().hashCode()); 
+        hashCode = prime * hashCode + ((getAllSecurityGroups() == null) ? 0 : getAllSecurityGroups().hashCode()); 
+        hashCode = prime * hashCode + ((getSecurityGroups() == null) ? 0 : getSecurityGroups().hashCode()); 
+        hashCode = prime * hashCode + ((getUserData() == null) ? 0 : getUserData().hashCode()); 
+        hashCode = prime * hashCode + ((getAddressingType() == null) ? 0 : getAddressingType().hashCode()); 
+        hashCode = prime * hashCode + ((getInstanceType() == null) ? 0 : getInstanceType().hashCode()); 
+        hashCode = prime * hashCode + ((getPlacement() == null) ? 0 : getPlacement().hashCode()); 
+        hashCode = prime * hashCode + ((getKernelId() == null) ? 0 : getKernelId().hashCode()); 
+        hashCode = prime * hashCode + ((getRamdiskId() == null) ? 0 : getRamdiskId().hashCode()); 
+        hashCode = prime * hashCode + ((getBlockDeviceMappings() == null) ? 0 : getBlockDeviceMappings().hashCode()); 
+        hashCode = prime * hashCode + ((isMonitoringEnabled() == null) ? 0 : isMonitoringEnabled().hashCode()); 
+        hashCode = prime * hashCode + ((getSubnetId() == null) ? 0 : getSubnetId().hashCode()); 
+        hashCode = prime * hashCode + ((getNetworkInterfaces() == null) ? 0 : getNetworkInterfaces().hashCode()); 
+        hashCode = prime * hashCode + ((getIamInstanceProfile() == null) ? 0 : getIamInstanceProfile().hashCode()); 
+        return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+    
+        if (obj instanceof LaunchSpecification == false) return false;
+        LaunchSpecification other = (LaunchSpecification)obj;
+        
+        if (other.getImageId() == null ^ this.getImageId() == null) return false;
+        if (other.getImageId() != null && other.getImageId().equals(this.getImageId()) == false) return false; 
+        if (other.getKeyName() == null ^ this.getKeyName() == null) return false;
+        if (other.getKeyName() != null && other.getKeyName().equals(this.getKeyName()) == false) return false; 
+        if (other.getAllSecurityGroups() == null ^ this.getAllSecurityGroups() == null) return false;
+        if (other.getAllSecurityGroups() != null && other.getAllSecurityGroups().equals(this.getAllSecurityGroups()) == false) return false; 
+        if (other.getSecurityGroups() == null ^ this.getSecurityGroups() == null) return false;
+        if (other.getSecurityGroups() != null && other.getSecurityGroups().equals(this.getSecurityGroups()) == false) return false; 
+        if (other.getUserData() == null ^ this.getUserData() == null) return false;
+        if (other.getUserData() != null && other.getUserData().equals(this.getUserData()) == false) return false; 
+        if (other.getAddressingType() == null ^ this.getAddressingType() == null) return false;
+        if (other.getAddressingType() != null && other.getAddressingType().equals(this.getAddressingType()) == false) return false; 
+        if (other.getInstanceType() == null ^ this.getInstanceType() == null) return false;
+        if (other.getInstanceType() != null && other.getInstanceType().equals(this.getInstanceType()) == false) return false; 
+        if (other.getPlacement() == null ^ this.getPlacement() == null) return false;
+        if (other.getPlacement() != null && other.getPlacement().equals(this.getPlacement()) == false) return false; 
+        if (other.getKernelId() == null ^ this.getKernelId() == null) return false;
+        if (other.getKernelId() != null && other.getKernelId().equals(this.getKernelId()) == false) return false; 
+        if (other.getRamdiskId() == null ^ this.getRamdiskId() == null) return false;
+        if (other.getRamdiskId() != null && other.getRamdiskId().equals(this.getRamdiskId()) == false) return false; 
+        if (other.getBlockDeviceMappings() == null ^ this.getBlockDeviceMappings() == null) return false;
+        if (other.getBlockDeviceMappings() != null && other.getBlockDeviceMappings().equals(this.getBlockDeviceMappings()) == false) return false; 
+        if (other.isMonitoringEnabled() == null ^ this.isMonitoringEnabled() == null) return false;
+        if (other.isMonitoringEnabled() != null && other.isMonitoringEnabled().equals(this.isMonitoringEnabled()) == false) return false; 
+        if (other.getSubnetId() == null ^ this.getSubnetId() == null) return false;
+        if (other.getSubnetId() != null && other.getSubnetId().equals(this.getSubnetId()) == false) return false; 
+        if (other.getNetworkInterfaces() == null ^ this.getNetworkInterfaces() == null) return false;
+        if (other.getNetworkInterfaces() != null && other.getNetworkInterfaces().equals(this.getNetworkInterfaces()) == false) return false; 
+        if (other.getIamInstanceProfile() == null ^ this.getIamInstanceProfile() == null) return false;
+        if (other.getIamInstanceProfile() != null && other.getIamInstanceProfile().equals(this.getIamInstanceProfile()) == false) return false; 
+        return true;
     }
     
 }

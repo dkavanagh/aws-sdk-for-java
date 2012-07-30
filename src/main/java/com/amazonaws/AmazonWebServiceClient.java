@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2011 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -39,10 +39,10 @@ public abstract class AmazonWebServiceClient {
     protected URI endpoint;
 
     /** The client configuration */
-    protected final ClientConfiguration clientConfiguration;
+    protected ClientConfiguration clientConfiguration;
 
     /** Low level client for sending requests to AWS services. */
-    protected final AmazonHttpClient client;
+    protected AmazonHttpClient client;
 
     /** Optional request handlers for additional request processing. */
     protected final List<RequestHandler> requestHandlers;
@@ -67,22 +67,26 @@ public abstract class AmazonWebServiceClient {
      * Overrides the default endpoint for this client. Callers can use this
      * method to control which AWS region they want to work with.
      * <p>
+     * <b>This method is not threadsafe. Endpoints should be configured when the
+     * client is created and before any service requests are made. Changing it
+     * afterwards creates inevitable race conditions for any service requests in
+     * transit.</b>
+     * <p>
      * Callers can pass in just the endpoint (ex: "ec2.amazonaws.com") or a full
      * URL, including the protocol (ex: "https://ec2.amazonaws.com"). If the
      * protocol is not specified here, the default protocol from this client's
      * {@link ClientConfiguration} will be used, which by default is HTTPS.
      * <p>
      * For more information on using AWS regions with the AWS SDK for Java, and
-     * a complete list of all available endpoints for all AWS services, see:
+     * a complete list of all available endpoints for all AWS services, see: 
      * <a href="http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912">
      * http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912</a>
-     *
+     * 
      * @param endpoint
      *            The endpoint (ex: "ec2.amazonaws.com") or a full URL,
      *            including the protocol (ex: "https://ec2.amazonaws.com") of
      *            the region specific AWS endpoint this client will communicate
      *            with.
-     *
      * @throws IllegalArgumentException
      *             If any problems are detected with the specified endpoint.
      */
@@ -101,6 +105,11 @@ public abstract class AmazonWebServiceClient {
         } catch (URISyntaxException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    public void setConfiguration(ClientConfiguration clientConfiguration) {
+        this.clientConfiguration = clientConfiguration;
+        client = new AmazonHttpClient(clientConfiguration);
     }
 
     /**
@@ -202,7 +211,7 @@ public abstract class AmazonWebServiceClient {
     public void addRequestHandler(RequestHandler requestHandler) {
     	requestHandlers.add(requestHandler);
     }
-    
+
     /**
      * Removes a request handler from the list of registered handlers that are run
      * as part of a request's lifecycle.
@@ -219,5 +228,5 @@ public abstract class AmazonWebServiceClient {
         ExecutionContext executionContext = new ExecutionContext(requestHandlers);
         return executionContext;
     }
-    
+
 }
